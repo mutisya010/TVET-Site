@@ -1,359 +1,348 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native';
-import { 
-  Zap, 
-  Car, 
-  HardHat, 
-  Monitor, 
-  Sprout, 
-  Utensils, 
-  ArrowRight, 
-  BookOpen, 
-  Award,
-  ShieldCheck,
-  ChevronRight
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ChevronRight, ArrowRight, BookOpen, CheckCircle2 } from 'lucide-react';
 import { academicDepartments, allCatalogCourses } from '../data/coursesData';
 import { colors, typography } from '../theme/colors';
 
-export default function CoursesDropdown({ onSelectCourse, onClose, onViewAllCourses, onOpenInquiry }) {
-  const { width } = useWindowDimensions();
-  const isMobile = width < 1024;
+/**
+ * CoursesDropdown component mirroring the official institution structure:
+ * - Vertical list of academic departments anchored directly below "Courses & Programmes"
+ * - Deep institutional green (#14462E) with warm amber accent (#F59E0B)
+ * - Hover / tap revealing adjacent flyout sub-menu displaying the accredited courses
+ * - Direct click on any course opens the CourseModal with full curriculum details
+ * - "View Complete Course Directory →" footer button
+ */
+export default function CoursesDropdown({ onSelectCourse, onClose, onViewAllCourses }) {
+  const [activeDeptId, setActiveDeptId] = useState(null);
 
-  const getDepartmentIcon = (iconName, color) => {
-    switch (iconName) {
-      case 'Zap':
-        return <Zap size={16} color={color || '#D97706'} />;
-      case 'Car':
-        return <Car size={16} color={color || '#14462E'} />;
-      case 'HardHat':
-        return <HardHat size={16} color={color || '#D97706'} />;
-      case 'Monitor':
-        return <Monitor size={16} color={color || '#166534'} />;
-      case 'Sprout':
-        return <Sprout size={16} color={color || '#166534'} />;
-      case 'Utensils':
-        return <Utensils size={16} color={color || '#B45309'} />;
-      default:
-        return <BookOpen size={16} color={color || '#14462E'} />;
+  const getCourseBadge = (level) => {
+    if (!level) return { label: 'Dip (L6)', bg: 'rgba(245, 158, 11, 0.2)', color: '#FBBF24', border: 'rgba(245, 158, 11, 0.4)' };
+    if (level.includes('Level 6') || level.includes('Diploma')) {
+      return { label: 'Dip (L6)', bg: 'rgba(245, 158, 11, 0.2)', color: '#FBBF24', border: 'rgba(245, 158, 11, 0.45)' };
+    }
+    if (level.includes('Level 5') || level.includes('Craft') || level.includes('Certificate')) {
+      return { label: 'Craft (L5)', bg: 'rgba(56, 189, 248, 0.2)', color: '#38BDF8', border: 'rgba(56, 189, 248, 0.45)' };
+    }
+    return { label: 'Artisan (L4)', bg: 'rgba(148, 163, 184, 0.2)', color: '#E2E8F0', border: 'rgba(148, 163, 184, 0.4)' };
+  };
+
+  const handleCourseClick = (course) => {
+    if (onSelectCourse) {
+      onSelectCourse(course);
+    }
+    if (onClose) {
+      onClose();
     }
   };
 
-  const getCourseBadge = (level) => {
-    if (level.includes('Level 6') || level.includes('Diploma')) {
-      return { label: 'Dip (L6)', bg: '#F0FDF4', color: '#166534', border: '#BBF7D0' };
+  const handleViewAll = () => {
+    if (onViewAllCourses) {
+      onViewAllCourses();
     }
-    if (level.includes('Level 5') || level.includes('Craft') || level.includes('Certificate')) {
-      return { label: 'Craft (L5)', bg: '#FFFBEB', color: '#B45309', border: '#FDE68A' };
+    if (onClose) {
+      onClose();
     }
-    return { label: 'Art (L4)', bg: '#F1F5F9', color: '#334155', border: '#CBD5E1' };
   };
 
   return (
-    <View style={styles.dropdownContainer}>
-      <View style={styles.innerContent}>
-        
-        {/* Top Header Label */}
-        <View style={styles.topMegaHeader}>
-          <View style={styles.megaHeaderLeft}>
-            <Award size={15} color={colors.greenDeep} />
-            <Text style={styles.megaHeaderTitle}>
-              ACCREDITED ACADEMIC PROGRAMMES BY DEPARTMENT
-            </Text>
-          </View>
-          <Text style={styles.megaHeaderHint}>
-            Click any course to view full curriculum, entry criteria, duration, and fees
-          </Text>
-        </View>
+    <View 
+      style={styles.dropdownBox}
+      // @ts-ignore
+      onMouseLeave={() => setActiveDeptId(null)}
+    >
+      {/* Top Gold / Amber Accent Stripe */}
+      <View style={styles.topAccent} />
 
-        {/* 6-Department Mega Menu Grid */}
-        <View style={[styles.grid, isMobile && styles.gridMobile]}>
-          {academicDepartments.map((dept) => {
-            const deptCourses = allCatalogCourses.filter((c) => dept.courseIds.includes(c.id));
+      {/* 6 Academic Departments */}
+      {academicDepartments.map((dept, index) => {
+        const isHovered = activeDeptId === dept.id;
+        const deptCourses = allCatalogCourses.filter((c) => dept.courseIds.includes(c.id));
+        const flyoutOffsetTop = index >= 4 ? -80 : 0;
 
-            return (
-              <View key={dept.id} style={styles.column}>
-                {/* Department Header */}
-                <View style={styles.deptHeader}>
-                  <View style={[styles.deptIconBox, { backgroundColor: dept.tagBg }]}>
-                    {getDepartmentIcon(dept.icon, dept.tagColor)}
-                  </View>
-                  <View style={styles.deptHeaderText}>
-                    <Text style={styles.deptTitle} numberOfLines={1}>
-                      {dept.shortTitle || dept.title}
-                    </Text>
-                    <Text style={styles.deptSub} numberOfLines={1}>
-                      {dept.description}
-                    </Text>
-                  </View>
+        return (
+          <View
+            key={dept.id}
+            style={styles.submenuParent}
+            // @ts-ignore
+            onMouseEnter={() => setActiveDeptId(dept.id)}
+          >
+            {/* Department Row */}
+            <TouchableOpacity
+              style={[styles.menuItem, isHovered && styles.menuItemHovered]}
+              onPress={() => setActiveDeptId(isHovered ? null : dept.id)}
+              activeOpacity={0.8}
+            >
+              <Text 
+                style={[styles.menuText, isHovered && styles.menuTextHighlight]}
+                numberOfLines={1}
+              >
+                {dept.title}
+              </Text>
+              <ChevronRight
+                size={14}
+                color={isHovered ? colors.orange : 'rgba(255, 255, 255, 0.75)'}
+              />
+            </TouchableOpacity>
+
+            {/* Submenu Flyout for Department's Courses */}
+            {isHovered && (
+              <View 
+                style={[
+                  styles.submenuFlyout, 
+                  { top: flyoutOffsetTop }
+                ]}
+              >
+                <View style={styles.submenuLeftAccent} />
+
+                {/* Submenu Header */}
+                <View style={styles.flyoutHeaderBox}>
+                  <Text style={styles.flyoutHeaderTitle} numberOfLines={1}>
+                    {dept.shortTitle ? dept.shortTitle.toUpperCase() : dept.title.toUpperCase()}
+                  </Text>
+                  <Text style={styles.flyoutHeaderSub}>
+                    {deptCourses.length} Accredited Programmes • Click to View Details
+                  </Text>
                 </View>
 
                 {/* Courses List */}
-                <View style={styles.coursesList}>
-                  {deptCourses.map((course) => {
+                <View style={styles.flyoutCoursesList}>
+                  {deptCourses.map((course, cIdx) => {
                     const badge = getCourseBadge(course.knqfLevel || course.qualificationLevel);
+                    const isLast = cIdx === deptCourses.length - 1;
 
                     return (
                       <TouchableOpacity
                         key={course.id}
-                        style={styles.courseItemRow}
-                        onPress={() => {
-                          if (onClose) onClose();
-                          if (onSelectCourse) onSelectCourse(course);
-                        }}
-                        activeOpacity={0.7}
+                        style={[styles.courseRow, isLast && styles.courseRowLast]}
+                        onPress={() => handleCourseClick(course)}
+                        activeOpacity={0.8}
                       >
-                        <View style={[styles.levelTag, { backgroundColor: badge.bg, borderColor: badge.border }]}>
-                          <Text style={[styles.levelTagText, { color: badge.color }]}>
-                            {badge.label}
+                        <View style={styles.courseRowTop}>
+                          <View style={[styles.badge, { backgroundColor: badge.bg, borderColor: badge.border }]}>
+                            <Text style={[styles.badgeText, { color: badge.color }]}>
+                              {badge.label}
+                            </Text>
+                          </View>
+                          <Text style={styles.courseDurationText}>
+                            {course.duration}
                           </Text>
                         </View>
-                        <Text style={styles.courseTitleText} numberOfLines={1}>
+
+                        <Text style={styles.courseTitle} numberOfLines={2}>
                           {course.title}
                         </Text>
-                        <ChevronRight size={12} color="#94A3B8" style={styles.chevron} />
+
+                        <View style={styles.courseRowBottom}>
+                          <CheckCircle2 size={11} color="rgba(255, 255, 255, 0.6)" />
+                          <Text style={styles.examBoardText}>
+                            {course.examBoard || 'TVET CDACC / KNEC'}
+                          </Text>
+                        </View>
                       </TouchableOpacity>
                     );
                   })}
                 </View>
               </View>
-            );
-          })}
-        </View>
-
-        {/* Bottom Banner Ribbon */}
-        <View style={styles.bottomRibbon}>
-          <View style={styles.ribbonLeft}>
-            <ShieldCheck size={16} color="#FFFFFF" />
-            <Text style={styles.ribbonText}>
-              All programmes accredited by TVETA & CDACC • National Government Capitation & HELB Supported
-            </Text>
+            )}
           </View>
+        );
+      })}
 
-          <View style={styles.ribbonActions}>
-            <TouchableOpacity 
-              style={styles.ribbonActionBtn}
-              onPress={() => {
-                if (onClose) onClose();
-                if (onViewAllCourses) onViewAllCourses();
-              }}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.ribbonActionBtnText}>Browse Full 15+ Course Catalog</Text>
-              <ArrowRight size={13} color="#FFFFFF" />
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.applyFastBtn}
-              onPress={() => {
-                if (onClose) onClose();
-                if (onOpenInquiry) onOpenInquiry();
-              }}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.applyFastBtnText}>Apply Online</Text>
-            </TouchableOpacity>
-          </View>
+      {/* 7. View Complete Course Directory Link */}
+      <TouchableOpacity
+        style={styles.viewAllRow}
+        onPress={handleViewAll}
+        activeOpacity={0.8}
+      >
+        <View style={styles.viewAllLeft}>
+          <BookOpen size={14} color={colors.orange} />
+          <Text style={styles.viewAllText}>View Complete Course Directory</Text>
         </View>
-
-      </View>
+        <ArrowRight size={13} color={colors.orange} />
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  dropdownContainer: {
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 3,
-    borderBottomColor: colors.greenDeep,
-    boxShadow: '0 20px 40px rgba(15, 23, 42, 0.12)',
+  dropdownBox: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    width: 320,
+    backgroundColor: colors.greenDeep,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+    boxShadow: '0 12px 28px rgba(0, 0, 0, 0.32)',
     elevation: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#E2E8F0',
+    zIndex: 10000,
+    overflow: 'visible',
+    marginTop: 4,
   },
-  innerContent: {
-    maxWidth: 1260,
+  topAccent: {
+    height: 3,
+    backgroundColor: colors.orange,
     width: '100%',
-    alignSelf: 'center',
-    paddingHorizontal: 24,
-    paddingTop: 18,
-    paddingBottom: 14,
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
   },
-  topMegaHeader: {
+  submenuParent: {
+    position: 'relative',
+  },
+  menuItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, 0.12)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingBottom: 12,
-    marginBottom: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
-    flexWrap: 'wrap',
-    gap: 10,
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
+    transition: 'background-color 0.15s ease',
   },
-  megaHeaderLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  menuItemHovered: {
+    backgroundColor: '#1A5638',
   },
-  megaHeaderTitle: {
-    fontSize: 11,
-    fontWeight: '800',
-    color: colors.greenDeep,
-    letterSpacing: 1,
-    fontFamily: typography.labelFont,
-  },
-  megaHeaderHint: {
-    fontSize: 11.5,
-    color: colors.textMuted,
-    fontFamily: typography.bodyFont,
-  },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 20,
-    marginBottom: 16,
-  },
-  gridMobile: {
-    flexDirection: 'column',
-    gap: 16,
-  },
-  column: {
-    width: 'calc(33.333% - 14px)',
-    backgroundColor: '#F8FAFC',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    padding: 14,
-  },
-  deptHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0',
-    paddingBottom: 8,
-  },
-  deptIconBox: {
-    width: 34,
-    height: 34,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  deptHeaderText: {
+  menuText: {
+    fontSize: 13.5,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    fontFamily: typography.headlineFont,
+    letterSpacing: 0.15,
     flex: 1,
+    paddingRight: 8,
+  },
+  menuTextHighlight: {
+    color: colors.orange,
+  },
+
+  /* Flyout Submenu */
+  submenuFlyout: {
+    position: 'absolute',
+    left: '100%',
+    width: 360,
+    backgroundColor: '#113A26',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 4,
+    boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4)',
+    elevation: 16,
+    zIndex: 10002,
+    marginLeft: 2,
     overflow: 'hidden',
   },
-  deptTitle: {
-    fontSize: 13,
+  submenuLeftAccent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: 3,
+    backgroundColor: colors.orange,
+    zIndex: 2,
+  },
+  flyoutHeaderBox: {
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    paddingLeft: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, 0.12)',
+    backgroundColor: 'rgba(0, 0, 0, 0.15)',
+  },
+  flyoutHeaderTitle: {
+    fontSize: 11,
     fontWeight: '800',
-    color: colors.textPrimary,
-    fontFamily: typography.headlineFont,
+    color: colors.orange,
+    fontFamily: typography.labelFont,
+    letterSpacing: 0.8,
   },
-  deptSub: {
+  flyoutHeaderSub: {
     fontSize: 10.5,
-    color: colors.textMuted,
-    marginTop: 1,
+    color: 'rgba(255, 255, 255, 0.7)',
     fontFamily: typography.bodyFont,
+    marginTop: 2,
   },
-  coursesList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 6,
+  flyoutCoursesList: {
+    paddingVertical: 4,
   },
-  courseItemRow: {
+  courseRow: {
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    paddingLeft: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, 0.08)',
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
+    transition: 'background-color 0.15s ease',
+  },
+  courseRowLast: {
+    borderBottomWidth: 0,
+  },
+  courseRowTop: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-    borderRadius: 6,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#F1F5F9',
-    cursor: 'pointer',
+    justifyContent: 'space-between',
+    marginBottom: 4,
   },
-  levelTag: {
-    paddingHorizontal: 5,
+  badge: {
+    paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 4,
     borderWidth: 1,
   },
-  levelTagText: {
+  badgeText: {
     fontSize: 9.5,
     fontWeight: '800',
     fontFamily: typography.labelFont,
+    letterSpacing: 0.3,
   },
-  courseTitleText: {
-    fontSize: 12,
-    color: '#1E293B',
-    fontWeight: '600',
-    flex: 1,
+  courseDurationText: {
+    fontSize: 10,
+    color: 'rgba(255, 255, 255, 0.65)',
     fontFamily: typography.bodyFont,
   },
-  chevron: {
-    marginLeft: 2,
+  courseTitle: {
+    fontSize: 12.5,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    fontFamily: typography.headlineFont,
+    lineHeight: 17,
+    marginBottom: 4,
+  },
+  courseRowBottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  examBoardText: {
+    fontSize: 10,
+    color: 'rgba(255, 255, 255, 0.6)',
+    fontFamily: typography.bodyFont,
   },
 
-  /* Bottom Ribbon */
-  bottomRibbon: {
-    backgroundColor: colors.greenDeep,
-    borderRadius: 8,
-    paddingVertical: 10,
+  /* View All Row at Bottom of Main Dropdown */
+  viewAllRow: {
+    paddingVertical: 12,
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 14,
-    flexWrap: 'wrap',
+    backgroundColor: 'rgba(245, 158, 11, 0.12)',
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+    cursor: 'pointer',
   },
-  ribbonLeft: {
+  viewAllLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    flex: 1,
-    minWidth: 280,
   },
-  ribbonText: {
-    fontSize: 12,
-    color: '#E2E8F0',
-    fontWeight: '600',
-    fontFamily: typography.bodyFont,
-  },
-  ribbonActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  ribbonActionBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
-    cursor: 'pointer',
-  },
-  ribbonActionBtnText: {
-    fontSize: 11.5,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    fontFamily: typography.labelFont,
-  },
-  applyFastBtn: {
-    backgroundColor: '#F59E0B',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
-    cursor: 'pointer',
-  },
-  applyFastBtnText: {
-    fontSize: 11.5,
+  viewAllText: {
+    fontSize: 12.5,
     fontWeight: '800',
-    color: '#FFFFFF',
-    fontFamily: typography.labelFont,
+    color: colors.orange,
+    fontFamily: typography.headlineFont,
+    letterSpacing: 0.2,
   },
 });
-

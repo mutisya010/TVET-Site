@@ -22,11 +22,16 @@ import {
   FileText, 
   Sparkles, 
   RotateCcw,
-  ExternalLink 
+  ExternalLink,
+  ShieldCheck,
+  Award,
+  Building2,
+  Camera
 } from 'lucide-react';
 import { aboutCategories, aboutItems } from '../data/aboutData';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';
+import laikipiaBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
 
 export default function AboutPage({ initialOptionId = 'our-history', onNavigate, onOpenInquiry }) {
   const { width } = useWindowDimensions();
@@ -83,25 +88,96 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
     <View style={styles.pageWrapper}>
       <View style={styles.container}>
         
-        {/* Header Breadcrumb & Title */}
-        <View style={styles.headerBlock}>
-          <View style={styles.overlineRow}>
-            <View style={styles.overlineDot} />
-            <Text style={styles.overlineText}>
-              INSTITUTIONAL PROFILE, GOVERNANCE & DEPARTMENTS
-            </Text>
+        {/* ========================================================================= */}
+        {/* FIRST SECTION: INSTITUTIONAL HERO BANNER WITH CAMPUS IMAGE */}
+        {/* ========================================================================= */}
+        <ScrollReveal animation="fade-up" duration={500}>
+          <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
+            {/* Ambient Background with subtle blur of the authentic campus banner */}
+            <Image
+              source={laikipiaBannerImg || { uri: '/Images/Laikipia-north-banner-300x200.webp' }}
+              style={styles.heroBannerBgImage}
+              resizeMode="cover"
+              blurRadius={10}
+            />
+            {/* Deep institutional gradient overlay */}
+            <View style={styles.heroBannerOverlay} />
+
+            {/* Split Content: Narrative on Left + Real Photo Showcase on Right */}
+            <View style={[styles.heroBannerInner, isMobile && styles.heroBannerInnerMobile]}>
+              
+              {/* Left Column: Heading, Badges, Details */}
+              <View style={[styles.heroBannerLeft, isMobile && styles.heroBannerLeftMobile]}>
+                <View style={styles.bannerTagRow}>
+                  <View style={styles.bannerGovTag}>
+                    <View style={styles.bannerGovDot} />
+                    <Text style={styles.bannerGovTagText}>
+                      MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
+                    </Text>
+                  </View>
+                  <View style={styles.bannerLocationTag}>
+                    <MapPin size={12} color={colors.orange} />
+                    <Text style={styles.bannerLocationText}>Rumuruti, Laikipia County</Text>
+                  </View>
+                </View>
+
+                <Text style={[styles.bannerMainTitle, isMobile && styles.bannerMainTitleMobile]}>
+                  About Laikipia North TVC
+                </Text>
+
+                <Text style={[styles.bannerSubtitle, isMobile && styles.bannerSubtitleMobile]}>
+                  A premier national centre of technical and vocational excellence established to empower 
+                  youth with competency-based craftsmanship, industrial innovation, and self-reliance.
+                </Text>
+
+                {/* Institutional Key Fact Badges */}
+                <View style={[styles.bannerBadgesRow, isMobile && styles.bannerBadgesRowMobile]}>
+                  <View style={styles.bannerBadgeItem}>
+                    <ShieldCheck size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/2021</Text>
+                  </View>
+                  <View style={styles.bannerBadgeItem}>
+                    <Award size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>KNQF Levels 4, 5 & 6</Text>
+                  </View>
+                  <View style={styles.bannerBadgeItem}>
+                    <CheckCircle2 size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>CDACC Assessment Center</Text>
+                  </View>
+                  <View style={styles.bannerBadgeItem}>
+                    <Building2 size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>35+ Acre Campus Complex</Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* Right Column: Featured Authentic Photo Card */}
+              <View style={[styles.heroBannerPhotoCol, isMobile && styles.heroBannerPhotoColMobile]}>
+                <View style={styles.heroPhotoFrame}>
+                  <Image
+                    source={laikipiaBannerImg || { uri: '/Images/Laikipia-north-banner-300x200.webp' }}
+                    style={styles.heroPhotoImg}
+                    resizeMode="cover"
+                  />
+                  {/* Amber bottom accent line */}
+                  <View style={styles.heroPhotoAccentBar} />
+
+                  <View style={styles.heroPhotoCaption}>
+                    <Camera size={12} color={colors.orange} />
+                    <Text style={styles.heroPhotoCaptionText} numberOfLines={1}>
+                      LNTVC Administration Block & Trainees
+                    </Text>
+                  </View>
+                </View>
+              </View>
+
+            </View>
           </View>
+        </ScrollReveal>
 
-          <Text style={[styles.mainTitle, isMobile && styles.mainTitleMobile]}>
-            About Laikipia North TVC
-          </Text>
-
-          <Text style={styles.mainSubtitle}>
-            Discover our rich heritage, executive governance, accredited academic faculties, and comprehensive 
-            student support divisions designed to champion technical craftsmanship in Kenya.
-          </Text>
-
-          {/* Category Filter Pills */}
+        {/* Category Filter Pills Section */}
+        <View style={styles.filterBarSection}>
+          <Text style={styles.filterBarTitle}>EXPLORE BY SECTOR OR GOVERNANCE DIVISION</Text>
           <View style={styles.categoryPillsRow}>
             <TouchableOpacity
               style={[styles.catPill, activeCategory === 'all' && styles.catPillActive]}
@@ -324,49 +400,229 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingHorizontal: 20,
   },
-  headerBlock: {
-    marginBottom: 28,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+  /* First Section: Hero Banner with Authentic Campus Image */
+  heroBanner: {
+    position: 'relative',
+    borderRadius: 14,
+    overflow: 'hidden',
+    marginBottom: 24,
+    minHeight: 310,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    boxShadow: '0 12px 30px rgba(15, 23, 42, 0.14)',
+    elevation: 4,
+    backgroundColor: colors.greenDeep,
+    justifyContent: 'center',
   },
-  overlineRow: {
+  heroBannerMobile: {
+    minHeight: 280,
+    borderRadius: 10,
+    marginBottom: 18,
+  },
+  heroBannerBgImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0.18,
+  },
+  heroBannerOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(14, 48, 32, 0.92)',
+    // @ts-ignore
+    backgroundImage: 'linear-gradient(135deg, rgba(14, 48, 32, 0.96) 0%, rgba(20, 70, 46, 0.90) 50%, rgba(15, 23, 42, 0.94) 100%)',
+  },
+  heroBannerInner: {
+    position: 'relative',
+    zIndex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 28,
+    paddingHorizontal: 32,
+    gap: 28,
+  },
+  heroBannerInnerMobile: {
+    flexDirection: 'column',
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    gap: 20,
+  },
+  heroBannerLeft: {
+    flex: 1.25,
+    minWidth: 300,
+  },
+  heroBannerLeftMobile: {
+    minWidth: '100%',
+  },
+  bannerTagRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginBottom: 12,
+  },
+  bannerGovTag: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    marginBottom: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.25)',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 20,
   },
-  overlineDot: {
+  bannerGovDot: {
     width: 6,
     height: 6,
     borderRadius: 3,
     backgroundColor: colors.orange,
   },
-  overlineText: {
+  bannerGovTagText: {
     fontSize: 10.5,
     fontWeight: '800',
-    color: colors.textOrange,
+    color: '#FFFFFF',
     letterSpacing: 0.8,
     fontFamily: typography.labelFont,
   },
-  mainTitle: {
-    fontSize: 34,
-    fontWeight: '800',
-    color: colors.charcoal,
-    letterSpacing: -0.6,
-    marginBottom: 8,
+  bannerLocationTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    borderRadius: 20,
+  },
+  bannerLocationText: {
+    fontSize: 10.5,
+    fontWeight: '700',
+    color: colors.orange,
+    fontFamily: typography.labelFont,
+  },
+  bannerMainTitle: {
+    fontSize: 32,
+    fontWeight: '900',
+    color: '#FFFFFF',
+    letterSpacing: -0.5,
+    marginBottom: 10,
     fontFamily: typography.headlineFont,
+    // @ts-ignore
+    textShadowColor: 'rgba(0, 0, 0, 0.35)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
-  mainTitleMobile: {
-    fontSize: 28,
+  bannerMainTitleMobile: {
+    fontSize: 23,
+    marginBottom: 8,
+    lineHeight: 28,
   },
-  mainSubtitle: {
-    fontSize: 14,
-    lineHeight: 21,
-    color: colors.textSecondary,
-    maxWidth: 720,
-    marginBottom: 20,
+  bannerSubtitle: {
+    fontSize: 14.5,
+    lineHeight: 22,
+    color: '#E2E8F0',
+    maxWidth: 760,
+    marginBottom: 18,
     fontFamily: typography.bodyFont,
+  },
+  bannerSubtitleMobile: {
+    fontSize: 13,
+    lineHeight: 19,
+    marginBottom: 14,
+  },
+  bannerBadgesRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  bannerBadgesRowMobile: {
+    gap: 8,
+  },
+  bannerBadgeItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: 'rgba(0, 0, 0, 0.32)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.18)',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 6,
+  },
+  bannerBadgeText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#F8FAFC',
+    fontFamily: typography.labelFont,
+  },
+
+  /* Right Column: Authentic Photo Showcase Frame */
+  heroBannerPhotoCol: {
+    flex: 0.95,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  heroBannerPhotoColMobile: {
+    width: '100%',
+    marginTop: 4,
+  },
+  heroPhotoFrame: {
+    width: '100%',
+    maxWidth: 420,
+    borderRadius: 10,
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: 'rgba(245, 158, 11, 0.55)',
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45)',
+    backgroundColor: '#0E3020',
+  },
+  heroPhotoImg: {
+    width: '100%',
+    height: 220,
+    aspectRatio: 1.5,
+  },
+  heroPhotoAccentBar: {
+    height: 3,
+    backgroundColor: colors.orange,
+    width: '100%',
+  },
+  heroPhotoCaption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    backgroundColor: 'rgba(10, 30, 20, 0.92)',
+  },
+  heroPhotoCaptionText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#F8FAFC',
+    fontFamily: typography.labelFont,
+  },
+  filterBarSection: {
+    marginBottom: 22,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  filterBarTitle: {
+    fontSize: 10.5,
+    fontWeight: '800',
+    color: colors.textMuted,
+    letterSpacing: 0.8,
+    fontFamily: typography.labelFont,
+    marginBottom: 10,
   },
   categoryPillsRow: {
     flexDirection: 'row',

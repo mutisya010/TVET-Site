@@ -1,11 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
-import { ArrowRight, Compass, ShieldCheck, Award } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Compass, 
+  ShieldCheck, 
+  ChevronLeft, 
+  ChevronRight 
+} from 'lucide-react';
 import { colors, typography } from '../theme/colors';
+import laikipiaBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+
+/**
+ * 6 Master Hero Slides showcasing LNTVC's Campus & Practical TVET Workshops.
+ * Clean, unobstructed photo carousel rotating automatically every 3 seconds.
+ */
+const heroSlides = [
+  {
+    id: 'campus',
+    image: laikipiaBannerImg || '/Images/Laikipia-north-banner-300x200.webp',
+  },
+  {
+    id: 'electrical',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'automotive',
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'ict',
+    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'building',
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'agriculture',
+    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
+  },
+];
 
 export default function HeroSection({ onExploreCourses, onApplyNow }) {
   const { width } = useWindowDimensions();
   const isMobile = width < 960;
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-rotate every 3 seconds (3000ms)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev + 1) % heroSlides.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [isPaused, currentSlideIndex]);
+
+  const handlePrevSlide = () => {
+    setCurrentSlideIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlideIndex((prev) => (prev + 1) % heroSlides.length);
+  };
 
   return (
     <View style={styles.sectionWrapper}>
@@ -67,38 +127,70 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
             </View>
           </View>
 
-          {/* Right Column: Hero Workshop Image + Overlays */}
+          {/* Right Column: Hero Auto-Rotating Image Carousel (Clean & Unobstructed) */}
           <View style={[styles.rightCol, isMobile && styles.rightColMobile]}>
-            <View style={styles.imageCardWrapper}>
-              {/* Main Workshop Image */}
-              <Image
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
-                }}
-                style={styles.heroImage}
-                resizeMode="cover"
-              />
-              <View style={styles.imageOverlayGradient} />
+            <View 
+              style={styles.imageCardWrapper}
+              // @ts-ignore
+              onMouseEnter={() => setIsPaused(true)}
+              // @ts-ignore
+              onMouseLeave={() => setIsPaused(false)}
+            >
+              {/* Stack of Rotating Images with Smooth Cross-Fade */}
+              {heroSlides.map((slide, idx) => {
+                const isActive = currentSlideIndex === idx;
+                return (
+                  <View
+                    key={slide.id}
+                    style={[
+                      styles.slideLayer,
+                      isActive ? styles.slideLayerActive : styles.slideLayerInactive,
+                    ]}
+                  >
+                    <Image
+                      source={typeof slide.image === 'string' ? { uri: slide.image } : slide.image}
+                      style={styles.heroImage}
+                      resizeMode="cover"
+                    />
+                  </View>
+                );
+              })}
 
-              {/* Tag Pill on Image */}
-              <View style={styles.imageTagBadge}>
-                <View style={styles.livePulse} />
-                <Text style={styles.imageTagText}>
-                  HANDS-ON WORKSHOP TRAINING & 100% CBET
-                </Text>
+              {/* Minimalist Slide Indicator Dots at Bottom-Center */}
+              <View style={styles.carouselIndicators}>
+                {heroSlides.map((_, idx) => (
+                  <TouchableOpacity
+                    key={idx}
+                    onPress={() => setCurrentSlideIndex(idx)}
+                    style={[
+                      styles.indicatorDot,
+                      currentSlideIndex === idx && styles.indicatorDotActive,
+                    ]}
+                    activeOpacity={0.7}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
               </View>
 
-              {/* Floating White Overlay Card: 100% Industry Attachment */}
-              <View style={styles.floatingCard}>
-                <View style={styles.floatingIconBox}>
-                  <Award size={22} color={colors.green} />
-                </View>
-                <View style={styles.floatingContent}>
-                  <Text style={styles.floatingStat}>100%</Text>
-                  <Text style={styles.floatingLabel}>Industry Attachment</Text>
-                  <Text style={styles.floatingSub}>All qualified trainees placed in industry</Text>
-                </View>
-              </View>
+              {/* Left / Right Quick Navigation Arrows */}
+              <TouchableOpacity
+                style={[styles.sliderArrowBtn, styles.sliderArrowLeft]}
+                onPress={handlePrevSlide}
+                activeOpacity={0.8}
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={16} color="#FFFFFF" />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.sliderArrowBtn, styles.sliderArrowRight]}
+                onPress={handleNextSlide}
+                activeOpacity={0.8}
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={16} color="#FFFFFF" />
+              </TouchableOpacity>
+
             </View>
           </View>
 
@@ -145,23 +237,23 @@ const styles = StyleSheet.create({
     gap: 32,
   },
   leftCol: {
-    flex: 1.15,
-    alignItems: 'flex-start',
+    flex: 1.05,
   },
   leftColMobile: {
     width: '100%',
   },
   govBadge: {
-    backgroundColor: colors.greenLight,
-    borderWidth: 1,
-    borderColor: colors.greenMuted,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 5.5,
+    alignSelf: 'flex-start',
+    backgroundColor: colors.greenLight,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     borderRadius: 20,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   govDot: {
     width: 6,
@@ -170,44 +262,43 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green,
   },
   govBadgeText: {
-    color: colors.textGreen,
-    fontSize: 10.5,
+    color: colors.greenDeep,
+    fontSize: 10,
     fontWeight: '800',
     letterSpacing: 0.6,
     fontFamily: typography.labelFont,
   },
   headline: {
-    fontSize: 38,
-    fontWeight: '800',
-    lineHeight: 46,
-    color: colors.textPrimary,
+    fontSize: 40,
+    lineHeight: 48,
+    fontWeight: '900',
+    color: colors.charcoal,
     letterSpacing: -0.8,
     marginBottom: 16,
     fontFamily: typography.headlineFont,
   },
   headlineMobile: {
-    fontSize: 28,
-    lineHeight: 34,
+    fontSize: 30,
+    lineHeight: 36,
   },
   paragraph: {
-    fontSize: 14.5,
-    lineHeight: 23,
+    fontSize: 15,
+    lineHeight: 24,
     color: colors.textSecondary,
     marginBottom: 24,
-    maxWidth: 580,
     fontFamily: typography.bodyFont,
   },
   buttonRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 14,
+    gap: 12,
     marginBottom: 24,
     flexWrap: 'wrap',
   },
   buttonRowMobile: {
-    width: '100%',
     flexDirection: 'column',
-    gap: 12,
+    alignItems: 'stretch',
+    gap: 10,
   },
   primaryBtn: {
     backgroundColor: colors.orange,
@@ -217,10 +308,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 8,
-    shadowColor: colors.orange,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 6,
+    boxShadow: '0 4px 12px rgba(245, 158, 11, 0.25)',
     elevation: 3,
     cursor: 'pointer',
   },
@@ -279,98 +367,85 @@ const styles = StyleSheet.create({
     position: 'relative',
     borderRadius: 16,
     overflow: 'hidden',
-    boxShadow: '0 20px 40px rgba(20, 70, 46, 0.12)',
+    boxShadow: '0 20px 40px rgba(20, 70, 46, 0.16)',
     borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceAlt,
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+    backgroundColor: '#0F2B1D',
     aspectRatio: 16 / 11,
-    minHeight: 280,
+    minHeight: 290,
   },
-  heroImage: {
-    width: '100%',
-    height: '100%',
-  },
-  imageOverlayGradient: {
+  slideLayer: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(20, 70, 46, 0.15)',
+    width: '100%',
+    height: '100%',
+    transition: 'opacity 0.65s ease-in-out',
   },
-  imageTagBadge: {
+  slideLayerActive: {
+    opacity: 1,
+    zIndex: 1,
+  },
+  slideLayerInactive: {
+    opacity: 0,
+    zIndex: 0,
+    pointerEvents: 'none',
+  },
+  heroImage: {
+    width: '100%',
+    height: '100%',
+  },
+  carouselIndicators: {
     position: 'absolute',
-    top: 14,
-    left: 14,
+    bottom: 14,
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: colors.greenDeep,
+    zIndex: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.45)',
     paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 6,
-  },
-  livePulse: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.orange,
-    animation: 'pulseGlow 2s ease-in-out infinite',
-  },
-  imageTagText: {
-    color: colors.white,
-    fontSize: 10,
-    fontWeight: '800',
-    letterSpacing: 0.5,
-    fontFamily: typography.labelFont,
-  },
-  floatingCard: {
-    position: 'absolute',
-    bottom: 14,
-    right: 14,
-    left: 14,
-    maxWidth: 290,
-    backgroundColor: colors.white,
-    borderRadius: 12,
-    padding: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    boxShadow: '0 8px 24px rgba(15, 23, 42, 0.12)',
+    paddingVertical: 6,
+    borderRadius: 20,
     borderWidth: 1,
-    borderColor: colors.border,
-    alignSelf: 'flex-end',
-    animation: 'floatGentle 4.5s ease-in-out infinite',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
-  floatingIconBox: {
-    width: 42,
-    height: 42,
-    borderRadius: 8,
-    backgroundColor: colors.greenLight,
+  indicatorDot: {
+    width: 7,
+    height: 7,
+    borderRadius: 3.5,
+    backgroundColor: 'rgba(255, 255, 255, 0.45)',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+  },
+  indicatorDotActive: {
+    width: 20,
+    backgroundColor: colors.orange,
+    borderRadius: 3.5,
+  },
+  sliderArrowBtn: {
+    position: 'absolute',
+    top: '50%',
+    transform: [{ translateY: -16 }],
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(10, 35, 22, 0.65)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.25)',
     justifyContent: 'center',
     alignItems: 'center',
-    flexShrink: 0,
+    zIndex: 10,
+    cursor: 'pointer',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+    transition: 'background-color 0.15s ease',
   },
-  floatingContent: {
-    flex: 1,
+  sliderArrowLeft: {
+    left: 10,
   },
-  floatingStat: {
-    fontSize: 20,
-    fontWeight: '900',
-    color: colors.greenDeep,
-    lineHeight: 22,
-    fontFamily: typography.headlineFont,
-  },
-  floatingLabel: {
-    fontSize: 11.5,
-    fontWeight: '800',
-    color: colors.textPrimary,
-    fontFamily: typography.labelFont,
-  },
-  floatingSub: {
-    fontSize: 10,
-    color: colors.textMuted,
-    marginTop: 1,
-    fontFamily: typography.bodyFont,
+  sliderArrowRight: {
+    right: 10,
   },
 });

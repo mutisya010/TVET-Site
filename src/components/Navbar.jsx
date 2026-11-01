@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'r
 import { ChevronDown, ChevronUp, ArrowRight, Menu, X, User, ChevronRight } from 'lucide-react';
 import CollegeLogo from './CollegeLogo';
 import AboutDropdown from './AboutDropdown';
+import ManagementDropdown from './ManagementDropdown';
 import CoursesDropdown from './CoursesDropdown';
 import { aboutCategories, aboutItems } from '../data/aboutData';
 import { academicDepartments, allCatalogCourses } from '../data/coursesData';
@@ -15,15 +16,19 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
   
   // Dropdown states for Desktop
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const [managementDropdownOpen, setManagementDropdownOpen] = useState(false);
   const [coursesDropdownOpen, setCoursesDropdownOpen] = useState(false);
 
   // Accordion states for Mobile
   const [mobileAboutExpanded, setMobileAboutExpanded] = useState(false);
+  const [mobileManagementExpanded, setMobileManagementExpanded] = useState(false);
+  const [mobileDeputyExpanded, setMobileDeputyExpanded] = useState(false);
   const [mobileCoursesExpanded, setMobileCoursesExpanded] = useState(false);
 
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Us', hasDropdown: true },
+    { id: 'management', label: 'Management', hasDropdown: true },
     { id: 'courses', label: 'Courses & Programmes', hasDropdown: true },
     { id: 'downloads', label: 'Downloads' },
     { id: 'contact', label: 'Contact' },
@@ -32,14 +37,20 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
   const handleNavClick = (id) => {
     setMobileMenuOpen(false);
     setAboutDropdownOpen(false);
+    setManagementDropdownOpen(false);
     setCoursesDropdownOpen(false);
-    if (onNavigate) {
+    if (id === 'management') {
+      if (onNavigate) {
+        onNavigate('about', 'board-of-governors');
+      }
+    } else if (onNavigate) {
       onNavigate(id);
     }
   };
 
   const handleSelectAboutOption = (optionId) => {
     setAboutDropdownOpen(false);
+    setManagementDropdownOpen(false);
     setMobileMenuOpen(false);
     if (onNavigate) {
       onNavigate('about', optionId);
@@ -60,6 +71,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
       // @ts-ignore
       onMouseLeave={() => {
         setAboutDropdownOpen(false);
+        setManagementDropdownOpen(false);
         setCoursesDropdownOpen(false);
       }}
     >
@@ -81,8 +93,12 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
               {navItems.map((item) => {
                 const isActive = currentPage === item.id;
                 const isAbout = item.id === 'about';
+                const isManagement = item.id === 'management';
                 const isCourses = item.id === 'courses';
-                const isDropdownOpen = (isAbout && aboutDropdownOpen) || (isCourses && coursesDropdownOpen);
+                const isDropdownOpen = 
+                  (isAbout && aboutDropdownOpen) || 
+                  (isManagement && managementDropdownOpen) || 
+                  (isCourses && coursesDropdownOpen);
 
                 return (
                   <View 
@@ -92,12 +108,19 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                     onMouseEnter={() => {
                       if (isAbout) {
                         setAboutDropdownOpen(true);
+                        setManagementDropdownOpen(false);
+                        setCoursesDropdownOpen(false);
+                      } else if (isManagement) {
+                        setManagementDropdownOpen(true);
+                        setAboutDropdownOpen(false);
                         setCoursesDropdownOpen(false);
                       } else if (isCourses) {
                         setCoursesDropdownOpen(true);
                         setAboutDropdownOpen(false);
+                        setManagementDropdownOpen(false);
                       } else {
                         setAboutDropdownOpen(false);
+                        setManagementDropdownOpen(false);
                         setCoursesDropdownOpen(false);
                       }
                     }}
@@ -106,12 +129,17 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                       onPress={() => {
                         if (isAbout) {
                           setAboutDropdownOpen(!aboutDropdownOpen);
+                          setManagementDropdownOpen(false);
                           setCoursesDropdownOpen(false);
                           handleNavClick('about');
+                        } else if (isManagement) {
+                          setManagementDropdownOpen(!managementDropdownOpen);
+                          setAboutDropdownOpen(false);
+                          setCoursesDropdownOpen(false);
                         } else if (isCourses) {
                           setCoursesDropdownOpen(!coursesDropdownOpen);
                           setAboutDropdownOpen(false);
-                          handleNavClick('courses');
+                          setManagementDropdownOpen(false);
                         } else {
                           handleNavClick(item.id);
                         }
@@ -119,23 +147,57 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                       style={[
                         styles.navLink, 
                         isActive && styles.navLinkActive,
-                        isDropdownOpen && styles.navLinkHover
+                        isDropdownOpen && styles.navLinkHover,
+                        ((isManagement && managementDropdownOpen) || (isCourses && coursesDropdownOpen)) && styles.navLinkManagementOpen
                       ]}
                       activeOpacity={0.7}
                     >
                       <Text style={[
                         styles.navText, 
-                        (isActive || isDropdownOpen) && styles.navTextActive
+                        (isActive || isDropdownOpen) && styles.navTextActive,
+                        ((isManagement && managementDropdownOpen) || (isCourses && coursesDropdownOpen)) && styles.navTextHighlight
                       ]}>
                         {item.label}
                       </Text>
                       {item.hasDropdown && (
                         <ChevronDown 
                           size={14} 
-                          color={(isActive || isDropdownOpen) ? colors.white : colors.textMuted} 
+                          color={
+                            ((isManagement && managementDropdownOpen) || (isCourses && coursesDropdownOpen))
+                              ? colors.orange 
+                              : ((isActive || isDropdownOpen) ? colors.white : colors.textMuted)
+                          } 
                         />
                       )}
                     </TouchableOpacity>
+
+                    {/* Anchored Dropdown for About Us */}
+                    {isAbout && aboutDropdownOpen && (
+                      <AboutDropdown 
+                        onSelectOption={handleSelectAboutOption}
+                        onClose={() => setAboutDropdownOpen(false)}
+                      />
+                    )}
+
+                    {/* Anchored Dropdown for Management (Mirroring Sample) */}
+                    {isManagement && managementDropdownOpen && (
+                      <ManagementDropdown 
+                        onSelectOption={handleSelectAboutOption}
+                        onClose={() => setManagementDropdownOpen(false)}
+                      />
+                    )}
+
+                    {/* Anchored Dropdown for Courses & Programmes (Mirroring Sample) */}
+                    {isCourses && coursesDropdownOpen && (
+                      <CoursesDropdown 
+                        onSelectCourse={handleSelectCourseItem}
+                        onClose={() => setCoursesDropdownOpen(false)}
+                        onViewAllCourses={() => {
+                          setCoursesDropdownOpen(false);
+                          handleNavClick('courses');
+                        }}
+                      />
+                    )}
                   </View>
                 );
               })}
@@ -182,36 +244,6 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
         </View>
 
         {/* ========================================================================= */}
-        {/* DESKTOP MEGA-MENU DROPDOWNS */}
-        {/* ========================================================================= */}
-        
-        {/* 1. Desktop About Us Mega Menu Dropdown */}
-        {!isMobile && aboutDropdownOpen && (
-          <View style={styles.desktopDropdownAbsolute}>
-            <AboutDropdown 
-              onSelectOption={handleSelectAboutOption}
-              onClose={() => setAboutDropdownOpen(false)}
-              onOpenInquiry={onOpenInquiry}
-            />
-          </View>
-        )}
-
-        {/* 2. Desktop Courses & Programmes Mega Menu Dropdown */}
-        {!isMobile && coursesDropdownOpen && (
-          <View style={styles.desktopDropdownAbsolute}>
-            <CoursesDropdown 
-              onSelectCourse={handleSelectCourseItem}
-              onClose={() => setCoursesDropdownOpen(false)}
-              onViewAllCourses={() => {
-                setCoursesDropdownOpen(false);
-                handleNavClick('courses');
-              }}
-              onOpenInquiry={onOpenInquiry}
-            />
-          </View>
-        )}
-
-        {/* ========================================================================= */}
         {/* MOBILE MENU DRAWER */}
         {/* ========================================================================= */}
         {isMobile && mobileMenuOpen && (
@@ -219,7 +251,12 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
             {navItems.map((item) => {
               const isActive = currentPage === item.id;
               const isAbout = item.id === 'about';
+              const isManagement = item.id === 'management';
               const isCourses = item.id === 'courses';
+              const isExpanded = 
+                (isAbout && mobileAboutExpanded) || 
+                (isManagement && mobileManagementExpanded) || 
+                (isCourses && mobileCoursesExpanded);
 
               return (
                 <View key={item.id}>
@@ -227,8 +264,16 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                     onPress={() => {
                       if (isAbout) {
                         setMobileAboutExpanded(!mobileAboutExpanded);
+                        setMobileManagementExpanded(false);
+                        setMobileCoursesExpanded(false);
+                      } else if (isManagement) {
+                        setMobileManagementExpanded(!mobileManagementExpanded);
+                        setMobileAboutExpanded(false);
+                        setMobileCoursesExpanded(false);
                       } else if (isCourses) {
                         setMobileCoursesExpanded(!mobileCoursesExpanded);
+                        setMobileAboutExpanded(false);
+                        setMobileManagementExpanded(false);
                       } else {
                         handleNavClick(item.id);
                       }
@@ -239,7 +284,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                       {item.label}
                     </Text>
                     {item.hasDropdown && (
-                      (isAbout && mobileAboutExpanded) || (isCourses && mobileCoursesExpanded) ? (
+                      isExpanded ? (
                         <ChevronUp size={15} color={isActive ? colors.textGreen : colors.textMuted} />
                       ) : (
                         <ChevronDown size={15} color={isActive ? colors.textGreen : colors.textMuted} />
@@ -257,26 +302,119 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                         <Text style={styles.mobileAllBtnText}>View All About Us Sections →</Text>
                       </TouchableOpacity>
 
-                      {aboutCategories.map((cat) => {
-                        const catItems = aboutItems.filter((i) => i.categoryId === cat.id);
-                        return (
-                          <View key={cat.id} style={styles.mobileCatBlock}>
-                            <Text style={styles.mobileCatTitle}>{cat.title.toUpperCase()}</Text>
-                            <View style={styles.mobileCatItems}>
-                              {catItems.map((opt) => (
-                                <TouchableOpacity
-                                  key={opt.id}
-                                  style={styles.mobileOptRow}
-                                  onPress={() => handleSelectAboutOption(opt.id)}
-                                >
-                                  <View style={styles.mobileOptDot} />
-                                  <Text style={styles.mobileOptText}>{opt.title}</Text>
-                                </TouchableOpacity>
-                              ))}
-                            </View>
-                          </View>
-                        );
-                      })}
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('our-history')}
+                      >
+                        <View style={styles.mobileOptDot} />
+                        <Text style={styles.mobileOptText}>Our History & Heritage</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('service-charter')}
+                      >
+                        <View style={styles.mobileOptDot} />
+                        <Text style={styles.mobileOptText}>Citizens Service Charter</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('brochures')}
+                      >
+                        <View style={styles.mobileOptDot} />
+                        <Text style={styles.mobileOptText}>LNTVC Brochures</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('gallery')}
+                      >
+                        <View style={styles.mobileOptDot} />
+                        <Text style={styles.mobileOptText}>Campus Life & Gallery</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('complaints-feedback')}
+                      >
+                        <View style={styles.mobileOptDot} />
+                        <Text style={styles.mobileOptText}>Complaints & Feedback</Text>
+                      </TouchableOpacity>
+                    </View>
+                  )}
+
+                  {/* Mobile Management Accordion (Mirroring Sample) */}
+                  {isManagement && mobileManagementExpanded && (
+                    <View style={styles.mobileAccordionBox}>
+                      {/* 1. Board of Governors */}
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('board-of-governors')}
+                      >
+                        <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
+                        <Text style={styles.mobileOptText}>Board of Governors</Text>
+                      </TouchableOpacity>
+
+                      {/* 2. Principal */}
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('office-of-principal')}
+                      >
+                        <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
+                        <Text style={styles.mobileOptText}>Principal</Text>
+                      </TouchableOpacity>
+
+                      {/* 3. Deputy Principals (Expandable) */}
+                      <TouchableOpacity
+                        style={[styles.mobileOptRow, styles.mobileDeputyRow]}
+                        onPress={() => setMobileDeputyExpanded(!mobileDeputyExpanded)}
+                      >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                          <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
+                          <Text style={[styles.mobileOptText, { fontWeight: '700' }]}>Deputy Principals</Text>
+                        </View>
+                        {mobileDeputyExpanded ? (
+                          <ChevronUp size={14} color={colors.orange} />
+                        ) : (
+                          <ChevronDown size={14} color={colors.textMuted} />
+                        )}
+                      </TouchableOpacity>
+
+                      {mobileDeputyExpanded && (
+                        <View style={styles.mobileSubIndent}>
+                          <TouchableOpacity
+                            style={styles.mobileSubRow}
+                            onPress={() => handleSelectAboutOption('deputy-principal-admin')}
+                          >
+                            <Text style={styles.mobileSubText}>• Deputy Principal (Administration)</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={styles.mobileSubRow}
+                            onPress={() => handleSelectAboutOption('deputy-principal-academics')}
+                          >
+                            <Text style={styles.mobileSubText}>• Deputy Principal (Academics)</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+
+                      {/* 4. Office of The Registrar */}
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('office-of-registrar')}
+                      >
+                        <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
+                        <Text style={styles.mobileOptText}>Office of The Registrar</Text>
+                      </TouchableOpacity>
+
+                      {/* 5. Dean of students */}
+                      <TouchableOpacity
+                        style={styles.mobileOptRow}
+                        onPress={() => handleSelectAboutOption('office-of-dean-of-trainees')}
+                      >
+                        <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
+                        <Text style={styles.mobileOptText}>Dean of students</Text>
+                      </TouchableOpacity>
                     </View>
                   )}
 
@@ -302,7 +440,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                                   style={styles.mobileOptRow}
                                   onPress={() => handleSelectCourseItem(c)}
                                 >
-                                  <View style={[styles.mobileOptDot, { backgroundColor: colors.greenDeep }]} />
+                                  <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
                                   <Text style={styles.mobileOptText}>{c.title}</Text>
                                 </TouchableOpacity>
                               ))}
@@ -385,6 +523,11 @@ const styles = StyleSheet.create({
   navLinkHover: {
     backgroundColor: colors.greenDeep,
   },
+  navLinkManagementOpen: {
+    backgroundColor: colors.greenDeep,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+  },
   navText: {
     fontSize: 13.5,
     fontWeight: '600',
@@ -394,6 +537,10 @@ const styles = StyleSheet.create({
   navTextActive: {
     color: colors.white,
     fontWeight: '700',
+  },
+  navTextHighlight: {
+    color: colors.orange,
+    fontWeight: '800',
   },
   rightActions: {
     flexDirection: 'row',
@@ -528,6 +675,25 @@ const styles = StyleSheet.create({
   },
   mobileOptText: {
     fontSize: 12.5,
+    color: colors.textSecondary,
+    fontFamily: typography.bodyFont,
+  },
+  mobileDeputyRow: {
+    justifyContent: 'space-between',
+    paddingRight: 6,
+  },
+  mobileSubIndent: {
+    paddingLeft: 20,
+    paddingVertical: 4,
+    gap: 4,
+  },
+  mobileSubRow: {
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+  },
+  mobileSubText: {
+    fontSize: 12,
+    fontWeight: '600',
     color: colors.textSecondary,
     fontFamily: typography.bodyFont,
   },
