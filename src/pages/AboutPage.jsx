@@ -95,7 +95,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
           <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
             {/* Ambient Background with subtle blur of the authentic campus banner */}
             <Image
-              source={laikipiaBannerImg || { uri: '/Images/Laikipia-north-banner-300x200.webp' }}
+              source={laikipiaBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
               style={styles.heroBannerBgImage}
               resizeMode="cover"
               blurRadius={10}
@@ -155,7 +155,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
               <View style={[styles.heroBannerPhotoCol, isMobile && styles.heroBannerPhotoColMobile]}>
                 <View style={styles.heroPhotoFrame}>
                   <Image
-                    source={laikipiaBannerImg || { uri: '/Images/Laikipia-north-banner-300x200.webp' }}
+                    source={laikipiaBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
                     style={styles.heroPhotoImg}
                     resizeMode="cover"
                   />

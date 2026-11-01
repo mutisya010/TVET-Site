@@ -17,7 +17,7 @@ import laikipiaBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
 const heroSlides = [
   {
     id: 'campus',
-    image: laikipiaBannerImg || '/Images/Laikipia-north-banner-300x200.webp',
+    image: laikipiaBannerImg || './Images/Laikipia-north-banner-300x200.webp',
   },
   {
     id: 'electrical',
