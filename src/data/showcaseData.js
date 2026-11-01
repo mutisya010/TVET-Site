@@ -1,0 +1,38 @@
+export const showcaseData = [
+  {
+    id: 'electrical-bay',
+    tag: 'Electrical Bay',
+    tagBg: '#F59E0B',
+    title: 'Electrical Power Workshop',
+    description: 'Fully equipped with modern power distribution test panels, single & three-phase wiring trainers, and switchgears.',
+    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80',
+    fallbackBg: '#14462E',
+  },
+  {
+    id: 'digital-center',
+    tag: 'Digital Center',
+    tagBg: '#2E8B57',
+    title: 'Ultra-Modern Computer Lab',
+    description: 'High-speed broadband network, 40+ dedicated workstations, and up-to-date industrial software development packages.',
+    imageUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+    fallbackBg: '#14462E',
+  },
+  {
+    id: 'mechanical-bay',
+    tag: 'Mechanical Bay',
+    tagBg: '#14462E',
+    title: 'Welding & Fabrication Bay',
+    description: 'Heavy-duty arc and MIG/TIG welding machines, metal sheet cutting benches, and forge frameworks.',
+    imageUrl: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
+    fallbackBg: '#1A5638',
+  },
+  {
+    id: 'civil-yard',
+    tag: 'Civil Yard',
+    tagBg: '#2E8B57',
+    title: 'Masonry & Plumbing Yard',
+    description: 'Outdoor testing ground featuring hydraulic leak testers, computerized level surveying instruments, and drainage display kits.',
+    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=800&q=80',
+    fallbackBg: '#14462E',
+  },
+];
