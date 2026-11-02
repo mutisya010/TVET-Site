@@ -9,6 +9,7 @@ import {
   ExternalLink,
   Check 
 } from 'lucide-react';
+import { colors, typography } from '../../theme/colors';
 
 export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
   const { width } = useWindowDimensions();
@@ -22,14 +23,14 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
         {/* Header Row */}
         <View style={[styles.headerRow, isMobile && styles.headerRowMobile]}>
           <View style={styles.headerLeft}>
-            <Text style={styles.overline}>REGULATORY FRAMEWORK & FINANCING</Text>
+            <Text style={styles.overline}>REGULATORY ACCREDITATION & FINANCING</Text>
             <Text style={[styles.title, isMobile && styles.titleMobile]}>
               Statutory Standards, Funding & Assessment
             </Text>
           </View>
           <Text style={styles.headerRightText}>
-            All courses comply with the Ministry of Education curriculum guidelines under 
-            the Technical and Vocational Education and Training Act of 2013.
+            All programmes adhere to the Ministry of Education curriculum guidelines under 
+            the TVET Act. Trainees benefit from subsidized tuition, HELB upkeep loans, and CDACC certification.
           </Text>
         </View>
 
@@ -39,13 +40,13 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
           {/* Card 1: KNQF Qualification Levels */}
           <View style={[styles.card, isMobile && styles.cardMobile, isTablet && styles.cardTablet]}>
             <View style={styles.cardTop}>
-              <View style={[styles.iconBox, { backgroundColor: '#FFA500' }]}>
-                <Layers size={18} color="#FFFFFF" />
+              <View style={[styles.iconBox, { backgroundColor: colors.orange }]}>
+                <Layers size={18} color={colors.white} />
               </View>
               <Text style={styles.cardTitle}>KNQF Qualification Levels</Text>
             </View>
             <Text style={styles.cardDesc}>
-              The Kenya National Qualifications Framework guarantees progression from artisan to university degrees.
+              The Kenya National Qualifications Framework guarantees seamless progression from artisan certificates to higher diplomas and degrees.
             </Text>
 
             <View style={styles.levelsTable}>
@@ -55,11 +56,11 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
               </View>
               <View style={styles.levelRow}>
                 <Text style={styles.levelName}>Level 5: Craft Cert</Text>
-                <Text style={styles.levelDuration}>1-2 Yrs</Text>
+                <Text style={styles.levelDuration}>1-2 Yrs (KCSE D)</Text>
               </View>
               <View style={styles.levelRow}>
                 <Text style={styles.levelName}>Level 4: Artisan</Text>
-                <Text style={styles.levelDuration}>Open entry KCSE/KCPE (1 Yr)</Text>
+                <Text style={styles.levelDuration}>Open Entry (1 Yr)</Text>
               </View>
             </View>
           </View>
@@ -67,8 +68,8 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
           {/* Card 2: Approved Fee Policy */}
           <View style={[styles.card, isMobile && styles.cardMobile, isTablet && styles.cardTablet]}>
             <View style={styles.cardTop}>
-              <View style={[styles.iconBox, { backgroundColor: '#FFA500' }]}>
-                <Coins size={18} color="#FFFFFF" />
+              <View style={[styles.iconBox, { backgroundColor: colors.orange }]}>
+                <Coins size={18} color={colors.white} />
               </View>
               <Text style={styles.cardTitle}>Approved Fee Policy</Text>
             </View>
@@ -79,14 +80,14 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
             <View style={styles.feeBreakdown}>
               <View style={styles.feeItem}>
                 <Text style={styles.feeLabel}>Government Capitation:</Text>
-                <Text style={styles.feeValHighlight}>Direct Subsidy</Text>
+                <Text style={styles.feeValHighlight}>Direct GoK Subsidy</Text>
               </View>
               <View style={styles.feeItem}>
                 <Text style={styles.feeLabel}>Trainee Tuition Share:</Text>
-                <Text style={styles.feeVal}>Subsidized Rates</Text>
+                <Text style={styles.feeVal}>Affordable Subsidized Rates</Text>
               </View>
               <View style={styles.feeItem}>
-                <Text style={styles.feeLabel}>Installment System:</Text>
+                <Text style={styles.feeLabel}>Payment Schedule:</Text>
                 <Text style={styles.feeVal}>3 Terms per Year</Text>
               </View>
             </View>
@@ -96,35 +97,35 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
               onPress={onDownloadFeeSchedule}
               activeOpacity={0.7}
             >
-              <Text style={styles.cardLinkText}>Download Fee Schedule (PDF)</Text>
-              <ArrowRight size={13} color="#FFA500" />
+              <Text style={styles.cardLinkText}>View Official Fee Schedule</Text>
+              <ArrowRight size={13} color={colors.orange} />
             </TouchableOpacity>
           </View>
 
           {/* Card 3: HELB & HEF Funding */}
           <View style={[styles.card, isMobile && styles.cardMobile, isTablet && styles.cardTablet]}>
             <View style={styles.cardTop}>
-              <View style={[styles.iconBox, { backgroundColor: '#2E8B57' }]}>
-                <Landmark size={18} color="#FFFFFF" />
+              <View style={[styles.iconBox, { backgroundColor: colors.green }]}>
+                <Landmark size={18} color={colors.white} />
               </View>
               <Text style={styles.cardTitle}>HELB & HEF Funding</Text>
             </View>
             <Text style={styles.cardDesc}>
-              100% eligibility for the New Higher Education Funding (HEF) Model:
+              100% eligibility for the Higher Education Financing (HEF) Model and national financial aid:
             </Text>
 
             <View style={styles.fundingBullets}>
               <View style={styles.bulletItem}>
-                <Check size={13} color="#2E8B57" />
+                <Check size={13} color={colors.green} />
                 <Text style={styles.bulletText}>Government Scholarships up to 70% based on Means Testing</Text>
               </View>
               <View style={styles.bulletItem}>
-                <Check size={13} color="#2E8B57" />
+                <Check size={13} color={colors.green} />
                 <Text style={styles.bulletText}>HELB Tuition & Upkeep Loans available annually per trainee</Text>
               </View>
               <View style={styles.bulletItem}>
-                <Check size={13} color="#2E8B57" />
-                <Text style={styles.bulletText}>County bursaries & CDF vouchers processed seamlessly</Text>
+                <Check size={13} color={colors.green} />
+                <Text style={styles.bulletText}>Turkana County bursaries & CDF vouchers processed</Text>
               </View>
             </View>
 
@@ -134,42 +135,38 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
               activeOpacity={0.7}
             >
               <Text style={styles.cardLinkText}>Apply via HEF Portal</Text>
-              <ExternalLink size={12} color="#2E8B57" />
+              <ExternalLink size={12} color={colors.green} />
             </TouchableOpacity>
           </View>
 
           {/* Card 4: Certification Bodies */}
           <View style={[styles.card, isMobile && styles.cardMobile, isTablet && styles.cardTablet]}>
             <View style={styles.cardTop}>
-              <View style={[styles.iconBox, { backgroundColor: '#14462E' }]}>
-                <ShieldCheck size={18} color="#F59E0B" />
+              <View style={[styles.iconBox, { backgroundColor: colors.greenDeep }]}>
+                <ShieldCheck size={18} color={colors.orange} />
               </View>
               <Text style={styles.cardTitle}>Certification Bodies</Text>
             </View>
             <Text style={styles.cardDesc}>
-              Accredited assessment centers delivering globally respected credentials:
+              Accredited assessment centers delivering globally respected technical credentials:
             </Text>
 
             <View style={styles.certPills}>
               <View style={styles.certPill}>
-                <Text style={styles.certPillText}>• TVET CDACC: Competency CBET</Text>
+                <Text style={styles.certPillText}>• TVET CDACC: Competency CBET Standards</Text>
               </View>
               <View style={styles.certPill}>
-                <Text style={styles.certPillText}>• KNEC: National Board Certified</Text>
+                <Text style={styles.certPillText}>• KNEC: National Examination Board</Text>
               </View>
               <View style={styles.certPill}>
-                <Text style={styles.certPillText}>• NITA: National Industrial Training</Text>
+                <Text style={styles.certPillText}>• NITA: National Industrial Training & Apprenticeship</Text>
               </View>
             </View>
 
-            <TouchableOpacity 
-              style={styles.cardLink}
-              onPress={() => alert('Loima TVC is fully registered and accredited by TVETA under Registration No: TVETA/PUBLIC/TVC/0212')}
-              activeOpacity={0.7}
-            >
-              <Text style={styles.cardLinkText}>Registry Accreditation Status</Text>
-              <ArrowRight size={13} color="#FFA500" />
-            </TouchableOpacity>
+            <View style={styles.cardLinkStatic}>
+              <ShieldCheck size={13} color={colors.textGreen} />
+              <Text style={styles.cardLinkTextGreen}>TVETA Accredited: TVETA/PUBLIC/TVC/2021</Text>
+            </View>
           </View>
 
         </View>
@@ -181,10 +178,10 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
 
 const styles = StyleSheet.create({
   section: {
-    backgroundColor: '#FAF9F6',
+    backgroundColor: colors.surfaceAlt,
     paddingVertical: 56,
     borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+    borderTopColor: colors.border,
   },
   container: {
     maxWidth: 1240,
@@ -209,28 +206,29 @@ const styles = StyleSheet.create({
   overline: {
     fontSize: 11,
     fontWeight: '800',
-    color: '#FFA500',
+    color: colors.orange,
     letterSpacing: 1.2,
     marginBottom: 6,
-    fontFamily: "'Space Grotesk', sans-serif",
+    fontFamily: typography.labelFont,
   },
   title: {
     fontSize: 28,
     fontWeight: '800',
-    color: '#0F172A',
+    color: colors.charcoal,
     letterSpacing: -0.5,
-    fontFamily: "'Space Grotesk', sans-serif",
+    fontFamily: typography.headlineFont,
   },
   titleMobile: {
-    fontSize: 24,
+    fontSize: 23,
+    lineHeight: 29,
   },
   headerRightText: {
     flex: 1,
-    fontSize: 12.5,
-    lineHeight: 18,
-    color: '#64748B',
-    maxWidth: 420,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontSize: 13,
+    lineHeight: 19,
+    color: colors.textSecondary,
+    maxWidth: 440,
+    fontFamily: typography.bodyFont,
   },
   cardsGrid: {
     flexDirection: 'row',
@@ -239,15 +237,18 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 'calc(25% - 15px)',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: colors.border,
     borderRadius: 12,
-    padding: 20,
+    padding: 22,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    boxShadow: '0 4px 12px rgba(15, 23, 42, 0.03)',
+    shadowColor: colors.charcoal,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 6,
     elevation: 2,
   },
   cardTablet: {
@@ -255,6 +256,7 @@ const styles = StyleSheet.create({
   },
   cardMobile: {
     width: '100%',
+    padding: 18,
   },
   cardTop: {
     flexDirection: 'row',
@@ -263,24 +265,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   iconBox: {
-    width: 32,
-    height: 32,
-    borderRadius: 6,
+    width: 34,
+    height: 34,
+    borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
   },
   cardTitle: {
     fontSize: 14.5,
     fontWeight: '800',
-    color: '#0F172A',
-    fontFamily: "'Space Grotesk', sans-serif",
+    color: colors.charcoal,
+    fontFamily: typography.headlineFont,
   },
   cardDesc: {
-    fontSize: 11.5,
-    lineHeight: 16,
-    color: '#64748B',
+    fontSize: 12,
+    lineHeight: 17,
+    color: colors.textSecondary,
     marginBottom: 14,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontFamily: typography.bodyFont,
   },
   levelsTable: {
     gap: 6,
@@ -289,51 +291,52 @@ const styles = StyleSheet.create({
   levelRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 5,
-    paddingHorizontal: 8,
-    paddingVertical: 5,
+    borderColor: colors.borderLight,
+    borderRadius: 6,
+    paddingHorizontal: 9,
+    paddingVertical: 6,
   },
   levelName: {
-    fontSize: 10.5,
+    fontSize: 11,
     fontWeight: '700',
-    color: '#0F172A',
-    fontFamily: "'Space Grotesk', sans-serif",
+    color: colors.charcoal,
+    fontFamily: typography.headlineFont,
   },
   levelDuration: {
-    fontSize: 10,
-    color: '#64748B',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontSize: 10.5,
+    color: colors.textMuted,
+    fontFamily: typography.bodyFont,
   },
   feeBreakdown: {
-    gap: 5,
+    gap: 6,
     marginBottom: 14,
   },
   feeItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   feeLabel: {
-    fontSize: 10.5,
-    color: '#64748B',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontSize: 11,
+    color: colors.textMuted,
+    fontFamily: typography.bodyFont,
   },
   feeValHighlight: {
-    fontSize: 11,
+    fontSize: 11.5,
     fontWeight: '800',
-    color: '#F59E0B',
-    fontFamily: "'Space Grotesk', sans-serif",
+    color: colors.orange,
+    fontFamily: typography.headlineFont,
   },
   feeVal: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#0F172A',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    color: colors.charcoal,
+    fontFamily: typography.bodyFont,
   },
   fundingBullets: {
-    gap: 6,
+    gap: 7,
     marginBottom: 14,
   },
   bulletItem: {
@@ -342,43 +345,57 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   bulletText: {
-    fontSize: 11,
-    lineHeight: 15,
-    color: '#334155',
+    fontSize: 11.5,
+    lineHeight: 16,
+    color: colors.textSecondary,
     flex: 1,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontFamily: typography.bodyFont,
   },
   certPills: {
     gap: 6,
     marginBottom: 14,
   },
   certPill: {
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 4,
-    paddingHorizontal: 8,
-    paddingVertical: 5,
+    borderColor: colors.borderLight,
+    borderRadius: 5,
+    paddingHorizontal: 9,
+    paddingVertical: 6,
   },
   certPillText: {
-    fontSize: 10.5,
+    fontSize: 11,
     fontWeight: '700',
-    color: '#0F172A',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    color: colors.charcoal,
+    fontFamily: typography.bodyFont,
   },
   cardLink: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    paddingTop: 8,
+    gap: 6,
+    paddingTop: 10,
     borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+    borderTopColor: colors.borderLight,
     cursor: 'pointer',
   },
   cardLinkText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.orange,
+    fontFamily: typography.labelFont,
+  },
+  cardLinkStatic: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.borderLight,
+  },
+  cardLinkTextGreen: {
     fontSize: 11.5,
     fontWeight: '700',
-    color: '#FFA500',
-    fontFamily: "'Space Grotesk', sans-serif",
+    color: colors.textGreen,
+    fontFamily: typography.labelFont,
   },
 });

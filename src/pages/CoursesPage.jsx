@@ -11,13 +11,25 @@ import {
 import { 
   Search, 
   RotateCcw, 
-  Download 
+  MapPin, 
+  ShieldCheck, 
+  Award, 
+  CheckCircle2, 
+  Sparkles, 
+  X, 
+  GraduationCap, 
+  Layers, 
+  Clock, 
+  Coins, 
+  Filter 
 } from 'lucide-react';
 import { allCatalogCourses } from '../data/coursesData';
 import CourseCatalogCard from '../components/courses/CourseCatalogCard';
 import StatutoryStandardsSection from '../components/courses/StatutoryStandardsSection';
 import CourseCtaBanner from '../components/courses/CourseCtaBanner';
 import ScrollReveal from '../components/common/ScrollReveal';
+import { colors, typography } from '../theme/colors';
+import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
 
 export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStartApplication }) {
   const { width } = useWindowDimensions();
@@ -30,7 +42,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [selectedIntake, setSelectedIntake] = useState('all');
 
-  const deptPills = [
+  const deptList = [
     { id: 'all', label: 'All Disciplines' },
     { id: 'electrical', label: 'Electrical & Solar' },
     { id: 'automotive', label: 'Automotive & Mechanical' },
@@ -40,6 +52,20 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
     { id: 'hospitality', label: 'Hospitality' },
   ];
 
+  const levelList = [
+    { id: 'all', label: 'All Qualifications' },
+    { id: 'diploma', label: 'Diploma (Level 6)' },
+    { id: 'craft', label: 'Craft Cert (Level 5)' },
+    { id: 'artisan', label: 'Artisan (Level 4)' },
+  ];
+
+  const intakeList = [
+    { id: 'all', label: 'All Intakes' },
+    { id: 'jan', label: 'January' },
+    { id: 'may', label: 'May' },
+    { id: 'sept', label: 'September' },
+  ];
+
   const handleResetFilters = () => {
     setSearchTerm('');
     setSelectedDept('all');
@@ -47,16 +73,30 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
     setSelectedIntake('all');
   };
 
+  const isFiltered = searchTerm.trim() !== '' || selectedDept !== 'all' || selectedLevel !== 'all' || selectedIntake !== 'all';
+
+  // Compute department counts
+  const getDeptCount = (deptId) => {
+    if (deptId === 'all') return allCatalogCourses.length;
+    return allCatalogCourses.filter((course) => {
+      if (deptId === 'ict-business') {
+        return course.department.includes('ict') || course.department.includes('business');
+      }
+      return course.department === deptId;
+    }).length;
+  };
+
   const filteredCourses = useMemo(() => {
     return allCatalogCourses.filter((course) => {
       // Search term matching
       if (searchTerm.trim()) {
         const query = searchTerm.toLowerCase();
-        const matchesTitle = course.title.toLowerCase().includes(query);
-        const matchesCode = course.code.toLowerCase().includes(query);
-        const matchesDept = course.deptLabel.toLowerCase().includes(query);
+        const matchesTitle = course.title?.toLowerCase().includes(query);
+        const matchesCode = course.code?.toLowerCase().includes(query);
+        const matchesDept = course.deptLabel?.toLowerCase().includes(query);
+        const matchesReq = course.minRequirement?.toLowerCase().includes(query);
         const matchesPathways = course.pathways ? course.pathways.toLowerCase().includes(query) : false;
-        if (!matchesTitle && !matchesCode && !matchesDept && !matchesPathways) {
+        if (!matchesTitle && !matchesCode && !matchesDept && !matchesReq && !matchesPathways) {
           return false;
         }
       }
@@ -71,8 +111,12 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
       }
 
       // Level filter
-      if (selectedLevel !== 'all' && course.qualificationLevel.toLowerCase() !== selectedLevel.toLowerCase()) {
-        return false;
+      if (selectedLevel !== 'all') {
+        const courseLevel = (course.qualificationLevel || '').toLowerCase();
+        const knqf = (course.knqfLevel || '').toLowerCase();
+        if (selectedLevel === 'diploma' && !courseLevel.includes('diploma') && !knqf.includes('level 6')) return false;
+        if (selectedLevel === 'craft' && !courseLevel.includes('craft') && !knqf.includes('level 5')) return false;
+        if (selectedLevel === 'artisan' && !courseLevel.includes('artisan') && !knqf.includes('level 4')) return false;
       }
 
       // Intake filter
@@ -87,219 +131,285 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
     });
   }, [searchTerm, selectedDept, selectedLevel, selectedIntake]);
 
-  const handleExportCatalog = () => {
-    alert('Exporting Loima TVC Complete Course Brochure (PDF)...');
-  };
-
   return (
     <View style={styles.pageWrapper}>
       <View style={styles.container}>
         
-        {/* Top Academic Header Section */}
-        <View style={[styles.headerSection, isMobile && styles.headerSectionMobile]}>
-          <View style={styles.headerLeft}>
-            {/* Academic Directory Pill */}
-            <View style={styles.pillRow}>
-              <View style={styles.directoryBadge}>
-                <Text style={styles.directoryBadgeText}>OFFICIAL ACADEMIC DIRECTORY</Text>
-              </View>
-              <Text style={styles.criteriaBadge}>2024/2025 Criteria</Text>
-            </View>
+        {/* ========================================================================= */}
+        {/* ACADEMIC INSTITUTIONAL HERO BANNER */}
+        {/* ========================================================================= */}
+        <ScrollReveal animation="fade-up" duration={500}>
+          <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
+            {/* Ambient Background with subtle blur of the authentic campus banner */}
+            <Image
+              source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+              style={styles.heroBannerBgImage}
+              resizeMode="cover"
+              blurRadius={10}
+            />
+            {/* Deep institutional gradient overlay */}
+            <View style={styles.heroBannerOverlay} />
 
-            {/* Page Title & Description */}
-            <Text style={[styles.title, isMobile && styles.titleMobile]}>
-              Courses & Programmes Catalog
-            </Text>
-            <Text style={styles.subtitle}>
-              Government-accredited Artisan, Craft Certificate, and Diploma qualifications aligned 
-              with TVET CDACC and KNQF standards. Practical, industry-based training engineered 
-              for self-employment and immediate industrial placement.
-            </Text>
-
-            {/* 4 Counter Metrics Row */}
-            <View style={[styles.metricsRow, isMobile && styles.metricsRowMobile]}>
-              <View style={styles.metricItem}>
-                <Text style={styles.metricVal}>100%</Text>
-                <Text style={styles.metricSub}>Practical Guaranteed</Text>
-              </View>
-
-              <View style={styles.metricItem}>
-                <Text style={styles.metricVal}>HELB</Text>
-                <Text style={styles.metricSub}>Capitation & Upkeep</Text>
-              </View>
-
-              <View style={styles.metricItem}>
-                <Text style={styles.metricVal}>3 Terms</Text>
-                <Text style={styles.metricSub}>Per Academic Year</Text>
-              </View>
-
-              <View style={styles.metricItem}>
-                <Text style={styles.metricVal}>CDACC</Text>
-                <Text style={styles.metricSub}>Dual Assessment</Text>
-              </View>
-            </View>
-          </View>
-
-          {/* Right Workshop Highlight Card */}
-          <View style={[styles.headerRight, isMobile && styles.headerRightMobile]}>
-            <View style={styles.cbetCard}>
-              <View style={styles.cbetImageBox}>
-                <Image
-                  source={{
-                    uri: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
-                  }}
-                  style={styles.cbetImage}
-                  resizeMode="cover"
-                />
-                <View style={styles.cbetBadge}>
-                  <Text style={styles.cbetBadgeText}>TVET CDACC CENTER #Loima TVC409</Text>
+            <View style={[styles.heroBannerInner, isMobile && styles.heroBannerInnerMobile]}>
+              <View style={styles.heroBannerContent}>
+                
+                {/* Government & Location Tag */}
+                <View style={styles.bannerTagRow}>
+                  <View style={styles.bannerGovTag}>
+                    <View style={styles.bannerGovDot} />
+                    <Text style={styles.bannerGovTagText}>
+                      MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
+                    </Text>
+                  </View>
+                  <View style={styles.bannerLocationTag}>
+                    <MapPin size={12} color={colors.orange} />
+                    <Text style={styles.bannerLocationText}>Loima, Turkana County</Text>
+                  </View>
                 </View>
-              </View>
-              <View style={styles.cbetContent}>
-                <Text style={styles.cbetTitle}>Competency-Based Education (CBET)</Text>
-                <Text style={styles.cbetDesc}>
-                  70% hands-on workshop practice combined with 30% theory. Trainees acquire real-world 
-                  competence under industry benchmark standard equipment.
+
+                {/* Banner Main Title */}
+                <Text style={[styles.bannerMainTitle, isMobile && styles.bannerMainTitleMobile]}>
+                  Courses & Programmes Catalog
                 </Text>
+
+                {/* Subtitle */}
+                <Text style={[styles.bannerSubtitle, isMobile && styles.bannerSubtitleMobile]}>
+                  Explore government-accredited Artisan, Craft Certificate, and Diploma qualifications at Loima TVC. 
+                  70%+ hands-on practical workshop training engineered for industrial craftsmanship, direct self-employment, and national certifications.
+                </Text>
+
+                {/* Institutional Badges */}
+                <View style={[styles.bannerBadgesRow, isMobile && styles.bannerBadgesRowMobile]}>
+                  <View style={styles.bannerBadgeItem}>
+                    <ShieldCheck size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/2021</Text>
+                  </View>
+                  <View style={styles.bannerBadgeItem}>
+                    <Award size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>KNQF Levels 4, 5 & 6</Text>
+                  </View>
+                  <View style={styles.bannerBadgeItem}>
+                    <CheckCircle2 size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>CDACC Assessment Center</Text>
+                  </View>
+                  <View style={styles.bannerBadgeItem}>
+                    <Coins size={14} color={colors.orange} />
+                    <Text style={styles.bannerBadgeText}>HELB & GoK Capitation</Text>
+                  </View>
+                </View>
+
               </View>
             </View>
-          </View>
-        </View>
 
-        {/* Search, Filter & Quick Department Pills Section */}
-        <View style={styles.filterSectionCard}>
-          {/* Main Search Row with Export & Reset */}
-          <View style={[styles.searchRow, isMobile && styles.searchRowMobile]}>
-            <View style={styles.searchBarBox}>
-              <Search size={16} color="#707070" />
+            {/* Quick Metrics Strip */}
+            <View style={[styles.metricsStrip, isMobile && styles.metricsStripMobile]}>
+              <View style={styles.metricBox}>
+                <Text style={styles.metricNumber}>100%</Text>
+                <Text style={styles.metricLabel}>Practical CBET Training</Text>
+              </View>
+              <View style={styles.metricDivider} />
+              <View style={styles.metricBox}>
+                <Text style={styles.metricNumber}>HELB</Text>
+                <Text style={styles.metricLabel}>Capitation & Tuition Loans</Text>
+              </View>
+              <View style={styles.metricDivider} />
+              <View style={styles.metricBox}>
+                <Text style={styles.metricNumber}>3 Intakes</Text>
+                <Text style={styles.metricLabel}>Jan • May • Sep Annually</Text>
+              </View>
+              <View style={styles.metricDivider} />
+              <View style={styles.metricBox}>
+                <Text style={styles.metricNumber}>CDACC</Text>
+                <Text style={styles.metricLabel}>National Examination Board</Text>
+              </View>
+            </View>
+
+          </View>
+        </ScrollReveal>
+
+        {/* ========================================================================= */}
+        {/* UNIFIED SEARCH & FILTER SUITE */}
+        {/* ========================================================================= */}
+        <View style={styles.filterCard}>
+          
+          {/* Top Search & Filter Bar */}
+          <View style={[styles.filterTopRow, isMobile && styles.filterTopRowMobile]}>
+            {/* Live Search Input */}
+            <View style={styles.searchContainer}>
+              <Search size={16} color={colors.textMuted} />
               <TextInput
                 style={styles.searchInput}
-                placeholder="Search by keyword (e.g., Electrical, ICT, Plumbing, Masonry, Solar)..."
-                placeholderTextColor="#A0A0A0"
+                placeholder="Search by keyword, code, or entry requirement..."
+                placeholderTextColor={colors.charcoalFaint}
                 value={searchTerm}
                 onChangeText={setSearchTerm}
               />
+              {searchTerm ? (
+                <TouchableOpacity onPress={() => setSearchTerm('')} activeOpacity={0.7}>
+                  <X size={15} color={colors.textMuted} />
+                </TouchableOpacity>
+              ) : null}
             </View>
 
-            <View style={styles.searchButtons}>
-              <TouchableOpacity 
-                style={styles.exportBtn}
-                onPress={handleExportCatalog}
-                activeOpacity={0.8}
-              >
-                <Download size={14} color="#FFFFFF" />
-                <Text style={styles.exportBtnText}>Export Catalog</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity 
-                style={styles.resetBtn}
-                onPress={handleResetFilters}
-                activeOpacity={0.8}
-              >
-                <RotateCcw size={13} color="#707070" />
-                <Text style={styles.resetBtnText}>Reset</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* 3 Select Dropdowns Row */}
-          <View style={[styles.dropdownsRow, isMobile && styles.dropdownsRowMobile]}>
-            {/* Filter 1: Department */}
-            <View style={styles.dropdownGroup}>
-              <Text style={styles.dropdownLabel}>Filter by Department</Text>
-              <select
-                value={selectedDept}
-                onChange={(e) => setSelectedDept(e.target.value)}
-                style={styles.selectHtml}
-              >
-                <option value="all">All Departments (6)</option>
-                <option value="ict">ICT & Informatics</option>
-                <option value="electrical">Electrical & Electronics</option>
-                <option value="automotive">Automotive & Mechanical</option>
-                <option value="building">Building & Civil</option>
-                <option value="agriculture">Agriculture & Bio-Resources</option>
-                <option value="business">Business & Commerce</option>
-              </select>
+            {/* Level Filter Segment */}
+            <View style={styles.levelSegmentGroup}>
+              {levelList.map((level) => {
+                const isActive = selectedLevel === level.id;
+                return (
+                  <TouchableOpacity
+                    key={level.id}
+                    style={[styles.segmentBtn, isActive && styles.segmentBtnActive]}
+                    onPress={() => setSelectedLevel(level.id)}
+                    activeOpacity={0.8}
+                  >
+                    <Text style={[styles.segmentBtnText, isActive && styles.segmentBtnTextActive]}>
+                      {level.label}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
             </View>
 
-            {/* Filter 2: Qualification Level */}
-            <View style={styles.dropdownGroup}>
-              <Text style={styles.dropdownLabel}>Qualification Level</Text>
-              <select
-                value={selectedLevel}
-                onChange={(e) => setSelectedLevel(e.target.value)}
-                style={styles.selectHtml}
-              >
-                <option value="all">All Levels (Artisan, Craft, Diploma)</option>
-                <option value="artisan">Artisan Certificate (KNQF Level 4)</option>
-                <option value="craft">Craft Certificate (KNQF Level 5)</option>
-                <option value="diploma">Diploma (KNQF Level 6)</option>
-              </select>
-            </View>
-
-            {/* Filter 3: Intake Season */}
-            <View style={styles.dropdownGroup}>
-              <Text style={styles.dropdownLabel}>Intake Season</Text>
-              <select
-                value={selectedIntake}
-                onChange={(e) => setSelectedIntake(e.target.value)}
-                style={styles.selectHtml}
-              >
-                <option value="all">All Intakes (Jan / May / Sept)</option>
-                <option value="jan">January Intake</option>
-                <option value="may">May Intake</option>
-                <option value="sept">September Intake</option>
-              </select>
+            {/* Intake Filter Segment */}
+            <View style={styles.intakeSegmentGroup}>
+              {intakeList.map((intake) => {
+                const isActive = selectedIntake === intake.id;
+                return (
+                  <TouchableOpacity
+                    key={intake.id}
+                    style={[styles.intakeBtn, isActive && styles.intakeBtnActive]}
+                    onPress={() => setSelectedIntake(intake.id)}
+                    activeOpacity={0.8}
+                  >
+                    <Text style={[styles.intakeBtnText, isActive && styles.intakeBtnTextActive]}>
+                      {intake.label}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
             </View>
           </View>
 
-          {/* Quick Department Pills */}
-          <View style={styles.deptPillsRow}>
-            {deptPills.map((pill) => {
-              const isActive = selectedDept === pill.id;
-              return (
-                <TouchableOpacity
-                  key={pill.id}
-                  style={[styles.deptPillBtn, isActive && styles.deptPillActive]}
-                  onPress={() => setSelectedDept(pill.id)}
+          {/* Department Tabs Row */}
+          <View style={styles.deptTabsRow}>
+            <Text style={styles.deptTabsLabel}>DISCIPLINES:</Text>
+            <View style={styles.deptPillsContainer}>
+              {deptList.map((dept) => {
+                const isActive = selectedDept === dept.id;
+                const count = getDeptCount(dept.id);
+                return (
+                  <TouchableOpacity
+                    key={dept.id}
+                    style={[styles.deptPill, isActive && styles.deptPillActive]}
+                    onPress={() => setSelectedDept(dept.id)}
+                    activeOpacity={0.8}
+                  >
+                    <Text style={[styles.deptPillText, isActive && styles.deptPillTextActive]}>
+                      {dept.label}
+                    </Text>
+                    <View style={[styles.deptCountBadge, isActive && styles.deptCountBadgeActive]}>
+                      <Text style={[styles.deptCountText, isActive && styles.deptCountTextActive]}>
+                        {count}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+
+          {/* Results Counter & Active Filter Dismissals */}
+          <View style={styles.resultsHeaderRow}>
+            <View style={styles.resultsCountBox}>
+              <Text style={styles.resultsCountText}>
+                Showing <Text style={styles.resultsCountBold}>{filteredCourses.length}</Text> Accredited Programmes
+              </Text>
+            </View>
+
+            {isFiltered && (
+              <View style={styles.activeFiltersRow}>
+                {selectedDept !== 'all' && (
+                  <TouchableOpacity 
+                    style={styles.filterChip} 
+                    onPress={() => setSelectedDept('all')}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.filterChipText}>
+                      {deptList.find((d) => d.id === selectedDept)?.label}
+                    </Text>
+                    <X size={12} color={colors.textSecondary} />
+                  </TouchableOpacity>
+                )}
+
+                {selectedLevel !== 'all' && (
+                  <TouchableOpacity 
+                    style={styles.filterChip} 
+                    onPress={() => setSelectedLevel('all')}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.filterChipText}>
+                      {levelList.find((l) => l.id === selectedLevel)?.label}
+                    </Text>
+                    <X size={12} color={colors.textSecondary} />
+                  </TouchableOpacity>
+                )}
+
+                {selectedIntake !== 'all' && (
+                  <TouchableOpacity 
+                    style={styles.filterChip} 
+                    onPress={() => setSelectedIntake('all')}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.filterChipText}>
+                      Intake: {intakeList.find((i) => i.id === selectedIntake)?.label}
+                    </Text>
+                    <X size={12} color={colors.textSecondary} />
+                  </TouchableOpacity>
+                )}
+
+                <TouchableOpacity 
+                  style={styles.resetBtn} 
+                  onPress={handleResetFilters}
                   activeOpacity={0.8}
                 >
-                  <Text style={[styles.deptPillText, isActive && styles.deptPillTextActive]}>
-                    {pill.label}
-                  </Text>
+                  <RotateCcw size={12} color={colors.orangeDark} />
+                  <Text style={styles.resetBtnText}>Clear All</Text>
                 </TouchableOpacity>
-              );
-            })}
+              </View>
+            )}
           </View>
+
         </View>
 
-        {/* Results Counter */}
-        <View style={styles.resultsBar}>
-          <Text style={styles.resultsCountText}>
-            Showing <Text style={styles.countBold}>{filteredCourses.length}</Text> Accredited Programmes
-          </Text>
-        </View>
-
-        {/* Course Cards Catalog Grid */}
+        {/* ========================================================================= */}
+        {/* COURSE CARDS CATALOG GRID */}
+        {/* ========================================================================= */}
         <View style={styles.catalogGrid}>
-          {filteredCourses.map((course, idx) => (
-            <ScrollReveal key={course.id} animation="fade-up" delay={idx * 50} duration={550}>
-              <CourseCatalogCard
-                course={course}
-                onViewDetails={onViewCourseDetails}
-                onApplyNow={onApplyCourse}
-              />
-            </ScrollReveal>
+          {filteredCourses.map((course) => (
+            <CourseCatalogCard
+              key={course.id}
+              course={course}
+              onViewDetails={onViewCourseDetails}
+              onApplyNow={onApplyCourse}
+            />
           ))}
         </View>
 
-        {/* Empty Search State */}
+        {/* Empty State */}
         {filteredCourses.length === 0 && (
-          <View style={styles.emptyBox}>
-            <Text style={styles.emptyTitle}>No matching programmes found</Text>
-            <Text style={styles.emptySubtitle}>Try adjusting your search keyword or clearing the filters.</Text>
-            <TouchableOpacity style={styles.emptyResetBtn} onPress={handleResetFilters}>
-              <Text style={styles.emptyResetText}>Reset All Filters</Text>
+          <View style={styles.emptyCard}>
+            <GraduationCap size={40} color={colors.charcoalMuted} />
+            <Text style={styles.emptyTitle}>No Matching Programmes Found</Text>
+            <Text style={styles.emptySubtitle}>
+              We couldn't find any courses matching your selected combination of discipline, qualification level, or keyword.
+            </Text>
+            <TouchableOpacity 
+              style={styles.emptyResetBtn} 
+              onPress={handleResetFilters}
+              activeOpacity={0.85}
+            >
+              <RotateCcw size={14} color={colors.white} />
+              <Text style={styles.emptyResetBtnText}>Reset All Filters</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -309,15 +419,15 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
       {/* Statutory Standards, Funding & Assessment Section */}
       <ScrollReveal animation="fade-up" duration={650}>
         <StatutoryStandardsSection 
-          onDownloadFeeSchedule={handleExportCatalog} 
+          onDownloadFeeSchedule={onStartApplication} 
         />
       </ScrollReveal>
 
       {/* Course CTA Banner */}
-      <ScrollReveal animation="zoom-in" duration={650}>
+      <ScrollReveal animation="fade-up" duration={650}>
         <CourseCtaBanner 
           onStartApplication={onStartApplication}
-          onSpeakAdvisor={() => alert('Connecting to Loima TVC Admissions Advisor via WhatsApp (+254 759 437 978)...')}
+          onSpeakAdvisor={onStartApplication}
         />
       </ScrollReveal>
     </View>
@@ -326,9 +436,9 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
 
 const styles = StyleSheet.create({
   pageWrapper: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     flexGrow: 1,
-    paddingTop: 32,
+    paddingVertical: 32,
   },
   container: {
     maxWidth: 1240,
@@ -336,352 +446,493 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingHorizontal: 20,
   },
-  headerSection: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    marginBottom: 32,
-    gap: 32,
-  },
-  headerSectionMobile: {
-    flexDirection: 'column',
-    gap: 24,
-  },
-  headerLeft: {
-    flex: 1.25,
-  },
-  pillRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 10,
-  },
-  directoryBadge: {
-    backgroundColor: '#14462E',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 4,
-  },
-  directoryBadgeText: {
-    fontSize: 10,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    letterSpacing: 0.6,
-    fontFamily: "'Space Grotesk', sans-serif",
-  },
-  criteriaBadge: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#64748B',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  title: {
-    fontSize: 34,
-    fontWeight: '800',
-    color: '#0F172A',
-    letterSpacing: -0.6,
-    marginBottom: 8,
-    fontFamily: "'Space Grotesk', sans-serif",
-  },
-  titleMobile: {
-    fontSize: 28,
-  },
-  subtitle: {
-    fontSize: 14.5,
-    lineHeight: 22,
-    color: '#475569',
-    marginBottom: 20,
-    maxWidth: 620,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  metricsRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    flexWrap: 'wrap',
-  },
-  metricsRowMobile: {
-    gap: 10,
-  },
-  metricItem: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    minWidth: 120,
-    boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)',
-    elevation: 1,
-  },
-  metricVal: {
-    fontSize: 16,
-    fontWeight: '900',
-    color: '#166534',
-    fontFamily: "'Space Grotesk', sans-serif",
-  },
-  metricSub: {
-    fontSize: 10.5,
-    color: '#64748B',
-    marginTop: 2,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  headerRight: {
-    flex: 0.95,
-    width: '100%',
-  },
-  headerRightMobile: {
-    width: '100%',
-  },
-  cbetCard: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 12,
-    overflow: 'hidden',
-    boxShadow: '0 8px 20px rgba(15, 23, 42, 0.06)',
-    elevation: 3,
-  },
-  cbetImageBox: {
-    height: 140,
+
+  /* Hero Banner */
+  heroBanner: {
     position: 'relative',
-    backgroundColor: '#14462E',
+    borderRadius: 14,
+    overflow: 'hidden',
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    boxShadow: '0 12px 30px rgba(15, 23, 42, 0.14)',
+    elevation: 4,
+    backgroundColor: colors.greenDeep,
   },
-  cbetImage: {
+  heroBannerMobile: {
+    borderRadius: 10,
+    marginBottom: 18,
+  },
+  heroBannerBgImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     width: '100%',
     height: '100%',
+    opacity: 0.18,
   },
-  cbetBadge: {
+  heroBannerOverlay: {
     position: 'absolute',
-    bottom: 8,
-    left: 8,
-    backgroundColor: 'rgba(20, 70, 46, 0.92)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 4,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(14, 48, 32, 0.92)',
+    // @ts-ignore
+    backgroundImage: 'linear-gradient(135deg, rgba(14, 48, 32, 0.96) 0%, rgba(20, 70, 46, 0.90) 50%, rgba(15, 23, 42, 0.94) 100%)',
   },
-  cbetBadgeText: {
-    fontSize: 9,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    letterSpacing: 0.5,
-    fontFamily: "'Space Grotesk', sans-serif",
+  heroBannerInner: {
+    position: 'relative',
+    zIndex: 2,
+    paddingTop: 32,
+    paddingBottom: 24,
+    paddingHorizontal: 32,
   },
-  cbetContent: {
-    padding: 14,
+  heroBannerInnerMobile: {
+    paddingVertical: 20,
+    paddingHorizontal: 16,
   },
-  cbetTitle: {
-    fontSize: 14.5,
-    fontWeight: '800',
-    color: '#0F172A',
-    marginBottom: 4,
-    fontFamily: "'Space Grotesk', sans-serif",
+  heroBannerContent: {
+    maxWidth: 880,
   },
-  cbetDesc: {
-    fontSize: 11.5,
-    lineHeight: 17,
-    color: '#475569',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  filterSectionCard: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 12,
-    padding: 18,
-    marginBottom: 20,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.03,
-    shadowRadius: 6,
-    elevation: 2,
-  },
-  searchRow: {
+  bannerTagRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 14,
+    flexWrap: 'wrap',
+    gap: 10,
     marginBottom: 14,
   },
-  searchRowMobile: {
+  bannerGovTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.25)',
+    paddingHorizontal: 10,
+    paddingVertical: 4.5,
+    borderRadius: 20,
+  },
+  bannerGovDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: colors.orange,
+  },
+  bannerGovTagText: {
+    fontSize: 10.5,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    letterSpacing: 0.8,
+    fontFamily: typography.labelFont,
+  },
+  bannerLocationTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    paddingHorizontal: 9,
+    paddingVertical: 4.5,
+    borderRadius: 20,
+  },
+  bannerLocationText: {
+    fontSize: 10.5,
+    color: 'rgba(255, 255, 255, 0.95)',
+    fontWeight: '700',
+    fontFamily: typography.labelFont,
+  },
+  bannerMainTitle: {
+    fontSize: 32,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    letterSpacing: -0.6,
+    lineHeight: 38,
+    marginBottom: 10,
+    fontFamily: typography.headlineFont,
+  },
+  bannerMainTitleMobile: {
+    fontSize: 24,
+    lineHeight: 30,
+  },
+  bannerSubtitle: {
+    fontSize: 13.5,
+    lineHeight: 21,
+    color: 'rgba(255, 255, 255, 0.90)',
+    marginBottom: 20,
+    fontFamily: typography.bodyFont,
+  },
+  bannerSubtitleMobile: {
+    fontSize: 12.5,
+    lineHeight: 19,
+    marginBottom: 16,
+  },
+  bannerBadgesRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  bannerBadgesRowMobile: {
+    gap: 6,
+  },
+  bannerBadgeItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: 'rgba(255, 255, 255, 0.12)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.22)',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 6,
+  },
+  bannerBadgeText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    fontFamily: typography.labelFont,
+  },
+  metricsStrip: {
+    position: 'relative',
+    zIndex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: 'rgba(10, 30, 20, 0.85)',
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(255, 255, 255, 0.15)',
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    flexWrap: 'wrap',
+  },
+  metricsStripMobile: {
+    paddingVertical: 10,
+  },
+  metricBox: {
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  metricNumber: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: colors.orange,
+    fontFamily: typography.headlineFont,
+  },
+  metricLabel: {
+    fontSize: 10.5,
+    fontWeight: '600',
+    color: 'rgba(255, 255, 255, 0.85)',
+    marginTop: 2,
+    fontFamily: typography.bodyFont,
+  },
+  metricDivider: {
+    width: 1,
+    height: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+  },
+
+  /* Unified Search & Filter Suite */
+  filterCard: {
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 12,
+    padding: 18,
+    marginBottom: 24,
+    shadowColor: colors.charcoal,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  filterTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    flexWrap: 'wrap',
+    marginBottom: 16,
+  },
+  filterTopRowMobile: {
     flexDirection: 'column',
     alignItems: 'stretch',
+    gap: 10,
   },
-  searchBarBox: {
-    flex: 1,
+  searchContainer: {
+    flex: 2,
+    minWidth: 260,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 7,
+    borderColor: colors.border,
+    borderRadius: 8,
     paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingVertical: 9,
   },
   searchInput: {
     flex: 1,
-    fontSize: 13,
-    color: '#0F172A',
+    fontSize: 12.5,
+    color: colors.charcoal,
     backgroundColor: 'transparent',
     borderWidth: 0,
     outline: 'none',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontFamily: typography.bodyFont,
   },
-  searchButtons: {
+  levelSegmentGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.surfaceAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 8,
+    padding: 3,
+    gap: 2,
+    flexWrap: 'wrap',
+  },
+  segmentBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 6,
+    cursor: 'pointer',
+  },
+  segmentBtnActive: {
+    backgroundColor: colors.greenDeep,
+  },
+  segmentBtnText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.textSecondary,
+    fontFamily: typography.labelFont,
+  },
+  segmentBtnTextActive: {
+    color: colors.white,
+    fontWeight: '700',
+  },
+  intakeSegmentGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.surfaceAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 8,
+    padding: 3,
+    gap: 2,
+  },
+  intakeBtn: {
+    paddingHorizontal: 9,
+    paddingVertical: 6,
+    borderRadius: 6,
+    cursor: 'pointer',
+  },
+  intakeBtnActive: {
+    backgroundColor: colors.orange,
+  },
+  intakeBtnText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.textSecondary,
+    fontFamily: typography.labelFont,
+  },
+  intakeBtnTextActive: {
+    color: colors.white,
+    fontWeight: '700',
+  },
+  deptTabsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: colors.borderLight,
+    flexWrap: 'wrap',
+  },
+  deptTabsLabel: {
+    fontSize: 10,
+    fontWeight: '800',
+    color: colors.textMuted,
+    letterSpacing: 0.8,
+    fontFamily: typography.labelFont,
+  },
+  deptPillsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-  },
-  exportBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: '#F59E0B',
-    paddingHorizontal: 12,
-    paddingVertical: 9,
-    borderRadius: 6,
-    cursor: 'pointer',
-  },
-  exportBtnText: {
-    fontSize: 12,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    fontFamily: "'Space Grotesk', sans-serif",
-  },
-  resetBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    paddingHorizontal: 12,
-    paddingVertical: 9,
-    borderRadius: 6,
-    cursor: 'pointer',
-  },
-  resetBtnText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#64748B',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  dropdownsRow: {
-    flexDirection: 'row',
-    gap: 14,
-    marginBottom: 14,
-  },
-  dropdownsRowMobile: {
-    flexDirection: 'column',
-  },
-  dropdownGroup: {
+    flexWrap: 'wrap',
     flex: 1,
   },
-  dropdownLabel: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#0F172A',
-    marginBottom: 4,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  selectHtml: {
-    height: 38,
-    padding: '0 10px',
-    borderRadius: 6,
-    border: '1px solid #E2E8F0',
-    fontSize: 12.5,
-    color: '#0F172A',
-    backgroundColor: '#FFFFFF',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-    outline: 'none',
-    width: '100%',
-  },
-  deptPillsRow: {
+  deptPill: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    flexWrap: 'wrap',
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
-  },
-  deptPillBtn: {
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 5,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: colors.border,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 6,
     cursor: 'pointer',
   },
   deptPillActive: {
-    backgroundColor: '#14462E',
-    borderColor: '#14462E',
+    backgroundColor: colors.greenDeep,
+    borderColor: colors.greenDeep,
   },
   deptPillText: {
     fontSize: 11.5,
     fontWeight: '600',
-    color: '#334155',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    color: colors.textSecondary,
+    fontFamily: typography.labelFont,
   },
   deptPillTextActive: {
-    color: '#FFFFFF',
+    color: colors.white,
     fontWeight: '700',
   },
-  resultsBar: {
+  deptCountBadge: {
+    backgroundColor: colors.border,
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+    borderRadius: 10,
+  },
+  deptCountBadgeActive: {
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+  },
+  deptCountText: {
+    fontSize: 9.5,
+    fontWeight: '700',
+    color: colors.textSecondary,
+    fontFamily: typography.labelFont,
+  },
+  deptCountTextActive: {
+    color: colors.white,
+  },
+
+  /* Results Header */
+  resultsHeaderRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 14,
+    paddingTop: 12,
+    marginTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: colors.borderLight,
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  resultsCountBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   resultsCountText: {
-    fontSize: 12.5,
-    color: '#64748B',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontSize: 12,
+    color: colors.textSecondary,
+    fontFamily: typography.bodyFont,
   },
-  countBold: {
+  resultsCountBold: {
     fontWeight: '800',
-    color: '#0F172A',
+    color: colors.greenDeep,
   },
+  activeFiltersRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    flexWrap: 'wrap',
+  },
+  filterChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    backgroundColor: colors.surfaceAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 5,
+    cursor: 'pointer',
+  },
+  filterChipText: {
+    fontSize: 10.5,
+    fontWeight: '600',
+    color: colors.textSecondary,
+    fontFamily: typography.labelFont,
+  },
+  resetBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: colors.orangeLight,
+    borderWidth: 1,
+    borderColor: colors.orangeMuted,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 5,
+    cursor: 'pointer',
+  },
+  resetBtnText: {
+    fontSize: 10.5,
+    fontWeight: '700',
+    color: colors.orangeDark,
+    fontFamily: typography.labelFont,
+  },
+
+  /* Course Cards Grid */
   catalogGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 24,
-    marginBottom: 40,
+    gap: 20,
+    justifyContent: 'flex-start',
+    marginBottom: 24,
   },
-  emptyBox: {
-    backgroundColor: '#FFFFFF',
+
+  /* Empty State */
+  emptyCard: {
+    backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: colors.border,
     borderRadius: 12,
     padding: 40,
     alignItems: 'center',
-    marginVertical: 20,
+    justifyContent: 'center',
+    marginBottom: 32,
+    shadowColor: colors.charcoal,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 2,
   },
   emptyTitle: {
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: '800',
-    color: '#0F172A',
+    color: colors.charcoal,
+    marginTop: 14,
     marginBottom: 6,
-    fontFamily: "'Space Grotesk', sans-serif",
+    fontFamily: typography.headlineFont,
   },
   emptySubtitle: {
     fontSize: 13,
-    color: '#64748B',
-    marginBottom: 16,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    color: colors.textSecondary,
+    textAlign: 'center',
+    maxWidth: 480,
+    lineHeight: 19,
+    marginBottom: 18,
+    fontFamily: typography.bodyFont,
   },
   emptyResetBtn: {
-    backgroundColor: '#14462E',
-    paddingHorizontal: 16,
-    paddingVertical: 9,
-    borderRadius: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: colors.greenDeep,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 7,
+    cursor: 'pointer',
   },
-  emptyResetText: {
+  emptyResetBtnText: {
     fontSize: 12.5,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    fontFamily: "'Space Grotesk', sans-serif",
+    fontWeight: '700',
+    color: colors.white,
+    fontFamily: typography.labelFont,
   },
 });

@@ -1,13 +1,34 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native';
-import { ChevronRight } from 'lucide-react';
+import { Clock, Award, ArrowRight, BookOpen, GraduationCap, Sparkles, Layers } from 'lucide-react';
+import { colors, typography } from '../../theme/colors';
 
 export default function CourseCatalogCard({ course, onViewDetails, onApplyNow }) {
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
   const isTablet = width >= 768 && width < 1140;
 
-  const isLevel4 = course.knqfLevel === 'KNQF Level 4';
+  // Determine qualification level badge styles
+  const isDiploma = course.qualificationLevel?.toLowerCase().includes('diploma') || course.knqfLevel?.includes('Level 6');
+  const isCraft = course.qualificationLevel?.toLowerCase().includes('craft') || course.knqfLevel?.includes('Level 5');
+  const isArtisan = course.qualificationLevel?.toLowerCase().includes('artisan') || course.knqfLevel?.includes('Level 4');
+
+  const getLevelBadgeStyle = () => {
+    if (isDiploma) return styles.badgeDiploma;
+    if (isCraft) return styles.badgeCraft;
+    return styles.badgeArtisan;
+  };
+
+  const getLevelTextStyle = () => {
+    if (isDiploma) return styles.textDiploma;
+    if (isCraft) return styles.textCraft;
+    return styles.textArtisan;
+  };
+
+  // Extract up to 3 career/skills keywords from pathways or modules
+  const pathwaysList = course.pathways 
+    ? course.pathways.split(',').map((p) => p.trim()).filter(Boolean).slice(0, 3)
+    : [];
 
   return (
     <View 
@@ -20,153 +41,99 @@ export default function CourseCatalogCard({ course, onViewDetails, onApplyNow })
       {/* Top Header Row: Category Badge & KNQF Level */}
       <View style={styles.topRow}>
         <View style={styles.deptBadge}>
-          <Text style={styles.deptBadgeText}>{course.deptLabel}</Text>
+          <Text style={styles.deptBadgeText}>{course.deptLabel || course.department?.toUpperCase()}</Text>
         </View>
 
-        <View style={[styles.knqfBadge, isLevel4 && styles.knqfBadgeLevel4]}>
-          <Text style={[styles.knqfBadgeText, isLevel4 && styles.knqfTextLevel4]}>
-            {course.knqfLevel}
+        <View style={[styles.levelBadge, getLevelBadgeStyle()]}>
+          <Text style={[styles.levelBadgeText, getLevelTextStyle()]}>
+            {course.knqfLevel || course.qualificationLevel}
           </Text>
         </View>
       </View>
 
-      {/* Course Title & Code Subline */}
-      <TouchableOpacity onPress={() => onViewDetails(course)} activeOpacity={0.8}>
-        <Text style={styles.title}>{course.title}</Text>
-      </TouchableOpacity>
-      <Text style={styles.subline}>
-        {course.duration} • {course.examBoard} • Code: {course.code}
-      </Text>
-
-      {/* Technical Specifications Grid (2 Columns) */}
-      <View style={styles.specsGrid}>
-        {/* Left Column */}
-        <View style={styles.specColLeft}>
-          {course.intakes && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Intake Cycles:</Text>
-              <Text style={styles.specVal}>{course.intakes.join(', ')}</Text>
-            </View>
-          )}
-
-          {course.epraLicensing && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>EPRA Licensing:</Text>
-              <Text style={styles.specVal}>{course.epraLicensing}</Text>
-            </View>
-          )}
-
-          {course.workshopFocus && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Workshop Focus:</Text>
-              <Text style={styles.specVal}>{course.workshopFocus}</Text>
-            </View>
-          )}
-
-          {course.ncaAccreditation && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>NCA Status:</Text>
-              <Text style={styles.specVal}>{course.ncaAccreditation}</Text>
-            </View>
-          )}
-
-          {course.softwareSkills && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Software Skills:</Text>
-              <Text style={styles.specVal}>{course.softwareSkills}</Text>
-            </View>
-          )}
-
-          {course.practicalFarm && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Practical Farm:</Text>
-              <Text style={styles.specVal}>{course.practicalFarm}</Text>
-            </View>
-          )}
-
-          {course.equipment && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Equipment:</Text>
-              <Text style={styles.specVal}>{course.equipment}</Text>
-            </View>
-          )}
-
-          <View style={styles.specItem}>
-            <Text style={styles.specKey}>Requirement:</Text>
-            <Text style={styles.specVal}>{course.minRequirement}</Text>
-          </View>
-        </View>
-
-        {/* Right Column */}
-        <View style={styles.specColRight}>
-          <View style={styles.specItem}>
-            <Text style={styles.specKey}>Practical Ratio:</Text>
-            <Text style={styles.specVal}>
-              {course.practicalRatio || course.handsOnRatio || '70% Practical'}
-            </Text>
-          </View>
-
-          <View style={styles.specItem}>
-            <Text style={styles.specKey}>Exam Board:</Text>
-            <Text style={styles.specVal}>
-              {course.examBoardDetail || course.examBoard}
-            </Text>
-          </View>
-
-          {course.fieldPlacement && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Field Placement:</Text>
-              <Text style={styles.specVal}>{course.fieldPlacement}</Text>
-            </View>
-          )}
-
-          {course.industrialAttachment && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Attachment:</Text>
-              <Text style={styles.specVal}>{course.industrialAttachment}</Text>
-            </View>
-          )}
-
-          {course.labFacilities && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Lab Facilities:</Text>
-              <Text style={styles.specVal}>{course.labFacilities}</Text>
-            </View>
-          )}
-
-          {course.certification && (
-            <View style={styles.specItem}>
-              <Text style={styles.specKey}>Certification:</Text>
-              <Text style={styles.specVal}>{course.certification}</Text>
-            </View>
-          )}
+      {/* Course Title & Code Header */}
+      <View style={styles.titleArea}>
+        <TouchableOpacity onPress={() => onViewDetails && onViewDetails(course)} activeOpacity={0.8}>
+          <Text style={styles.title} numberOfLines={2}>
+            {course.title}
+          </Text>
+        </TouchableOpacity>
+        
+        <View style={styles.codeRow}>
+          <Text style={styles.codeText}>Code: {course.code}</Text>
+          <View style={styles.dotSeparator} />
+          <Text style={styles.examBoardText}>{course.examBoard}</Text>
         </View>
       </View>
 
-      {/* Pathways Sub-section */}
-      <View style={styles.pathwaysBox}>
-        <Text style={styles.pathwaysText}>
-          <Text style={styles.pathwaysBold}>Pathways: </Text>
-          {course.pathways}
+      {/* Meta Highlights Strip */}
+      <View style={styles.metaStrip}>
+        <View style={styles.metaItem}>
+          <Clock size={13} color={colors.textMuted} />
+          <Text style={styles.metaText}>{course.duration}</Text>
+        </View>
+
+        <View style={styles.metaDivider} />
+
+        <View style={styles.metaItem}>
+          <Sparkles size={13} color={colors.orange} />
+          <Text style={styles.metaText}>
+            {course.practicalRatio ? course.practicalRatio.split('/')[0].trim() : '70% Practical'}
+          </Text>
+        </View>
+
+        <View style={styles.metaDivider} />
+
+        <View style={styles.metaItem}>
+          <Layers size={13} color={colors.green} />
+          <Text style={styles.metaText}>
+            {course.intakes ? `${course.intakes.join('/')} Intakes` : '3 Intakes'}
+          </Text>
+        </View>
+      </View>
+
+      {/* Entry Requirement Box */}
+      <View style={styles.requirementCard}>
+        <View style={styles.requirementHeader}>
+          <GraduationCap size={13} color={colors.greenDark} />
+          <Text style={styles.requirementLabel}>Minimum Entry Requirement</Text>
+        </View>
+        <Text style={styles.requirementText} numberOfLines={2}>
+          {course.minRequirement}
         </Text>
       </View>
 
-      {/* Split Action Button */}
-      <View style={styles.buttonContainer}>
+      {/* Pathways / Competency Tags */}
+      {pathwaysList.length > 0 && (
+        <View style={styles.pathwaysRow}>
+          {pathwaysList.map((tag, idx) => (
+            <View key={idx} style={styles.pathwayPill}>
+              <Text style={styles.pathwayPillText} numberOfLines={1}>
+                {tag}
+              </Text>
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* Action Buttons Row */}
+      <View style={styles.actionsRow}>
         <TouchableOpacity 
-          style={styles.viewCurriculumBtn}
-          onPress={() => onViewDetails(course)}
-          activeOpacity={0.85}
+          style={styles.detailsBtn}
+          onPress={() => onViewDetails && onViewDetails(course)}
+          activeOpacity={0.8}
         >
-          <Text style={styles.viewCurriculumText}>View Course Details</Text>
+          <BookOpen size={13} color={colors.greenDeep} />
+          <Text style={styles.detailsBtnText}>Details</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
-          style={styles.arrowBtn}
-          onPress={() => onApplyNow(course)}
+          style={styles.applyBtn}
+          onPress={() => onApplyNow && onApplyNow(course)}
           activeOpacity={0.85}
         >
-          <ChevronRight size={16} color="#FFFFFF" />
+          <Text style={styles.applyBtnText}>Apply Now</Text>
+          <ArrowRight size={13} color={colors.white} />
         </TouchableOpacity>
       </View>
     </View>
@@ -176,159 +143,245 @@ export default function CourseCatalogCard({ course, onViewDetails, onApplyNow })
 const styles = StyleSheet.create({
   card: {
     width: 'calc(33.333% - 16px)',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderColor: colors.border,
     borderRadius: 12,
     padding: 20,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    shadowColor: '#0F172A',
+    shadowColor: colors.charcoal,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.04,
-    shadowRadius: 6,
+    shadowRadius: 8,
     elevation: 2,
     marginBottom: 20,
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
   },
   cardTablet: {
-    width: 'calc(50% - 10px)',
+    width: 'calc(50% - 12px)',
   },
   cardMobile: {
     width: '100%',
+    padding: 16,
+    marginBottom: 16,
   },
   topRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 12,
     gap: 8,
+    marginBottom: 12,
   },
   deptBadge: {
-    backgroundColor: '#FFF8ED',
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
-    borderColor: '#FFE8CC',
+    borderColor: colors.border,
     paddingHorizontal: 8,
     paddingVertical: 3.5,
-    borderRadius: 4,
+    borderRadius: 5,
   },
   deptBadgeText: {
     fontSize: 9.5,
     fontWeight: '800',
-    color: '#CC8400',
+    color: colors.textSecondary,
     letterSpacing: 0.5,
-    fontFamily: "'Space Grotesk', sans-serif",
+    fontFamily: typography.labelFont,
   },
-  knqfBadge: {
-    backgroundColor: '#14462E',
-    paddingHorizontal: 8,
+  levelBadge: {
+    paddingHorizontal: 9,
     paddingVertical: 3.5,
-    borderRadius: 4,
-  },
-  knqfBadgeLevel4: {
-    backgroundColor: '#F59E0B',
-  },
-  knqfBadgeText: {
-    fontSize: 9.5,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    letterSpacing: 0.4,
-    fontFamily: "'Space Grotesk', sans-serif",
-  },
-  knqfTextLevel4: {
-    color: '#FFFFFF',
-  },
-  title: {
-    fontSize: 16.5,
-    fontWeight: '800',
-    color: '#0F172A',
-    marginBottom: 4,
-    lineHeight: 22,
-    fontFamily: "'Space Grotesk', sans-serif",
-  },
-  subline: {
-    fontSize: 11,
-    color: '#64748B',
-    fontWeight: '500',
-    marginBottom: 14,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  specsGrid: {
-    flexDirection: 'row',
-    gap: 12,
-    backgroundColor: '#FAF9F6',
+    borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#F0F0F0',
-    borderRadius: 6,
-    padding: 10,
+  },
+  badgeDiploma: {
+    backgroundColor: '#EFF6FF',
+    borderColor: '#BFDBFE',
+  },
+  textDiploma: {
+    color: '#1D4ED8',
+    fontWeight: '800',
+    fontSize: 10,
+    fontFamily: typography.labelFont,
+  },
+  badgeCraft: {
+    backgroundColor: colors.orangeLight,
+    borderColor: colors.orangeMuted,
+  },
+  textCraft: {
+    color: colors.orangeDark,
+    fontWeight: '800',
+    fontSize: 10,
+    fontFamily: typography.labelFont,
+  },
+  badgeArtisan: {
+    backgroundColor: colors.greenLight,
+    borderColor: colors.greenMuted,
+  },
+  textArtisan: {
+    color: colors.textGreen,
+    fontWeight: '800',
+    fontSize: 10,
+    fontFamily: typography.labelFont,
+  },
+  levelBadgeText: {
+    fontSize: 10,
+    fontFamily: typography.labelFont,
+  },
+  titleArea: {
     marginBottom: 12,
   },
-  specColLeft: {
-    flex: 1.1,
-    gap: 5,
+  title: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: colors.charcoal,
+    lineHeight: 22,
+    fontFamily: typography.headlineFont,
+    marginBottom: 6,
+    cursor: 'pointer',
   },
-  specColRight: {
-    flex: 0.9,
-    gap: 5,
-    borderLeftWidth: 1,
-    borderLeftColor: '#E0E0E0',
-    paddingLeft: 8,
+  codeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
   },
-  specItem: {
-    marginBottom: 2,
-  },
-  specKey: {
-    fontSize: 9.5,
-    color: '#707070',
-    fontWeight: '600',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-  },
-  specVal: {
+  codeText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#0F172A',
-    lineHeight: 14,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    color: colors.textMuted,
+    fontFamily: typography.labelFont,
   },
-  pathwaysBox: {
-    marginBottom: 16,
-    flexGrow: 1,
+  dotSeparator: {
+    width: 3,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: colors.textLight,
   },
-  pathwaysText: {
-    fontSize: 11.5,
-    lineHeight: 17,
-    color: '#334155',
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+  examBoardText: {
+    fontSize: 11,
+    color: colors.textMuted,
+    fontFamily: typography.bodyFont,
   },
-  pathwaysBold: {
-    fontWeight: '700',
-    color: '#0F172A',
-  },
-  buttonContainer: {
+  metaStrip: {
     flexDirection: 'row',
-    borderRadius: 6,
-    overflow: 'hidden',
-    height: 38,
-  },
-  viewCurriculumBtn: {
-    flex: 1,
-    backgroundColor: '#14462E',
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    cursor: 'pointer',
+    justifyContent: 'space-between',
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+    marginBottom: 12,
   },
-  viewCurriculumText: {
-    fontSize: 12.5,
+  metaItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  metaText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: colors.textSecondary,
+    fontFamily: typography.bodyFont,
+  },
+  metaDivider: {
+    width: 1,
+    height: 12,
+    backgroundColor: colors.border,
+  },
+  requirementCard: {
+    backgroundColor: colors.greenLight,
+    borderRadius: 8,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: colors.greenMuted,
+    marginBottom: 12,
+  },
+  requirementHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    marginBottom: 4,
+  },
+  requirementLabel: {
+    fontSize: 10,
     fontWeight: '800',
-    color: '#FFFFFF',
-    fontFamily: "'Space Grotesk', sans-serif",
+    color: colors.textGreen,
+    letterSpacing: 0.3,
+    textTransform: 'uppercase',
+    fontFamily: typography.labelFont,
   },
-  arrowBtn: {
-    width: 38,
-    backgroundColor: '#F59E0B',
-    justifyContent: 'center',
+  requirementText: {
+    fontSize: 11.5,
+    lineHeight: 16,
+    color: colors.charcoal,
+    fontWeight: '600',
+    fontFamily: typography.bodyFont,
+  },
+  pathwaysRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+    marginBottom: 16,
+  },
+  pathwayPill: {
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: 4,
+    paddingHorizontal: 7,
+    paddingVertical: 3,
+  },
+  pathwayPillText: {
+    fontSize: 10,
+    color: colors.textSecondary,
+    fontWeight: '600',
+    fontFamily: typography.bodyFont,
+  },
+  actionsRow: {
+    flexDirection: 'row',
     alignItems: 'center',
+    gap: 10,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: colors.borderLight,
+  },
+  detailsBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+    borderRadius: 7,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.border,
     cursor: 'pointer',
+  },
+  detailsBtnText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.greenDeep,
+    fontFamily: typography.labelFont,
+  },
+  applyBtn: {
+    flex: 1.1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+    borderRadius: 7,
+    backgroundColor: colors.greenDeep,
+    cursor: 'pointer',
+  },
+  applyBtnText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.white,
+    fontFamily: typography.labelFont,
   },
 });
