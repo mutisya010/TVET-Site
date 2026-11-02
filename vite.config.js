@@ -7,6 +7,12 @@ export default defineConfig({
   // The site is served at https://teemoh00.github.io/TVET-Site/
   base: '/TVET-Site/',
 
+  // Output to /docs so GitHub Pages can serve directly from the main branch
+  // (Settings → Pages → Deploy from branch → main → /docs)
+  build: {
+    outDir: 'docs',
+  },
+
   plugins: [react()],
 
   resolve: {
