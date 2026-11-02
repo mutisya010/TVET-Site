@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -36,12 +36,9 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Ensure 404.html and .nojekyll exist in dist
-        run: |
-          cp dist/index.html dist/404.html
-          touch dist/.nojekyll
+      - name: Add .nojekyll to disable Jekyll processing
+        run: touch dist/.nojekyll
 
-      # Path A: Official GitHub Actions Pages deployment
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -53,11 +50,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      # Path B: Also publish to gh-pages branch for dual branch-based deployment
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist

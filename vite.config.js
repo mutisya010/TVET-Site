@@ -3,9 +3,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  // Use relative base ('./') so assets load correctly on both GitHub Pages (/TVET-Site/),
-  // custom root domains, and any subpath without 404 asset path breakage.
-  base: './',
+  // Must match the GitHub repository name for GitHub Pages to resolve assets correctly.
+  // The site is served at https://teemoh00.github.io/TVET-Site/
+  base: '/TVET-Site/',
 
   plugins: [react()],
 
