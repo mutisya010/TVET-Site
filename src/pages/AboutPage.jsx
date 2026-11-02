@@ -6,23 +6,17 @@ import {
   TouchableOpacity, 
   Image, 
   TextInput, 
-  ScrollView, 
-  useWindowDimensions, 
-  Linking 
+  useWindowDimensions 
 } from 'react-native';
 import { 
   Search, 
   ChevronRight, 
   CheckCircle2, 
   Info, 
-  Mail, 
-  Phone, 
   MapPin, 
   ArrowRight, 
-  FileText, 
   Sparkles, 
   RotateCcw,
-  ExternalLink,
   ShieldCheck,
   Award,
   Building2,

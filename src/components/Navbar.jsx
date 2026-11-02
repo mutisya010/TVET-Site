@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native';
-import { ChevronDown, ChevronUp, ArrowRight, Menu, X, User, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronUp, ArrowRight, Menu, X, User } from 'lucide-react';
 import CollegeLogo from './CollegeLogo';
 import AboutDropdown from './AboutDropdown';
 import ManagementDropdown from './ManagementDropdown';
 import CoursesDropdown from './CoursesDropdown';
-import { aboutCategories, aboutItems } from '../data/aboutData';
 import { academicDepartments, allCatalogCourses } from '../data/coursesData';
 import { colors, typography } from '../theme/colors';
 

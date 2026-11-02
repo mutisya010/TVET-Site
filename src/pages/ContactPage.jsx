@@ -12,8 +12,6 @@ import {
 import { 
   MapPin, 
   Phone, 
-  Mail, 
-  Clock, 
   MessageSquare, 
   Send, 
   ShieldCheck, 
@@ -22,8 +20,7 @@ import {
   ExternalLink, 
   Calendar, 
   Compass, 
-  ChevronRight,
-  AlertCircle
+  ChevronRight
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';

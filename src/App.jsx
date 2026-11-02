@@ -28,7 +28,6 @@ import DownloadsPage from './pages/DownloadsPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
-import { coursesData } from './data/coursesData';
 import { noticesData } from './data/noticesData';
 
 export default function App() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal, Image, useWindowDimensions } from 'react-native';
-import { X, Calendar, Printer, ShieldCheck } from 'lucide-react';
+import { X, Calendar, Printer } from 'lucide-react';
 import logoImg from '../assets/logo.png';
 
 export default function NoticeModal({ visible, notice, onClose }) {
