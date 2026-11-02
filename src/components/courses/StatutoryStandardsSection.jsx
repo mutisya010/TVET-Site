@@ -73,7 +73,7 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
               <Text style={styles.cardTitle}>Approved Fee Policy</Text>
             </View>
             <Text style={styles.cardDesc}>
-              Standardised Ministry of Education fee structure with approved tuition capitation for all LNTVC trainees.
+              Standardised Ministry of Education fee structure with approved tuition capitation for all Loima TVC trainees.
             </Text>
 
             <View style={styles.feeBreakdown}>
@@ -164,7 +164,7 @@ export default function StatutoryStandardsSection({ onDownloadFeeSchedule }) {
 
             <TouchableOpacity 
               style={styles.cardLink}
-              onPress={() => alert('LNTVC is fully registered and accredited by TVETA under Registration No: TVETA/PUBLIC/TVC/0212')}
+              onPress={() => alert('Loima TVC is fully registered and accredited by TVETA under Registration No: TVETA/PUBLIC/TVC/0212')}
               activeOpacity={0.7}
             >
               <Text style={styles.cardLinkText}>Registry Accreditation Status</Text>

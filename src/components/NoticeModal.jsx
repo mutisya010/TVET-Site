@@ -53,10 +53,10 @@ export default function NoticeModal({ visible, notice, onClose }) {
                   style={styles.circularLogo} 
                   resizeMode="contain"
                   // @ts-ignore
-                  accessibilityLabel="LNTVC Official Crest"
+                  accessibilityLabel="Loima TVC Official Crest"
                 />
                 <Text style={styles.officialHeader}>
-                  LAIKIPIA NORTH TECHNICAL AND VOCATIONAL COLLEGE
+                  LOIMA TECHNICAL AND VOCATIONAL COLLEGE
                 </Text>
                 <Text style={styles.officialSub}>
                   P.O. Box 90 - 10400 Nanyuki | Ministry of Education, Kenya
@@ -72,7 +72,7 @@ export default function NoticeModal({ visible, notice, onClose }) {
               <View style={styles.officialStampBox}>
                 <View style={styles.stampCircle}>
                   <Text style={styles.stampText}>OFFICIAL REGISTRY</Text>
-                  <Text style={styles.stampTextSub}>LAIKIPIA NORTH TVC</Text>
+                  <Text style={styles.stampTextSub}>LOIMA TVC</Text>
                   <Text style={styles.stampDate}>{notice.date}</Text>
                 </View>
               </View>

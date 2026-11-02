@@ -91,7 +91,7 @@ export default function WhyTrainSection({ onOpenNotice, onOpenInquiry }) {
           >
             <Text style={styles.overline}>INSTITUTIONAL ADVANTAGE</Text>
             <Text style={[styles.title, isMobile && styles.titleMobile]}>
-              Why Train with Laikipia North TVC?
+              Why Train with Loima TVC?
             </Text>
             <Text style={styles.paragraph}>
               We bridge the gap between classroom theory and heavy industry demands. 

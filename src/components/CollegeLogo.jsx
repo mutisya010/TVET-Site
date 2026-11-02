@@ -20,7 +20,7 @@ export default function CollegeLogo({ variant = 'light', size = 'normal', showTe
           style={[styles.logoImage, isSmall && styles.logoImageSmall]}
           resizeMode="contain"
           // @ts-ignore
-          accessibilityLabel="Laikipia North Technical and Vocational College Official Logo"
+          accessibilityLabel="Loima Technical and Vocational College Official Logo"
         />
       </View>
 
@@ -29,7 +29,7 @@ export default function CollegeLogo({ variant = 'light', size = 'normal', showTe
         <View style={styles.textContainer}>
           <View style={styles.titleRow}>
             <Text style={[styles.title, isDark && styles.titleDark, isSmall && styles.titleSmall]}>
-              LAIKIPIA NORTH
+              LOIMA
             </Text>
             <View style={styles.tvcBadge}>
               <Text style={styles.tvcText}>TVC</Text>

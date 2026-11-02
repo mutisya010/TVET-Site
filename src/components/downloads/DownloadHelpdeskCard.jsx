@@ -9,11 +9,11 @@ export default function DownloadHelpdeskCard() {
   };
 
   const handleEmail = () => {
-    Linking.openURL('mailto:admissions@laikipianorthtvc.ac.ke');
+    Linking.openURL('mailto:admissions@loimatvc.ac.ke');
   };
 
   const handleWhatsApp = () => {
-    Linking.openURL('https://wa.me/254711000000?text=Hello%20LNTVC%20Document%20Desk,%20I%20need%20help%20downloading%20admission%20materials');
+    Linking.openURL('https://wa.me/254711000000?text=Hello%20Loima%20TVC%20Document%20Desk,%20I%20need%20help%20downloading%20admission%20materials');
   };
 
   return (
@@ -45,7 +45,7 @@ export default function DownloadHelpdeskCard() {
           <Mail size={14} color={colors.orange} />
           <View>
             <Text style={styles.contactLabel}>Registrar Email</Text>
-            <Text style={styles.contactVal}>admissions@laikipianorthtvc.ac.ke</Text>
+            <Text style={styles.contactVal}>admissions@loimatvc.ac.ke</Text>
           </View>
         </TouchableOpacity>
 

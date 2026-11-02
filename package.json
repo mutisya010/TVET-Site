@@ -1,7 +1,7 @@
 {
-  "name": "laikipia-north-tvc-web",
+  "name": "loima-tvc-web",
   "version": "1.0.0",
-  "description": "Laikipia North Technical and Vocational College official website built with React Native",
+  "description": "Loima Technical and Vocational College official website built with React Native",
   "type": "module",
   "scripts": {
     "dev": "vite",

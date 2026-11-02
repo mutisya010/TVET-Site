@@ -15,7 +15,7 @@ export default function AboutDropdown({ onSelectOption, onClose }) {
   const aboutLinks = [
     { id: 'our-history', label: 'Our History & Heritage' },
     { id: 'service-charter', label: 'Citizens Service Charter' },
-    { id: 'brochures', label: 'LNTVC Brochures' },
+    { id: 'brochures', label: 'Loima TVC Brochures' },
     { id: 'gallery', label: 'Campus Life & Gallery' },
     { id: 'complaints-feedback', label: 'Complaints & Feedback' },
   ];

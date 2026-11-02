@@ -15,7 +15,7 @@ export default function AccreditationNoticeCard() {
             style={styles.accreditLogo}
             resizeMode="contain"
             // @ts-ignore
-            accessibilityLabel="LNTVC Logo"
+            accessibilityLabel="Loima TVC Logo"
           />
         </View>
         <View style={styles.headerTitles}>
@@ -26,7 +26,7 @@ export default function AccreditationNoticeCard() {
 
       {/* Main Notice Body */}
       <Text style={styles.bodyText}>
-        Laikipia North Technical and Vocational College is fully registered and licensed by the 
+        Loima Technical and Vocational College is fully registered and licensed by the 
         Technical and Vocational Education and Training Authority (TVETA) under TVET Act No. 29 of 2013.
       </Text>
 

@@ -9,7 +9,7 @@ export default function TopBar({ onOpenInquiry }) {
   };
 
   const handleWhatsApp = () => {
-    Linking.openURL('https://wa.me/254711000000?text=Hello%20Laikipia%20North%20TVC,%20I%20would%20like%20to%20enquire%20about%20admissions');
+    Linking.openURL('https://wa.me/254711000000?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20enquire%20about%20admissions');
   };
 
   return (

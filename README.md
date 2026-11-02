@@ -1,6 +1,6 @@
-# Laikipia North Technical & Vocational College (LNTVC) - React Native Web Application
+# Loima Technical & Vocational College (Loima TVC) - React Native Web Application
 
-A modern, high-performance web platform built with **React Native (React Native Web)** replicating the complete home page, courses catalog, admissions enquiry portal, and downloads directory for **Laikipia North Technical and Vocational College**.
+A modern, high-performance web platform built with **React Native (React Native Web)** replicating the complete home page, courses catalog, admissions enquiry portal, and downloads directory for **Loima Technical and Vocational College**.
 
 ---
 
@@ -20,7 +20,7 @@ A modern, high-performance web platform built with **React Native (React Native 
 
 ### 2. Courses & Programmes Catalog Page (`/courses`)
 - **Header:** `OFFICIAL ACADEMIC DIRECTORY • 2024/2025 Criteria` with 4 counter metrics (**100%** Practical Guaranteed, **HELB** Eligible, **3 Terms** Per Year, **CDACC** Dual Assessment).
-- **Competency-Based Education (CBET) Highlight Card:** Workshop photo with `TVET CDACC CENTER #LNTVC409` badge and 70% hands-on training breakdown.
+- **Competency-Based Education (CBET) Highlight Card:** Workshop photo with `TVET CDACC CENTER #Loima TVC409` badge and 70% hands-on training breakdown.
 - **Search & Multi-Filter Control Center:**
   - Real-time keyword search bar (`Search by keyword...`).
   - `Export Catalog` and `Reset` action buttons.
@@ -42,10 +42,10 @@ A modern, high-performance web platform built with **React Native (React Native 
   - Sponsorship mode selectors (`KUCCPS Govt.`, `Self-Sponsored`).
   - Support inquiries multiline textarea.
   - **Live Dynamic Capitation & Upfront Fee Estimate:** Real-time calculation showing net trainee balance (KSh 28,420/Yr after deducting KSh 30,000 govt capitation).
-  - Submit online application with automated reference code generation (`LNTVC-XXXXXX`).
+  - Submit online application with automated reference code generation (`Loima TVC-XXXXXX`).
   - Instant WhatsApp direct hotline button.
 - **Hands-on Technical Environment Card:** State-of-the-art practical training preview with `TVET CDACC WORKSHOP` badge.
-- **Admissions Office Contacts Card:** Direct Liaison Desk with active helpline (`+254 759 437 978`), application inbox, physical address (Rumuruti / Doldol Rd), and campus entrance map preview.
+- **Admissions Office Contacts Card:** Direct Liaison Desk with active helpline (`+254 759 437 978`), application inbox, physical address (Loima / Doldol Rd), and campus entrance map preview.
 - **KUCCPS 4-Step Application Guide:** Step-by-step guidance for government-placed students with institution code `1478111`.
 - **HELB & TVET Funding Model:** 3-step guide for tuition scholarships and M-Pesa upkeep allowance.
 - **Interactive Admissions FAQ Accordion:** Expandable answers for entry grades, hostel accommodations, and required document checklists.

@@ -47,7 +47,7 @@ export const downloadsData = [
     format: 'PDF',
     size: '1.2 MB',
     title: 'TVETA Institutional Registration & Accreditation Certificate',
-    description: 'Official license TVETA/PUBLIC/TVC/2021 empowering LNTVC to deliver Level 4, 5 & 6 national qualifications.',
+    description: 'Official license TVETA/PUBLIC/TVC/2021 empowering Loima TVC to deliver Level 4, 5 & 6 national qualifications.',
     date: 'Oct 11, 2025',
     downloadUrl: '#',
     code: 'TVETA-CERT-0212',

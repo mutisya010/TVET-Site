@@ -31,7 +31,7 @@ import {
 import { aboutCategories, aboutItems } from '../data/aboutData';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';
-import laikipiaBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
 
 export default function AboutPage({ initialOptionId = 'our-history', onNavigate, onOpenInquiry }) {
   const { width } = useWindowDimensions();
@@ -95,7 +95,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
           <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
             {/* Ambient Background with subtle blur of the authentic campus banner */}
             <Image
-              source={laikipiaBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+              source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
               style={styles.heroBannerBgImage}
               resizeMode="cover"
               blurRadius={10}
@@ -117,12 +117,12 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                   </View>
                   <View style={styles.bannerLocationTag}>
                     <MapPin size={12} color={colors.orange} />
-                    <Text style={styles.bannerLocationText}>Rumuruti, Laikipia County</Text>
+                    <Text style={styles.bannerLocationText}>Loima, Turkana County</Text>
                   </View>
                 </View>
 
                 <Text style={[styles.bannerMainTitle, isMobile && styles.bannerMainTitleMobile]}>
-                  About Laikipia North TVC
+                  About Loima TVC
                 </Text>
 
                 <Text style={[styles.bannerSubtitle, isMobile && styles.bannerSubtitleMobile]}>
@@ -155,7 +155,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
               <View style={[styles.heroBannerPhotoCol, isMobile && styles.heroBannerPhotoColMobile]}>
                 <View style={styles.heroPhotoFrame}>
                   <Image
-                    source={laikipiaBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+                    source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
                     style={styles.heroPhotoImg}
                     resizeMode="cover"
                   />
@@ -165,7 +165,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                   <View style={styles.heroPhotoCaption}>
                     <Camera size={12} color={colors.orange} />
                     <Text style={styles.heroPhotoCaptionText} numberOfLines={1}>
-                      LNTVC Administration Block & Trainees
+                      Loima TVC Administration Block & Trainees
                     </Text>
                   </View>
                 </View>
@@ -290,7 +290,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
 
                 <View style={styles.codeBadge}>
                   <Sparkles size={11} color={colors.charcoal} />
-                  <Text style={styles.codeBadgeText}>Verified LNTVC Section</Text>
+                  <Text style={styles.codeBadgeText}>Verified Loima TVC Section</Text>
                 </View>
               </View>
 

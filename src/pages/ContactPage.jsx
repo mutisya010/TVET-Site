@@ -74,11 +74,11 @@ export default function ContactPage({ onNavigate }) {
   };
 
   const handleOpenGoogleMaps = () => {
-    Linking.openURL('https://www.google.com/maps/search/?api=1&query=Laikipia+North+Technical+and+Vocational+College');
+    Linking.openURL('https://www.google.com/maps/search/?api=1&query=Loima+Technical+and+Vocational+College');
   };
 
   const handleOpenWhatsApp = (customMsg) => {
-    const text = encodeURIComponent(customMsg || 'Hello Laikipia North TVC, I have an inquiry regarding admissions and programmes');
+    const text = encodeURIComponent(customMsg || 'Hello Loima TVC, I have an inquiry regarding admissions and programmes');
     Linking.openURL(`https://wa.me/254759437978?text=${text}`);
   };
 
@@ -119,7 +119,7 @@ export default function ContactPage({ onNavigate }) {
             </View>
 
             <Text style={[styles.mainTitle, isMobile && styles.mainTitleMobile]}>
-              Connect with Laikipia North TVC
+              Connect with Loima TVC
             </Text>
             
             <Text style={styles.leadSubtitle}>
@@ -319,14 +319,14 @@ export default function ContactPage({ onNavigate }) {
                   source={{ uri: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=1000&q=80' }} 
                   style={styles.campusImage}
                   // @ts-ignore
-                  accessibilityLabel="Laikipia North TVC Main Campus"
+                  accessibilityLabel="Loima TVC Main Campus"
                 />
                 <View style={styles.campusImageOverlay}>
                   <View style={styles.pinPill}>
                     <MapPin size={13} color="#FFFFFF" />
                     <Text style={styles.pinPillText}>Main Campus</Text>
                   </View>
-                  <Text style={styles.campusTagline}>Rumuruti / Doldol Road</Text>
+                  <Text style={styles.campusTagline}>Lodwar - Loima Road</Text>
                 </View>
               </View>
 
@@ -337,9 +337,9 @@ export default function ContactPage({ onNavigate }) {
                   <View style={styles.addressLine}>
                     <MapPin size={16} color={colors.greenDeep} style={styles.addressIcon} />
                     <View style={styles.addressTexts}>
-                      <Text style={styles.addressPrimary}>Laikipia North Technical and Vocational College</Text>
-                      <Text style={styles.addressSecondary}>Off Rumuruti - Doldol Highway, Laikipia County, Kenya</Text>
-                      <Text style={styles.addressPostal}>P.O. Box 50 - 20321, Rumuruti, Kenya</Text>
+                      <Text style={styles.addressPrimary}>Loima Technical and Vocational College</Text>
+                      <Text style={styles.addressSecondary}>Off Lodwar - Loima Road, Turkana County, Kenya</Text>
+                      <Text style={styles.addressPostal}>P.O. Box 50 - 20321, Loima, Kenya</Text>
                     </View>
                   </View>
                 </View>
@@ -349,13 +349,13 @@ export default function ContactPage({ onNavigate }) {
                   <View style={styles.dirItem}>
                     <Compass size={14} color="#D97706" />
                     <Text style={styles.dirText}>
-                      <Text style={styles.boldText}>Public Transit (Matatu):</Text> Board Doldol-bound public service vehicles from Nanyuki or Rumuruti town stages; alight at LNTVC College Main Gate stage.
+                      <Text style={styles.boldText}>Public Transit (Matatu):</Text> Board Doldol-bound public service vehicles from Nanyuki or Loima town stages; alight at Loima TVC College Main Gate stage.
                     </Text>
                   </View>
                   <View style={styles.dirItem}>
                     <Navigation size={14} color={colors.greenDeep} />
                     <Text style={styles.dirText}>
-                      <Text style={styles.boldText}>Personal Vehicle:</Text> Direct all-weather tarmac access along the Rumuruti-Doldol corridor with secure on-campus parking.
+                      <Text style={styles.boldText}>Personal Vehicle:</Text> Direct all-weather tarmac access along the Lodwar-Loima corridor with secure on-campus parking.
                     </Text>
                   </View>
                 </View>
@@ -373,7 +373,7 @@ export default function ContactPage({ onNavigate }) {
 
                   <TouchableOpacity 
                     style={styles.tourBtn}
-                    onPress={() => handleOpenWhatsApp('Hello LNTVC Admissions, I would like to schedule an in-person guided tour of your technical workshops')}
+                    onPress={() => handleOpenWhatsApp('Hello Loima TVC Admissions, I would like to schedule an in-person guided tour of your technical workshops')}
                     activeOpacity={0.85}
                   >
                     <Calendar size={14} color="#FFFFFF" />
@@ -418,7 +418,7 @@ export default function ContactPage({ onNavigate }) {
             </ScrollReveal>
 
             <ScrollReveal animation="fade-up" delay={100} duration={550} style={[styles.faqCard, isMobile && styles.faqCardMobile]}>
-              <Text style={styles.faqQuestion}>What is the official KUCCPS institution code for LNTVC?</Text>
+              <Text style={styles.faqQuestion}>What is the official KUCCPS institution code for Loima TVC?</Text>
               <Text style={styles.faqAnswer}>
                 Our verified KUCCPS institution code is <Text style={styles.boldText}>1478111</Text>. You can select this code directly on the student portal during national placement or inter-institutional transfers.
               </Text>

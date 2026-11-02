@@ -492,7 +492,7 @@ export const allCatalogCourses = [
     badgeType: 'success',
     intakes: ['Jan', 'May'],
     minRequirement: 'KCSE D (Plain) or Artisan Pass',
-    practicalFarm: 'LNTVC Demonstration Greenhouse',
+    practicalFarm: 'Loima TVC Demonstration Greenhouse',
     capitation: 'Eligible: Direct Capitation Subsidy',
     practicalFocus: 'Pasture, Silage, Drip Tech',
     pathways: 'Agribusiness Supervisor, Cooperative Society Field Agent, Commercial Horticulture Enterprise.',

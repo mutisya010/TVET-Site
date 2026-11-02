@@ -128,11 +128,11 @@ export default function App() {
   };
 
   const handleBookVisit = () => {
-    Linking.openURL('https://wa.me/254759437978?text=Hello%20Laikipia%20North%20TVC,%20I%20would%20like%20to%20book%20a%20guided%20campus%20visit');
+    Linking.openURL('https://wa.me/254759437978?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20book%20a%20guided%20campus%20visit');
   };
 
   const handleFloatingWhatsApp = () => {
-    Linking.openURL('https://wa.me/254759437978?text=Hello%20Laikipia%20North%20TVC%20Admissions,%20I%20have%20an%20enquiry');
+    Linking.openURL('https://wa.me/254759437978?text=Hello%20Loima%20TVC%20Admissions,%20I%20have%20an%20enquiry');
   };
 
   return (
@@ -190,7 +190,7 @@ export default function App() {
               />
             </ScrollReveal>
 
-            {/* Institutional Advantages: Why Train with LNTVC */}
+            {/* Institutional Advantages: Why Train with Loima TVC */}
             <ScrollReveal animation="fade-up" delay={60} duration={700}>
               <WhyTrainSection onInquire={handleOpenInquiry} />
             </ScrollReveal>

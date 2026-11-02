@@ -88,7 +88,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
   }, [searchTerm, selectedDept, selectedLevel, selectedIntake]);
 
   const handleExportCatalog = () => {
-    alert('Exporting LNTVC Complete Course Brochure (PDF)...');
+    alert('Exporting Loima TVC Complete Course Brochure (PDF)...');
   };
 
   return (
@@ -152,7 +152,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                   resizeMode="cover"
                 />
                 <View style={styles.cbetBadge}>
-                  <Text style={styles.cbetBadgeText}>TVET CDACC CENTER #LNTVC409</Text>
+                  <Text style={styles.cbetBadgeText}>TVET CDACC CENTER #Loima TVC409</Text>
                 </View>
               </View>
               <View style={styles.cbetContent}>
@@ -317,7 +317,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
       <ScrollReveal animation="zoom-in" duration={650}>
         <CourseCtaBanner 
           onStartApplication={onStartApplication}
-          onSpeakAdvisor={() => alert('Connecting to LNTVC Admissions Advisor via WhatsApp (+254 759 437 978)...')}
+          onSpeakAdvisor={() => alert('Connecting to Loima TVC Admissions Advisor via WhatsApp (+254 759 437 978)...')}
         />
       </ScrollReveal>
     </View>

@@ -220,7 +220,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                 {/* Profile Avatar Icon */}
                 <TouchableOpacity 
                   style={styles.userAvatarBtn}
-                  onPress={() => alert('LNTVC Trainee & Staff Portal')}
+                  onPress={() => alert('Loima TVC Trainee & Staff Portal')}
                   activeOpacity={0.8}
                 >
                   <User size={16} color={colors.textPrimary} />
@@ -323,7 +323,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                         onPress={() => handleSelectAboutOption('brochures')}
                       >
                         <View style={styles.mobileOptDot} />
-                        <Text style={styles.mobileOptText}>LNTVC Brochures</Text>
+                        <Text style={styles.mobileOptText}>Loima TVC Brochures</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity

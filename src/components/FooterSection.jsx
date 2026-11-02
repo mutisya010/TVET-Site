@@ -90,7 +90,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
               <View style={styles.contactEntry}>
                 <MapPin size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  P.O. Box 90 - 10400, Nanyuki-Doldol Road, Laikipia County, Kenya
+                  P.O. Box 90 - 10400, Lodwar - Loima Road, Turkana County, Kenya
                 </Text>
               </View>
 
@@ -107,12 +107,12 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
 
               <TouchableOpacity 
                 style={styles.contactEntry} 
-                onPress={() => Linking.openURL('mailto:principal@laikipianorthtvc.ac.ke')}
+                onPress={() => Linking.openURL('mailto:principal@loimatvc.ac.ke')}
                 activeOpacity={0.7}
               >
                 <Mail size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  principal@laikipianorthtvc.ac.ke
+                  principal@loimatvc.ac.ke
                 </Text>
               </TouchableOpacity>
 
@@ -130,7 +130,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
         {/* Bottom Copyright Bar */}
         <View style={styles.bottomBar}>
           <Text style={styles.copyrightText}>
-            © 2024 Laikipia North Technical & Vocational College, Republic of Kenya. All rights reserved.
+            © 2024 Loima Technical & Vocational College, Republic of Kenya. All rights reserved.
           </Text>
 
           <View style={styles.legalLinks}>

@@ -38,9 +38,9 @@ export const aboutItems = [
     categoryName: 'General Information',
     title: 'Our History',
     subtitle: 'From a Visionary Community Initiative to a Premier National TVET Centre of Excellence',
-    description: `Laikipia North Technical and Vocational College (LNTVC) was established by the Government of Kenya through the Ministry of Education, State Department for Technical and Vocational Training, to address the pressing demand for high-grade technical and vocational skills in Laikipia County and the wider Northern Kenyan region.
+    description: `Loima Technical and Vocational College (LTVC) was established by the Government of Kenya through the Ministry of Education, State Department for Technical and Vocational Training, to address the pressing demand for high-grade technical and vocational skills in Turkana County and the wider Northern Kenyan region.
 
-Founded as a flagship TVET institution under Kenya Vision 2030, the college broke ground with ultra-modern mechanical workshops, electrical laboratories, and ICT infrastructure. Since opening its gates, LNTVC has transformed from an initial cohort into a thriving multi-disciplinary technical college offering fully accredited Artisan, Craft Certificate, and Diploma qualifications under TVET CDACC, KNEC, and NITA curricula.`,
+Founded as a flagship TVET institution under Kenya Vision 2030, the college broke ground with ultra-modern mechanical workshops, electrical laboratories, and ICT infrastructure. Since opening its gates, Loima TVC has transformed from an initial cohort into a thriving multi-disciplinary technical college offering fully accredited Artisan, Craft Certificate, and Diploma qualifications under TVET CDACC, KNEC, and NITA curricula.`,
     mandates: [
       'Empower Northern Kenya youth with market-demanded hands-on competencies.',
       'Bridge the industrial workforce gap through Competency-Based Education and Training (CBET).',
@@ -56,7 +56,7 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
     images: [
       {
         url: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=900&q=80',
-        caption: 'The main administrative and academic complex of Laikipia North TVC.'
+        caption: 'The main administrative and academic complex of Loima TVC.'
       },
       {
         url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80',
@@ -67,7 +67,7 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
         caption: 'Commissioning of advanced technical workshop equipment.'
       }
     ],
-    contactInfo: 'Main Campus: Rumuruti - Doldol Road, Laikipia County | Email: info@laikipianorthtvc.ac.ke',
+    contactInfo: 'Main Campus: Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
     actionText: 'View Academic Catalog',
     actionRoute: 'courses'
   },
@@ -77,7 +77,7 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
     categoryName: 'General Information',
     title: 'Service Charter',
     subtitle: 'Our Statutory Commitment to Timely, Transparent, and Accountable Public Service',
-    description: `The Laikipia North Technical and Vocational College Citizens Service Delivery Charter outlines our operational standards, service turnaround guarantees, trainee entitlements, and public service pledges under the Constitution of Kenya (2010) and the Public Service Commission standards.
+    description: `The Loima Technical and Vocational College Citizens Service Delivery Charter outlines our operational standards, service turnaround guarantees, trainee entitlements, and public service pledges under the Constitution of Kenya (2010) and the Public Service Commission standards.
 
 We are dedicated to delivering prompt, courteous, and non-discriminatory service to prospective trainees, guardians, industry partners, and the public. Every department is held to strict performance metrics to ensure maximum satisfaction and operational integrity.`,
     mandates: [
@@ -102,7 +102,7 @@ We are dedicated to delivering prompt, courteous, and non-discriminatory service
         caption: 'Statutory performance tracking and service quality evaluation.'
       }
     ],
-    contactInfo: 'Service Quality Helpdesk: service@laikipianorthtvc.ac.ke | Tel: +254 700 000 000',
+    contactInfo: 'Service Quality Helpdesk: service@loimatvc.ac.ke | Tel: +254 700 000 000',
     actionText: 'Download Official Charter',
     actionRoute: 'downloads'
   },
@@ -110,9 +110,9 @@ We are dedicated to delivering prompt, courteous, and non-discriminatory service
     id: 'brochures',
     categoryId: 'general-info',
     categoryName: 'General Information',
-    title: 'LNTVC Brochures',
+    title: 'Loima TVC Brochures',
     subtitle: 'Comprehensive Course Prospectuses, Fee Guidelines, and Student Handbooks',
-    description: `Explore the complete collection of Laikipia North TVC publications. Our annual brochure packs detail admission criteria for Government-sponsored (KUCCPS) and Self-sponsored trainees, course outlines across all engineering and business faculties, capitation breakdown, accommodation guides, and industrial attachment partnerships.
+    description: `Explore the complete collection of Loima TVC publications. Our annual brochure packs detail admission criteria for Government-sponsored (KUCCPS) and Self-sponsored trainees, course outlines across all engineering and business faculties, capitation breakdown, accommodation guides, and industrial attachment partnerships.
 
 All prospectuses are regularly updated to reflect the latest TVET CDACC curriculum releases, Ministry of Education fee regulations, and HELB funding allocations.`,
     mandates: [
@@ -137,7 +137,7 @@ All prospectuses are regularly updated to reflect the latest TVET CDACC curricul
         caption: 'Trainees reviewing curriculum options during the academic intake fair.'
       }
     ],
-    contactInfo: 'Admissions Resource Center: admissions@laikipianorthtvc.ac.ke',
+    contactInfo: 'Admissions Resource Center: admissions@loimatvc.ac.ke',
     actionText: 'Download Brochure (PDF)',
     actionRoute: 'downloads'
   },
@@ -147,7 +147,7 @@ All prospectuses are regularly updated to reflect the latest TVET CDACC curricul
     categoryName: 'General Information',
     title: 'Gallery',
     subtitle: 'Vibrant Pictorial Journey Across Workshops, Campus Facilities, and Student Life',
-    description: `Step inside the daily life of Laikipia North Technical and Vocational College. Our gallery showcases the state-of-the-art training environments where trainees acquire real-world mastery—from heavy welding and fabrication bays to modern computer labs, electrical testing rigs, greenhouse farming, and athletics fields.
+    description: `Step inside the daily life of Loima Technical and Vocational College. Our gallery showcases the state-of-the-art training environments where trainees acquire real-world mastery—from heavy welding and fabrication bays to modern computer labs, electrical testing rigs, greenhouse farming, and athletics fields.
 
 Witness our trainees in action as they build prototypes, conduct site surveying, practice culinary arts, and engage in co-curricular competitions.`,
     mandates: [
@@ -180,7 +180,7 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
         caption: 'Building technology trainees executing masonry work on the demonstration site.'
       }
     ],
-    contactInfo: 'Media & Public Relations Desk: media@laikipianorthtvc.ac.ke',
+    contactInfo: 'Media & Public Relations Desk: media@loimatvc.ac.ke',
     actionText: 'Explore Campus Showcase',
     actionRoute: 'home'
   },
@@ -192,7 +192,7 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
     subtitle: 'Direct Channels to Our Admissions Desk, Registrar, and Campus Headquarters',
     description: `We welcome prospective trainees, parents, guardians, and corporate partners to visit our main campus or reach out through our official direct channels. Our admissions team is on standby to assist with course selection, KUCCPS inter-institutional transfers, hostel bookings, and fee payment arrangements.
 
-Our campus is conveniently situated along the main Rumuruti - Doldol road, with reliable all-weather access, secure parking, and visitor reception facilities.`,
+Our campus is conveniently situated along the main Loima - Doldol road, with reliable all-weather access, secure parking, and visitor reception facilities.`,
     mandates: [
       'Prompt response to telephone and WhatsApp admissions enquiries (Mon-Fri 8am-5pm).',
       'Guided campus and workshop walkthrough tours for visiting prospective students.',
@@ -200,7 +200,7 @@ Our campus is conveniently situated along the main Rumuruti - Doldol road, with 
       'Direct coordination with high school career teachers for secondary outreach.'
     ],
     highlights: [
-      { label: 'Campus Address', value: 'P.O. Box 50 - 20321, Rumuruti' },
+      { label: 'Campus Address', value: 'P.O. Box 50 - 20321, Loima' },
       { label: 'Admissions Line', value: '+254 759 437 978' },
       { label: 'WhatsApp Helpdesk', value: '+254 711 000 000' },
       { label: 'Office Hours', value: 'Mon - Fri (8:00 AM - 5:00 PM)' }
@@ -215,7 +215,7 @@ Our campus is conveniently situated along the main Rumuruti - Doldol road, with 
         caption: 'Customer service desk welcoming parents and new applicants.'
       }
     ],
-    contactInfo: 'Postal Address: P.O. Box 50 - 20321, Rumuruti / Doldol Road, Laikipia County | Email: info@laikipianorthtvc.ac.ke',
+    contactInfo: 'Postal Address: P.O. Box 50 - 20321, Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
     actionText: 'Express Course Enquiry',
     actionRoute: 'home'
   },
@@ -225,7 +225,7 @@ Our campus is conveniently situated along the main Rumuruti - Doldol road, with 
     categoryName: 'General Information',
     title: 'Complaints & Feedback',
     subtitle: 'Transparent Public Redress Mechanism and Continuous Quality Improvement',
-    description: `Laikipia North TVC upholds an open-door policy and a zero-tolerance approach to maladministration, corruption, or substandard service. In accordance with Commission on Administrative Justice (Ombudsman) directives, our Complaints and Feedback Office provides a safe, anonymous, and expedited channel for trainees, staff, and the community to voice concerns.
+    description: `Loima TVC upholds an open-door policy and a zero-tolerance approach to maladministration, corruption, or substandard service. In accordance with Commission on Administrative Justice (Ombudsman) directives, our Complaints and Feedback Office provides a safe, anonymous, and expedited channel for trainees, staff, and the community to voice concerns.
 
 Every submission is logged into the official complaint registry, investigated objectively, and resolved within statutory timelines with written feedback provided to the complainant.`,
     mandates: [
@@ -250,7 +250,7 @@ Every submission is logged into the official complaint registry, investigated ob
         caption: 'Grievance committee conducting an objective review session.'
       }
     ],
-    contactInfo: 'Ombudsman Desk: feedback@laikipianorthtvc.ac.ke | Confidential Hotline: +254 759 437 978',
+    contactInfo: 'Ombudsman Desk: feedback@loimatvc.ac.ke | Confidential Hotline: +254 759 437 978',
     actionText: 'Contact Registrar Desk',
     actionRoute: 'home'
   },
@@ -264,7 +264,7 @@ Every submission is logged into the official complaint registry, investigated ob
     categoryName: 'Administrators',
     title: 'Board of Governors',
     subtitle: 'Strategic Governance, Institutional Stewardship, and Policy Direction',
-    description: `The Board of Governors (BOG) is the supreme governing body of Laikipia North Technical and Vocational College, established pursuant to the Technical and Vocational Education and Training Act No. 29 of 2013. Comprising distinguished leaders from industry, academia, public administration, and community stakeholders, the Board provides visionary strategic oversight.
+    description: `The Board of Governors (BOG) is the supreme governing body of Loima Technical and Vocational College, established pursuant to the Technical and Vocational Education and Training Act No. 29 of 2013. Comprising distinguished leaders from industry, academia, public administration, and community stakeholders, the Board provides visionary strategic oversight.
 
 The Board is responsible for institutional resource mobilization, approving capital infrastructure developments, safeguarding institutional financial solvency, and formulating policies that align the college with national industrialization priorities.`,
     mandates: [
@@ -289,7 +289,7 @@ The Board is responsible for institutional resource mobilization, approving capi
         caption: 'Board members inspecting new mechanical engineering workshop equipment.'
       }
     ],
-    contactInfo: 'Office of the Secretary to the Board: bog@laikipianorthtvc.ac.ke',
+    contactInfo: 'Office of the Secretary to the Board: bog@loimatvc.ac.ke',
     actionText: 'Learn More About Governance',
     actionRoute: 'home'
   },
@@ -299,7 +299,7 @@ The Board is responsible for institutional resource mobilization, approving capi
     categoryName: 'Administrators',
     title: 'Office of Principal',
     subtitle: 'Chief Executive Leadership, Academic Vision, and Strategic Execution',
-    description: `The Principal is the Chief Executive Officer and academic leader of Laikipia North Technical and Vocational College, serving as the Secretary to the Board of Governors. The Principal is charged with the overall operational leadership, academic excellence, TVETA regulatory compliance, and fiscal management of the institution.
+    description: `The Principal is the Chief Executive Officer and academic leader of Loima Technical and Vocational College, serving as the Secretary to the Board of Governors. The Principal is charged with the overall operational leadership, academic excellence, TVETA regulatory compliance, and fiscal management of the institution.
 
 Working closely with the Ministry of Education and TVET CDACC, the Principal spearheads institutional modernization, curriculum delivery, and the establishment of sustainable industry linkages that guarantee high employment outcomes for our graduates.`,
     mandates: [
@@ -324,7 +324,7 @@ Working closely with the Ministry of Education and TVET CDACC, the Principal spe
         caption: 'Principal’s executive boardroom during an industrial partner signing.'
       }
     ],
-    contactInfo: 'Executive Office: principal@laikipianorthtvc.ac.ke | Switchboard: +254 700 000 000',
+    contactInfo: 'Executive Office: principal@loimatvc.ac.ke | Switchboard: +254 700 000 000',
     actionText: 'View College Leadership',
     actionRoute: 'home'
   },
@@ -359,7 +359,7 @@ Through proactive maintenance schedules and modern facility management, the offi
         caption: 'Campus facilities and infrastructure management command.'
       }
     ],
-    contactInfo: 'Email: dpa@laikipianorthtvc.ac.ke | Location: Administration Block, 1st Floor',
+    contactInfo: 'Email: dpa@loimatvc.ac.ke | Location: Administration Block, 1st Floor',
     actionText: 'Explore Campus Facilities',
     actionRoute: 'home'
   },
@@ -371,7 +371,7 @@ Through proactive maintenance schedules and modern facility management, the offi
     subtitle: 'Curriculum Implementation, Examination Integrity, and Faculty Development',
     description: `The Office of the Deputy Principal (Academics) steers the educational core of the college. This office is tasked with curriculum implementation, timetable coordination, faculty supervision, academic quality audits, and statutory collaboration with examination bodies including TVET CDACC, KNEC, and NITA.
 
-Under its stewardship, LNTVC maintains a rigorous Competency-Based Education and Training (CBET) framework that combines 70% practical workshop immersion with 30% theory, ensuring trainees achieve complete occupational competence.`,
+Under its stewardship, Loima TVC maintains a rigorous Competency-Based Education and Training (CBET) framework that combines 70% practical workshop immersion with 30% theory, ensuring trainees achieve complete occupational competence.`,
     mandates: [
       'Plan, monitor, and evaluate the delivery of all approved TVET training programs.',
       'Coordinate continuous assessments, internal moderation, and national examination schedules.',
@@ -394,7 +394,7 @@ Under its stewardship, LNTVC maintains a rigorous Competency-Based Education and
         caption: 'Academic department heads assessing student practical projects.'
       }
     ],
-    contactInfo: 'Email: dpa.academics@laikipianorthtvc.ac.ke | Tel: +254 759 437 978',
+    contactInfo: 'Email: dpa.academics@loimatvc.ac.ke | Tel: +254 759 437 978',
     actionText: 'Explore Accredited Courses',
     actionRoute: 'courses'
   },
@@ -429,7 +429,7 @@ The Registrar also acts as the official institutional liaison with statutory reg
         caption: 'Digitized student archive and official transcript authentication.'
       }
     ],
-    contactInfo: 'Email: admissions@laikipianorthtvc.ac.ke | Phone: +254 759 437 978',
+    contactInfo: 'Email: admissions@loimatvc.ac.ke | Phone: +254 759 437 978',
     actionText: 'Apply via Courses Catalog',
     actionRoute: 'courses'
   },
@@ -439,7 +439,7 @@ The Registrar also acts as the official institutional liaison with statutory reg
     categoryName: 'Administrators',
     title: 'Office of Dean of Trainees',
     subtitle: 'Student Welfare, Hostel Accommodation, Mentorship, and Student Governance',
-    description: `The Office of the Dean of Trainees champions the holistic welfare, personal development, and residential comfort of every student at LNTVC. This office coordinates the Trainee Governing Council, hostel accommodation, dining hall services, psycho-social counseling, health and wellness services, and club activities.
+    description: `The Office of the Dean of Trainees champions the holistic welfare, personal development, and residential comfort of every student at Loima TVC. This office coordinates the Trainee Governing Council, hostel accommodation, dining hall services, psycho-social counseling, health and wellness services, and club activities.
 
 The Dean works in close harmony with student leaders to maintain campus harmony, organize mentorship forums, and nurture trainees into responsible, disciplined professionals ready to excel in industry.`,
     mandates: [
@@ -464,7 +464,7 @@ The Dean works in close harmony with student leaders to maintain campus harmony,
         caption: 'Student mentorship session and career orientation event.'
       }
     ],
-    contactInfo: 'Dean of Trainees Desk: dean.trainees@laikipianorthtvc.ac.ke | Location: Student Centre',
+    contactInfo: 'Dean of Trainees Desk: dean.trainees@loimatvc.ac.ke | Location: Student Centre',
     actionText: 'Download Joining Instructions',
     actionRoute: 'downloads'
   },
@@ -503,7 +503,7 @@ The department offers courses in Information Communication Technology, Business 
         caption: 'Business and accounting trainees conducting financial simulations.'
       }
     ],
-    contactInfo: 'Head of Department: hod.ict@laikipianorthtvc.ac.ke',
+    contactInfo: 'Head of Department: hod.ict@loimatvc.ac.ke',
     actionText: 'View ICT & Business Courses',
     actionRoute: 'courses'
   },
@@ -538,7 +538,7 @@ Students gain hands-on expertise in international gastronomy, food safety and hy
         caption: 'Food and beverage service practicals in the training restaurant.'
       }
     ],
-    contactInfo: 'Head of Department: hod.hospitality@laikipianorthtvc.ac.ke',
+    contactInfo: 'Head of Department: hod.hospitality@loimatvc.ac.ke',
     actionText: 'Explore Hospitality Courses',
     actionRoute: 'courses'
   },
@@ -573,7 +573,7 @@ Trainees are prepared for direct EPRA (Energy and Petroleum Regulatory Authority
         caption: 'Electrical workshop testing bench and oscilloscope analysis.'
       }
     ],
-    contactInfo: 'Head of Department: hod.electrical@laikipianorthtvc.ac.ke',
+    contactInfo: 'Head of Department: hod.electrical@loimatvc.ac.ke',
     actionText: 'Explore Electrical Engineering',
     actionRoute: 'courses'
   },
@@ -583,7 +583,7 @@ Trainees are prepared for direct EPRA (Energy and Petroleum Regulatory Authority
     categoryName: 'Academic Departments',
     title: 'Department of Agriculture and Applied Sciences',
     subtitle: 'Climate-Smart Farming, Agribusiness Value Addition, Animal Health, and Irrigation',
-    description: `Positioned in the agricultural heartbeat of Laikipia County, the Department of Agriculture and Applied Sciences champions modern, climate-smart agriculture and sustainable food systems. The department manages a dedicated demonstration farm, modern greenhouses, and drip irrigation installations.
+    description: `Positioned in the agricultural heartbeat of Turkana County, the Department of Agriculture and Applied Sciences champions modern, climate-smart agriculture and sustainable food systems. The department manages a dedicated demonstration farm, modern greenhouses, and drip irrigation installations.
 
 Students receive rigorous training in crop production, livestock husbandry, post-harvest handling, agribusiness management, veterinary technology, and soil nutrient analysis.`,
     mandates: [
@@ -608,7 +608,7 @@ Students receive rigorous training in crop production, livestock husbandry, post
         caption: 'Field demonstration of computerized drip irrigation and soil testing.'
       }
     ],
-    contactInfo: 'Head of Department: hod.agri@laikipianorthtvc.ac.ke',
+    contactInfo: 'Head of Department: hod.agri@loimatvc.ac.ke',
     actionText: 'Explore Agriculture Courses',
     actionRoute: 'courses'
   },
@@ -643,7 +643,7 @@ Graduates gain accreditation through the National Construction Authority (NCA) a
         caption: 'Plumbing and pipefitting trainees testing pressurized hydraulic lines.'
       }
     ],
-    contactInfo: 'Head of Department: hod.civil@laikipianorthtvc.ac.ke',
+    contactInfo: 'Head of Department: hod.civil@loimatvc.ac.ke',
     actionText: 'Explore Building & Civil Courses',
     actionRoute: 'courses'
   },
@@ -657,7 +657,7 @@ Graduates gain accreditation through the National Construction Authority (NCA) a
     categoryName: 'Non Academic Departments',
     title: 'Sports and Recreation Office',
     subtitle: 'Physical Fitness, Inter-TVET Athletics, Co-Curricular Excellence, and Wellness',
-    description: `The Sports and Recreation Office coordinates physical health, sporting championships, and recreational life at LNTVC. The college maintains football pitches, volleyball courts, netball courts, and indoor games facilities.
+    description: `The Sports and Recreation Office coordinates physical health, sporting championships, and recreational life at Loima TVC. The college maintains football pitches, volleyball courts, netball courts, and indoor games facilities.
 
 Our teams participate actively in the Kenya Association of Technical Training Institutions (KATTI) regional and national athletics, ball games, and cultural competitions, winning laurels and fostering teamwork and discipline among trainees.`,
     mandates: [
@@ -675,14 +675,14 @@ Our teams participate actively in the Kenya Association of Technical Training In
     images: [
       {
         url: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80',
-        caption: 'LNTVC trainees competing in regional TVET track and field events.'
+        caption: 'Loima TVC trainees competing in regional TVET track and field events.'
       },
       {
         url: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=900&q=80',
         caption: 'Campus football and team fitness training sessions.'
       }
     ],
-    contactInfo: 'Sports Officer: sports@laikipianorthtvc.ac.ke',
+    contactInfo: 'Sports Officer: sports@loimatvc.ac.ke',
     actionText: 'Explore Campus Life',
     actionRoute: 'home'
   },
@@ -717,7 +717,7 @@ The office also manages trainee workplace insurance (WIBA), organizes on-site su
         caption: 'Industrial liaison officer signing an MOU with corporate partners.'
       }
     ],
-    contactInfo: 'Liaison Officer: ilo@laikipianorthtvc.ac.ke | Direct: +254 759 437 978',
+    contactInfo: 'Liaison Officer: ilo@loimatvc.ac.ke | Direct: +254 759 437 978',
     actionText: 'Download Attachment Logbook',
     actionRoute: 'downloads'
   },
@@ -729,10 +729,10 @@ The office also manages trainee workplace insurance (WIBA), organizes on-site su
     subtitle: 'Employability Training, Resume Clinics, Mock Interviews, and Job Placement',
     description: `The Office of Career Services (OCS) empowers trainees to transition seamlessly from graduation to rewarding careers. Established under Ministry of Education guidelines, the OCS hosts regular career days, resume-writing workshops, soft skills bootcamps, and mock interview sessions.
 
-The office maintains an active employer database and graduate tracking network, connecting LNTVC alumni directly to job opportunities in the private sector and public civil service.`,
+The office maintains an active employer database and graduate tracking network, connecting Loima TVC alumni directly to job opportunities in the private sector and public civil service.`,
     mandates: [
       'Conduct regular professional CV writing, digital branding, and interview preparation clinics.',
-      'Organize the annual LNTVC Career & Innovation Fair with invited corporate recruiters.',
+      'Organize the annual Loima TVC Career & Innovation Fair with invited corporate recruiters.',
       'Track alumni employment destinations and maintain graduate employer feedback loops.',
       'Deliver entrepreneurial mentorship for trainees seeking to establish independent businesses.'
     ],
@@ -749,10 +749,10 @@ The office maintains an active employer database and graduate tracking network, 
       },
       {
         url: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
-        caption: 'Students attending the annual LNTVC corporate recruitment forum.'
+        caption: 'Students attending the annual Loima TVC corporate recruitment forum.'
       }
     ],
-    contactInfo: 'Career Services Advisor: careers@laikipianorthtvc.ac.ke',
+    contactInfo: 'Career Services Advisor: careers@loimatvc.ac.ke',
     actionText: 'View Academic Programmes',
     actionRoute: 'courses'
   },
@@ -764,7 +764,7 @@ The office maintains an active employer database and graduate tracking network, 
     subtitle: 'Institutional Audits, TVETA Compliance, CBET Benchmarking, and Evaluation',
     description: `The Quality Assurance and Standards (QAS) Office safeguards the educational and operational excellence of the college. Acting as an internal watchdog, the office carries out regular internal quality audits of training facilities, lecturer lesson plans, practical assessment scoring, and student satisfaction.
 
-The office ensures LNTVC continually complies with TVETA licensing conditions, ISO standards, and the Kenya National Qualifications Framework (KNQF) requirements.`,
+The office ensures Loima TVC continually complies with TVETA licensing conditions, ISO standards, and the Kenya National Qualifications Framework (KNQF) requirements.`,
     mandates: [
       'Conduct continuous internal academic and administrative audits across all departments.',
       'Monitor curriculum delivery to ensure 100% adherence to TVET CDACC CBET standards.',
@@ -787,7 +787,7 @@ The office ensures LNTVC continually complies with TVETA licensing conditions, I
         caption: 'Inspection of workshop safety protocols and practical rubrics.'
       }
     ],
-    contactInfo: 'Director of Quality Assurance: qas@laikipianorthtvc.ac.ke',
+    contactInfo: 'Director of Quality Assurance: qas@loimatvc.ac.ke',
     actionText: 'View Accreditation Notice',
     actionRoute: 'downloads'
   },
@@ -797,7 +797,7 @@ The office ensures LNTVC continually complies with TVETA licensing conditions, I
     categoryName: 'Non Academic Departments',
     title: 'Finance Office',
     subtitle: 'Fee Administration, Government Capitation, HELB Disbursements, and Budgeting',
-    description: `The Finance Office manages the financial integrity, accounting, and revenue systems of Laikipia North TVC. Responsible for trainee fee billing, the office ensures transparent management of the annual Government Capitation subsidy per student, HELB TVET loan and bursary disbursements, and NG-CDF tuition sponsorships.
+    description: `The Finance Office manages the financial integrity, accounting, and revenue systems of Loima TVC. Responsible for trainee fee billing, the office ensures transparent management of the annual Government Capitation subsidy per student, HELB TVET loan and bursary disbursements, and NG-CDF tuition sponsorships.
 
 Trainees and parents receive timely financial receipts, fee payment installment reconciliations, and clearance statements via secure institutional accounts.`,
     mandates: [
@@ -822,7 +822,7 @@ Trainees and parents receive timely financial receipts, fee payment installment 
         caption: 'Accounts desk issuing official receipts and fee statements.'
       }
     ],
-    contactInfo: 'Accounts Desk: finance@laikipianorthtvc.ac.ke | Location: Admin Block Ground Floor',
+    contactInfo: 'Accounts Desk: finance@loimatvc.ac.ke | Location: Admin Block Ground Floor',
     actionText: 'View Approved Fee Structure',
     actionRoute: 'downloads'
   },
@@ -857,7 +857,7 @@ The office cascades annual ministerial targets to all academic and non-academic 
         caption: 'Institutional performance reporting and documentation review.'
       }
     ],
-    contactInfo: 'Performance Officer: pc@laikipianorthtvc.ac.ke',
+    contactInfo: 'Performance Officer: pc@loimatvc.ac.ke',
     actionText: 'View Service Charter',
     actionRoute: 'downloads'
   },
@@ -892,7 +892,7 @@ Additionally, the office drafts the master teaching and workshop usage timetable
         caption: 'Examination office processing official candidate registration dockets.'
       }
     ],
-    contactInfo: 'Examinations Officer: exams@laikipianorthtvc.ac.ke',
+    contactInfo: 'Examinations Officer: exams@loimatvc.ac.ke',
     actionText: 'Check Academic Calendar',
     actionRoute: 'downloads'
   },
@@ -902,12 +902,12 @@ Additionally, the office drafts the master teaching and workshop usage timetable
     categoryName: 'Non Academic Departments',
     title: 'Research & Innovation Office',
     subtitle: 'Applied Engineering Research, Prototype Incubation, Robotics, and Patenting',
-    description: `The Research and Innovation Office fosters a culture of discovery, technological ingenuity, and problem-solving at Laikipia North TVC. Trainees and trainers are supported to build practical prototypes that solve local challenges—such as solar water pumps, automated agro-sorters, waste-plastic pavers, and mobile IoT applications.
+    description: `The Research and Innovation Office fosters a culture of discovery, technological ingenuity, and problem-solving at Loima TVC. Trainees and trainers are supported to build practical prototypes that solve local challenges—such as solar water pumps, automated agro-sorters, waste-plastic pavers, and mobile IoT applications.
 
 The office sponsors trainee participation in regional TVET innovation fairs, scientific conferences, and technology incubation competitions with industry mentors.`,
     mandates: [
       'Promote applied research and engineering prototyping among trainees and faculty.',
-      'Organize the annual LNTVC Trainee Innovation and Science Competition.',
+      'Organize the annual Loima TVC Trainee Innovation and Science Competition.',
       'Facilitate patenting and intellectual property (IP) protection for breakthrough inventions.',
       'Secure research grants and technical equipment sponsorships from technology partners.'
     ],
@@ -927,7 +927,7 @@ The office sponsors trainee participation in regional TVET innovation fairs, sci
         caption: 'Student researchers demonstrating solar-powered agricultural prototypes.'
       }
     ],
-    contactInfo: 'Research Coordinator: research@laikipianorthtvc.ac.ke',
+    contactInfo: 'Research Coordinator: research@loimatvc.ac.ke',
     actionText: 'Explore Campus Showcase',
     actionRoute: 'home'
   }

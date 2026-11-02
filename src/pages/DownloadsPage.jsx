@@ -54,7 +54,7 @@ export default function DownloadsPage({ onDownloadDoc }) {
   };
 
   const handleOpenRegistryWhatsApp = () => {
-    Linking.openURL('https://wa.me/254759437978?text=Hello%20LNTVC%20Registry,%20I%20need%20assistance%20with%20an%20official%20download%20or%20joining%20form.');
+    Linking.openURL('https://wa.me/254759437978?text=Hello%20Loima%20TVC%20Registry,%20I%20need%20assistance%20with%20an%20official%20download%20or%20joining%20form.');
   };
 
   return (

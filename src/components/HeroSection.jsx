@@ -8,16 +8,16 @@ import {
   ChevronRight 
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
-import laikipiaBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
 
 /**
- * 6 Master Hero Slides showcasing LNTVC's Campus & Practical TVET Workshops.
+ * 6 Master Hero Slides showcasing Loima TVC's Campus & Practical TVET Workshops.
  * Clean, unobstructed photo carousel rotating automatically every 3 seconds.
  */
 const heroSlides = [
   {
     id: 'campus',
-    image: laikipiaBannerImg || './Images/Laikipia-north-banner-300x200.webp',
+    image: collegeBannerImg || './Images/Laikipia-north-banner-300x200.webp',
   },
   {
     id: 'electrical',
@@ -92,7 +92,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
 
             {/* Sub-paragraph */}
             <Text style={styles.paragraph}>
-              Laikipia North Technical and Vocational College provides accredited Competency-Based 
+              Loima Technical and Vocational College provides accredited Competency-Based 
               Education and Training (CBET). We equip students with job-ready technical expertise, 
               subsidised by national capitation and tailored for immediate employment.
             </Text>

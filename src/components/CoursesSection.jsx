@@ -24,7 +24,7 @@ const categorySpotlights = {
     tag: 'HANDS-ON TECHNICAL TRAINING',
     tagColor: colors.greenDeep,
     title: 'Modern Engineering & Workshop Labs',
-    description: 'Over 70% of LNTVC curriculum is practical workshop mastery. Trainees train with modern industrial machinery, EPRA-certified test panels, and commercial software suites.',
+    description: 'Over 70% of Loima TVC curriculum is practical workshop mastery. Trainees train with modern industrial machinery, EPRA-certified test panels, and commercial software suites.',
     imageUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80',
     stats: [
       { label: 'Practical Ratio', val: '70% CBET' },
@@ -254,7 +254,7 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                 {/* Bottom Image Tag */}
                 <View style={styles.imageCaptionBar}>
                   <Text style={styles.imageCaptionText}>
-                    Laikipia North TVC Workshop Bay • Live Practical Session
+                    Loima TVC Workshop Bay • Live Practical Session
                   </Text>
                 </View>
               </View>

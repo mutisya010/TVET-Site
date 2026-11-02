@@ -71,7 +71,7 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
   };
 
   const handleWhatsApp = () => {
-    Linking.openURL('https://wa.me/254711000000?text=Hello%20Admissions%20Office,%20I%20would%20like%20to%20apply%20to%20Laikipia%20North%20TVC');
+    Linking.openURL('https://wa.me/254711000000?text=Hello%20Admissions%20Office,%20I%20would%20like%20to%20apply%20to%20Loima%20TVC');
   };
 
   const handleCall = () => {
@@ -125,11 +125,11 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
             <View style={styles.metaInfoList}>
               <View style={styles.metaItem}>
                 <Mail size={15} color="#FFA500" />
-                <Text style={styles.metaText}>admissions@laikipianorthtvc.ac.ke</Text>
+                <Text style={styles.metaText}>admissions@loimatvc.ac.ke</Text>
               </View>
               <View style={styles.metaItem}>
                 <MapPin size={15} color="#FFA500" />
-                <Text style={styles.metaText}>Doldol, Samburu Highway, Laikipia County</Text>
+                <Text style={styles.metaText}>Doldol, Samburu Highway, Turkana County</Text>
               </View>
             </View>
           </View>
@@ -272,7 +272,7 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
                   <View style={styles.successRefBox}>
                     <Text style={styles.successRefLabel}>Application Tracking Ref:</Text>
                     <Text style={styles.successRefCode}>
-                      LNTVC-{Math.floor(100000 + Math.random() * 900000)}
+                      Loima TVC-{Math.floor(100000 + Math.random() * 900000)}
                     </Text>
                   </View>
                   <TouchableOpacity style={styles.resetBtn} onPress={handleReset}>
