@@ -1,4 +1,4 @@
-﻿// Master Data for About Us categories and detailed options
+// Master Data for About Us categories and detailed options
 import img_workshop from '../assets/Bright Workshop Training Room.webp';
 import img_training from '../assets/Collaborative Training Room Meeting.webp';
 import img_cream from '../assets/Cream Institutional Building in Dry Sunlight.webp';
@@ -106,11 +106,11 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
       { url: img_workshop,  caption: 'Bright workshop training room — hands-on industrial skills in action.' },
       { url: img_training,  caption: 'Collaborative training session with students and instructors.' },
       { url: img_cream,     caption: 'Cream institutional building bathed in dry sunlight.' },
-      { url: img_desert,    caption: 'Campus grounds under clear blue skies.' },
+      { url: img_desert,    caption: 'Tuition Block — lecture halls under clear blue skies.' },
       { url: img_office,    caption: 'Focused office training session in the ICT & Business lab.' },
-      { url: img_sunlit,    caption: 'Loima College sunlit main facade and entrance.' },
+      { url: img_sunlit,    caption: 'Tuition Block — main entrance and facade.' },
       { url: img_exterior,  caption: 'Lomia Technical College exterior view.' },
-      { url: img_concrete,  caption: 'Sunlit administration block and office building.' },
+      { url: img_concrete,  caption: 'Administration Block — administrative and management offices.' },
       { url: img_walkway,   caption: 'School building with covered walkway connecting departments.' },
     ],
     contactInfo: 'Media & Public Relations Desk: info@loima.co.ke',
