@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';
+import campusFacadeImg from '../assets/Loima Technical College Façade.webp';
 
 export default function ContactPage({ onNavigate }) {
   const { width } = useWindowDimensions();
@@ -313,10 +314,10 @@ export default function ContactPage({ onNavigate }) {
             <View style={styles.locationCard}>
               <View style={styles.campusImageWrapper}>
                 <Image 
-                  source={{ uri: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=1000&q=80' }} 
+                  source={typeof campusFacadeImg === 'string' ? { uri: campusFacadeImg } : campusFacadeImg} 
                   style={styles.campusImage}
                   // @ts-ignore
-                  accessibilityLabel="Loima TVC Main Campus"
+                  accessibilityLabel="Loima Technical College Façade"
                 />
                 <View style={styles.campusImageOverlay}>
                   <View style={styles.pinPill}>
