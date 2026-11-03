@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
 import crestImg from '../assets/Loima Technical College Crest.png';
-import slide1 from '../assets/Loima Technical College Banner.webp';
+import slide1 from '../assets/College Banner_ Technology and Innovation.webp';
 import slide2 from '../assets/Loima Technical College Façade.webp';
 import slide3 from '../assets/Bright Workshop Training Room.webp';
 import slide5 from '../assets/Lomia Technical College Exterior.webp';
