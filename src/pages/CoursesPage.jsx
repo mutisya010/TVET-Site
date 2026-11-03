@@ -163,7 +163,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                   </View>
                   <View style={styles.bannerLocationTag}>
                     <MapPin size={12} color={colors.orange} />
-                    <Text style={styles.bannerLocationText}>Loima, Turkana County</Text>
+                    <Text style={styles.bannerLocationText}>Lorugum, Loima Sub-County, Turkana County</Text>
                   </View>
                 </View>
 
@@ -182,7 +182,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                 <View style={[styles.bannerBadgesRow, isMobile && styles.bannerBadgesRowMobile]}>
                   <View style={styles.bannerBadgeItem}>
                     <ShieldCheck size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/2021</Text>
+                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/0005/2023</Text>
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <Award size={14} color={colors.orange} />
@@ -190,11 +190,11 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <CheckCircle2 size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>CDACC Assessment Center</Text>
+                    <Text style={styles.bannerBadgeText}>CDACC Centre: 02300008</Text>
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <Coins size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>HELB & GoK Capitation</Text>
+                    <Text style={styles.bannerBadgeText}>HEF/HELB & GoK Capitation</Text>
                   </View>
                 </View>
 

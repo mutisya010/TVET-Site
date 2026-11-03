@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   View, 
   Text, 
@@ -71,11 +71,11 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
   };
 
   const handleWhatsApp = () => {
-    Linking.openURL('https://wa.me/254711000000?text=Hello%20Admissions%20Office,%20I%20would%20like%20to%20apply%20to%20Loima%20TVC');
+    Linking.openURL('https://wa.me/254759437978?text=Hello%20Admissions%20Office,%20I%20would%20like%20to%20apply%20to%20Loima%20TVC');
   };
 
   const handleCall = () => {
-    Linking.openURL('tel:+254700000000');
+    Linking.openURL('tel:+254716189084');
   };
 
   return (
@@ -95,9 +95,8 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
             </Text>
 
             <Text style={styles.description}>
-              Reach our admissions officers directly via WhatsApp, cellular call, or submit 
-              this express registration form. We guide you through course selection, 
-              KUCCPS confirmation, and capitation funding.
+              We welcome applications for January, May, and September intakes across Artisan, Craft Certificate, and Diploma levels.
+              Apply online via the KUCCPS Student Portal or register manually by collecting forms directly at our College Administration Office in Lorugum.
             </Text>
 
             {/* Direct Contact Buttons */}
@@ -117,7 +116,7 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
                 activeOpacity={0.85}
               >
                 <Phone size={16} color="#FFFFFF" />
-                <Text style={styles.callBtnText}>+254 700 000 000</Text>
+                <Text style={styles.callBtnText}>+254 716 189 084</Text>
               </TouchableOpacity>
             </View>
 
@@ -125,11 +124,11 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
             <View style={styles.metaInfoList}>
               <View style={styles.metaItem}>
                 <Mail size={15} color="#FFA500" />
-                <Text style={styles.metaText}>admissions@loimatvc.ac.ke</Text>
+                <Text style={styles.metaText}>admissions@loima.co.ke / info@loima.co.ke</Text>
               </View>
               <View style={styles.metaItem}>
                 <MapPin size={15} color="#FFA500" />
-                <Text style={styles.metaText}>Doldol, Samburu Highway, Turkana County</Text>
+                <Text style={styles.metaText}>Lorugum (~1.5 km off Lodwar–Uganda Rd), Loima, Turkana County</Text>
               </View>
             </View>
           </View>

@@ -1,4 +1,4 @@
-// Master Publications, Campus News, and Official Registry Notices
+﻿// Master Publications, Campus News, and Official Registry Notices
 // Modern Institutional Palette (Deep Green, Clean White, Warm Amber, Slate)
 
 export const newsCategories = [
@@ -21,7 +21,7 @@ export const noticesData = [
     date: '28 OCT 2024',
     readTime: '4 min read',
     title: 'Loima TVC Showcases Innovations at National TVET Skills Fair',
-    excerpt: 'Trainees from the Electrical & Automotive departments scooped top awards with their solar-powered water filtration unit and smart IoT agricultural monitor at the regional TVET fair in Nanyuki.',
+    excerpt: 'Trainees from the Electrical & Automotive departments scooped top awards with their solar-powered water filtration unit and smart IoT agricultural monitor at the regional TVET fair in Lodwar.',
     author: 'Corporate Communications',
     refNo: 'Loima TVC/PR/2024/11',
     imageUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80',
@@ -36,7 +36,7 @@ export const noticesData = [
 
       FOR IMMEDIATE RELEASE: LOIMA TVC SCOOPS REGIONAL TVET SKILLS INNOVATION TROPHY
 
-      Loima Technical and Vocational College (LTVC) has demonstrated national excellence at the just-concluded Regional TVET Skills & Innovation Fair held in Nanyuki, claiming first prize in the Renewable Energy and Sustainable Agribusiness categories.
+      Loima Technical and Vocational College (LTVC) has demonstrated national excellence at the just-concluded Regional TVET Skills & Innovation Fair held in Lodwar, claiming first prize in the Renewable Energy and Sustainable Agribusiness categories.
 
       The two award-winning innovations developed by Loima TVC trainees include:
       1. Solar-Powered Smart Water Desalination & Pumping Unit:
@@ -86,7 +86,7 @@ export const noticesData = [
       - Original & copies of KCSE/KCPE Certificates or Result Slips
       - 2 clear passport-size photographs (recent, colored)
       - Copy of National ID card or Birth Certificate
-      - Bank deposit slip for term fees (KCB Account: 1234567890, Branch: Nanyuki)
+      - Bank deposit slip for term fees (KCB Account: 1234567890, Branch: Lodwar)
       - Trainee Medical Examination Form signed by an authorized government medical officer.
 
       3. ACCOMMODATION & MEALS

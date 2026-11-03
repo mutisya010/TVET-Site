@@ -35,7 +35,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
           <View style={styles.ribbonRight}>
             <Text style={styles.ribbonBadge}>• TVETA ACCREDITED</Text>
             <Text style={styles.ribbonBadge}>• TVET CDACC ASSESSMENT CENTRE</Text>
-            <Text style={styles.ribbonBadge}>• KNEC EXAMINATION</Text>
+            <Text style={styles.ribbonBadge}>• KNEC & NITA ASSESSMENT</Text>
           </View>
         </View>
       </View>
@@ -53,7 +53,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
             </Text>
             <View style={styles.tvetaBadge}>
               <ShieldCheck size={14} color="#FFA500" />
-              <Text style={styles.tvetaBadgeText}>Registered: TVETA/PUBLIC/TVC/0212</Text>
+              <Text style={styles.tvetaBadgeText}>Registered: TVETA/PUBLIC/TVC/0005/2023 • CDACC: 02300008</Text>
             </View>
           </View>
 
@@ -89,29 +89,29 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
               <View style={styles.contactEntry}>
                 <MapPin size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  P.O. Box 90 - 10400, Lodwar - Loima Road, Turkana County, Kenya
+                  Lorugum (~1.5 km off Lodwar–Uganda Rd), P.O. Box 517 – 30500, Lodwar, Turkana County, Kenya
                 </Text>
               </View>
 
               <TouchableOpacity 
                 style={styles.contactEntry} 
-                onPress={() => Linking.openURL('tel:+254700000000')}
+                onPress={() => Linking.openURL('tel:+254716189084')}
                 activeOpacity={0.7}
               >
                 <Phone size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  +254 700 000 000 / +254 711 000 000
+                  +254 716 189 084 / +254 759 437 978
                 </Text>
               </TouchableOpacity>
 
               <TouchableOpacity 
                 style={styles.contactEntry} 
-                onPress={() => Linking.openURL('mailto:principal@loimatvc.ac.ke')}
+                onPress={() => Linking.openURL('mailto:info@loima.co.ke / principal@loima.co.ke')}
                 activeOpacity={0.7}
               >
                 <Mail size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  principal@loimatvc.ac.ke
+                  info@loima.co.ke / principal@loima.co.ke
                 </Text>
               </TouchableOpacity>
 

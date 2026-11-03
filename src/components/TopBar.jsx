@@ -1,15 +1,15 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { Phone, MessageCircle, Megaphone } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
 
 export default function TopBar({ onOpenInquiry }) {
   const handleCall = () => {
-    Linking.openURL('tel:+254700000000');
+    Linking.openURL('tel:+254716189084');
   };
 
   const handleWhatsApp = () => {
-    Linking.openURL('https://wa.me/254711000000?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20enquire%20about%20admissions');
+    Linking.openURL('https://wa.me/254759437978?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20enquire%20about%20admissions');
   };
 
   return (
@@ -26,7 +26,7 @@ export default function TopBar({ onOpenInquiry }) {
             <Text style={styles.badgeText}>Admissions Notice:</Text>
           </View>
           <Text style={styles.noticeText} numberOfLines={1}>
-            Ongoing intake for May & September Cohorts. Apply Online or Visit Campus
+            Intakes: January, May & September | Apply via KUCCPS or Campus Office in Lorugum
           </Text>
         </TouchableOpacity>
 
@@ -35,7 +35,7 @@ export default function TopBar({ onOpenInquiry }) {
           <TouchableOpacity style={styles.contactItem} onPress={handleCall} activeOpacity={0.7}>
             <Phone size={13} color={colors.green} />
             <Text style={styles.contactLabel}>Helpline: </Text>
-            <Text style={styles.contactValue}>+254 700 000 000</Text>
+            <Text style={styles.contactValue}>+254 716 189 084</Text>
           </TouchableOpacity>
 
           <View style={styles.divider} />
@@ -43,7 +43,7 @@ export default function TopBar({ onOpenInquiry }) {
           <TouchableOpacity style={styles.contactItem} onPress={handleWhatsApp} activeOpacity={0.7}>
             <MessageCircle size={13} color={colors.green} />
             <Text style={styles.contactLabel}>WhatsApp: </Text>
-            <Text style={[styles.contactValue, styles.whatsAppColor]}>+254 711 000 000</Text>
+            <Text style={[styles.contactValue, styles.whatsAppColor]}>+254 759 437 978</Text>
           </TouchableOpacity>
         </View>
       </View>

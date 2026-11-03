@@ -108,7 +108,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
             <View style={styles.trustRow}>
               <ShieldCheck size={16} color={colors.green} />
               <Text style={styles.trustText}>
-                KUCCPS Institution Code: <Text style={styles.trustBold}>1478111</Text> â€¢ Government Placed & Self-Sponsored
+                KUCCPS Placement & Self-Sponsored • TVETA Reg: <Text style={styles.trustBold}>TVETA/PUBLIC/TVC/0005/2023</Text> • Lorugum, Turkana
               </Text>
             </View>
           </View>

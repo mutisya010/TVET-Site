@@ -59,7 +59,7 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
     ],
     highlights: [
       { label: 'Year Established', value: '2021' },
-      { label: 'Registration', value: 'TVETA/PUBLIC/TVC/2021' },
+      { label: 'Registration', value: 'TVETA/PUBLIC/TVC/0005/2023' },
       { label: 'Campus Acreage', value: '35+ Acres' },
       { label: 'Trainee Capacity', value: '1,500+ Trainees' }
     ],
@@ -77,7 +77,7 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
         caption: 'College banner — technology and innovation.'
       }
     ],
-    contactInfo: 'Main Campus: Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
+    contactInfo: 'Lorugum Campus (~1.5 km off Lodwar–Uganda Road), Loima Sub-County, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke',
     actionText: 'View Academic Catalog',
     actionRoute: 'courses'
   },
@@ -113,7 +113,7 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
       { url: img_concrete,  caption: 'Sunlit administration block and office building.' },
       { url: img_walkway,   caption: 'School building with covered walkway connecting departments.' },
     ],
-    contactInfo: 'Media & Public Relations Desk: media@loimatvc.ac.ke',
+    contactInfo: 'Media & Public Relations Desk: info@loima.co.ke',
     actionText: 'Explore Campus Showcase',
     actionRoute: 'home'
   },
@@ -125,7 +125,7 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
     subtitle: 'Direct Channels to Our Admissions Desk, Registrar, and Campus Headquarters',
     description: `We welcome prospective trainees, parents, guardians, and corporate partners to visit our main campus or reach out through our official direct channels. Our admissions team is on standby to assist with course selection, KUCCPS inter-institutional transfers, hostel bookings, and fee payment arrangements.
 
-Our campus is conveniently situated along the main Loima - Doldol road, with reliable all-weather access, secure parking, and visitor reception facilities.`,
+Our campus is conveniently situated approximately 1.5 km from Lorugum shopping centre, along the Lodwar–Uganda (Lodwar–Moroto) road, with reliable all-weather access, secure parking, and visitor reception facilities.`,
     mandates: [
       'Prompt response to telephone and WhatsApp admissions enquiries (Mon-Fri 8am-5pm).',
       'Guided campus and workshop walkthrough tours for visiting prospective students.',
@@ -133,7 +133,7 @@ Our campus is conveniently situated along the main Loima - Doldol road, with rel
       'Direct coordination with high school career teachers for secondary outreach.'
     ],
     highlights: [
-      { label: 'Campus Address', value: 'P.O. Box 50 - 20321, Loima' },
+      { label: 'Campus Address', value: 'P.O. Box 517 – 30500, Lodwar (Lorugum Campus)' },
       { label: 'Admissions Line', value: '+254 759 437 978' },
       { label: 'WhatsApp Helpdesk', value: '+254 711 000 000' },
       { label: 'Office Hours', value: 'Mon - Fri (8:00 AM - 5:00 PM)' }
@@ -148,7 +148,7 @@ Our campus is conveniently situated along the main Loima - Doldol road, with rel
         caption: 'Customer service desk welcoming parents and new applicants.'
       }
     ],
-    contactInfo: 'Postal Address: P.O. Box 50 - 20321, Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
+    contactInfo: 'Postal Address: P.O. Box 517 – 30500, Lodwar | Lorugum, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke',
     actionText: 'Express Course Enquiry',
     actionRoute: 'home'
   },
@@ -178,7 +178,7 @@ Working closely with the Ministry of Education and TVET CDACC, the Principal spe
       { label: 'Direct Oversight', value: 'All Academic & Support Divisions' }
     ],
     images: [],
-    contactInfo: 'Executive Office: principal@loimatvc.ac.ke | Switchboard: +254 700 000 000',
+    contactInfo: 'Executive Office: principal@loima.co.ke | Helpline: +254 716 189 084 / +254 759 437 978',
     actionText: 'View College Leadership',
     actionRoute: 'home'
   },
