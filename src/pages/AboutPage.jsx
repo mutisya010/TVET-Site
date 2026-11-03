@@ -170,30 +170,32 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
             <Text style={styles.detailSubtitle}>{activeItem.subtitle}</Text>
           </View>
 
-          {/* Photo Gallery Grid with Captions */}
-          <View style={styles.gallerySection}>
-            <View style={[styles.galleryGrid, isMobile && styles.galleryGridMobile]}>
-              {activeItem.images.map((img, idx) => (
-                <View 
-                  key={idx} 
-                  style={[
-                    styles.galleryCard, 
-                    activeItem.images.length === 1 && styles.galleryCardFull,
-                    idx === 0 && activeItem.images.length === 3 && styles.galleryCardLarge
-                  ]}
-                >
-                  <Image
-                    source={typeof img.url === "string" ? { uri: img.url } : img.url}
-                    style={styles.galleryImage}
-                    resizeMode="cover"
-                  />
-                  <View style={styles.galleryCaptionBox}>
-                    <Text style={styles.galleryCaptionText}>{img.caption}</Text>
+          {/* Photo Gallery Grid with Captions (Rendered only if images exist) */}
+          {activeItem.images && activeItem.images.length > 0 && (
+            <View style={styles.gallerySection}>
+              <View style={[styles.galleryGrid, isMobile && styles.galleryGridMobile]}>
+                {activeItem.images.map((img, idx) => (
+                  <View 
+                    key={idx} 
+                    style={[
+                      styles.galleryCard, 
+                      activeItem.images.length === 1 && styles.galleryCardFull,
+                      idx === 0 && activeItem.images.length === 3 && styles.galleryCardLarge
+                    ]}
+                  >
+                    <Image
+                      source={typeof img.url === "string" ? { uri: img.url } : img.url}
+                      style={styles.galleryImage}
+                      resizeMode="cover"
+                    />
+                    <View style={styles.galleryCaptionBox}>
+                      <Text style={styles.galleryCaptionText}>{img.caption}</Text>
+                    </View>
                   </View>
-                </View>
-              ))}
+                ))}
+              </View>
             </View>
-          </View>
+          )}
 
           {/* Detailed Explanation Text */}
           <View style={styles.explanationSection}>

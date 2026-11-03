@@ -177,16 +177,7 @@ Working closely with the Ministry of Education and TVET CDACC, the Principal spe
       { label: 'Administrative Base', value: 'Central Administration Block' },
       { label: 'Direct Oversight', value: 'All Academic & Support Divisions' }
     ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80',
-        caption: 'The Principal presiding over the annual institutional review.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80',
-        caption: 'Principal’s executive boardroom during an industrial partner signing.'
-      }
-    ],
+    images: [],
     contactInfo: 'Executive Office: principal@loimatvc.ac.ke | Switchboard: +254 700 000 000',
     actionText: 'View College Leadership',
     actionRoute: 'home'
