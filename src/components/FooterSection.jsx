@@ -1,7 +1,8 @@
-﻿import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking, useWindowDimensions } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Linking, useWindowDimensions, Image } from 'react-native';
 import { MapPin, Phone, Mail, Clock, Download, ShieldCheck } from 'lucide-react';
 import CollegeLogo from './CollegeLogo';
+import crestImg from '../assets/Loima Technical College Crest.png';
 
 export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice }) {
   const { width } = useWindowDimensions();
@@ -26,6 +27,17 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
 
   return (
     <View style={styles.footerWrapper}>
+      {/* Background Subtle Institutional Crest Watermark */}
+      <View style={styles.bgCrestContainer} pointerEvents="none">
+        <Image
+          source={typeof crestImg === 'string' ? { uri: crestImg } : crestImg}
+          style={styles.bgCrestWatermark}
+          resizeMode="contain"
+          // @ts-ignore
+          accessibilityRole="presentation"
+        />
+      </View>
+
       {/* Sub-footer Regulatory Ribbon */}
       <View style={styles.subRibbon}>
         <View style={styles.ribbonContainer}>
@@ -151,6 +163,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#0F3D24',
     borderTopWidth: 1,
     borderTopColor: '#0A2B19',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  bgCrestContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    pointerEvents: 'none',
+    zIndex: 0,
+    overflow: 'hidden',
+  },
+  bgCrestWatermark: {
+    width: 480,
+    height: 480,
+    maxWidth: '85vw',
+    maxHeight: '85%',
+    opacity: 0.065,
   },
   subRibbon: {
     backgroundColor: '#0A2B19',
