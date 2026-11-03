@@ -81,76 +81,6 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
     actionRoute: 'courses'
   },
   {
-    id: 'service-charter',
-    categoryId: 'general-info',
-    categoryName: 'General Information',
-    title: 'Service Charter',
-    subtitle: 'Our Statutory Commitment to Timely, Transparent, and Accountable Public Service',
-    description: `The Loima Technical and Vocational College Citizens Service Delivery Charter outlines our operational standards, service turnaround guarantees, trainee entitlements, and public service pledges under the Constitution of Kenya (2010) and the Public Service Commission standards.
-
-We are dedicated to delivering prompt, courteous, and non-discriminatory service to prospective trainees, guardians, industry partners, and the public. Every department is held to strict performance metrics to ensure maximum satisfaction and operational integrity.`,
-    mandates: [
-      'Admission application processing within 24 business hours.',
-      'Issuance of official receipts and fee statements immediately upon bank reconciliation.',
-      'Processing of academic transcripts within 14 days following official examination release.',
-      'Response to public inquiries and official correspondence within 48 hours.'
-    ],
-    highlights: [
-      { label: 'Admission Processing', value: '< 24 Hours' },
-      { label: 'Fee Statement Issuance', value: 'Instant' },
-      { label: 'Transcript Delivery', value: '14 Days' },
-      { label: 'Customer Satisfaction', value: '98.4%' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=80',
-        caption: 'Admissions and Customer Service Desk at the Registrar’s office.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80',
-        caption: 'Statutory performance tracking and service quality evaluation.'
-      }
-    ],
-    contactInfo: 'Service Quality Helpdesk: service@loimatvc.ac.ke | Tel: +254 700 000 000',
-    actionText: 'Download Official Charter',
-    actionRoute: 'downloads'
-  },
-  {
-    id: 'brochures',
-    categoryId: 'general-info',
-    categoryName: 'General Information',
-    title: 'Loima TVC Brochures',
-    subtitle: 'Comprehensive Course Prospectuses, Fee Guidelines, and Student Handbooks',
-    description: `Explore the complete collection of Loima TVC publications. Our annual brochure packs detail admission criteria for Government-sponsored (KUCCPS) and Self-sponsored trainees, course outlines across all engineering and business faculties, capitation breakdown, accommodation guides, and industrial attachment partnerships.
-
-All prospectuses are regularly updated to reflect the latest TVET CDACC curriculum releases, Ministry of Education fee regulations, and HELB funding allocations.`,
-    mandates: [
-      'Detailed breakdowns of Artisan, Craft Certificate, and Diploma curricula.',
-      'Comprehensive step-by-step KUCCPS placement and inter-institutional transfer instructions.',
-      'Transparent schedule of fees showing Government Capitation subsidies.',
-      'Full campus map, hostel guidelines, and code of conduct.'
-    ],
-    highlights: [
-      { label: 'Edition', value: '2024 - 2026' },
-      { label: 'Document Format', value: 'Printable PDF' },
-      { label: 'Programmes Listed', value: '15+ Courses' },
-      { label: 'Circulation', value: 'Verified Official' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=900&q=80',
-        caption: 'Official course guides and student information brochures.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80',
-        caption: 'Trainees reviewing curriculum options during the academic intake fair.'
-      }
-    ],
-    contactInfo: 'Admissions Resource Center: admissions@loimatvc.ac.ke',
-    actionText: 'Download Brochure (PDF)',
-    actionRoute: 'downloads'
-  },
-  {
     id: 'gallery',
     categoryId: 'general-info',
     categoryName: 'General Information',
@@ -219,41 +149,6 @@ Our campus is conveniently situated along the main Loima - Doldol road, with rel
     ],
     contactInfo: 'Postal Address: P.O. Box 50 - 20321, Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
     actionText: 'Express Course Enquiry',
-    actionRoute: 'home'
-  },
-  {
-    id: 'complaints-feedback',
-    categoryId: 'general-info',
-    categoryName: 'General Information',
-    title: 'Complaints & Feedback',
-    subtitle: 'Transparent Public Redress Mechanism and Continuous Quality Improvement',
-    description: `Loima TVC upholds an open-door policy and a zero-tolerance approach to maladministration, corruption, or substandard service. In accordance with Commission on Administrative Justice (Ombudsman) directives, our Complaints and Feedback Office provides a safe, anonymous, and expedited channel for trainees, staff, and the community to voice concerns.
-
-Every submission is logged into the official complaint registry, investigated objectively, and resolved within statutory timelines with written feedback provided to the complainant.`,
-    mandates: [
-      'Guaranteed acknowledgment of all received complaints within 24 working hours.',
-      'Fair, confidential, and impartial resolution of trainee grievances and examination disputes.',
-      'Continuous quarterly reporting to the Commission on Administrative Justice (CAJ).',
-      'Regular implementation of stakeholder suggestions for service delivery enhancements.'
-    ],
-    highlights: [
-      { label: 'Acknowledgment', value: 'Within 24 Hours' },
-      { label: 'Resolution Window', value: '5 - 7 Working Days' },
-      { label: 'Confidentiality', value: '100% Protected' },
-      { label: 'Ombudsman Compliance', value: 'Fully Certified' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=900&q=80',
-        caption: 'Customer feedback and service evaluation desk.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=900&q=80',
-        caption: 'Grievance committee conducting an objective review session.'
-      }
-    ],
-    contactInfo: 'Ombudsman Desk: feedback@loimatvc.ac.ke | Confidential Hotline: +254 759 437 978',
-    actionText: 'Contact Registrar Desk',
     actionRoute: 'home'
   },
 

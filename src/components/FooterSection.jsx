@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking, useWindowDimensions } from 'react-native';
 import { MapPin, Phone, Mail, Clock, Download, ShieldCheck } from 'lucide-react';
 import CollegeLogo from './CollegeLogo';
@@ -14,7 +14,6 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
     { label: 'Government Bursaries & HELB', action: () => onOpenNotice && onOpenNotice('notice-2') },
     { label: 'Student Portal Access', action: () => alert('Student Portal Login: Please enter your Student Registration Number') },
     { label: 'Administration & Council', action: () => onNavigate && onNavigate('about', 'board-of-governors') },
-    { label: 'Service Delivery Charter', action: () => onNavigate && onNavigate('about', 'service-charter') },
     { label: 'Industrial Liaison Office', action: () => onNavigate && onNavigate('about', 'industrial-liaison') },
   ];
 

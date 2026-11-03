@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { ChevronDown, ChevronUp, ArrowRight, Menu, X, User } from 'lucide-react';
 import CollegeLogo from './CollegeLogo';
@@ -311,34 +311,10 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
 
                       <TouchableOpacity
                         style={styles.mobileOptRow}
-                        onPress={() => handleSelectAboutOption('service-charter')}
-                      >
-                        <View style={styles.mobileOptDot} />
-                        <Text style={styles.mobileOptText}>Citizens Service Charter</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity
-                        style={styles.mobileOptRow}
-                        onPress={() => handleSelectAboutOption('brochures')}
-                      >
-                        <View style={styles.mobileOptDot} />
-                        <Text style={styles.mobileOptText}>Loima TVC Brochures</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity
-                        style={styles.mobileOptRow}
                         onPress={() => handleSelectAboutOption('gallery')}
                       >
                         <View style={styles.mobileOptDot} />
                         <Text style={styles.mobileOptText}>Campus Life & Gallery</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity
-                        style={styles.mobileOptRow}
-                        onPress={() => handleSelectAboutOption('complaints-feedback')}
-                      >
-                        <View style={styles.mobileOptDot} />
-                        <Text style={styles.mobileOptText}>Complaints & Feedback</Text>
                       </TouchableOpacity>
                     </View>
                   )}
