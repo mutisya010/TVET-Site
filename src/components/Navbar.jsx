@@ -40,7 +40,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
     setCoursesDropdownOpen(false);
     if (id === 'management') {
       if (onNavigate) {
-        onNavigate('about', 'board-of-governors');
+        onNavigate('about', 'office-of-principal');
       }
     } else if (onNavigate) {
       onNavigate(id);
@@ -322,14 +322,6 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                   {/* Mobile Management Accordion (Mirroring Sample) */}
                   {isManagement && mobileManagementExpanded && (
                     <View style={styles.mobileAccordionBox}>
-                      {/* 1. Board of Governors */}
-                      <TouchableOpacity
-                        style={styles.mobileOptRow}
-                        onPress={() => handleSelectAboutOption('board-of-governors')}
-                      >
-                        <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
-                        <Text style={styles.mobileOptText}>Board of Governors</Text>
-                      </TouchableOpacity>
 
                       {/* 2. Principal */}
                       <TouchableOpacity
@@ -372,24 +364,6 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                           </TouchableOpacity>
                         </View>
                       )}
-
-                      {/* 4. Office of The Registrar */}
-                      <TouchableOpacity
-                        style={styles.mobileOptRow}
-                        onPress={() => handleSelectAboutOption('office-of-registrar')}
-                      >
-                        <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
-                        <Text style={styles.mobileOptText}>Office of The Registrar</Text>
-                      </TouchableOpacity>
-
-                      {/* 5. Dean of students */}
-                      <TouchableOpacity
-                        style={styles.mobileOptRow}
-                        onPress={() => handleSelectAboutOption('office-of-dean-of-trainees')}
-                      >
-                        <View style={[styles.mobileOptDot, { backgroundColor: colors.orange }]} />
-                        <Text style={styles.mobileOptText}>Dean of students</Text>
-                      </TouchableOpacity>
                     </View>
                   )}
 

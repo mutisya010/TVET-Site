@@ -13,7 +13,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
     { label: 'Fee Structure & Entry Criteria', action: () => onOpenNotice && onOpenNotice('notice-2') },
     { label: 'Government Bursaries & HELB', action: () => onOpenNotice && onOpenNotice('notice-2') },
     { label: 'Student Portal Access', action: () => alert('Student Portal Login: Please enter your Student Registration Number') },
-    { label: 'Administration & Council', action: () => onNavigate && onNavigate('about', 'board-of-governors') },
+    { label: 'Administration & Council', action: () => onNavigate && onNavigate('about', 'office-of-principal') },
     { label: 'Industrial Liaison Office', action: () => onNavigate && onNavigate('about', 'industrial-liaison') },
   ];
 

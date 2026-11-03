@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronRight } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
@@ -28,15 +28,6 @@ export default function ManagementDropdown({ onSelectOption, onClose }) {
       {/* Top Gold / Amber Accent Stripe */}
       <View style={styles.topAccent} />
 
-      {/* 1. Board of Governors */}
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => handleItemClick('board-of-governors')}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.menuText}>Board of Governors</Text>
-      </TouchableOpacity>
-
       {/* 2. Principal */}
       <TouchableOpacity
         style={styles.menuItem}
@@ -55,7 +46,7 @@ export default function ManagementDropdown({ onSelectOption, onClose }) {
         onMouseLeave={() => setDeputySubmenuOpen(false)}
       >
         <TouchableOpacity
-          style={[styles.menuItem, deputySubmenuOpen && styles.menuItemHovered]}
+          style={[styles.menuItem, styles.menuItemLast, deputySubmenuOpen && styles.menuItemHovered]}
           onPress={() => setDeputySubmenuOpen(!deputySubmenuOpen)}
           activeOpacity={0.8}
         >
@@ -90,24 +81,6 @@ export default function ManagementDropdown({ onSelectOption, onClose }) {
           </View>
         )}
       </View>
-
-      {/* 4. Office of The Registrar */}
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => handleItemClick('office-of-registrar')}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.menuText}>Office of The Registrar</Text>
-      </TouchableOpacity>
-
-      {/* 5. Dean of students */}
-      <TouchableOpacity
-        style={[styles.menuItem, styles.menuItemLast]}
-        onPress={() => handleItemClick('office-of-dean-of-trainees')}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.menuText}>Dean of students</Text>
-      </TouchableOpacity>
     </View>
   );
 }

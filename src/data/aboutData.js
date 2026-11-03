@@ -156,41 +156,6 @@ Our campus is conveniently situated along the main Loima - Doldol road, with rel
   // 2. ADMINISTRATORS
   // ==========================================
   {
-    id: 'board-of-governors',
-    categoryId: 'administrators',
-    categoryName: 'Administrators',
-    title: 'Board of Governors',
-    subtitle: 'Strategic Governance, Institutional Stewardship, and Policy Direction',
-    description: `The Board of Governors (BOG) is the supreme governing body of Loima Technical and Vocational College, established pursuant to the Technical and Vocational Education and Training Act No. 29 of 2013. Comprising distinguished leaders from industry, academia, public administration, and community stakeholders, the Board provides visionary strategic oversight.
-
-The Board is responsible for institutional resource mobilization, approving capital infrastructure developments, safeguarding institutional financial solvency, and formulating policies that align the college with national industrialization priorities.`,
-    mandates: [
-      'Formulate and approve the college 5-year Strategic Plan and annual operational budgets.',
-      'Supervise executive management and assess institutional performance indicators.',
-      'Ensure prudent financial stewardship, statutory audit adherence, and public procurement integrity.',
-      'Strengthen industrial partnerships and resource mobilization for campus expansion.'
-    ],
-    highlights: [
-      { label: 'Governing Authority', value: 'TVET Act No. 29 (2013)' },
-      { label: 'Board Committees', value: 'Audit, Finance, Academic & HR' },
-      { label: 'Meeting Cycle', value: 'Quarterly Regular Sessions' },
-      { label: 'Chairperson', value: 'Appointed by Cabinet Secretary' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=900&q=80',
-        caption: 'Board of Governors convening for strategic policy deliberation.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
-        caption: 'Board members inspecting new mechanical engineering workshop equipment.'
-      }
-    ],
-    contactInfo: 'Office of the Secretary to the Board: bog@loimatvc.ac.ke',
-    actionText: 'Learn More About Governance',
-    actionRoute: 'home'
-  },
-  {
     id: 'office-of-principal',
     categoryId: 'administrators',
     categoryName: 'Administrators',
@@ -294,76 +259,6 @@ Under its stewardship, Loima TVC maintains a rigorous Competency-Based Education
     contactInfo: 'Email: dpa.academics@loimatvc.ac.ke | Tel: +254 759 437 978',
     actionText: 'Explore Accredited Courses',
     actionRoute: 'courses'
-  },
-  {
-    id: 'office-of-registrar',
-    categoryId: 'administrators',
-    categoryName: 'Administrators',
-    title: 'Office of Registrar',
-    subtitle: 'Admissions Gateway, Trainee Records, KUCCPS Liaison, and Certification',
-    description: `The Office of the Registrar (Academic & Administrative Affairs) is the primary contact point for all trainees from admission through graduation. The office oversees student onboarding, KUCCPS placement verification, trainee registration numbers, class rolls, fee clearance verification, and the issuance of official transcripts and certificates.
-
-The Registrar also acts as the official institutional liaison with statutory regulatory bodies including the Kenya National Qualifications Authority (KNQA) and TVETA.`,
-    mandates: [
-      'Manage the end-to-end trainee admission pipeline for Government and Self-sponsored cohorts.',
-      'Process KUCCPS placement lists, transfers, and annual intake data.',
-      'Maintain secure, confidential, and digitized permanent student academic records.',
-      'Coordinate the issuance of official completion letters, academic transcripts, and certificates.'
-    ],
-    highlights: [
-      { label: 'Annual Trainee Intake', value: '3 Intakes (Jan, May, Sep)' },
-      { label: 'Record Digitization', value: '100% Online Registry' },
-      { label: 'Turnaround Time', value: 'Same-day Admission Letters' },
-      { label: 'Statutory Stamp', value: 'Official Registrar Seal' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80',
-        caption: 'Registrar desk processing new trainee verification documents.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=80',
-        caption: 'Digitized student archive and official transcript authentication.'
-      }
-    ],
-    contactInfo: 'Email: admissions@loimatvc.ac.ke | Phone: +254 759 437 978',
-    actionText: 'Apply via Courses Catalog',
-    actionRoute: 'courses'
-  },
-  {
-    id: 'office-of-dean-of-trainees',
-    categoryId: 'administrators',
-    categoryName: 'Administrators',
-    title: 'Office of Dean of Trainees',
-    subtitle: 'Student Welfare, Hostel Accommodation, Mentorship, and Student Governance',
-    description: `The Office of the Dean of Trainees champions the holistic welfare, personal development, and residential comfort of every student at Loima TVC. This office coordinates the Trainee Governing Council, hostel accommodation, dining hall services, psycho-social counseling, health and wellness services, and club activities.
-
-The Dean works in close harmony with student leaders to maintain campus harmony, organize mentorship forums, and nurture trainees into responsible, disciplined professionals ready to excel in industry.`,
-    mandates: [
-      'Supervise campus student accommodation and coordinate approved private hostel partners.',
-      'Facilitate democratic Trainee Council elections and advise student leadership.',
-      'Provide professional and confidential guidance, counseling, and mental health support.',
-      'Organize cultural days, talent showcases, and community volunteer outreaches.'
-    ],
-    highlights: [
-      { label: 'Student Governance', value: 'Elected Trainee Council' },
-      { label: 'Hostel Coverage', value: 'On-Campus & Approved Hostels' },
-      { label: 'Clubs & Societies', value: '12+ Active Student Guilds' },
-      { label: 'Wellness Services', value: 'Free Student Counseling' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80',
-        caption: 'Trainee council representatives meeting with the Dean of Trainees.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80',
-        caption: 'Student mentorship session and career orientation event.'
-      }
-    ],
-    contactInfo: 'Dean of Trainees Desk: dean.trainees@loimatvc.ac.ke | Location: Student Centre',
-    actionText: 'Download Joining Instructions',
-    actionRoute: 'downloads'
   },
 
   // ==========================================
