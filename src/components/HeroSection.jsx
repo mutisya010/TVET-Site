@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
-import { 
-  ArrowRight, 
-  Compass, 
-  ShieldCheck, 
-  ChevronLeft, 
-  ChevronRight 
+import {
+  ArrowRight,
+  Compass,
+  ShieldCheck,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
 import crestImg from '../assets/Loima Technical College Crest.png';
-import slide1 from '../assets/College Banner_ Technology and Innovation.webp';
+import slide1 from '../assets/Loima Technical College Banner.webp';
 import slide2 from '../assets/Loima Technical College Façade.webp';
 import slide3 from '../assets/Bright Workshop Training Room.webp';
 import slide5 from '../assets/Lomia Technical College Exterior.webp';
@@ -20,11 +20,11 @@ import slide6 from '../assets/Collaborative Training Room Meeting.webp';
  * Clean, unobstructed photo carousel rotating automatically every 3 seconds.
  */
 const heroSlides = [
-  { id: 'banner',        image: slide1 },
-  { id: 'facade',        image: slide2 },
-  { id: 'workshop1',     image: slide3 },
-  { id: 'workshop2',     image: slide3 },
-  { id: 'exterior',      image: slide5 },
+  { id: 'banner', image: slide1 },
+  { id: 'facade', image: slide2 },
+  { id: 'workshop1', image: slide3 },
+  { id: 'workshop2', image: slide3 },
+  { id: 'exterior', image: slide5 },
   { id: 'training-room', image: slide6 },
 ];
 
@@ -72,7 +72,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
 
       <View style={styles.container}>
         <View style={[styles.inner, isMobile && styles.innerMobile]}>
-          
+
           {/* Left Column: Heading, Badges, Text, CTAs */}
           <View style={[styles.leftCol, isMobile && styles.leftColMobile]}>
             {/* National TVET Status Pill Badge */}
@@ -90,8 +90,8 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
 
             {/* Sub-paragraph */}
             <Text style={styles.paragraph}>
-              Loima Technical and Vocational College provides accredited Competency-Based 
-              Education and Training (CBET). We equip students with job-ready technical expertise, 
+              Loima Technical and Vocational College provides accredited Competency-Based
+              Education and Training (CBET). We equip students with job-ready technical expertise,
               subsidised by national capitation and tailored for immediate employment.
             </Text>
 
@@ -127,7 +127,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
 
           {/* Right Column: Hero Auto-Rotating Image Carousel (Clean & Unobstructed) */}
           <View style={[styles.rightCol, isMobile && styles.rightColMobile]}>
-            <View 
+            <View
               style={styles.imageCardWrapper}
               // @ts-ignore
               onMouseEnter={() => setIsPaused(true)}
