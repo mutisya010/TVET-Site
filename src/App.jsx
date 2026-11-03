@@ -206,49 +206,39 @@ export default function App() {
         )}
 
         {currentPage === 'about' && (
-          <ScrollReveal animation="fade-up" duration={600}>
-            <AboutPage 
-              initialOptionId={selectedAboutOptionId}
-              onNavigate={handleNavigate}
-              onOpenInquiry={handleOpenInquiry}
-            />
-          </ScrollReveal>
+          <AboutPage 
+            initialOptionId={selectedAboutOptionId}
+            onNavigate={handleNavigate}
+            onOpenInquiry={handleOpenInquiry}
+          />
         )}
 
         {currentPage === 'courses' && (
-          <ScrollReveal animation="fade-up" duration={600}>
-            <CoursesPage 
-              onViewCourseDetails={handleOpenCourseModal}
-              onApplyCourse={handleApplyCourse}
-              onStartApplication={handleOpenInquiry}
-            />
-          </ScrollReveal>
+          <CoursesPage 
+            onViewCourseDetails={handleOpenCourseModal}
+            onApplyCourse={handleApplyCourse}
+            onStartApplication={handleOpenInquiry}
+          />
         )}
 
         {currentPage === 'downloads' && (
-          <ScrollReveal animation="fade-up" duration={600}>
-            <DownloadsPage
-              onDownloadDoc={handleDownloadDoc}
-            />
-          </ScrollReveal>
+          <DownloadsPage
+            onDownloadDoc={handleDownloadDoc}
+          />
         )}
 
         {currentPage === 'contact' && (
-          <ScrollReveal animation="fade-up" duration={600}>
-            <ContactPage 
-              onNavigate={handleNavigate}
-            />
-          </ScrollReveal>
+          <ContactPage 
+            onNavigate={handleNavigate}
+          />
         )}
 
         {/* Footer & Regulatory Sub-footer */}
-        <ScrollReveal animation="fade-up" duration={650}>
-          <FooterSection 
-            onNavigate={handleNavigate}
-            onOpenInquiry={handleOpenInquiry}
-            onOpenNotice={handleOpenNotice}
-          />
-        </ScrollReveal>
+        <FooterSection 
+          onNavigate={handleNavigate}
+          onOpenInquiry={handleOpenInquiry}
+          onOpenNotice={handleOpenNotice}
+        />
       </ScrollView>
 
       {/* Floating WhatsApp Action Pill */}
