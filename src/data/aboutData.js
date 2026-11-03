@@ -8,6 +8,7 @@ import img_sunlit from '../assets/Loima College Sunlit Facade.webp';
 import img_exterior from '../assets/Lomia Technical College Exterior.webp';
 import img_concrete from '../assets/Sunlit Concrete Office Building.webp';
 import img_walkway from '../assets/Sunlit School Building with Covered Walkway.webp';
+import img_banner from '../assets/College Banner_ Technology and Innovation.webp';
 // Balanced Branding: Institutional Green (#14462E / #2E8B57), Crisp White (#FFFFFF), Warm Orange/Amber (#F59E0B)
 
 export const aboutCategories = [
@@ -64,16 +65,16 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
     ],
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=900&q=80',
-        caption: 'The main administrative and academic complex of Loima TVC.'
+        url: img_exterior,
+        caption: 'Lomia Technical College exterior view.'
       },
       {
-        url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80',
-        caption: 'Foundational trainee intake during orientation and matriculation.'
+        url: img_desert,
+        caption: 'Desert campus facilities under clear blue skies.'
       },
       {
-        url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80',
-        caption: 'Commissioning of advanced technical workshop equipment.'
+        url: img_banner,
+        caption: 'College banner — technology and innovation.'
       }
     ],
     contactInfo: 'Main Campus: Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
