@@ -1,4 +1,13 @@
-// Master Data for About Us categories and detailed options
+﻿// Master Data for About Us categories and detailed options
+import img_workshop from '../assets/Bright Workshop Training Room.webp';
+import img_training from '../assets/Collaborative Training Room Meeting.webp';
+import img_cream from '../assets/Cream Institutional Building in Dry Sunlight.webp';
+import img_desert from '../assets/Desert Campus Under Blue Skies.webp';
+import img_office from '../assets/Focused Office Training Session.webp';
+import img_sunlit from '../assets/Loima College Sunlit Facade.webp';
+import img_exterior from '../assets/Lomia Technical College Exterior.webp';
+import img_concrete from '../assets/Sunlit Concrete Office Building.webp';
+import img_walkway from '../assets/Sunlit School Building with Covered Walkway.webp';
 // Balanced Branding: Institutional Green (#14462E / #2E8B57), Crisp White (#FFFFFF), Warm Orange/Amber (#F59E0B)
 
 export const aboutCategories = [
@@ -163,22 +172,15 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
       { label: 'Exhibitions Won', value: 'Regional TVET Fair' }
     ],
     images: [
-      {
-        url: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=900&q=80',
-        caption: 'Mechanical students welding precision metal frames in the fabrication bay.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80',
-        caption: 'ICT trainees collaborating on software development in the computer lab.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80',
-        caption: 'Electrical power trainees wiring domestic distribution boards.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=900&q=80',
-        caption: 'Building technology trainees executing masonry work on the demonstration site.'
-      }
+      { url: img_workshop,  caption: 'Bright workshop training room — hands-on industrial skills in action.' },
+      { url: img_training,  caption: 'Collaborative training session with students and instructors.' },
+      { url: img_cream,     caption: 'Cream institutional building bathed in dry sunlight.' },
+      { url: img_desert,    caption: 'Campus grounds under clear blue skies.' },
+      { url: img_office,    caption: 'Focused office training session in the ICT & Business lab.' },
+      { url: img_sunlit,    caption: 'Loima College sunlit main facade and entrance.' },
+      { url: img_exterior,  caption: 'Lomia Technical College exterior view.' },
+      { url: img_concrete,  caption: 'Sunlit administration block and office building.' },
+      { url: img_walkway,   caption: 'School building with covered walkway connecting departments.' },
     ],
     contactInfo: 'Media & Public Relations Desk: media@loimatvc.ac.ke',
     actionText: 'Explore Campus Showcase',

@@ -183,7 +183,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                   ]}
                 >
                   <Image
-                    source={{ uri: img.url }}
+                    source={typeof img.url === "string" ? { uri: img.url } : img.url}
                     style={styles.galleryImage}
                     resizeMode="cover"
                   />
