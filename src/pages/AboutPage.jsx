@@ -21,7 +21,7 @@ import {
 import { aboutItems } from '../data/aboutData';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';
-import collegeBannerImg from '../assets/College Banner_ Technology and Innovation.webp';
+import collegeBannerImg from '../assets/Loima Technical College Façade.webp';
 
 export default function AboutPage({ initialOptionId = 'our-history', onNavigate, onOpenInquiry }) {
   const { width } = useWindowDimensions();
