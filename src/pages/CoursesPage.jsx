@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { 
   View, 
   Text, 
@@ -29,7 +29,7 @@ import StatutoryStandardsSection from '../components/courses/StatutoryStandardsS
 import CourseCtaBanner from '../components/courses/CourseCtaBanner';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { colors, typography } from '../theme/colors';
-import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import collegeBannerImg from '../assets/College Banner_ Technology and Innovation.webp';
 
 export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStartApplication }) {
   const { width } = useWindowDimensions();
@@ -142,7 +142,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
           <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
             {/* Ambient Background with subtle blur of the authentic campus banner */}
             <Image
-              source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+              source={collegeBannerImg }
               style={styles.heroBannerBgImage}
               resizeMode="cover"
               blurRadius={10}

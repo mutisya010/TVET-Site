@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { 
   ArrowRight, 
@@ -8,37 +8,23 @@ import {
   ChevronRight 
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
-import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import slide1 from '../assets/College Banner_ Technology and Innovation.webp';
+import slide2 from '../assets/Loima Technical College Façade.webp';
+import slide3 from '../assets/Bright Workshop Training Room.webp';
+import slide5 from '../assets/Lomia Technical College Exterior.webp';
+import slide6 from '../assets/Collaborative Training Room Meeting.webp';
 
 /**
- * 6 Master Hero Slides showcasing Loima TVC's Campus & Practical TVET Workshops.
+ * 6 Hero Slides showcasing Loima TVC's Campus & Practical TVET Workshops.
  * Clean, unobstructed photo carousel rotating automatically every 3 seconds.
  */
 const heroSlides = [
-  {
-    id: 'campus',
-    image: collegeBannerImg || './Images/Laikipia-north-banner-300x200.webp',
-  },
-  {
-    id: 'electrical',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'automotive',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'ict',
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'building',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'agriculture',
-    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
-  },
+  { id: 'banner',        image: slide1 },
+  { id: 'facade',        image: slide2 },
+  { id: 'workshop1',     image: slide3 },
+  { id: 'workshop2',     image: slide3 },
+  { id: 'exterior',      image: slide5 },
+  { id: 'training-room', image: slide6 },
 ];
 
 export default function HeroSection({ onExploreCourses, onApplyNow }) {
@@ -81,7 +67,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
             <View style={styles.govBadge}>
               <View style={styles.govDot} />
               <Text style={styles.govBadgeText}>
-                MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
+                MINISTRY OF EDUCATION â€¢ STATE DEPARTMENT FOR TVET
               </Text>
             </View>
 
@@ -122,7 +108,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
             <View style={styles.trustRow}>
               <ShieldCheck size={16} color={colors.green} />
               <Text style={styles.trustText}>
-                KUCCPS Institution Code: <Text style={styles.trustBold}>1478111</Text> • Government Placed & Self-Sponsored
+                KUCCPS Institution Code: <Text style={styles.trustBold}>1478111</Text> â€¢ Government Placed & Self-Sponsored
               </Text>
             </View>
           </View>

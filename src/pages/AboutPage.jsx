@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -21,7 +21,7 @@ import {
 import { aboutItems } from '../data/aboutData';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';
-import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import collegeBannerImg from '../assets/College Banner_ Technology and Innovation.webp';
 
 export default function AboutPage({ initialOptionId = 'our-history', onNavigate, onOpenInquiry }) {
   const { width } = useWindowDimensions();
@@ -66,7 +66,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
           <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
             {/* Ambient Background with subtle blur of the authentic campus banner */}
             <Image
-              source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+              source={collegeBannerImg }
               style={styles.heroBannerBgImage}
               resizeMode="cover"
               blurRadius={10}
@@ -126,7 +126,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
               <View style={[styles.heroBannerPhotoCol, isMobile && styles.heroBannerPhotoColMobile]}>
                 <View style={styles.heroPhotoFrame}>
                   <Image
-                    source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+                    source={collegeBannerImg }
                     style={styles.heroPhotoImg}
                     resizeMode="cover"
                   />

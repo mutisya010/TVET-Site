@@ -11,6 +11,7 @@ export default defineConfig({
   // (Settings → Pages → Deploy from branch → main → /docs)
   build: {
     outDir: 'docs',
+    emptyOutDir: false,
   },
 
   plugins: [react()],
