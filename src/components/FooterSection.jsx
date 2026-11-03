@@ -140,9 +140,24 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
 
         {/* Bottom Copyright Bar */}
         <View style={styles.bottomBar}>
-          <Text style={styles.copyrightText}>
-            © 2024 Loima Technical & Vocational College, Republic of Kenya. All rights reserved.
-          </Text>
+          <View style={styles.copyrightCol}>
+            <Text style={styles.copyrightText}>
+              © 2024 Loima Technical & Vocational College, Republic of Kenya. All rights reserved.
+            </Text>
+            <View style={styles.creditsRow}>
+              <Text style={styles.creditsText}>Built by </Text>
+              <TouchableOpacity 
+                onPress={() => Linking.openURL('https://royalsoftwares.co.ke/')}
+                activeOpacity={0.7}
+                // @ts-ignore
+                accessibilityRole="link"
+                href="https://royalsoftwares.co.ke/"
+                target="_blank"
+              >
+                <Text style={styles.creditsLink}>Royal softwares Company</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
           <View style={styles.legalLinks}>
             <TouchableOpacity><Text style={styles.legalText}>Privacy Policy</Text></TouchableOpacity>
@@ -322,6 +337,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     gap: 12,
+  },
+  copyrightCol: {
+    flexDirection: 'column',
+    gap: 4,
+  },
+  creditsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  creditsText: {
+    fontSize: 11.5,
+    color: '#8E9AA0',
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
+  },
+  creditsLink: {
+    fontSize: 11.5,
+    fontWeight: '700',
+    color: '#FFA500',
+    fontFamily: "'Space Grotesk', sans-serif",
+    textDecorationLine: 'underline',
+    cursor: 'pointer',
   },
   copyrightText: {
     fontSize: 12,
