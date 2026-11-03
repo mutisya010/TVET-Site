@@ -229,16 +229,7 @@ Under its stewardship, Loima TVC maintains a rigorous Competency-Based Education
       { label: 'Departments Overseen', value: '5 Academic Divisions' },
       { label: 'Academic Completion Rate', value: '96.2%' }
     ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=900&q=80',
-        caption: 'Academic board meeting on curriculum delivery and evaluation.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80',
-        caption: 'Academic department heads assessing student practical projects.'
-      }
-    ],
+    images: [],
     contactInfo: 'Email: dpa.academics@loimatvc.ac.ke | Tel: +254 759 437 978',
     actionText: 'Explore Accredited Courses',
     actionRoute: 'courses'
