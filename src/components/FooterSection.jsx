@@ -154,7 +154,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
                 href="https://royalsoftwares.co.ke/"
                 target="_blank"
               >
-                <Text style={styles.creditsLink}>Royal softwares Company</Text>
+                <Text style={styles.creditsLink}>Royal Software Solutions</Text>
               </TouchableOpacity>
             </View>
           </View>
