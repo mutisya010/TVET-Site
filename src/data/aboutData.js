@@ -203,16 +203,7 @@ Through proactive maintenance schedules and modern facility management, the offi
       { label: 'Staff Managed', value: 'Teaching & Support Personnel' },
       { label: 'Facility Readiness', value: '100% Operational Standards' }
     ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
-        caption: 'Administrative coordination center and human resources wing.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80',
-        caption: 'Campus facilities and infrastructure management command.'
-      }
-    ],
+    images: [],
     contactInfo: 'Email: dpa@loimatvc.ac.ke | Location: Administration Block, 1st Floor',
     actionText: 'Explore Campus Facilities',
     actionRoute: 'home'
