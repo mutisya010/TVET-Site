@@ -8,6 +8,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
+import ScrollReveal from './common/ScrollReveal';
 import crestImg from '../assets/Loima Technical College Crest.png';
 import slide1 from '../assets/College Banner_ Technology and Innovation.webp';
 import slide2 from '../assets/Loima Technical College Façade.webp';
@@ -76,57 +77,67 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
           {/* Left Column: Heading, Badges, Text, CTAs */}
           <View style={[styles.leftCol, isMobile && styles.leftColMobile]}>
             {/* National TVET Status Pill Badge */}
-            <View style={styles.govBadge}>
-              <View style={styles.govDot} />
-              <Text style={styles.govBadgeText}>
-                MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
-              </Text>
-            </View>
+            <ScrollReveal animation="fade-down" delay={60} duration={550}>
+              <View style={styles.govBadge}>
+                <View style={styles.govDot} />
+                <Text style={styles.govBadgeText}>
+                  MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
+                </Text>
+              </View>
+            </ScrollReveal>
 
             {/* Main Hero Headline */}
-            <Text style={[styles.headline, isMobile && styles.headlineMobile]}>
-              Empowering Youth with Practical Technical & Vocational Skills for the Modern Industry.
-            </Text>
+            <ScrollReveal animation="fade-up" delay={120} duration={650}>
+              <Text style={[styles.headline, isMobile && styles.headlineMobile]}>
+                Empowering Youth with Practical Technical & Vocational Skills for the Modern Industry.
+              </Text>
+            </ScrollReveal>
 
             {/* Sub-paragraph */}
-            <Text style={styles.paragraph}>
-              Loima Technical and Vocational College provides accredited Competency-Based
-              Education and Training (CBET). We equip students with job-ready technical expertise,
-              subsidised by national capitation and tailored for immediate employment.
-            </Text>
+            <ScrollReveal animation="fade-up" delay={180} duration={650}>
+              <Text style={styles.paragraph}>
+                Loima Technical and Vocational College provides accredited Competency-Based
+                Education and Training (CBET). We equip students with job-ready technical expertise,
+                subsidised by national capitation and tailored for immediate employment.
+              </Text>
+            </ScrollReveal>
 
             {/* Action Buttons */}
-            <View style={[styles.buttonRow, isMobile && styles.buttonRowMobile]}>
-              <TouchableOpacity
-                style={styles.primaryBtn}
-                onPress={onExploreCourses}
-                activeOpacity={0.85}
-              >
-                <Compass size={17} color={colors.white} />
-                <Text style={styles.primaryBtnText}>Explore Courses (15)</Text>
-              </TouchableOpacity>
+            <ScrollReveal animation="fade-up" delay={240} duration={650}>
+              <View style={[styles.buttonRow, isMobile && styles.buttonRowMobile]}>
+                <TouchableOpacity
+                  style={styles.primaryBtn}
+                  onPress={onExploreCourses}
+                  activeOpacity={0.85}
+                >
+                  <Compass size={17} color={colors.white} />
+                  <Text style={styles.primaryBtnText}>Explore Courses (15)</Text>
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.secondaryBtn}
-                onPress={onApplyNow}
-                activeOpacity={0.85}
-              >
-                <Text style={styles.secondaryBtnText}>Apply for Admission</Text>
-                <ArrowRight size={16} color={colors.white} />
-              </TouchableOpacity>
-            </View>
+                <TouchableOpacity
+                  style={styles.secondaryBtn}
+                  onPress={onApplyNow}
+                  activeOpacity={0.85}
+                >
+                  <Text style={styles.secondaryBtnText}>Apply for Admission</Text>
+                  <ArrowRight size={16} color={colors.white} />
+                </TouchableOpacity>
+              </View>
+            </ScrollReveal>
 
             {/* KUCCPS Trust Subtext */}
-            <View style={styles.trustRow}>
-              <ShieldCheck size={16} color={colors.green} />
-              <Text style={styles.trustText}>
-                KUCCPS Placement & Self-Sponsored • TVETA Reg: <Text style={styles.trustBold}>TVETA/PUBLIC/TVC/0005/2023</Text> • Lorugum, Turkana
-              </Text>
-            </View>
+            <ScrollReveal animation="fade-up" delay={300} duration={600}>
+              <View style={styles.trustRow}>
+                <ShieldCheck size={16} color={colors.green} />
+                <Text style={styles.trustText}>
+                  KUCCPS Placement & Self-Sponsored • TVETA Reg: <Text style={styles.trustBold}>TVETA/PUBLIC/TVC/0005/2023</Text> • Lorugum, Turkana
+                </Text>
+              </View>
+            </ScrollReveal>
           </View>
 
           {/* Right Column: Hero Auto-Rotating Image Carousel (Clean & Unobstructed) */}
-          <View style={[styles.rightCol, isMobile && styles.rightColMobile]}>
+          <ScrollReveal animation="zoom-in" delay={180} duration={750} style={[styles.rightCol, isMobile && styles.rightColMobile]}>
             <View
               style={styles.imageCardWrapper}
               // @ts-ignore
@@ -190,7 +201,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
               </TouchableOpacity>
 
             </View>
-          </View>
+          </ScrollReveal>
 
         </View>
       </View>

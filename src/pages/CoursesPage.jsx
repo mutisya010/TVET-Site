@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   View, 
   Text, 
@@ -385,13 +385,15 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
         {/* COURSE CARDS CATALOG GRID */}
         {/* ========================================================================= */}
         <View style={styles.catalogGrid}>
-          {filteredCourses.map((course) => (
-            <CourseCatalogCard
-              key={course.id}
+          {filteredCourses.map((course, idx) => (
+            <ScrollReveal key={course.id} animation="fade-up" delay={(idx % 6) * 60} duration={550}>
+              <CourseCatalogCard
+
               course={course}
               onViewDetails={onViewCourseDetails}
               onApplyNow={onApplyCourse}
             />
+            </ScrollReveal>
           ))}
         </View>
 

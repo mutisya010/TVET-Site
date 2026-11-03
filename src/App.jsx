@@ -156,62 +156,50 @@ export default function App() {
         {/* Render page based on currentPage */}
         {currentPage === 'home' && (
           <>
-            {/* Hero Section */}
-            <ScrollReveal animation="fade-up" duration={700}>
-              <HeroSection 
-                onExploreCourses={() => {
-                  setCurrentPage('courses');
-                  scrollToTop();
-                }}
-                onApplyNow={handleOpenInquiry}
-              />
-            </ScrollReveal>
+            {/* Hero Section (staggered entrance internally) */}
+            <HeroSection 
+              onExploreCourses={() => {
+                setCurrentPage('courses');
+                scrollToTop();
+              }}
+              onApplyNow={handleOpenInquiry}
+            />
 
-            {/* Key Metrics & Stats Bar */}
-            <ScrollReveal animation="fade-up" delay={60} duration={650}>
-              <StatsBar />
-            </ScrollReveal>
+            {/* Key Metrics & Stats Bar (staggered cards internally) */}
+            <StatsBar />
 
             {/* Accredited Regulatory Ribbon */}
             <ScrollReveal animation="fade-up" delay={50} duration={600}>
               <RegulatoryRibbon />
             </ScrollReveal>
 
-            {/* Featured Programme Categories */}
-            <ScrollReveal animation="fade-up" delay={60} duration={700}>
-              <CoursesSection 
-                onSelectCourse={handleOpenCourseModal}
-                onApplyCourse={handleApplyCourse}
-                onViewAllCourses={() => {
-                  setCurrentPage('courses');
-                  scrollToTop();
-                }}
-              />
-            </ScrollReveal>
+            {/* Featured Programme Categories (staggered cards internally) */}
+            <CoursesSection 
+              onSelectCourse={handleOpenCourseModal}
+              onApplyCourse={handleApplyCourse}
+              onViewAllCourses={() => {
+                setCurrentPage('courses');
+                scrollToTop();
+              }}
+            />
 
-            {/* Institutional Advantages: Why Train with Loima TVC */}
-            <ScrollReveal animation="fade-up" delay={60} duration={700}>
-              <WhyTrainSection onInquire={handleOpenInquiry} />
-            </ScrollReveal>
+            {/* Institutional Advantages: Why Train with Loima TVC (staggered feature cards internally) */}
+            <WhyTrainSection onInquire={handleOpenInquiry} />
 
-            {/* Campus Life & Workshop Showcase */}
-            <ScrollReveal animation="fade-up" delay={60} duration={700}>
-              <CampusShowcaseSection 
-                onBookVisit={handleBookVisit}
-                onViewWorkshops={() => {
-                  setCurrentPage('courses');
-                  scrollToTop();
-                }}
-              />
-            </ScrollReveal>
+            {/* Campus Life & Workshop Showcase (staggered cards internally) */}
+            <CampusShowcaseSection 
+              onBookVisit={handleBookVisit}
+              onViewWorkshops={() => {
+                setCurrentPage('courses');
+                scrollToTop();
+              }}
+            />
 
-            {/* Academic Registry Notices & Circulars */}
-            <ScrollReveal animation="fade-up" delay={60} duration={700}>
-              <NoticesSection onOpenNotice={handleOpenNotice} />
-            </ScrollReveal>
+            {/* Academic Registry Notices & Circulars (staggered cards internally) */}
+            <NoticesSection onOpenNotice={handleOpenNotice} />
 
             {/* Ready to Build Career CTA Section */}
-            <ScrollReveal animation="zoom-in" delay={80} duration={750}>
+            <ScrollReveal animation="fade-up" delay={60} duration={700}>
               <AdmissionsCTASection onApplySuccess={handleOpenInquiry} />
             </ScrollReveal>
           </>
