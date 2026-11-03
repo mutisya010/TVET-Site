@@ -29,7 +29,7 @@ import StatutoryStandardsSection from '../components/courses/StatutoryStandardsS
 import CourseCtaBanner from '../components/courses/CourseCtaBanner';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { colors, typography } from '../theme/colors';
-import collegeBannerImg from '../assets/College Banner_ Technology and Innovation.webp';
+import collegeBannerImg from '../assets/Loima Technical College Banner.webp';
 
 export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStartApplication }) {
   const { width } = useWindowDimensions();
@@ -145,7 +145,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
               source={collegeBannerImg }
               style={styles.heroBannerBgImage}
               resizeMode="cover"
-              blurRadius={10}
+              
             />
             {/* Deep institutional gradient overlay */}
             <View style={styles.heroBannerOverlay} />
@@ -471,7 +471,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '100%',
-    opacity: 0.18,
+    opacity: 0.85,
   },
   heroBannerOverlay: {
     position: 'absolute',
@@ -479,9 +479,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(14, 48, 32, 0.92)',
+    backgroundColor: 'rgba(14, 48, 32, 0.70)',
     // @ts-ignore
-    backgroundImage: 'linear-gradient(135deg, rgba(14, 48, 32, 0.96) 0%, rgba(20, 70, 46, 0.90) 50%, rgba(15, 23, 42, 0.94) 100%)',
+    backgroundImage: 'linear-gradient(90deg, rgba(10, 35, 22, 0.92) 0%, rgba(14, 48, 32, 0.75) 55%, rgba(10, 35, 22, 0.45) 100%)',
   },
   heroBannerInner: {
     position: 'relative',
