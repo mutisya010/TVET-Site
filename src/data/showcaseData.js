@@ -1,38 +1,93 @@
+import img1 from '../assets/Bright Workshop Training Room.webp';
+import img2 from '../assets/Collaborative Training Room Meeting.webp';
+import img3 from '../assets/Cream Institutional Building in Dry Sunlight.webp';
+import img4 from '../assets/Desert Campus Under Blue Skies.webp';
+import img5 from '../assets/Focused Office Training Session.webp';
+import img6 from '../assets/Loima College Sunlit Facade.webp';
+import img7 from '../assets/Lomia Technical College Exterior.webp';
+import img8 from '../assets/Sunlit Concrete Office Building.webp';
+import img9 from '../assets/Sunlit School Building with Covered Walkway.webp';
+
 export const showcaseData = [
   {
-    id: 'electrical-bay',
-    tag: 'Electrical Bay',
+    id: 'workshop-bay',
+    tag: 'Workshop Bay',
     tagBg: '#F59E0B',
-    title: 'Electrical Power Workshop',
-    description: 'Fully equipped with modern power distribution test panels, single & three-phase wiring trainers, and switchgears.',
-    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80',
+    title: 'Bright Workshop Training Room',
+    description: 'Modern hands-on training environment equipped with industry-standard tools and practical workstations for technical skill development.',
+    imageUrl: img1,
     fallbackBg: '#14462E',
   },
   {
-    id: 'digital-center',
-    tag: 'Digital Center',
+    id: 'training-room',
+    tag: 'Training Room',
     tagBg: '#2E8B57',
-    title: 'Ultra-Modern Computer Lab',
-    description: 'High-speed broadband network, 40+ dedicated workstations, and up-to-date industrial software development packages.',
-    imageUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+    title: 'Collaborative Training Session',
+    description: 'Spacious collaborative learning rooms designed for group projects, mentorship sessions, and CBET practical assessments.',
+    imageUrl: img2,
     fallbackBg: '#14462E',
   },
   {
-    id: 'mechanical-bay',
-    tag: 'Mechanical Bay',
+    id: 'campus-building',
+    tag: 'Campus',
     tagBg: '#14462E',
-    title: 'Welding & Fabrication Bay',
-    description: 'Heavy-duty arc and MIG/TIG welding machines, metal sheet cutting benches, and forge frameworks.',
-    imageUrl: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
+    title: 'Institutional Building',
+    description: 'Purpose-built institutional facilities offering a conducive and professional environment for technical and vocational education.',
+    imageUrl: img3,
     fallbackBg: '#1A5638',
   },
   {
-    id: 'civil-yard',
-    tag: 'Civil Yard',
+    id: 'campus-grounds',
+    tag: 'Campus Grounds',
     tagBg: '#2E8B57',
-    title: 'Masonry & Plumbing Yard',
-    description: 'Outdoor testing ground featuring hydraulic leak testers, computerized level surveying instruments, and drainage display kits.',
-    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=800&q=80',
+    title: 'Desert Campus Under Blue Skies',
+    description: 'Expansive campus grounds set against clear skies, providing ample space for outdoor practicals and civil construction training.',
+    imageUrl: img4,
+    fallbackBg: '#14462E',
+  },
+  {
+    id: 'office-training',
+    tag: 'ICT & Business',
+    tagBg: '#F59E0B',
+    title: 'Focused Office Training Session',
+    description: 'Dedicated ICT and business studies training with high-speed broadband, dedicated workstations, and enterprise software suites.',
+    imageUrl: img5,
+    fallbackBg: '#14462E',
+  },
+  {
+    id: 'college-facade',
+    tag: 'College Facade',
+    tagBg: '#14462E',
+    title: 'Loima College Sunlit Facade',
+    description: 'The welcoming main facade of Loima Technical and Vocational College, reflecting our commitment to quality infrastructure.',
+    imageUrl: img6,
+    fallbackBg: '#1A5638',
+  },
+  {
+    id: 'college-exterior',
+    tag: 'Exterior',
+    tagBg: '#2E8B57',
+    title: 'College Exterior View',
+    description: 'A panoramic exterior view of the college premises, showcasing well-maintained buildings and accessible campus layout.',
+    imageUrl: img7,
+    fallbackBg: '#14462E',
+  },
+  {
+    id: 'office-building',
+    tag: 'Administration',
+    tagBg: '#F59E0B',
+    title: 'Sunlit Administration Block',
+    description: 'The modern administration block housing the academic registrar, student services, and college management offices.',
+    imageUrl: img8,
+    fallbackBg: '#14462E',
+  },
+  {
+    id: 'school-walkway',
+    tag: 'Covered Walkway',
+    tagBg: '#2E8B57',
+    title: 'School Building with Covered Walkway',
+    description: 'Sheltered walkways connecting classrooms and workshops, ensuring seamless movement across the campus in all weather.',
+    imageUrl: img9,
     fallbackBg: '#14462E',
   },
 ];

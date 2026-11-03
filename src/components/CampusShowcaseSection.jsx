@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { ExternalLink } from 'lucide-react';
 import { showcaseData } from '../data/showcaseData';
@@ -69,7 +69,7 @@ export default function CampusShowcaseSection({ onBookVisit }) {
               {/* Image Container with Tag Badge */}
               <View style={styles.imageBox}>
                 <Image
-                  source={{ uri: item.imageUrl }}
+                  source={typeof item.imageUrl === "string" ? { uri: item.imageUrl } : item.imageUrl}
                   style={styles.cardImage}
                   resizeMode="cover"
                 />
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   showcaseCard: {
-    width: 'calc(25% - 15px)',
+    width: 'calc(33.333% - 14px)',
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     overflow: 'hidden',
