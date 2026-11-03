@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { 
   ArrowRight, 
@@ -8,6 +8,7 @@ import {
   ChevronRight 
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
+import crestImg from '../assets/Loima Technical College Crest.png';
 import slide1 from '../assets/College Banner_ Technology and Innovation.webp';
 import slide2 from '../assets/Loima Technical College Façade.webp';
 import slide3 from '../assets/Bright Workshop Training Room.webp';
@@ -58,6 +59,17 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
       {/* Background Soft Green/Orange Glow */}
       <View style={styles.bgGlow} />
 
+      {/* Subtle School Crest Watermark in Background */}
+      <View style={styles.bgCrestContainer} pointerEvents="none">
+        <Image
+          source={typeof crestImg === 'string' ? { uri: crestImg } : crestImg}
+          style={styles.bgCrestWatermark}
+          resizeMode="contain"
+          // @ts-ignore
+          accessibilityRole="presentation"
+        />
+      </View>
+
       <View style={styles.container}>
         <View style={[styles.inner, isMobile && styles.innerMobile]}>
           
@@ -67,7 +79,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
             <View style={styles.govBadge}>
               <View style={styles.govDot} />
               <Text style={styles.govBadgeText}>
-                MINISTRY OF EDUCATION â€¢ STATE DEPARTMENT FOR TVET
+                MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
               </Text>
             </View>
 
@@ -205,6 +217,25 @@ const styles = StyleSheet.create({
     borderRadius: 225,
     backgroundColor: 'rgba(46, 139, 87, 0.08)',
     pointerEvents: 'none',
+  },
+  bgCrestContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    pointerEvents: 'none',
+    zIndex: 0,
+    overflow: 'hidden',
+  },
+  bgCrestWatermark: {
+    width: 540,
+    height: 540,
+    maxWidth: '85vw',
+    maxHeight: '85%',
+    opacity: 0.075,
   },
   container: {
     maxWidth: 1240,

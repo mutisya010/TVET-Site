@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { colors, typography } from '../theme/colors';
-import logoImg from '../assets/logo.png';
+import logoImg from '../assets/Loima Technical College Crest.png';
 
 export default function CollegeLogo({ variant = 'light', size = 'normal', showText = true }) {
   const isDark = variant === 'dark';
@@ -16,7 +16,7 @@ export default function CollegeLogo({ variant = 'light', size = 'normal', showTe
         isDark && styles.emblemDark
       ]}>
         <Image 
-          source={{ uri: logoImg }} 
+          source={typeof logoImg === 'string' ? { uri: logoImg } : logoImg} 
           style={[styles.logoImage, isSmall && styles.logoImageSmall]}
           resizeMode="contain"
           // @ts-ignore

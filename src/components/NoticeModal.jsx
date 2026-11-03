@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal, Image, useWindowDimensions } from 'react-native';
 import { X, Calendar, Printer } from 'lucide-react';
-import logoImg from '../assets/logo.png';
+import logoImg from '../assets/Loima Technical College Crest.png';
 
 export default function NoticeModal({ visible, notice, onClose }) {
   const { width } = useWindowDimensions();
@@ -49,7 +49,7 @@ export default function NoticeModal({ visible, notice, onClose }) {
             <View style={styles.circularPaper}>
               <View style={styles.circularHeader}>
                 <Image 
-                  source={{ uri: logoImg }} 
+                  source={typeof logoImg === 'string' ? { uri: logoImg } : logoImg} 
                   style={styles.circularLogo} 
                   resizeMode="contain"
                   // @ts-ignore
@@ -59,7 +59,7 @@ export default function NoticeModal({ visible, notice, onClose }) {
                   LOIMA TECHNICAL AND VOCATIONAL COLLEGE
                 </Text>
                 <Text style={styles.officialSub}>
-                  P.O. Box 90 - 10400 Nanyuki | Ministry of Education, Kenya
+                  P.O. Box 517 - 30500 Lodwar, Turkana County | Ministry of Education, Kenya
                 </Text>
               </View>
 
