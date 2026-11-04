@@ -704,3 +704,5 @@ export const academicDepartments = [
 ];
 
 export const coursesData = allCatalogCourses;
+
+export const courses = allCatalogCourses;

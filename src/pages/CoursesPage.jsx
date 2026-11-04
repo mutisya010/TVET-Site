@@ -23,7 +23,7 @@ import {
   Coins, 
   Filter 
 } from 'lucide-react';
-import { courses as fallbackCourses } from '../data/coursesData';
+import { allCatalogCourses as fallbackCourses } from '../data/coursesData';
 import { fetchPrograms } from '../services/api';
 import CourseCatalogCard from '../components/courses/CourseCatalogCard';
 import StatutoryStandardsSection from '../components/courses/StatutoryStandardsSection';
