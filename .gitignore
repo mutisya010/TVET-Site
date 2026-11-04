@@ -10,10 +10,13 @@ lerna-debug.log*
 node_modules
 .DS_Store
 *.local
+.env
+
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
 .fleet
-
+node_modules
+venv

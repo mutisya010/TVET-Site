@@ -2,82 +2,135 @@ import React, { useRef, useState, useEffect } from 'react';
 import { View } from 'react-native';
 
 /**
- * ScrollReveal component that animates elements smoothly into view
+ * ScrollReveal component that smoothly animates elements into view
  * as the user scrolls down the page.
+ * Uses both IntersectionObserver and captured scroll events for 100% reliable
+ * triggering inside React Native Web scroll containers and native browsers.
  */
 export default function ScrollReveal({
   children,
   animation = 'fade-up', // 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'zoom-in' | 'fade'
   delay = 0,
   duration = 650,
-  distance = 32,
+  distance = 28,
   style,
   once = true,
-  threshold = 0.08,
-  rootMargin = '0px 0px -40px 0px',
+  threshold = 0.05,
   ...rest
 }) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const visibleRef = useRef(false);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
 
-    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') {
+    if (typeof window === 'undefined') {
       setIsVisible(true);
       return;
     }
 
+    // Honor reduced-motion accessibility preference
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setIsVisible(true);
+      visibleRef.current = true;
       return;
     }
 
-    // If already in initial viewport, reveal promptly
-    try {
-      const rect = node.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        setIsVisible(true);
-        if (once) return;
-      }
-    } catch {
-      // Fallback
-    }
+    const checkVisibility = () => {
+      if (visibleRef.current && once) return true;
+      if (!node) return false;
 
-    let observer;
-    try {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            if (once && observer) {
-              observer.unobserve(node);
-            }
-          } else if (!once) {
-            setIsVisible(false);
-          }
-        },
-        {
-          threshold,
-          rootMargin,
+      try {
+        const rect = node.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        
+        // Element is visible if its top edge is within viewport (with 40px buffer)
+        // and its bottom edge is below the top of viewport
+        const inView = rect.top <= vh - 40 && rect.bottom >= 20;
+
+        if (inView) {
+          visibleRef.current = true;
+          setIsVisible(true);
+          return true;
+        } else if (!once) {
+          visibleRef.current = false;
+          setIsVisible(false);
         }
-      );
-      observer.observe(node);
-    } catch {
-      setIsVisible(true);
+      } catch {
+        // Fallback
+      }
+      return false;
+    };
+
+    // Check immediately on mount (for elements already in initial viewport like Hero)
+    if (checkVisibility() && once) {
+      return;
     }
 
-    // Safety fallback: ensure content is never stuck invisible
-    const fallbackTimer = setTimeout(() => {
-      setIsVisible(true);
-    }, 1500);
+    // Set up IntersectionObserver
+    let observer;
+    if (typeof IntersectionObserver !== 'undefined') {
+      try {
+        observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting || entry.intersectionRatio > 0) {
+                visibleRef.current = true;
+                setIsVisible(true);
+                if (once && observer && node) {
+                  observer.unobserve(node);
+                }
+              } else if (!once) {
+                visibleRef.current = false;
+                setIsVisible(false);
+              }
+            });
+          },
+          {
+            threshold: [0, 0.05, 0.1],
+            rootMargin: '0px 0px -30px 0px',
+          }
+        );
+        observer.observe(node);
+      } catch {
+        // Fall back to scroll listener
+      }
+    }
+
+    // Capture scroll events from ANY scrollable container (window, ScrollView, document)
+    let rafId = null;
+    const handleScrollOrResize = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = null;
+        const reached = checkVisibility();
+        if (reached && once) {
+          cleanupScrollListeners();
+          if (observer && node) {
+            try { observer.unobserve(node); } catch {}
+          }
+        }
+      });
+    };
+
+    const cleanupScrollListeners = () => {
+      window.removeEventListener('scroll', handleScrollOrResize, true);
+      window.removeEventListener('resize', handleScrollOrResize);
+      document.removeEventListener('scroll', handleScrollOrResize, true);
+    };
+
+    window.addEventListener('scroll', handleScrollOrResize, { capture: true, passive: true });
+    window.addEventListener('resize', handleScrollOrResize, { passive: true });
+    document.addEventListener('scroll', handleScrollOrResize, { capture: true, passive: true });
 
     return () => {
       if (observer) observer.disconnect();
-      clearTimeout(fallbackTimer);
+      cleanupScrollListeners();
+      if (rafId) window.cancelAnimationFrame(rafId);
     };
-  }, [once, threshold, rootMargin]);
+  }, [once, threshold]);
 
   const getTransform = () => {
     if (isVisible) {
@@ -93,7 +146,7 @@ export default function ScrollReveal({
       case 'fade-right':
         return `translate3d(${distance}px, 0, 0)`;
       case 'zoom-in':
-        return 'scale(0.95)';
+        return 'scale(0.93)';
       case 'fade':
       default:
         return 'none';
@@ -113,4 +166,3 @@ export default function ScrollReveal({
     </View>
   );
 }
-

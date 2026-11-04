@@ -1,44 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
-import { 
-  ArrowRight, 
-  Compass, 
-  ShieldCheck, 
-  ChevronLeft, 
-  ChevronRight 
+import {
+  ArrowRight,
+  Compass,
+  ShieldCheck,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
-import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import ScrollReveal from './common/ScrollReveal';
+import crestImg from '../assets/Loima Technical College Crest.png';
+import slide1 from '../assets/College Banner_ Technology and Innovation.webp';
+import slide2 from '../assets/Loima Technical College Façade.webp';
+import slide3 from '../assets/Bright Workshop Training Room.webp';
+import slide5 from '../assets/Lomia Technical College Exterior.webp';
+import slide6 from '../assets/Collaborative Training Room Meeting.webp';
 
 /**
- * 6 Master Hero Slides showcasing Loima TVC's Campus & Practical TVET Workshops.
+ * 6 Hero Slides showcasing Loima TVC's Campus & Practical TVET Workshops.
  * Clean, unobstructed photo carousel rotating automatically every 3 seconds.
  */
 const heroSlides = [
-  {
-    id: 'campus',
-    image: collegeBannerImg || './Images/Laikipia-north-banner-300x200.webp',
-  },
-  {
-    id: 'electrical',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'automotive',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'ict',
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'building',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    id: 'agriculture',
-    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
-  },
+  { id: 'banner', image: slide1 },
+  { id: 'facade', image: slide2 },
+  { id: 'workshop1', image: slide3 },
+  { id: 'workshop2', image: slide3 },
+  { id: 'exterior', image: slide5 },
+  { id: 'training-room', image: slide6 },
 ];
 
 export default function HeroSection({ onExploreCourses, onApplyNow }) {
@@ -72,64 +60,85 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
       {/* Background Soft Green/Orange Glow */}
       <View style={styles.bgGlow} />
 
+      {/* Subtle School Crest Watermark in Background */}
+      <View style={styles.bgCrestContainer} pointerEvents="none">
+        <Image
+          source={typeof crestImg === 'string' ? { uri: crestImg } : crestImg}
+          style={styles.bgCrestWatermark}
+          resizeMode="contain"
+          // @ts-ignore
+          accessibilityRole="presentation"
+        />
+      </View>
+
       <View style={styles.container}>
         <View style={[styles.inner, isMobile && styles.innerMobile]}>
-          
+
           {/* Left Column: Heading, Badges, Text, CTAs */}
           <View style={[styles.leftCol, isMobile && styles.leftColMobile]}>
             {/* National TVET Status Pill Badge */}
-            <View style={styles.govBadge}>
-              <View style={styles.govDot} />
-              <Text style={styles.govBadgeText}>
-                MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
-              </Text>
-            </View>
+            <ScrollReveal animation="fade-down" delay={60} duration={550}>
+              <View style={styles.govBadge}>
+                <View style={styles.govDot} />
+                <Text style={styles.govBadgeText}>
+                  MINISTRY OF EDUCATION • STATE DEPARTMENT FOR TVET
+                </Text>
+              </View>
+            </ScrollReveal>
 
             {/* Main Hero Headline */}
-            <Text style={[styles.headline, isMobile && styles.headlineMobile]}>
-              Empowering Youth with Practical Technical & Vocational Skills for the Modern Industry.
-            </Text>
+            <ScrollReveal animation="fade-up" delay={120} duration={650}>
+              <Text style={[styles.headline, isMobile && styles.headlineMobile]}>
+                Empowering Youth with Practical Technical & Vocational Skills for the Modern Industry.
+              </Text>
+            </ScrollReveal>
 
             {/* Sub-paragraph */}
-            <Text style={styles.paragraph}>
-              Loima Technical and Vocational College provides accredited Competency-Based 
-              Education and Training (CBET). We equip students with job-ready technical expertise, 
-              subsidised by national capitation and tailored for immediate employment.
-            </Text>
+            <ScrollReveal animation="fade-up" delay={180} duration={650}>
+              <Text style={styles.paragraph}>
+                Loima Technical and Vocational College provides accredited Competency-Based
+                Education and Training (CBET). We equip students with job-ready technical expertise,
+                subsidised by national capitation and tailored for immediate employment.
+              </Text>
+            </ScrollReveal>
 
             {/* Action Buttons */}
-            <View style={[styles.buttonRow, isMobile && styles.buttonRowMobile]}>
-              <TouchableOpacity
-                style={styles.primaryBtn}
-                onPress={onExploreCourses}
-                activeOpacity={0.85}
-              >
-                <Compass size={17} color={colors.white} />
-                <Text style={styles.primaryBtnText}>Explore Courses (15)</Text>
-              </TouchableOpacity>
+            <ScrollReveal animation="fade-up" delay={240} duration={650}>
+              <View style={[styles.buttonRow, isMobile && styles.buttonRowMobile]}>
+                <TouchableOpacity
+                  style={styles.primaryBtn}
+                  onPress={onExploreCourses}
+                  activeOpacity={0.85}
+                >
+                  <Compass size={17} color={colors.white} />
+                  <Text style={styles.primaryBtnText}>Explore Courses (15)</Text>
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.secondaryBtn}
-                onPress={onApplyNow}
-                activeOpacity={0.85}
-              >
-                <Text style={styles.secondaryBtnText}>Apply for Admission</Text>
-                <ArrowRight size={16} color={colors.white} />
-              </TouchableOpacity>
-            </View>
+                <TouchableOpacity
+                  style={styles.secondaryBtn}
+                  onPress={onApplyNow}
+                  activeOpacity={0.85}
+                >
+                  <Text style={styles.secondaryBtnText}>Apply for Admission</Text>
+                  <ArrowRight size={16} color={colors.white} />
+                </TouchableOpacity>
+              </View>
+            </ScrollReveal>
 
             {/* KUCCPS Trust Subtext */}
-            <View style={styles.trustRow}>
-              <ShieldCheck size={16} color={colors.green} />
-              <Text style={styles.trustText}>
-                KUCCPS Institution Code: <Text style={styles.trustBold}>1478111</Text> • Government Placed & Self-Sponsored
-              </Text>
-            </View>
+            <ScrollReveal animation="fade-up" delay={300} duration={600}>
+              <View style={styles.trustRow}>
+                <ShieldCheck size={16} color={colors.green} />
+                <Text style={styles.trustText}>
+                  KUCCPS Placement & Self-Sponsored • TVETA Reg: <Text style={styles.trustBold}>TVETA/PUBLIC/TVC/0005/2023</Text> • Lorugum, Turkana
+                </Text>
+              </View>
+            </ScrollReveal>
           </View>
 
           {/* Right Column: Hero Auto-Rotating Image Carousel (Clean & Unobstructed) */}
-          <View style={[styles.rightCol, isMobile && styles.rightColMobile]}>
-            <View 
+          <ScrollReveal animation="zoom-in" delay={180} duration={750} style={[styles.rightCol, isMobile && styles.rightColMobile]}>
+            <View
               style={styles.imageCardWrapper}
               // @ts-ignore
               onMouseEnter={() => setIsPaused(true)}
@@ -192,7 +201,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
               </TouchableOpacity>
 
             </View>
-          </View>
+          </ScrollReveal>
 
         </View>
       </View>
@@ -219,6 +228,25 @@ const styles = StyleSheet.create({
     borderRadius: 225,
     backgroundColor: 'rgba(46, 139, 87, 0.08)',
     pointerEvents: 'none',
+  },
+  bgCrestContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    pointerEvents: 'none',
+    zIndex: 0,
+    overflow: 'hidden',
+  },
+  bgCrestWatermark: {
+    width: 540,
+    height: 540,
+    maxWidth: '85vw',
+    maxHeight: '85%',
+    opacity: 0.075,
   },
   container: {
     maxWidth: 1240,

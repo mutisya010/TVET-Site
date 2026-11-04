@@ -1,11 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { colors, typography } from '../theme/colors';
-import logoImg from '../assets/logo.png';
+import defaultLogoImg from '../assets/Loima Technical College Crest.png';
+import { useBranding } from '../context/BrandingContext';
 
 export default function CollegeLogo({ variant = 'light', size = 'normal', showText = true }) {
+  const { shortName, acronymBadge, tagline, logoUrl, institutionName } = useBranding();
   const isDark = variant === 'dark';
   const isSmall = size === 'small';
+
+  const imageSource = logoUrl 
+    ? (typeof logoUrl === 'string' ? { uri: logoUrl } : logoUrl)
+    : defaultLogoImg;
 
   return (
     <View style={styles.container}>
@@ -16,11 +22,11 @@ export default function CollegeLogo({ variant = 'light', size = 'normal', showTe
         isDark && styles.emblemDark
       ]}>
         <Image 
-          source={{ uri: logoImg }} 
+          source={imageSource} 
           style={[styles.logoImage, isSmall && styles.logoImageSmall]}
           resizeMode="contain"
           // @ts-ignore
-          accessibilityLabel="Loima Technical and Vocational College Official Logo"
+          accessibilityLabel={`${institutionName || 'Loima Technical and Vocational College'} Official Logo`}
         />
       </View>
 
@@ -29,14 +35,16 @@ export default function CollegeLogo({ variant = 'light', size = 'normal', showTe
         <View style={styles.textContainer}>
           <View style={styles.titleRow}>
             <Text style={[styles.title, isDark && styles.titleDark, isSmall && styles.titleSmall]}>
-              LOIMA
+              {shortName || 'LOIMA'}
             </Text>
-            <View style={styles.tvcBadge}>
-              <Text style={styles.tvcText}>TVC</Text>
-            </View>
+            {acronymBadge ? (
+              <View style={styles.tvcBadge}>
+                <Text style={styles.tvcText}>{acronymBadge}</Text>
+              </View>
+            ) : null}
           </View>
           <Text style={[styles.subtitle, isDark && styles.subtitleDark, isSmall && styles.subtitleSmall]}>
-            TECHNICAL & VOCATIONAL COLLEGE
+            {tagline || 'TECHNICAL & VOCATIONAL COLLEGE'}
           </Text>
         </View>
       )}
@@ -70,8 +78,7 @@ const styles = StyleSheet.create({
   },
   emblemDark: {
     backgroundColor: '#FFFFFF',
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+    borderColor: 'rgba(255, 255, 255, 0.25)',
   },
   logoImage: {
     width: '100%',
@@ -82,7 +89,6 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   textContainer: {
-    flexDirection: 'column',
     justifyContent: 'center',
   },
   titleRow: {
@@ -91,43 +97,45 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   title: {
-    fontSize: 18,
-    fontWeight: '800',
-    letterSpacing: -0.3,
-    color: colors.textPrimary,
     fontFamily: typography.headlineFont,
+    fontSize: 22,
+    fontWeight: '800',
+    color: colors.textPrimary,
+    letterSpacing: 1.5,
   },
   titleDark: {
-    color: colors.white,
+    color: '#FFFFFF',
   },
   titleSmall: {
-    fontSize: 16,
+    fontSize: 18,
+    letterSpacing: 1,
   },
   tvcBadge: {
-    backgroundColor: colors.orange,
+    backgroundColor: colors.green,
     paddingHorizontal: 6,
-    paddingVertical: 2,
+    paddingVertical: 1,
     borderRadius: 4,
   },
   tvcText: {
+    fontFamily: typography.headlineFont,
     fontSize: 11,
     fontWeight: '800',
-    color: colors.white,
+    color: '#FFFFFF',
     letterSpacing: 0.5,
-    fontFamily: typography.headlineFont,
   },
   subtitle: {
+    fontFamily: typography.bodyFont,
     fontSize: 9.5,
     fontWeight: '700',
-    letterSpacing: 0.8,
-    color: colors.textSecondary,
-    marginTop: 2,
-    fontFamily: typography.labelFont,
+    color: colors.textMuted,
+    letterSpacing: 1.2,
+    marginTop: 1,
   },
   subtitleDark: {
-    color: 'rgba(255, 255, 255, 0.85)',
+    color: '#E2E8F0',
   },
   subtitleSmall: {
     fontSize: 8.5,
+    letterSpacing: 0.8,
   },
 });

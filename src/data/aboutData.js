@@ -1,4 +1,14 @@
 // Master Data for About Us categories and detailed options
+import img_workshop from '../assets/Bright Workshop Training Room.webp';
+import img_training from '../assets/Collaborative Training Room Meeting.webp';
+import img_cream from '../assets/Cream Institutional Building in Dry Sunlight.webp';
+import img_desert from '../assets/Desert Campus Under Blue Skies.webp';
+import img_office from '../assets/Focused Office Training Session.webp';
+import img_sunlit from '../assets/Loima College Sunlit Facade.webp';
+import img_exterior from '../assets/Lomia Technical College Exterior.webp';
+import img_concrete from '../assets/Sunlit Concrete Office Building.webp';
+import img_walkway from '../assets/Sunlit School Building with Covered Walkway.webp';
+import img_banner from '../assets/College Banner_ Technology and Innovation.webp';
 // Balanced Branding: Institutional Green (#14462E / #2E8B57), Crisp White (#FFFFFF), Warm Orange/Amber (#F59E0B)
 
 export const aboutCategories = [
@@ -49,97 +59,27 @@ Founded as a flagship TVET institution under Kenya Vision 2030, the college brok
     ],
     highlights: [
       { label: 'Year Established', value: '2021' },
-      { label: 'Registration', value: 'TVETA/PUBLIC/TVC/2021' },
+      { label: 'Registration', value: 'TVETA/PUBLIC/TVC/0005/2023' },
       { label: 'Campus Acreage', value: '35+ Acres' },
       { label: 'Trainee Capacity', value: '1,500+ Trainees' }
     ],
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=900&q=80',
-        caption: 'The main administrative and academic complex of Loima TVC.'
+        url: img_exterior,
+        caption: 'Lomia Technical College exterior view.'
       },
       {
-        url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80',
-        caption: 'Foundational trainee intake during orientation and matriculation.'
+        url: img_desert,
+        caption: 'Desert campus facilities under clear blue skies.'
       },
       {
-        url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80',
-        caption: 'Commissioning of advanced technical workshop equipment.'
+        url: img_banner,
+        caption: 'College banner — technology and innovation.'
       }
     ],
-    contactInfo: 'Main Campus: Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
+    contactInfo: 'Lorugum Campus (~1.5 km off Lodwar–Uganda Road), Loima Sub-County, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke',
     actionText: 'View Academic Catalog',
     actionRoute: 'courses'
-  },
-  {
-    id: 'service-charter',
-    categoryId: 'general-info',
-    categoryName: 'General Information',
-    title: 'Service Charter',
-    subtitle: 'Our Statutory Commitment to Timely, Transparent, and Accountable Public Service',
-    description: `The Loima Technical and Vocational College Citizens Service Delivery Charter outlines our operational standards, service turnaround guarantees, trainee entitlements, and public service pledges under the Constitution of Kenya (2010) and the Public Service Commission standards.
-
-We are dedicated to delivering prompt, courteous, and non-discriminatory service to prospective trainees, guardians, industry partners, and the public. Every department is held to strict performance metrics to ensure maximum satisfaction and operational integrity.`,
-    mandates: [
-      'Admission application processing within 24 business hours.',
-      'Issuance of official receipts and fee statements immediately upon bank reconciliation.',
-      'Processing of academic transcripts within 14 days following official examination release.',
-      'Response to public inquiries and official correspondence within 48 hours.'
-    ],
-    highlights: [
-      { label: 'Admission Processing', value: '< 24 Hours' },
-      { label: 'Fee Statement Issuance', value: 'Instant' },
-      { label: 'Transcript Delivery', value: '14 Days' },
-      { label: 'Customer Satisfaction', value: '98.4%' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=80',
-        caption: 'Admissions and Customer Service Desk at the Registrar’s office.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80',
-        caption: 'Statutory performance tracking and service quality evaluation.'
-      }
-    ],
-    contactInfo: 'Service Quality Helpdesk: service@loimatvc.ac.ke | Tel: +254 700 000 000',
-    actionText: 'Download Official Charter',
-    actionRoute: 'downloads'
-  },
-  {
-    id: 'brochures',
-    categoryId: 'general-info',
-    categoryName: 'General Information',
-    title: 'Loima TVC Brochures',
-    subtitle: 'Comprehensive Course Prospectuses, Fee Guidelines, and Student Handbooks',
-    description: `Explore the complete collection of Loima TVC publications. Our annual brochure packs detail admission criteria for Government-sponsored (KUCCPS) and Self-sponsored trainees, course outlines across all engineering and business faculties, capitation breakdown, accommodation guides, and industrial attachment partnerships.
-
-All prospectuses are regularly updated to reflect the latest TVET CDACC curriculum releases, Ministry of Education fee regulations, and HELB funding allocations.`,
-    mandates: [
-      'Detailed breakdowns of Artisan, Craft Certificate, and Diploma curricula.',
-      'Comprehensive step-by-step KUCCPS placement and inter-institutional transfer instructions.',
-      'Transparent schedule of fees showing Government Capitation subsidies.',
-      'Full campus map, hostel guidelines, and code of conduct.'
-    ],
-    highlights: [
-      { label: 'Edition', value: '2024 - 2026' },
-      { label: 'Document Format', value: 'Printable PDF' },
-      { label: 'Programmes Listed', value: '15+ Courses' },
-      { label: 'Circulation', value: 'Verified Official' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=900&q=80',
-        caption: 'Official course guides and student information brochures.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80',
-        caption: 'Trainees reviewing curriculum options during the academic intake fair.'
-      }
-    ],
-    contactInfo: 'Admissions Resource Center: admissions@loimatvc.ac.ke',
-    actionText: 'Download Brochure (PDF)',
-    actionRoute: 'downloads'
   },
   {
     id: 'gallery',
@@ -163,24 +103,17 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
       { label: 'Exhibitions Won', value: 'Regional TVET Fair' }
     ],
     images: [
-      {
-        url: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=900&q=80',
-        caption: 'Mechanical students welding precision metal frames in the fabrication bay.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80',
-        caption: 'ICT trainees collaborating on software development in the computer lab.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80',
-        caption: 'Electrical power trainees wiring domestic distribution boards.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=900&q=80',
-        caption: 'Building technology trainees executing masonry work on the demonstration site.'
-      }
+      { url: img_workshop,  caption: 'Bright workshop training room — hands-on industrial skills in action.' },
+      { url: img_training,  caption: 'Collaborative training session with students and instructors.' },
+      { url: img_cream,     caption: 'Cream institutional building bathed in dry sunlight.' },
+      { url: img_desert,    caption: 'Tuition Block — lecture halls under clear blue skies.' },
+      { url: img_office,    caption: 'Focused office training session in the ICT & Business lab.' },
+      { url: img_sunlit,    caption: 'Administration Block — main entrance and executive offices.' },
+      { url: img_exterior,  caption: 'Lomia Technical College exterior view.' },
+      { url: img_concrete,  caption: 'Tuition Block — modern classrooms and lecture facilities.' },
+      { url: img_walkway,   caption: 'School building with covered walkway connecting departments.' },
     ],
-    contactInfo: 'Media & Public Relations Desk: media@loimatvc.ac.ke',
+    contactInfo: 'Media & Public Relations Desk: info@loima.co.ke',
     actionText: 'Explore Campus Showcase',
     actionRoute: 'home'
   },
@@ -192,7 +125,7 @@ Witness our trainees in action as they build prototypes, conduct site surveying,
     subtitle: 'Direct Channels to Our Admissions Desk, Registrar, and Campus Headquarters',
     description: `We welcome prospective trainees, parents, guardians, and corporate partners to visit our main campus or reach out through our official direct channels. Our admissions team is on standby to assist with course selection, KUCCPS inter-institutional transfers, hostel bookings, and fee payment arrangements.
 
-Our campus is conveniently situated along the main Loima - Doldol road, with reliable all-weather access, secure parking, and visitor reception facilities.`,
+Our campus is conveniently situated approximately 1.5 km from Lorugum shopping centre, along the Lodwar–Uganda (Lodwar–Moroto) road, with reliable all-weather access, secure parking, and visitor reception facilities.`,
     mandates: [
       'Prompt response to telephone and WhatsApp admissions enquiries (Mon-Fri 8am-5pm).',
       'Guided campus and workshop walkthrough tours for visiting prospective students.',
@@ -200,7 +133,7 @@ Our campus is conveniently situated along the main Loima - Doldol road, with rel
       'Direct coordination with high school career teachers for secondary outreach.'
     ],
     highlights: [
-      { label: 'Campus Address', value: 'P.O. Box 50 - 20321, Loima' },
+      { label: 'Campus Address', value: 'P.O. Box 517 – 30500, Lodwar (Lorugum Campus)' },
       { label: 'Admissions Line', value: '+254 759 437 978' },
       { label: 'WhatsApp Helpdesk', value: '+254 711 000 000' },
       { label: 'Office Hours', value: 'Mon - Fri (8:00 AM - 5:00 PM)' }
@@ -215,84 +148,14 @@ Our campus is conveniently situated along the main Loima - Doldol road, with rel
         caption: 'Customer service desk welcoming parents and new applicants.'
       }
     ],
-    contactInfo: 'Postal Address: P.O. Box 50 - 20321, Lodwar - Loima Road, Turkana County | Email: info@loimatvc.ac.ke',
+    contactInfo: 'Postal Address: P.O. Box 517 – 30500, Lodwar | Lorugum, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke',
     actionText: 'Express Course Enquiry',
-    actionRoute: 'home'
-  },
-  {
-    id: 'complaints-feedback',
-    categoryId: 'general-info',
-    categoryName: 'General Information',
-    title: 'Complaints & Feedback',
-    subtitle: 'Transparent Public Redress Mechanism and Continuous Quality Improvement',
-    description: `Loima TVC upholds an open-door policy and a zero-tolerance approach to maladministration, corruption, or substandard service. In accordance with Commission on Administrative Justice (Ombudsman) directives, our Complaints and Feedback Office provides a safe, anonymous, and expedited channel for trainees, staff, and the community to voice concerns.
-
-Every submission is logged into the official complaint registry, investigated objectively, and resolved within statutory timelines with written feedback provided to the complainant.`,
-    mandates: [
-      'Guaranteed acknowledgment of all received complaints within 24 working hours.',
-      'Fair, confidential, and impartial resolution of trainee grievances and examination disputes.',
-      'Continuous quarterly reporting to the Commission on Administrative Justice (CAJ).',
-      'Regular implementation of stakeholder suggestions for service delivery enhancements.'
-    ],
-    highlights: [
-      { label: 'Acknowledgment', value: 'Within 24 Hours' },
-      { label: 'Resolution Window', value: '5 - 7 Working Days' },
-      { label: 'Confidentiality', value: '100% Protected' },
-      { label: 'Ombudsman Compliance', value: 'Fully Certified' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=900&q=80',
-        caption: 'Customer feedback and service evaluation desk.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=900&q=80',
-        caption: 'Grievance committee conducting an objective review session.'
-      }
-    ],
-    contactInfo: 'Ombudsman Desk: feedback@loimatvc.ac.ke | Confidential Hotline: +254 759 437 978',
-    actionText: 'Contact Registrar Desk',
     actionRoute: 'home'
   },
 
   // ==========================================
   // 2. ADMINISTRATORS
   // ==========================================
-  {
-    id: 'board-of-governors',
-    categoryId: 'administrators',
-    categoryName: 'Administrators',
-    title: 'Board of Governors',
-    subtitle: 'Strategic Governance, Institutional Stewardship, and Policy Direction',
-    description: `The Board of Governors (BOG) is the supreme governing body of Loima Technical and Vocational College, established pursuant to the Technical and Vocational Education and Training Act No. 29 of 2013. Comprising distinguished leaders from industry, academia, public administration, and community stakeholders, the Board provides visionary strategic oversight.
-
-The Board is responsible for institutional resource mobilization, approving capital infrastructure developments, safeguarding institutional financial solvency, and formulating policies that align the college with national industrialization priorities.`,
-    mandates: [
-      'Formulate and approve the college 5-year Strategic Plan and annual operational budgets.',
-      'Supervise executive management and assess institutional performance indicators.',
-      'Ensure prudent financial stewardship, statutory audit adherence, and public procurement integrity.',
-      'Strengthen industrial partnerships and resource mobilization for campus expansion.'
-    ],
-    highlights: [
-      { label: 'Governing Authority', value: 'TVET Act No. 29 (2013)' },
-      { label: 'Board Committees', value: 'Audit, Finance, Academic & HR' },
-      { label: 'Meeting Cycle', value: 'Quarterly Regular Sessions' },
-      { label: 'Chairperson', value: 'Appointed by Cabinet Secretary' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=900&q=80',
-        caption: 'Board of Governors convening for strategic policy deliberation.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
-        caption: 'Board members inspecting new mechanical engineering workshop equipment.'
-      }
-    ],
-    contactInfo: 'Office of the Secretary to the Board: bog@loimatvc.ac.ke',
-    actionText: 'Learn More About Governance',
-    actionRoute: 'home'
-  },
   {
     id: 'office-of-principal',
     categoryId: 'administrators',
@@ -314,17 +177,8 @@ Working closely with the Ministry of Education and TVET CDACC, the Principal spe
       { label: 'Administrative Base', value: 'Central Administration Block' },
       { label: 'Direct Oversight', value: 'All Academic & Support Divisions' }
     ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80',
-        caption: 'The Principal presiding over the annual institutional review.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80',
-        caption: 'Principal’s executive boardroom during an industrial partner signing.'
-      }
-    ],
-    contactInfo: 'Executive Office: principal@loimatvc.ac.ke | Switchboard: +254 700 000 000',
+    images: [],
+    contactInfo: 'Executive Office: principal@loima.co.ke | Helpline: +254 716 189 084 / +254 759 437 978',
     actionText: 'View College Leadership',
     actionRoute: 'home'
   },
@@ -349,16 +203,7 @@ Through proactive maintenance schedules and modern facility management, the offi
       { label: 'Staff Managed', value: 'Teaching & Support Personnel' },
       { label: 'Facility Readiness', value: '100% Operational Standards' }
     ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
-        caption: 'Administrative coordination center and human resources wing.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80',
-        caption: 'Campus facilities and infrastructure management command.'
-      }
-    ],
+    images: [],
     contactInfo: 'Email: dpa@loimatvc.ac.ke | Location: Administration Block, 1st Floor',
     actionText: 'Explore Campus Facilities',
     actionRoute: 'home'
@@ -384,89 +229,10 @@ Under its stewardship, Loima TVC maintains a rigorous Competency-Based Education
       { label: 'Departments Overseen', value: '5 Academic Divisions' },
       { label: 'Academic Completion Rate', value: '96.2%' }
     ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=900&q=80',
-        caption: 'Academic board meeting on curriculum delivery and evaluation.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80',
-        caption: 'Academic department heads assessing student practical projects.'
-      }
-    ],
+    images: [],
     contactInfo: 'Email: dpa.academics@loimatvc.ac.ke | Tel: +254 759 437 978',
     actionText: 'Explore Accredited Courses',
     actionRoute: 'courses'
-  },
-  {
-    id: 'office-of-registrar',
-    categoryId: 'administrators',
-    categoryName: 'Administrators',
-    title: 'Office of Registrar',
-    subtitle: 'Admissions Gateway, Trainee Records, KUCCPS Liaison, and Certification',
-    description: `The Office of the Registrar (Academic & Administrative Affairs) is the primary contact point for all trainees from admission through graduation. The office oversees student onboarding, KUCCPS placement verification, trainee registration numbers, class rolls, fee clearance verification, and the issuance of official transcripts and certificates.
-
-The Registrar also acts as the official institutional liaison with statutory regulatory bodies including the Kenya National Qualifications Authority (KNQA) and TVETA.`,
-    mandates: [
-      'Manage the end-to-end trainee admission pipeline for Government and Self-sponsored cohorts.',
-      'Process KUCCPS placement lists, transfers, and annual intake data.',
-      'Maintain secure, confidential, and digitized permanent student academic records.',
-      'Coordinate the issuance of official completion letters, academic transcripts, and certificates.'
-    ],
-    highlights: [
-      { label: 'Annual Trainee Intake', value: '3 Intakes (Jan, May, Sep)' },
-      { label: 'Record Digitization', value: '100% Online Registry' },
-      { label: 'Turnaround Time', value: 'Same-day Admission Letters' },
-      { label: 'Statutory Stamp', value: 'Official Registrar Seal' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80',
-        caption: 'Registrar desk processing new trainee verification documents.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=80',
-        caption: 'Digitized student archive and official transcript authentication.'
-      }
-    ],
-    contactInfo: 'Email: admissions@loimatvc.ac.ke | Phone: +254 759 437 978',
-    actionText: 'Apply via Courses Catalog',
-    actionRoute: 'courses'
-  },
-  {
-    id: 'office-of-dean-of-trainees',
-    categoryId: 'administrators',
-    categoryName: 'Administrators',
-    title: 'Office of Dean of Trainees',
-    subtitle: 'Student Welfare, Hostel Accommodation, Mentorship, and Student Governance',
-    description: `The Office of the Dean of Trainees champions the holistic welfare, personal development, and residential comfort of every student at Loima TVC. This office coordinates the Trainee Governing Council, hostel accommodation, dining hall services, psycho-social counseling, health and wellness services, and club activities.
-
-The Dean works in close harmony with student leaders to maintain campus harmony, organize mentorship forums, and nurture trainees into responsible, disciplined professionals ready to excel in industry.`,
-    mandates: [
-      'Supervise campus student accommodation and coordinate approved private hostel partners.',
-      'Facilitate democratic Trainee Council elections and advise student leadership.',
-      'Provide professional and confidential guidance, counseling, and mental health support.',
-      'Organize cultural days, talent showcases, and community volunteer outreaches.'
-    ],
-    highlights: [
-      { label: 'Student Governance', value: 'Elected Trainee Council' },
-      { label: 'Hostel Coverage', value: 'On-Campus & Approved Hostels' },
-      { label: 'Clubs & Societies', value: '12+ Active Student Guilds' },
-      { label: 'Wellness Services', value: 'Free Student Counseling' }
-    ],
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80',
-        caption: 'Trainee council representatives meeting with the Dean of Trainees.'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80',
-        caption: 'Student mentorship session and career orientation event.'
-      }
-    ],
-    contactInfo: 'Dean of Trainees Desk: dean.trainees@loimatvc.ac.ke | Location: Student Centre',
-    actionText: 'Download Joining Instructions',
-    actionRoute: 'downloads'
   },
 
   // ==========================================

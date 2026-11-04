@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -23,18 +23,38 @@ import {
   Coins, 
   Filter 
 } from 'lucide-react';
-import { allCatalogCourses } from '../data/coursesData';
+import { courses as fallbackCourses } from '../data/coursesData';
+import { fetchPrograms } from '../services/api';
 import CourseCatalogCard from '../components/courses/CourseCatalogCard';
 import StatutoryStandardsSection from '../components/courses/StatutoryStandardsSection';
 import CourseCtaBanner from '../components/courses/CourseCtaBanner';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { colors, typography } from '../theme/colors';
-import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import collegeBannerImg from '../assets/Loima Technical College Banner.webp';
 
 export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStartApplication }) {
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
   const isTablet = width >= 768 && width < 1024;
+
+  const [courses, setCourses] = useState(fallbackCourses);
+
+  // Load programs from Django backend
+  useEffect(() => {
+    let isMounted = true;
+    async function loadPrograms() {
+      try {
+        const data = await fetchPrograms();
+        if (isMounted && data && data.length) {
+          setCourses(data);
+        }
+      } catch (err) {
+        console.warn('Using fallback courses:', err);
+      }
+    }
+    loadPrograms();
+    return () => { isMounted = false; };
+  }, []);
 
   // Filter & Search states
   const [searchTerm, setSearchTerm] = useState('');
@@ -77,8 +97,8 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
 
   // Compute department counts
   const getDeptCount = (deptId) => {
-    if (deptId === 'all') return allCatalogCourses.length;
-    return allCatalogCourses.filter((course) => {
+    if (deptId === 'all') return courses.length;
+    return courses.filter((course) => {
       if (deptId === 'ict-business') {
         return course.department.includes('ict') || course.department.includes('business');
       }
@@ -87,7 +107,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
   };
 
   const filteredCourses = useMemo(() => {
-    return allCatalogCourses.filter((course) => {
+    return courses.filter((course) => {
       // Search term matching
       if (searchTerm.trim()) {
         const query = searchTerm.toLowerCase();
@@ -142,10 +162,10 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
           <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
             {/* Ambient Background with subtle blur of the authentic campus banner */}
             <Image
-              source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+              source={collegeBannerImg }
               style={styles.heroBannerBgImage}
               resizeMode="cover"
-              blurRadius={10}
+              
             />
             {/* Deep institutional gradient overlay */}
             <View style={styles.heroBannerOverlay} />
@@ -163,7 +183,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                   </View>
                   <View style={styles.bannerLocationTag}>
                     <MapPin size={12} color={colors.orange} />
-                    <Text style={styles.bannerLocationText}>Loima, Turkana County</Text>
+                    <Text style={styles.bannerLocationText}>Lorugum, Loima Sub-County, Turkana County</Text>
                   </View>
                 </View>
 
@@ -182,7 +202,7 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                 <View style={[styles.bannerBadgesRow, isMobile && styles.bannerBadgesRowMobile]}>
                   <View style={styles.bannerBadgeItem}>
                     <ShieldCheck size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/2021</Text>
+                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/0005/2023</Text>
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <Award size={14} color={colors.orange} />
@@ -190,11 +210,11 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <CheckCircle2 size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>CDACC Assessment Center</Text>
+                    <Text style={styles.bannerBadgeText}>CDACC Centre: 02300008</Text>
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <Coins size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>HELB & GoK Capitation</Text>
+                    <Text style={styles.bannerBadgeText}>HEF/HELB & GoK Capitation</Text>
                   </View>
                 </View>
 
@@ -471,7 +491,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '100%',
-    opacity: 0.18,
+    opacity: 0.85,
   },
   heroBannerOverlay: {
     position: 'absolute',
@@ -479,9 +499,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(14, 48, 32, 0.92)',
+    backgroundColor: 'rgba(14, 48, 32, 0.70)',
     // @ts-ignore
-    backgroundImage: 'linear-gradient(135deg, rgba(14, 48, 32, 0.96) 0%, rgba(20, 70, 46, 0.90) 50%, rgba(15, 23, 42, 0.94) 100%)',
+    backgroundImage: 'linear-gradient(90deg, rgba(10, 35, 22, 0.92) 0%, rgba(14, 48, 32, 0.75) 55%, rgba(10, 35, 22, 0.45) 100%)',
   },
   heroBannerInner: {
     position: 'relative',

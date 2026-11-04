@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import { ShieldCheck } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
@@ -8,10 +8,11 @@ export default function RegulatoryRibbon() {
   const isMobile = width < 768;
 
   const accreditors = [
-    'TVET AUTHORITY (TVETA)',
-    'CDACC ASSESSMENT HUB',
+    'TVETA REG: TVETA/PUBLIC/TVC/0005/2023',
+    'CDACC ASSESSMENT CENTRE: 02300008',
     'KNEC EXAMINATION CENTRE',
-    'LINKED TO HELB/KUCCPS FUNDING',
+    'NITA CERTIFIED TRADES',
+    'KUCCPS & HEF/HELB FUNDING',
   ];
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -21,7 +21,7 @@ import {
 import { aboutItems } from '../data/aboutData';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';
-import collegeBannerImg from '../assets/Laikipia-north-banner-300x200.webp';
+import collegeBannerImg from '../assets/Loima Technical College Façade.webp';
 
 export default function AboutPage({ initialOptionId = 'our-history', onNavigate, onOpenInquiry }) {
   const { width } = useWindowDimensions();
@@ -66,7 +66,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
           <View style={[styles.heroBanner, isMobile && styles.heroBannerMobile]}>
             {/* Ambient Background with subtle blur of the authentic campus banner */}
             <Image
-              source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+              source={collegeBannerImg }
               style={styles.heroBannerBgImage}
               resizeMode="cover"
               blurRadius={10}
@@ -88,7 +88,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                   </View>
                   <View style={styles.bannerLocationTag}>
                     <MapPin size={12} color={colors.orange} />
-                    <Text style={styles.bannerLocationText}>Loima, Turkana County</Text>
+                    <Text style={styles.bannerLocationText}>Lorugum, Loima Sub-County, Turkana County</Text>
                   </View>
                 </View>
 
@@ -105,7 +105,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                 <View style={[styles.bannerBadgesRow, isMobile && styles.bannerBadgesRowMobile]}>
                   <View style={styles.bannerBadgeItem}>
                     <ShieldCheck size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/2021</Text>
+                    <Text style={styles.bannerBadgeText}>TVETA/PUBLIC/TVC/0005/2023</Text>
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <Award size={14} color={colors.orange} />
@@ -113,7 +113,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <CheckCircle2 size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>CDACC Assessment Center</Text>
+                    <Text style={styles.bannerBadgeText}>CDACC Centre: 02300008</Text>
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <Building2 size={14} color={colors.orange} />
@@ -126,7 +126,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
               <View style={[styles.heroBannerPhotoCol, isMobile && styles.heroBannerPhotoColMobile]}>
                 <View style={styles.heroPhotoFrame}>
                   <Image
-                    source={collegeBannerImg || { uri: './Images/Laikipia-north-banner-300x200.webp' }}
+                    source={collegeBannerImg }
                     style={styles.heroPhotoImg}
                     resizeMode="cover"
                   />
@@ -170,30 +170,32 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
             <Text style={styles.detailSubtitle}>{activeItem.subtitle}</Text>
           </View>
 
-          {/* Photo Gallery Grid with Captions */}
-          <View style={styles.gallerySection}>
-            <View style={[styles.galleryGrid, isMobile && styles.galleryGridMobile]}>
-              {activeItem.images.map((img, idx) => (
-                <View 
-                  key={idx} 
-                  style={[
-                    styles.galleryCard, 
-                    activeItem.images.length === 1 && styles.galleryCardFull,
-                    idx === 0 && activeItem.images.length === 3 && styles.galleryCardLarge
-                  ]}
-                >
-                  <Image
-                    source={{ uri: img.url }}
-                    style={styles.galleryImage}
-                    resizeMode="cover"
-                  />
-                  <View style={styles.galleryCaptionBox}>
-                    <Text style={styles.galleryCaptionText}>{img.caption}</Text>
+          {/* Photo Gallery Grid with Captions (Rendered only if images exist) */}
+          {activeItem.images && activeItem.images.length > 0 && (
+            <View style={styles.gallerySection}>
+              <View style={[styles.galleryGrid, isMobile && styles.galleryGridMobile]}>
+                {activeItem.images.map((img, idx) => (
+                  <View 
+                    key={idx} 
+                    style={[
+                      styles.galleryCard, 
+                      activeItem.images.length === 1 && styles.galleryCardFull,
+                      idx === 0 && activeItem.images.length === 3 && styles.galleryCardLarge
+                    ]}
+                  >
+                    <Image
+                      source={typeof img.url === "string" ? { uri: img.url } : img.url}
+                      style={styles.galleryImage}
+                      resizeMode="cover"
+                    />
+                    <View style={styles.galleryCaptionBox}>
+                      <Text style={styles.galleryCaptionText}>{img.caption}</Text>
+                    </View>
                   </View>
-                </View>
-              ))}
+                ))}
+              </View>
             </View>
-          </View>
+          )}
 
           {/* Detailed Explanation Text */}
           <View style={styles.explanationSection}>

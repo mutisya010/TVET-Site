@@ -1,20 +1,36 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking, useWindowDimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Linking, useWindowDimensions, Image } from 'react-native';
 import { MapPin, Phone, Mail, Clock, Download, ShieldCheck } from 'lucide-react';
 import CollegeLogo from './CollegeLogo';
+import defaultCrestImg from '../assets/Loima Technical College Crest.png';
+import { useBranding } from '../context/BrandingContext';
 
 export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice }) {
+  const { 
+    institutionName, 
+    physicalLocation, 
+    helplinePhone, 
+    helplinePhoneAlt, 
+    emailInfo, 
+    emailPrincipal, 
+    tvetaLicense,
+    logoUrl 
+  } = useBranding();
+  
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
   const isTablet = width >= 768 && width < 1024;
+
+  const crestSource = logoUrl 
+    ? (typeof logoUrl === 'string' ? { uri: logoUrl } : logoUrl) 
+    : defaultCrestImg;
 
   const quickLinks = [
     { label: 'Academic Programmes', action: () => onNavigate && onNavigate('courses') },
     { label: 'Fee Structure & Entry Criteria', action: () => onOpenNotice && onOpenNotice('notice-2') },
     { label: 'Government Bursaries & HELB', action: () => onOpenNotice && onOpenNotice('notice-2') },
     { label: 'Student Portal Access', action: () => alert('Student Portal Login: Please enter your Student Registration Number') },
-    { label: 'Administration & Council', action: () => onNavigate && onNavigate('about', 'board-of-governors') },
-    { label: 'Service Delivery Charter', action: () => onNavigate && onNavigate('about', 'service-charter') },
+    { label: 'Administration & Council', action: () => onNavigate && onNavigate('about', 'office-of-principal') },
     { label: 'Industrial Liaison Office', action: () => onNavigate && onNavigate('about', 'industrial-liaison') },
   ];
 
@@ -25,8 +41,28 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
     { label: 'Academic Calendar 2024/25', action: () => onNavigate && onNavigate('downloads') },
   ];
 
+  const primaryPhone = helplinePhone || '+254 716 189 084';
+  const altPhone = helplinePhoneAlt || '+254 759 437 978';
+  const phoneDisplay = altPhone ? `${primaryPhone} / ${altPhone}` : primaryPhone;
+  const rawPhone = primaryPhone.replace(/[^0-9+]/g, '');
+
+  const primaryEmail = emailInfo || 'info@loimatvc.ac.ke';
+  const altEmail = emailPrincipal || 'principal@loimatvc.ac.ke';
+  const emailDisplay = `${primaryEmail} / ${altEmail}`;
+
   return (
     <View style={styles.footerWrapper}>
+      {/* Background Subtle Institutional Crest Watermark */}
+      <View style={styles.bgCrestContainer} pointerEvents="none">
+        <Image
+          source={crestSource}
+          style={styles.bgCrestWatermark}
+          resizeMode="contain"
+          // @ts-ignore
+          accessibilityRole="presentation"
+        />
+      </View>
+
       {/* Sub-footer Regulatory Ribbon */}
       <View style={styles.subRibbon}>
         <View style={styles.ribbonContainer}>
@@ -36,7 +72,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
           <View style={styles.ribbonRight}>
             <Text style={styles.ribbonBadge}>• TVETA ACCREDITED</Text>
             <Text style={styles.ribbonBadge}>• TVET CDACC ASSESSMENT CENTRE</Text>
-            <Text style={styles.ribbonBadge}>• KNEC EXAMINATION</Text>
+            <Text style={styles.ribbonBadge}>• KNEC & NITA ASSESSMENT</Text>
           </View>
         </View>
       </View>
@@ -54,7 +90,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
             </Text>
             <View style={styles.tvetaBadge}>
               <ShieldCheck size={14} color="#FFA500" />
-              <Text style={styles.tvetaBadgeText}>Registered: TVETA/PUBLIC/TVC/0212</Text>
+              <Text style={styles.tvetaBadgeText}>Registered: {tvetaLicense || 'TVETA/PUBLIC/TVC/0005/2023'} • CDACC: 02300008</Text>
             </View>
           </View>
 
@@ -90,29 +126,29 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
               <View style={styles.contactEntry}>
                 <MapPin size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  P.O. Box 90 - 10400, Lodwar - Loima Road, Turkana County, Kenya
+                  {physicalLocation || 'Lorugum (~1.5 km off Lodwar–Uganda Rd), P.O. Box 517 – 30500, Lodwar, Turkana County, Kenya'}
                 </Text>
               </View>
 
               <TouchableOpacity 
                 style={styles.contactEntry} 
-                onPress={() => Linking.openURL('tel:+254700000000')}
+                onPress={() => Linking.openURL(`tel:${rawPhone}`)}
                 activeOpacity={0.7}
               >
                 <Phone size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  +254 700 000 000 / +254 711 000 000
+                  {phoneDisplay}
                 </Text>
               </TouchableOpacity>
 
               <TouchableOpacity 
                 style={styles.contactEntry} 
-                onPress={() => Linking.openURL('mailto:principal@loimatvc.ac.ke')}
+                onPress={() => Linking.openURL(`mailto:${primaryEmail}`)}
                 activeOpacity={0.7}
               >
                 <Mail size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
-                  principal@loimatvc.ac.ke
+                  {emailDisplay}
                 </Text>
               </TouchableOpacity>
 
@@ -129,9 +165,24 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
 
         {/* Bottom Copyright Bar */}
         <View style={styles.bottomBar}>
-          <Text style={styles.copyrightText}>
-            © 2024 Loima Technical & Vocational College, Republic of Kenya. All rights reserved.
-          </Text>
+          <View style={styles.copyrightCol}>
+            <Text style={styles.copyrightText}>
+              © {new Date().getFullYear()} {institutionName || 'Loima Technical & Vocational College'}, Republic of Kenya. All rights reserved.
+            </Text>
+            <View style={styles.creditsRow}>
+              <Text style={styles.creditsText}>Built by </Text>
+              <TouchableOpacity 
+                onPress={() => Linking.openURL('https://royalsoftwares.co.ke/')}
+                activeOpacity={0.7}
+                // @ts-ignore
+                accessibilityRole="link"
+                href="https://royalsoftwares.co.ke/"
+                target="_blank"
+              >
+                <Text style={styles.creditsLink}>Royal Software Solutions</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
           <View style={styles.legalLinks}>
             <TouchableOpacity><Text style={styles.legalText}>Privacy Policy</Text></TouchableOpacity>
@@ -152,6 +203,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#0F3D24',
     borderTopWidth: 1,
     borderTopColor: '#0A2B19',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  bgCrestContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    pointerEvents: 'none',
+    zIndex: 0,
+    overflow: 'hidden',
+  },
+  bgCrestWatermark: {
+    width: 480,
+    height: 480,
+    maxWidth: '85vw',
+    maxHeight: '85%',
+    opacity: 0.065,
   },
   subRibbon: {
     backgroundColor: '#0A2B19',
@@ -290,6 +362,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     gap: 12,
+  },
+  copyrightCol: {
+    flexDirection: 'column',
+    gap: 4,
+  },
+  creditsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  creditsText: {
+    fontSize: 11.5,
+    color: '#8E9AA0',
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
+  },
+  creditsLink: {
+    fontSize: 11.5,
+    fontWeight: '700',
+    color: '#FFA500',
+    fontFamily: "'Space Grotesk', sans-serif",
+    textDecorationLine: 'underline',
+    cursor: 'pointer',
   },
   copyrightText: {
     fontSize: 12,

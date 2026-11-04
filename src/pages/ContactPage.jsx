@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   View, 
   Text, 
@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from '../components/common/ScrollReveal';
+import campusFacadeImg from '../assets/Loima Technical College Façade.webp';
 
 export default function ContactPage({ onNavigate }) {
   const { width } = useWindowDimensions();
@@ -202,7 +203,7 @@ export default function ContactPage({ onNavigate }) {
                       <Text style={styles.fieldLabel}>Mobile / WhatsApp Number *</Text>
                       <TextInput
                         style={styles.textInput}
-                        placeholder="e.g. +254 759 437 978"
+                        placeholder="e.g. +254 716 189 084 / +254 759 437 978"
                         placeholderTextColor="#94A3B8"
                         value={formData.phone}
                         onChangeText={(t) => handleInputChange('phone', t)}
@@ -313,17 +314,17 @@ export default function ContactPage({ onNavigate }) {
             <View style={styles.locationCard}>
               <View style={styles.campusImageWrapper}>
                 <Image 
-                  source={{ uri: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=1000&q=80' }} 
+                  source={typeof campusFacadeImg === 'string' ? { uri: campusFacadeImg } : campusFacadeImg} 
                   style={styles.campusImage}
                   // @ts-ignore
-                  accessibilityLabel="Loima TVC Main Campus"
+                  accessibilityLabel="Loima Technical College Façade"
                 />
                 <View style={styles.campusImageOverlay}>
                   <View style={styles.pinPill}>
                     <MapPin size={13} color="#FFFFFF" />
                     <Text style={styles.pinPillText}>Main Campus</Text>
                   </View>
-                  <Text style={styles.campusTagline}>Lodwar - Loima Road</Text>
+                  <Text style={styles.campusTagline}>Lorugum, Turkana County</Text>
                 </View>
               </View>
 
@@ -335,8 +336,8 @@ export default function ContactPage({ onNavigate }) {
                     <MapPin size={16} color={colors.greenDeep} style={styles.addressIcon} />
                     <View style={styles.addressTexts}>
                       <Text style={styles.addressPrimary}>Loima Technical and Vocational College</Text>
-                      <Text style={styles.addressSecondary}>Off Lodwar - Loima Road, Turkana County, Kenya</Text>
-                      <Text style={styles.addressPostal}>P.O. Box 50 - 20321, Loima, Kenya</Text>
+                      <Text style={styles.addressSecondary}>Lorugum (~1.5 km from shopping centre, off Lodwar–Uganda Rd), Loima Sub-County, Turkana County</Text>
+                      <Text style={styles.addressPostal}>P.O. Box 517 – 30500, Lodwar, Kenya</Text>
                     </View>
                   </View>
                 </View>
@@ -346,13 +347,13 @@ export default function ContactPage({ onNavigate }) {
                   <View style={styles.dirItem}>
                     <Compass size={14} color="#D97706" />
                     <Text style={styles.dirText}>
-                      <Text style={styles.boldText}>Public Transit (Matatu):</Text> Board Doldol-bound public service vehicles from Nanyuki or Loima town stages; alight at Loima TVC College Main Gate stage.
+                      <Text style={styles.boldText}>Public Transit (Matatu):</Text> Board Lorugum / Loima-bound public service vehicles from Lodwar town stage; alight at Loima TVC College Main Gate (~1.5 km from Lorugum shopping centre along Lodwar–Uganda Road).
                     </Text>
                   </View>
                   <View style={styles.dirItem}>
                     <Navigation size={14} color={colors.greenDeep} />
                     <Text style={styles.dirText}>
-                      <Text style={styles.boldText}>Personal Vehicle:</Text> Direct all-weather tarmac access along the Lodwar-Loima corridor with secure on-campus parking.
+                      <Text style={styles.boldText}>Personal Vehicle:</Text> Direct all-weather road access along the Lodwar–Uganda (Lodwar–Moroto) corridor with secure on-campus parking in Lorugum.
                     </Text>
                   </View>
                 </View>
@@ -392,7 +393,7 @@ export default function ContactPage({ onNavigate }) {
               </Text>
               <TouchableOpacity style={styles.securityPhoneTouch} onPress={() => handleCall('+254759437978')}>
                 <Phone size={14} color="#D97706" />
-                <Text style={styles.securityPhoneText}>Campus Security Gate: +254 759 437 978</Text>
+                <Text style={styles.securityPhoneText}>Campus Security Gate: +254 716 189 084 / +254 759 437 978</Text>
               </TouchableOpacity>
             </View>
 
@@ -408,9 +409,9 @@ export default function ContactPage({ onNavigate }) {
           <View style={styles.faqGrid}>
             
             <ScrollReveal animation="fade-up" delay={50} duration={550} style={[styles.faqCard, isMobile && styles.faqCardMobile]}>
-              <Text style={styles.faqQuestion}>Can I register and apply physically at the campus?</Text>
+              <Text style={styles.faqQuestion}>How do I apply for admissions at Loima TVC?</Text>
               <Text style={styles.faqAnswer}>
-                Yes. Our physical Admissions Desk is open Monday to Friday from 8:00 AM to 5:00 PM. Prospective students can bring their KCSE result slips and national ID/birth certificate for instant on-site placement.
+                You can apply through two approved pathways: 1) Online Placement via the Kenya Universities and Colleges Central Placement Service (KUCCPS Student Portal: students.kuccps.net) or the admissions section on our website; 2) Manual Application by downloading official forms from our website or collecting them in person directly from the College Administration Office in Lorugum.
               </Text>
             </ScrollReveal>
 

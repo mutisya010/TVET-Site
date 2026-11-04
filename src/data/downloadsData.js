@@ -1,4 +1,4 @@
-export const downloadCategories = [
+﻿export const downloadCategories = [
   { id: 'all', label: 'All Documents' },
   { id: 'application', label: 'Application Forms' },
   { id: 'fees', label: 'Fee Structures' },
@@ -14,7 +14,7 @@ export const downloadsData = [
     format: 'PDF',
     size: '420 KB',
     title: '2026/2027 Student Application & Admission Form',
-    description: 'Complete admission pack for new trainees encompassing bio-data, course selection, and joining declarations.',
+    description: 'Official admission pack for new trainees. Also collectable directly from the College Administration Office in Lorugum or applied via KUCCPS.',
     date: 'Jan 15, 2026',
     downloadUrl: '#',
     code: 'ADM-FORM-2026',
@@ -47,10 +47,10 @@ export const downloadsData = [
     format: 'PDF',
     size: '1.2 MB',
     title: 'TVETA Institutional Registration & Accreditation Certificate',
-    description: 'Official license TVETA/PUBLIC/TVC/2021 empowering Loima TVC to deliver Level 4, 5 & 6 national qualifications.',
+    description: 'Official license TVETA/PUBLIC/TVC/0005/2023 empowering Loima TVC to deliver Level 4, 5 & 6 national qualifications.',
     date: 'Oct 11, 2025',
     downloadUrl: '#',
-    code: 'TVETA-CERT-0212',
+    code: 'TVETA-CERT-0005-2023',
   },
   {
     id: 'doc-5',

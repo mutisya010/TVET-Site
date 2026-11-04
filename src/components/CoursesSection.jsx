@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { 
   Zap, 
@@ -18,6 +18,7 @@ import {
 import { allCatalogCourses } from '../data/coursesData';
 import { colors, typography } from '../theme/colors';
 import ScrollReveal from './common/ScrollReveal';
+import trainingRoomImg from '../assets/Collaborative Training Room Meeting.webp';
 
 const categorySpotlights = {
   all: {
@@ -25,7 +26,7 @@ const categorySpotlights = {
     tagColor: colors.greenDeep,
     title: 'Modern Engineering & Workshop Labs',
     description: 'Over 70% of Loima TVC curriculum is practical workshop mastery. Trainees train with modern industrial machinery, EPRA-certified test panels, and commercial software suites.',
-    imageUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: trainingRoomImg,
     stats: [
       { label: 'Practical Ratio', val: '70% CBET' },
       { label: 'Govt Subsidy', val: 'Supported' },
@@ -38,7 +39,7 @@ const categorySpotlights = {
     tagColor: colors.orange,
     title: 'Electrical, Solar PV & Automotive Diagnostics',
     description: 'Fully equipped electrical power laboratories, EPRA-compliant solar micro-grid installations, heavy-duty welding rigs, and computerized motor vehicle diagnostic bays.',
-    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: trainingRoomImg,
     stats: [
       { label: 'Licensing', val: 'EPRA C1 & T2' },
       { label: 'Facilities', val: 'OBD & MIG/TIG' },
@@ -51,7 +52,7 @@ const categorySpotlights = {
     tagColor: colors.green,
     title: 'High-Speed Broadband ICT & Enterprise Hub',
     description: 'Ultra-modern computing labs with dedicated dual-display workstations, Cisco networking racks, and computerized QuickBooks & Sage ERP business management suites.',
-    imageUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: trainingRoomImg,
     stats: [
       { label: 'Digital Lab', val: '40+ Dedicated PCs' },
       { label: 'Software', val: 'ERP, SQL & Cloud' },
@@ -64,7 +65,7 @@ const categorySpotlights = {
     tagColor: colors.greenDeep,
     title: 'Greenhouse Horticulture & Civil Construction',
     description: 'Outdoor testing yards featuring computerized level surveying instruments, reinforced concrete curing testbeds, sanitary plumbing rigs, and automated greenhouse drip irrigation.',
-    imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: trainingRoomImg,
     stats: [
       { label: 'NCA Standards', val: 'Site Supervision' },
       { label: 'Farming Practice', val: 'Greenhouse & Drip' },
@@ -232,7 +233,7 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
               {/* Photo Area with Floating Glass Badges */}
               <View style={styles.imageWrapper}>
                 <Image 
-                  source={{ uri: currentSpotlight.imageUrl }} 
+                  source={typeof currentSpotlight.imageUrl === "string" ? { uri: currentSpotlight.imageUrl } : currentSpotlight.imageUrl} 
                   style={styles.spotlightImage}
                   // @ts-ignore
                   accessibilityLabel={currentSpotlight.title}

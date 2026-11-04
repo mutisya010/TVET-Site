@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -10,7 +10,9 @@ import {
   useWindowDimensions 
 } from 'react-native';
 import { Search, RotateCcw, ShieldCheck, ArrowRight, MessageSquare } from 'lucide-react';
-import { downloadsData, downloadCategories } from '../data/downloadsData';
+import { downloadsData as fallbackDownloads, downloadCategories as fallbackCategories } from '../data/downloadsData';
+import { fetchDownloads, fetchDownloadCategories } from '../services/api';
+import { useBranding } from '../context/BrandingContext';
 import DownloadDocumentCard from '../components/downloads/DownloadDocumentCard';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { colors, typography } from '../theme/colors';
@@ -18,19 +20,49 @@ import { colors, typography } from '../theme/colors';
 export default function DownloadsPage({ onDownloadDoc }) {
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
+  const { whatsappNumber, tvetaLicense } = useBranding();
+
+  // Categories & Documents state
+  const [categories, setCategories] = useState(fallbackCategories);
+  const [documents, setDocuments] = useState(fallbackDownloads);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Search & filter state
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
+  // Load categories and initial docs from Django backend
+  useEffect(() => {
+    let isMounted = true;
+    async function loadData() {
+      setIsLoading(true);
+      try {
+        const [cats, docs] = await Promise.all([
+          fetchDownloadCategories(),
+          fetchDownloads({ category: 'all', search: '' }),
+        ]);
+        if (isMounted) {
+          if (cats && cats.length) setCategories(cats);
+          if (docs && docs.length) setDocuments(docs);
+        }
+      } catch (err) {
+        console.warn('Using local fallback downloads data:', err);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    }
+    loadData();
+    return () => { isMounted = false; };
+  }, []);
+
   const filteredDocs = useMemo(() => {
-    return downloadsData.filter((doc) => {
+    return documents.filter((doc) => {
       // Keyword matching
       if (searchTerm.trim()) {
         const query = searchTerm.toLowerCase();
-        const matchesTitle = doc.title.toLowerCase().includes(query);
-        const matchesDesc = doc.description.toLowerCase().includes(query);
-        const matchesCode = doc.code.toLowerCase().includes(query);
+        const matchesTitle = doc.title ? doc.title.toLowerCase().includes(query) : false;
+        const matchesDesc = doc.description ? doc.description.toLowerCase().includes(query) : false;
+        const matchesCode = doc.code ? doc.code.toLowerCase().includes(query) : false;
         if (!matchesTitle && !matchesDesc && !matchesCode) {
           return false;
         }
@@ -43,18 +75,21 @@ export default function DownloadsPage({ onDownloadDoc }) {
 
       return true;
     });
-  }, [searchTerm, activeCategory]);
+  }, [documents, searchTerm, activeCategory]);
 
   const handleDownload = (doc) => {
     if (onDownloadDoc) {
       onDownloadDoc(doc);
+    } else if (doc.downloadUrl && doc.downloadUrl !== '#') {
+      Linking.openURL(doc.downloadUrl);
     } else {
       alert(`Downloading ${doc.title} (${doc.size} • ${doc.format})...`);
     }
   };
 
   const handleOpenRegistryWhatsApp = () => {
-    Linking.openURL('https://wa.me/254759437978?text=Hello%20Loima%20TVC%20Registry,%20I%20need%20assistance%20with%20an%20official%20download%20or%20joining%20form.');
+    const rawNumber = (whatsappNumber || '+254759437978').replace(/[^0-9]/g, '');
+    Linking.openURL(`https://wa.me/${rawNumber}?text=Hello%20Registry,%20I%20need%20assistance%20with%20an%20official%20download%20or%20joining%20form.`);
   };
 
   return (
@@ -104,11 +139,11 @@ export default function DownloadsPage({ onDownloadDoc }) {
             showsHorizontalScrollIndicator={false} 
             contentContainerStyle={styles.categoryPillsRow}
           >
-            {downloadCategories.map((cat) => {
+            {categories.map((cat) => {
               const isActive = activeCategory === cat.id;
               const count = cat.id === 'all' 
-                ? downloadsData.length 
-                : downloadsData.filter(d => d.category === cat.id).length;
+                ? documents.length 
+                : documents.filter(d => d.category === cat.id).length;
 
               return (
                 <TouchableOpacity
@@ -184,7 +219,7 @@ export default function DownloadsPage({ onDownloadDoc }) {
             <View style={styles.supportTextCol}>
               <Text style={styles.supportHeading}>Statutory TVETA Certification</Text>
               <Text style={styles.supportBody}>
-                Registered & licensed under TVET Act No. 29 of 2013 (TVETA/PUBLIC/TVC/2021). All materials are official certified publications.
+                Registered & licensed under TVET Act No. 29 of 2013 ({tvetaLicense || 'TVETA/PUBLIC/TVC/0005/2023'}). All materials are official certified publications.
               </Text>
             </View>
           </View>
@@ -253,54 +288,53 @@ const styles = StyleSheet.create({
   mainSubtitle: {
     fontSize: 14,
     lineHeight: 22,
-    color: colors.textMuted,
+    color: colors.textSecondary,
     maxWidth: 720,
     fontFamily: typography.bodyFont,
   },
   filterSection: {
     marginBottom: 20,
-    gap: 12,
+    gap: 14,
   },
   searchBarWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1.5,
-    borderColor: '#E2E8F0',
-    borderRadius: 8,
+    borderColor: colors.border,
+    borderRadius: 10,
     paddingHorizontal: 14,
-    height: 46,
+    paddingVertical: 10,
     gap: 10,
-    boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04)',
   },
   searchInput: {
     flex: 1,
     fontSize: 13.5,
     color: colors.textPrimary,
+    outlineWidth: 0,
     fontFamily: typography.bodyFont,
-    outlineStyle: 'none',
   },
   clearBtn: {
     padding: 4,
+    borderRadius: 4,
+    backgroundColor: colors.surfaceMuted,
   },
   categoryPillsRow: {
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 8,
     paddingVertical: 4,
   },
   catPill: {
-    paddingHorizontal: 13,
-    paddingVertical: 7,
-    borderRadius: 20,
-    backgroundColor: '#F8FAFC',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 8,
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
-    cursor: 'pointer',
+    borderColor: colors.border,
   },
   catPillActive: {
-    backgroundColor: colors.greenDeep,
-    borderColor: colors.greenDeep,
+    backgroundColor: colors.greenLight,
+    borderColor: colors.green,
   },
   catPillText: {
     fontSize: 12,
@@ -309,17 +343,17 @@ const styles = StyleSheet.create({
     fontFamily: typography.labelFont,
   },
   catPillTextActive: {
-    color: '#FFFFFF',
+    color: colors.green,
     fontWeight: '700',
   },
   resultsMetaRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 8,
-    marginBottom: 12,
+    paddingBottom: 14,
+    marginBottom: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: colors.borderLight,
   },
   resultsCountText: {
     fontSize: 12.5,
@@ -327,28 +361,30 @@ const styles = StyleSheet.create({
     fontFamily: typography.bodyFont,
   },
   countBold: {
-    fontWeight: '700',
     color: colors.textPrimary,
+    fontWeight: '700',
   },
   resetFilterLink: {
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: '600',
     color: colors.orange,
-    cursor: 'pointer',
+    textDecorationLine: 'underline',
     fontFamily: typography.labelFont,
   },
   docsList: {
-    marginBottom: 36,
+    gap: 10,
+    marginBottom: 44,
   },
   emptyBox: {
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 10,
-    padding: 36,
+    paddingVertical: 48,
+    paddingHorizontal: 24,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 24,
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+    marginBottom: 44,
   },
   emptyTitle: {
     fontSize: 16,
@@ -361,56 +397,55 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: colors.textMuted,
     textAlign: 'center',
-    maxWidth: 440,
-    marginBottom: 18,
+    maxWidth: 420,
+    marginBottom: 16,
+    lineHeight: 19,
     fontFamily: typography.bodyFont,
   },
   emptyResetBtn: {
-    backgroundColor: colors.greenDeep,
+    backgroundColor: colors.green,
     paddingHorizontal: 16,
-    paddingVertical: 9,
-    borderRadius: 6,
-    cursor: 'pointer',
+    paddingVertical: 8,
+    borderRadius: 8,
   },
   emptyResetBtnText: {
+    color: '#FFFFFF',
     fontSize: 12.5,
     fontWeight: '700',
-    color: '#FFFFFF',
     fontFamily: typography.labelFont,
   },
   supportFooter: {
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 10,
-    padding: 18,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    backgroundColor: colors.greenLight,
+    borderWidth: 1,
+    borderColor: colors.greenMuted,
+    borderRadius: 12,
+    padding: 18,
     gap: 16,
+    flexWrap: 'wrap',
   },
   supportFooterMobile: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: 14,
   },
   supportLeft: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: 12,
     flex: 1,
+    minWidth: 260,
   },
   shieldIconBox: {
-    width: 34,
-    height: 34,
-    borderRadius: 6,
-    backgroundColor: '#F0FDF4',
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#DCFCE7',
-    justifyContent: 'center',
+    borderColor: colors.greenMuted,
     alignItems: 'center',
-    flexShrink: 0,
-    marginTop: 2,
+    justifyContent: 'center',
   },
   supportTextCol: {
     flex: 1,
@@ -418,28 +453,26 @@ const styles = StyleSheet.create({
   supportHeading: {
     fontSize: 13,
     fontWeight: '800',
-    color: colors.textPrimary,
+    color: colors.greenDeep,
     marginBottom: 2,
     fontFamily: typography.headlineFont,
   },
   supportBody: {
     fontSize: 11.5,
     lineHeight: 16,
-    color: colors.textMuted,
+    color: colors.textSecondary,
     fontFamily: typography.bodyFont,
   },
   supportRightBtn: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: 8,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: colors.greenMuted,
     paddingHorizontal: 14,
     paddingVertical: 9,
-    borderRadius: 6,
-    cursor: 'pointer',
-    flexShrink: 0,
+    borderRadius: 8,
   },
   supportRightBtnText: {
     fontSize: 12,

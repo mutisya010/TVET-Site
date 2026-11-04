@@ -1,0 +1,31 @@
+[Unit]
+Description=Gunicorn daemon for Loima TVC Backend
+After=network.target postgresql.service
+
+[Service]
+User=root
+Group=www-data
+
+WorkingDirectory=/var/www/tvet-site/backend
+Environment="DJANGO_ENV=production"
+Environment="PYTHONUNBUFFERED=1"
+EnvironmentFile=-/etc/tvet-site/tvet.env
+
+ExecStart=/var/www/tvet-site/backend/venv/bin/gunicorn \
+    --access-logfile /var/log/tvet_gunicorn_access.log \
+    --error-logfile /var/log/tvet_gunicorn_error.log \
+    --workers 3 \
+    --bind 127.0.0.1:8002 \
+    --timeout 120 \
+    --graceful-timeout 30 \
+    tvet_backend.wsgi:application
+
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+
