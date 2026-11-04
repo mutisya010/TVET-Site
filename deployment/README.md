@@ -16,13 +16,13 @@ On a freshly created Linux VPS (Ubuntu 20.04 / 22.04 / 24.04 LTS):
 
 2. **Run the one-shot installer**:
    ```bash
-   sudo bash scripts/deploy.sh --mode=install
+   sudo bash scripts/deploy.sh --mode=install --domain=loima.royalsoftwares.co.ke
    ```
    *This automatically installs Python, Node.js, Nginx, PostgreSQL, Certbot, configures systemd, builds the React frontend, seeds the initial college catalog into the database, and prompts you to create the Django admin superuser.*
 
 3. **Configure your domain & SSL**:
    ```bash
-   sudo bash scripts/deploy.sh --mode=https --domain=loimatvc.ac.ke
+   sudo bash scripts/deploy.sh --mode=https --domain=loima.royalsoftwares.co.ke
    ```
 
 ---
@@ -50,7 +50,20 @@ This performs:
 
 ---
 
-## 3. Maintenance Mode Management
+## 3. Shifting Domains Later (e.g. from `loima.royalsoftwares.co.ke` to `loimatvc.ac.ke`)
+
+When your official domain `loimatvc.ac.ke` DNS points to your VPS IP:
+
+1. Update `DOMAIN="loimatvc.ac.ke"` in `/etc/tvet-site/tvet.env`.
+2. Run:
+   ```bash
+   sudo bash scripts/deploy.sh --mode=https --domain=loimatvc.ac.ke
+   ```
+   The script will automatically regenerate Nginx config for `loimatvc.ac.ke` & `www.loimatvc.ac.ke`, test syntax, reload Nginx, and request Let's Encrypt certificates.
+
+---
+
+## 4. Maintenance Mode Management
 
 Put the portal into maintenance mode with a single command:
 
@@ -66,26 +79,7 @@ sudo bash scripts/deploy.sh --maintenance=off
 ```
 
 > **Client Preview Access**: When maintenance mode is active, you can preview the live portal using your private access URL:
-> `https://your-domain.com/preview-access?key=tvet-preview-2026`
-
----
-
-## 4. Useful Operations
-
-```bash
-# Diagnostic audit (checks Python, Node, Nginx, PostgreSQL, SSL, systemd)
-sudo bash scripts/deploy.sh --mode=check
-
-# Immediate compressed database backup
-sudo bash scripts/deploy.sh --mode=backup
-
-# Deploy a specific Git branch or commit
-sudo bash scripts/deploy.sh --branch=staging
-sudo bash scripts/deploy.sh --commit=a1b2c3d
-
-# Rebuild the Python virtual environment from scratch
-sudo bash scripts/deploy.sh --rebuild-venv
-```
+> `https://loima.royalsoftwares.co.ke/preview-access?key=tvet-preview-2026`
 
 ---
 
@@ -100,4 +94,3 @@ sudo bash scripts/deploy.sh --rebuild-venv
 | `/var/www/tvet-site-static` | Django admin and collected static files |
 | `/var/www/tvet-site-media` | Uploaded PDFs, brochures, crests, photos |
 | `/var/backups/tvet-site` | Compressed 14-day database backups |
-

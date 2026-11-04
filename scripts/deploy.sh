@@ -2,7 +2,7 @@
 # ==============================================================================
 # Loima TVC (TVET Site) - Enterprise Deployment & Management Automation Script
 # ==============================================================================
-# Target Domain: loimatvc.ac.ke (or custom domain / VPS IP)
+# Target Domain: loima.royalsoftwares.co.ke (or loimatvc.ac.ke / custom domain)
 # Target OS:     Ubuntu 20.04 / 22.04 / 24.04 LTS / Debian 11 / 12
 # Target Stack:  Django 6.x (WSGI), Gunicorn, Nginx, PostgreSQL/SQLite, Certbot
 # Architecture:  Vite + React Frontend (SPA) + Django REST Framework Backend
@@ -76,7 +76,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 # ------------------------------------------------------------------------------
-# 3. Path & Environment Discovery
+# 3. Path & Environment Defaults
 # ------------------------------------------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -96,7 +96,8 @@ ENV_DIR="/etc/tvet-site"
 ENV_FILE="${ENV_FILE:-$ENV_DIR/tvet.env}"
 DEPLOY_CONFIG_FILE="${DEPLOY_CONFIG_FILE:-$PROJECT_ROOT/deployment/tvet.env.example}"
 
-DOMAIN="${DOMAIN:-loimatvc.ac.ke}"
+# Default domain (user configured)
+DOMAIN="loima.royalsoftwares.co.ke"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 GIT_REMOTE="${GIT_REMOTE:-origin}"
 CURRENT_ACTIVE_BRANCH=$(git -C "$PROJECT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
@@ -119,6 +120,14 @@ FORCE_DEPLOY=false
 MAINTENANCE_FLAG_FILE="${MAINTENANCE_FLAG_FILE:-/etc/tvet-site/maintenance.flag}"
 MAINTENANCE_BYPASS_KEY="${MAINTENANCE_BYPASS_KEY:-tvet-preview-2026}"
 MAINTENANCE_ACTION="status"
+
+# Explicit CLI tracker so CLI flags take strict precedence over .env files
+CLI_DOMAIN=""
+CLI_BRANCH=""
+CLI_COMMIT=""
+CLI_PYTHON=""
+CLI_BYPASS_KEY=""
+CLI_MAINTENANCE=""
 
 # ------------------------------------------------------------------------------
 # 4. Usage Documentation
@@ -145,13 +154,13 @@ ${BOLD}MODES (--mode=<mode>):${NC}
                Provides private secret bypass link for administrative preview.
   ${CYAN}database${NC}     Tests database connectivity, verifies tables, and applies migrations.
   ${CYAN}backup${NC}       Creates an immediate compressed database backup.
-  ${CYAN}https${NC}        Inspects DNS resolution, provisions or renews Let's Encrypt SSL.
+  ${CYAN}https${NC}        Configures Nginx and provisions/renews Let's Encrypt SSL certificate.
 
 ${BOLD}OPTIONS:${NC}
   -m, --mode=<mode>        Specify execution mode (default: deploy)
   -b, --branch=<branch>    Git branch to deploy (default: main)
   -c, --commit=<hash>      Deploy a specific Git commit hash instead of branch HEAD
-      --domain=<domain>    Target domain name (default: loimatvc.ac.ke)
+      --domain=<domain>    Target domain (e.g. loima.royalsoftwares.co.ke or loimatvc.ac.ke)
       --maintenance=<cmd>  Maintenance action: on (enable), off (disable), or status
       --bypass-key=<key>   Custom preview key for maintenance bypass
       --python=<path>      Specify path to Python interpreter (default: python3)
@@ -167,10 +176,10 @@ ${BOLD}EXAMPLES:${NC}
   sudo bash scripts/deploy.sh --mode=check
   sudo bash scripts/deploy.sh --mode=deploy
   sudo bash scripts/deploy.sh --mode=install
+  sudo bash scripts/deploy.sh --mode=https --domain=loima.royalsoftwares.co.ke
   sudo bash scripts/deploy.sh --maintenance=on
   sudo bash scripts/deploy.sh --maintenance=off
   sudo bash scripts/deploy.sh --mode=backup
-  sudo bash scripts/deploy.sh --mode=https --domain=loimatvc.ac.ke
 EOF
     exit 0
 }
@@ -191,34 +200,42 @@ parse_args() {
                 ;;
             -b|--branch)
                 GIT_BRANCH="$2"
+                CLI_BRANCH="$2"
                 shift 2
                 ;;
             --branch=*)
                 GIT_BRANCH="${1#*=}"
+                CLI_BRANCH="${1#*=}"
                 shift
                 ;;
             -c|--commit)
                 TARGET_COMMIT="$2"
+                CLI_COMMIT="$2"
                 shift 2
                 ;;
             --commit=*)
                 TARGET_COMMIT="${1#*=}"
+                CLI_COMMIT="${1#*=}"
                 shift
                 ;;
             --domain)
                 DOMAIN="$2"
+                CLI_DOMAIN="$2"
                 shift 2
                 ;;
             --domain=*)
                 DOMAIN="${1#*=}"
+                CLI_DOMAIN="${1#*=}"
                 shift
                 ;;
             --python)
                 PYTHON_BIN="$2"
+                CLI_PYTHON="$2"
                 shift 2
                 ;;
             --python=*)
                 PYTHON_BIN="${1#*=}"
+                CLI_PYTHON="${1#*=}"
                 shift
                 ;;
             --rebuild-venv)
@@ -244,19 +261,23 @@ parse_args() {
             --maintenance)
                 MODE="maintenance"
                 MAINTENANCE_ACTION="$2"
+                CLI_MAINTENANCE="$2"
                 shift 2
                 ;;
             --maintenance=*)
                 MODE="maintenance"
                 MAINTENANCE_ACTION="${1#*=}"
+                CLI_MAINTENANCE="${1#*=}"
                 shift
                 ;;
             --bypass-key)
                 MAINTENANCE_BYPASS_KEY="$2"
+                CLI_BYPASS_KEY="$2"
                 shift 2
                 ;;
             --bypass-key=*)
                 MAINTENANCE_BYPASS_KEY="${1#*=}"
+                CLI_BYPASS_KEY="${1#*=}"
                 shift
                 ;;
             -n|--dry-run)
@@ -325,12 +346,34 @@ load_environment() {
         done < "$target_file"
     fi
 
-    export DOMAIN="${DOMAIN:-loimatvc.ac.ke}"
+    # Apply strict CLI argument overrides so user flags are never overwritten by files
+    if [ -n "$CLI_DOMAIN" ]; then
+        DOMAIN="$CLI_DOMAIN"
+    fi
+    if [ -n "$CLI_BRANCH" ]; then
+        GIT_BRANCH="$CLI_BRANCH"
+    fi
+    if [ -n "$CLI_COMMIT" ]; then
+        TARGET_COMMIT="$CLI_COMMIT"
+    fi
+    if [ -n "$CLI_PYTHON" ]; then
+        PYTHON_BIN="$CLI_PYTHON"
+    fi
+    if [ -n "$CLI_BYPASS_KEY" ]; then
+        MAINTENANCE_BYPASS_KEY="$CLI_BYPASS_KEY"
+    fi
+    if [ -n "$CLI_MAINTENANCE" ]; then
+        MAINTENANCE_ACTION="$CLI_MAINTENANCE"
+    fi
+
+    export DOMAIN="${DOMAIN:-loima.royalsoftwares.co.ke}"
     export DB_PORT="${DB_PORT:-5432}"
     export DB_ENGINE="${DB_ENGINE:-django.db.backends.sqlite3}"
     export MAINTENANCE_BYPASS_KEY="${MAINTENANCE_BYPASS_KEY:-tvet-preview-2026}"
     export DJANGO_ENV="production"
     export PYTHONPATH="${BACKEND_DIR}:${PYTHONPATH:-}"
+
+    log_info "Active Target Domain: $DOMAIN"
 }
 
 get_db_settings() {
@@ -427,7 +470,6 @@ backup_database() {
     export PGPASSWORD="${DB_PASSWORD:-}"
     if pg_dump -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" "$DB_NAME" | gzip > "$backup_file"; then
         log_success "Database backup created successfully ($(du -h "$backup_file" | cut -f1))."
-        # 14-day retention cleanup
         find "$BACKUP_DIR" -type f -name "tvet_*.sql.gz" -mtime +14 -delete 2>/dev/null || true
     else
         log_error "Database backup failed! Check PostgreSQL credentials."
@@ -459,7 +501,6 @@ sync_git_repository() {
     log_info "Git Remote: $GIT_REMOTE ($remote_url)"
     git config core.fileMode false 2>/dev/null || true
 
-    # Preserve local media metadata modifications
     if git status -s 2>/dev/null | grep -q "backend/media"; then
         git checkout -- "$PROJECT_ROOT/backend/media" 2>/dev/null || true
     fi
@@ -508,7 +549,6 @@ deploy_backend() {
     resolve_python_bin
     log_info "Base Python interpreter: $PYTHON_BIN ($($PYTHON_BIN --version 2>&1 | head -n1))"
 
-    # Virtual environment check / creation / rebuild
     if [ "$REBUILD_VENV" = true ] && [ -d "$VENV_DIR" ]; then
         log_warn "Rebuilding virtual environment at $VENV_DIR..."
         rm -rf "$VENV_DIR"
@@ -523,7 +563,6 @@ deploy_backend() {
     # shellcheck disable=SC1091
     source "$VENV_DIR/bin/activate"
 
-    # Dependencies installation
     log_info "Validating Python dependencies from requirements.txt..."
     if [ -f "$BACKEND_DIR/requirements.txt" ]; then
         pip install --upgrade pip setuptools wheel -q
@@ -537,26 +576,21 @@ deploy_backend() {
 
     export DJANGO_ENV="production"
 
-    # Execute database migrations
     log_info "Applying database migrations (python manage.py migrate --no-input)..."
     python "$BACKEND_DIR/manage.py" migrate --no-input
 
-    # Seed master college initial data if database is fresh
     log_info "Checking master data catalog..."
     python "$BACKEND_DIR/manage.py" seed_tvet_data || {
         log_warn "seed_tvet_data reported warnings or was already initialized."
     }
 
-    # Collect static files
     log_info "Collecting static assets (python manage.py collectstatic --no-input)..."
     export STATIC_ROOT="$STATIC_DEST"
     python "$BACKEND_DIR/manage.py" collectstatic --no-input
 
-    # Ensure directories & permissions for static and media
     log_info "Configuring permissions on static ($STATIC_DEST) and media ($MEDIA_DEST)..."
     mkdir -p "$STATIC_DEST" "$MEDIA_DEST" "$BACKEND_DIR/media"
     
-    # Symlink backend/media to MEDIA_DEST if distinct
     if [ "$MEDIA_DEST" != "$BACKEND_DIR/media" ] && [ ! -L "$MEDIA_DEST" ]; then
         cp -rn "$BACKEND_DIR/media"/* "$MEDIA_DEST"/ 2>/dev/null || true
     fi
@@ -629,7 +663,6 @@ deploy_frontend() {
     fi
     rm -rf "$stage_dir"
 
-    # Set ownership & permissions
     chown -R "$SERVICE_GROUP":"$SERVICE_GROUP" "$FRONTEND_DEST"
     find "$FRONTEND_DEST" -type d -exec chmod 755 {} +
     find "$FRONTEND_DEST" -type f -exec chmod 644 {} +
@@ -647,7 +680,6 @@ manage_gunicorn_service() {
         log_info "Installing systemd service file from deployment template..."
         if [ -f "$PROJECT_ROOT/deployment/tvet_backend.service" ]; then
             cp "$PROJECT_ROOT/deployment/tvet_backend.service" "$SYSTEMD_FILE"
-            # Replace placeholder paths if project root differs
             sed -i "s|/var/www/tvet-site/backend|$BACKEND_DIR|g" "$SYSTEMD_FILE"
             systemctl daemon-reload
             systemctl enable "$GUNICORN_SERVICE"
@@ -680,7 +712,7 @@ manage_gunicorn_service() {
 # 12. Nginx Validation & Service Management
 # ------------------------------------------------------------------------------
 manage_nginx() {
-    log_step "Nginx Validation & Service Management"
+    log_step "Nginx Validation & Service Management ($DOMAIN)"
 
     if ! command -v nginx >/dev/null 2>&1; then
         log_error "Nginx is not installed on this system."
@@ -689,10 +721,23 @@ manage_nginx() {
 
     local bypass_key="${MAINTENANCE_BYPASS_KEY:-tvet-preview-2026}"
 
-    # Install or update site configuration from deployment template
-    if [ ! -f "$NGINX_AVAILABLE" ] || ! grep -q "$bypass_key" "$NGINX_AVAILABLE" 2>/dev/null; then
-        log_info "Generating Nginx site configuration ($DOMAIN)..."
+    # Determine server_name string: check if www sub-variant resolves or if apex domain
+    local server_names="$DOMAIN"
+    local dot_count
+    dot_count=$(echo "$DOMAIN" | tr -cd '.' | wc -c)
+    if [ "$dot_count" -le 1 ]; then
+        # Apex domain like loimatvc.ac.ke or site.ke
+        server_names="$DOMAIN www.$DOMAIN"
+    elif command -v host >/dev/null 2>&1 && host "www.$DOMAIN" >/dev/null 2>&1; then
+        # Subdomain whose www variant also resolves in DNS
+        server_names="$DOMAIN www.$DOMAIN"
+    fi
+
+    # Install or update site configuration if missing or if domain changed
+    if [ ! -f "$NGINX_AVAILABLE" ] || ! grep -q "$DOMAIN" "$NGINX_AVAILABLE" 2>/dev/null || ! grep -q "$bypass_key" "$NGINX_AVAILABLE" 2>/dev/null; then
+        log_info "Writing Nginx site configuration for [$DOMAIN] ($server_names)..."
         cp "$PROJECT_ROOT/deployment/nginx.conf" "$NGINX_AVAILABLE"
+        sed -i "s/__SERVER_NAMES__/${server_names}/g" "$NGINX_AVAILABLE"
         sed -i "s/__DOMAIN__/${DOMAIN}/g" "$NGINX_AVAILABLE"
         sed -i "s/__MAINTENANCE_BYPASS_KEY__/${bypass_key}/g" "$NGINX_AVAILABLE"
 
@@ -712,7 +757,7 @@ manage_nginx() {
     if nginx -t; then
         log_info "Reloading Nginx web server..."
         systemctl reload nginx
-        log_success "Nginx reloaded successfully."
+        log_success "Nginx reloaded successfully for $DOMAIN."
     else
         log_error "Nginx configuration syntax validation failed!"
         exit 1
@@ -735,12 +780,27 @@ manage_ssl() {
         host "$DOMAIN" || log_warn "DNS lookup failed for $DOMAIN. Ensure DNS A-record points to this VPS IP."
     fi
 
-    log_info "Requesting/Renewing SSL certificate for $DOMAIN via Certbot..."
-    if certbot --nginx -d "$DOMAIN" -d "www.$DOMAIN" --non-interactive --agree-tos --register-unsafely-without-email --redirect 2>/dev/null || \
-       certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos --register-unsafely-without-email --redirect; then
+    # Build certbot domain flags based on active DNS resolution
+    local certbot_domains=("-d" "$DOMAIN")
+    local dot_count
+    dot_count=$(echo "$DOMAIN" | tr -cd '.' | wc -c)
+
+    # Only include www if it's an apex domain or if www actually resolves
+    if [ "$dot_count" -le 1 ]; then
+        certbot_domains+=("-d" "www.$DOMAIN")
+    elif command -v host >/dev/null 2>&1 && host "www.$DOMAIN" >/dev/null 2>&1; then
+        certbot_domains+=("-d" "www.$DOMAIN")
+    else
+        log_info "Subdomain detected: skipping www.$DOMAIN (only requesting certificate for $DOMAIN)."
+    fi
+
+    log_info "Requesting/Renewing SSL certificate for ${certbot_domains[*]} via Certbot..."
+    if certbot --nginx "${certbot_domains[@]}" --non-interactive --agree-tos --register-unsafely-without-email --redirect 2>/dev/null || \
+       certbot --nginx "${certbot_domains[@]}" --non-interactive --agree-tos --register-unsafely-without-email --redirect; then
         log_success "SSL Certificate verified & configured successfully for $DOMAIN."
     else
-        log_warn "Certbot could not obtain certificate automatically. Verify DNS propagation and run: certbot --nginx -d $DOMAIN"
+        log_warn "Certbot could not obtain certificate automatically. Verify DNS propagation and run:"
+        echo -e "${CYAN}sudo certbot --nginx -d $DOMAIN${NC}"
     fi
 }
 
@@ -822,18 +882,15 @@ install_full_stack() {
         nginx postgresql postgresql-contrib \
         certbot python3-certbot-nginx
 
-    # Install Node.js LTS if missing
     if ! command -v node >/dev/null 2>&1; then
         log_info "Installing Node.js LTS (v20)..."
         curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
         apt-get install -y -q nodejs
     fi
 
-    # Create directory tree
     log_info "Creating production directory tree..."
     mkdir -p "$ENV_DIR" "$FRONTEND_DEST" "$STATIC_DEST" "$MEDIA_DEST" "$BACKUP_DIR"
 
-    # Setup environment file
     if [ ! -f "$ENV_FILE" ]; then
         log_info "Creating production environment file at $ENV_FILE..."
         cp "$DEPLOY_CONFIG_FILE" "$ENV_FILE"
@@ -843,7 +900,6 @@ install_full_stack() {
 
     load_environment
 
-    # Setup PostgreSQL database and user
     if [[ "$DB_ENGINE" == *"postgresql"* ]]; then
         log_info "Configuring PostgreSQL user [$DB_USER] and database [$DB_NAME]..."
         sudo -u postgres psql -c "CREATE USER \"$DB_USER\" WITH PASSWORD '$DB_PASSWORD';" 2>/dev/null || true
@@ -851,13 +907,11 @@ install_full_stack() {
         sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"$DB_NAME\" TO \"$DB_USER\";" 2>/dev/null || true
     fi
 
-    # Run deployment routines
     deploy_backend
     deploy_frontend
     manage_gunicorn_service
     manage_nginx
 
-    # Prompt to create superuser
     echo -e "\n${BOLD}Create Django Admin Superuser? (y/n)${NC}"
     read -r create_admin || create_admin="n"
     if [[ "$create_admin" =~ ^[Yy]$ ]]; then
@@ -947,7 +1001,9 @@ main() {
             ;;
         https|ssl)
             load_environment
+            manage_nginx
             manage_ssl
+            run_health_checks
             ;;
         maintenance)
             load_environment
@@ -961,4 +1017,3 @@ main() {
 }
 
 main "$@"
-
