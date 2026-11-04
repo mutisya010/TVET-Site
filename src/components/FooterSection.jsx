@@ -41,8 +41,8 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
     { label: 'Academic Calendar 2024/25', action: () => onNavigate && onNavigate('downloads') },
   ];
 
-  const primaryPhone = helplinePhone || '+254 716 189 084';
-  const altPhone = helplinePhoneAlt || '+254 759 437 978';
+  const primaryPhone = helplinePhone || '+254 746 525 252';
+  const altPhone = helplinePhoneAlt || '';
   const phoneDisplay = altPhone ? `${primaryPhone} / ${altPhone}` : primaryPhone;
   const rawPhone = primaryPhone.replace(/[^0-9+]/g, '');
 

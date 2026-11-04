@@ -8,12 +8,12 @@ export default function TopBar({ onOpenInquiry }) {
   const { admissionsNotice, helplinePhone, whatsappNumber } = useBranding();
 
   const handleCall = () => {
-    const rawNumber = (helplinePhone || '+254716189084').replace(/[^0-9+]/g, '');
+    const rawNumber = (helplinePhone || '+254746525252').replace(/[^0-9+]/g, '');
     Linking.openURL(`tel:${rawNumber}`);
   };
 
   const handleWhatsApp = () => {
-    const rawNumber = (whatsappNumber || '+254759437978').replace(/[^0-9]/g, '');
+    const rawNumber = (whatsappNumber || '+254746525252').replace(/[^0-9]/g, '');
     Linking.openURL(`https://wa.me/${rawNumber}?text=Hello,%20I%20would%20like%20to%20enquire%20about%20admissions`);
   };
 
@@ -40,7 +40,7 @@ export default function TopBar({ onOpenInquiry }) {
           <TouchableOpacity style={styles.contactItem} onPress={handleCall} activeOpacity={0.7}>
             <Phone size={13} color={colors.green} />
             <Text style={styles.contactLabel}>Helpline: </Text>
-            <Text style={styles.contactValue}>{helplinePhone || '+254 716 189 084'}</Text>
+            <Text style={styles.contactValue}>{helplinePhone || '+254 746 525 252'}</Text>
           </TouchableOpacity>
 
           <View style={styles.divider} />
@@ -48,7 +48,7 @@ export default function TopBar({ onOpenInquiry }) {
           <TouchableOpacity style={styles.contactItem} onPress={handleWhatsApp} activeOpacity={0.7}>
             <MessageCircle size={13} color={colors.green} />
             <Text style={styles.contactLabel}>WhatsApp: </Text>
-            <Text style={[styles.contactValue, styles.whatsAppColor]}>{whatsappNumber || '+254 759 437 978'}</Text>
+            <Text style={[styles.contactValue, styles.whatsAppColor]}>{whatsappNumber || '+254 746 525 252'}</Text>
           </TouchableOpacity>
         </View>
       </View>

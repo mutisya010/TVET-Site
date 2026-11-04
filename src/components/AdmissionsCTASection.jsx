@@ -71,11 +71,11 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
   };
 
   const handleWhatsApp = () => {
-    Linking.openURL('https://wa.me/254759437978?text=Hello%20Admissions%20Office,%20I%20would%20like%20to%20apply%20to%20Loima%20TVC');
+    Linking.openURL('https://wa.me/254746525252?text=Hello%20Admissions%20Office,%20I%20would%20like%20to%20apply%20to%20Loima%20TVC');
   };
 
   const handleCall = () => {
-    Linking.openURL('tel:+254716189084');
+    Linking.openURL('tel:+254746525252');
   };
 
   return (
@@ -116,7 +116,7 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
                 activeOpacity={0.85}
               >
                 <Phone size={16} color="#FFFFFF" />
-                <Text style={styles.callBtnText}>+254 716 189 084</Text>
+                <Text style={styles.callBtnText}>+254 746 525 252</Text>
               </TouchableOpacity>
             </View>
 

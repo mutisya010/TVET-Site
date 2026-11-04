@@ -9,12 +9,12 @@
     "primary_dark": "#14462E",
     "accent_color": "#F59E0B",
     "accent_hover": "#D97706",
-    "helpline_phone": "+254 716 189 084",
-    "helpline_phone_alt": "+254 759 437 978",
-    "whatsapp_number": "+254 759 437 978",
+    "helpline_phone": "+254 746 525 252",
+    "helpline_phone_alt": "",
+    "whatsapp_number": "+254 746 525 252",
     "email_info": "info@loimatvc.ac.ke",
     "email_principal": "principal@loimatvc.ac.ke",
-    "physical_location": "Lorugum Campus (~1.5 km off Lodwar–Uganda Road), Loima Sub-County, Turkana County",
+    "physical_location": "Lorugum Campus (~1.5 km off Lodwar\u2013Uganda Road), Loima Sub-County, Turkana County",
     "po_box": "P.O. Box 123 - 30500, Lodwar, Kenya",
     "tveta_license_number": "TVETA/PUBLIC/TVC/0005/2023",
     "admissions_notice": "Intakes: January, May & September | Apply via KUCCPS or Campus Office in Lorugum"
@@ -62,7 +62,7 @@
       "category": "fees",
       "format": "PDF",
       "size": "280 KB",
-      "title": "Official Fee Structure – Government Sponsored (KUCCPS) 2026",
+      "title": "Official Fee Structure \u2013 Government Sponsored (KUCCPS) 2026",
       "description": "Capitation breakdowns, National Government scholarship allocations, and payable balances per academic term.",
       "date": "Feb 02, 2026",
       "downloadUrl": "#",
@@ -73,7 +73,7 @@
       "category": "fees",
       "format": "PDF",
       "size": "295 KB",
-      "title": "Official Fee Structure – Self-Sponsored Students 2026",
+      "title": "Official Fee Structure \u2013 Self-Sponsored Students 2026",
       "description": "Direct enrollment tuition tiers, activity charges, practical materials levies, and instalment plans.",
       "date": "Feb 02, 2026",
       "downloadUrl": "#",
@@ -910,10 +910,10 @@
         },
         {
           "url": "College Banner_ Technology and Innovation.webp",
-          "caption": "College banner — technology and innovation."
+          "caption": "College banner \u2014 technology and innovation."
         }
       ],
-      "contactInfo": "Lorugum Campus (~1.5 km off Lodwar–Uganda Road), Loima Sub-County, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke",
+      "contactInfo": "Lorugum Campus (~1.5 km off Lodwar\u2013Uganda Road), Loima Sub-County, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke",
       "actionText": "View Academic Catalog",
       "actionRoute": "courses"
     },
@@ -923,7 +923,7 @@
       "categoryName": "General Information",
       "title": "Gallery",
       "subtitle": "Vibrant Pictorial Journey Across Workshops, Campus Facilities, and Student Life",
-      "description": "Step inside the daily life of Loima Technical and Vocational College. Our gallery showcases the state-of-the-art training environments where trainees acquire real-world mastery—from heavy welding and fabrication bays to modern computer labs, electrical testing rigs, greenhouse farming, and athletics fields.\n\nWitness our trainees in action as they build prototypes, conduct site surveying, practice culinary arts, and engage in co-curricular competitions.",
+      "description": "Step inside the daily life of Loima Technical and Vocational College. Our gallery showcases the state-of-the-art training environments where trainees acquire real-world mastery\u2014from heavy welding and fabrication bays to modern computer labs, electrical testing rigs, greenhouse farming, and athletics fields.\n\nWitness our trainees in action as they build prototypes, conduct site surveying, practice culinary arts, and engage in co-curricular competitions.",
       "mandates": [
         "Visual documentation of modern industrial workshop equipment in active use.",
         "Highlighting trainee achievements in TVET trade fairs and robotic exhibitions.",
@@ -951,7 +951,7 @@
       "images": [
         {
           "url": "Bright Workshop Training Room.webp",
-          "caption": "Bright workshop training room — hands-on industrial skills in action."
+          "caption": "Bright workshop training room \u2014 hands-on industrial skills in action."
         },
         {
           "url": "Collaborative Training Room Meeting.webp",
@@ -963,7 +963,7 @@
         },
         {
           "url": "Desert Campus Under Blue Skies.webp",
-          "caption": "Tuition Block — lecture halls under clear blue skies."
+          "caption": "Tuition Block \u2014 lecture halls under clear blue skies."
         },
         {
           "url": "Focused Office Training Session.webp",
@@ -971,7 +971,7 @@
         },
         {
           "url": "Loima College Sunlit Facade.webp",
-          "caption": "Administration Block — main entrance and executive offices."
+          "caption": "Administration Block \u2014 main entrance and executive offices."
         },
         {
           "url": "Lomia Technical College Exterior.webp",
@@ -979,7 +979,7 @@
         },
         {
           "url": "Sunlit Concrete Office Building.webp",
-          "caption": "Tuition Block — modern classrooms and lecture facilities."
+          "caption": "Tuition Block \u2014 modern classrooms and lecture facilities."
         },
         {
           "url": "Sunlit School Building with Covered Walkway.webp",
@@ -996,7 +996,7 @@
       "categoryName": "General Information",
       "title": "Contact Us",
       "subtitle": "Direct Channels to Our Admissions Desk, Registrar, and Campus Headquarters",
-      "description": "We welcome prospective trainees, parents, guardians, and corporate partners to visit our main campus or reach out through our official direct channels. Our admissions team is on standby to assist with course selection, KUCCPS inter-institutional transfers, hostel bookings, and fee payment arrangements.\n\nOur campus is conveniently situated approximately 1.5 km from Lorugum shopping centre, along the Lodwar–Uganda (Lodwar–Moroto) road, with reliable all-weather access, secure parking, and visitor reception facilities.",
+      "description": "We welcome prospective trainees, parents, guardians, and corporate partners to visit our main campus or reach out through our official direct channels. Our admissions team is on standby to assist with course selection, KUCCPS inter-institutional transfers, hostel bookings, and fee payment arrangements.\n\nOur campus is conveniently situated approximately 1.5 km from Lorugum shopping centre, along the Lodwar\u2013Uganda (Lodwar\u2013Moroto) road, with reliable all-weather access, secure parking, and visitor reception facilities.",
       "mandates": [
         "Prompt response to telephone and WhatsApp admissions enquiries (Mon-Fri 8am-5pm).",
         "Guided campus and workshop walkthrough tours for visiting prospective students.",
@@ -1006,7 +1006,7 @@
       "highlights": [
         {
           "label": "Campus Address",
-          "value": "P.O. Box 517 – 30500, Lodwar (Lorugum Campus)"
+          "value": "P.O. Box 517 \u2013 30500, Lodwar (Lorugum Campus)"
         },
         {
           "label": "Admissions Line",
@@ -1031,7 +1031,7 @@
           "caption": "Customer service desk welcoming parents and new applicants."
         }
       ],
-      "contactInfo": "Postal Address: P.O. Box 517 – 30500, Lodwar | Lorugum, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke",
+      "contactInfo": "Postal Address: P.O. Box 517 \u2013 30500, Lodwar | Lorugum, Turkana County | Email: info@loima.co.ke / principal@loima.co.ke",
       "actionText": "Express Course Enquiry",
       "actionRoute": "home"
     },
@@ -1329,7 +1329,7 @@
       "categoryName": "Academic Departments",
       "title": "Building & Civil Engineering",
       "subtitle": "Structural Masonry, Plumbing, Architectural Draughting, and Surveying",
-      "description": "The Department of Building & Civil Engineering equips trainees to build Kenya’s critical infrastructure. With outdoor construction yards, surveying gear, and plumbing test installations, trainees gain practical mastery in masonry, architectural design, pipefitting, concrete technology, and road construction.\n\nGraduates gain accreditation through the National Construction Authority (NCA) and secure employment with major construction firms, county governments, and water companies.",
+      "description": "The Department of Building & Civil Engineering equips trainees to build Kenya\u2019s critical infrastructure. With outdoor construction yards, surveying gear, and plumbing test installations, trainees gain practical mastery in masonry, architectural design, pipefitting, concrete technology, and road construction.\n\nGraduates gain accreditation through the National Construction Authority (NCA) and secure employment with major construction firms, county governments, and water companies.",
       "mandates": [
         "Develop skilled craftsmen in structural masonry, bricklaying, and plastering.",
         "Provide practical mastery of residential and municipal plumbing, drainage, and solar water heating.",
@@ -1599,7 +1599,7 @@
       "categoryName": "Non Academic Departments",
       "title": "Performance Contracting Office",
       "subtitle": "Institutional Target Setting, Public Service Evaluation, and Compliance Reporting",
-      "description": "The Performance Contracting Office steers the college’s compliance with the Government of Kenya Performance Contracting guidelines for State Corporations and Tertiary Institutions.\n\nThe office cascades annual ministerial targets to all academic and non-academic departments, monitors quarterly milestone delivery, and prepares statutory performance reports submitted to the Ministry of Education and the Public Service Commission.",
+      "description": "The Performance Contracting Office steers the college\u2019s compliance with the Government of Kenya Performance Contracting guidelines for State Corporations and Tertiary Institutions.\n\nThe office cascades annual ministerial targets to all academic and non-academic departments, monitors quarterly milestone delivery, and prepares statutory performance reports submitted to the Ministry of Education and the Public Service Commission.",
       "mandates": [
         "Negotiate and execute the annual Performance Contract with the Ministry of Education.",
         "Cascade performance deliverables to departments and individual staff workplans.",
@@ -1689,7 +1689,7 @@
       "categoryName": "Non Academic Departments",
       "title": "Research & Innovation Office",
       "subtitle": "Applied Engineering Research, Prototype Incubation, Robotics, and Patenting",
-      "description": "The Research and Innovation Office fosters a culture of discovery, technological ingenuity, and problem-solving at Loima TVC. Trainees and trainers are supported to build practical prototypes that solve local challenges—such as solar water pumps, automated agro-sorters, waste-plastic pavers, and mobile IoT applications.\n\nThe office sponsors trainee participation in regional TVET innovation fairs, scientific conferences, and technology incubation competitions with industry mentors.",
+      "description": "The Research and Innovation Office fosters a culture of discovery, technological ingenuity, and problem-solving at Loima TVC. Trainees and trainers are supported to build practical prototypes that solve local challenges\u2014such as solar water pumps, automated agro-sorters, waste-plastic pavers, and mobile IoT applications.\n\nThe office sponsors trainee participation in regional TVET innovation fairs, scientific conferences, and technology incubation competitions with industry mentors.",
       "mandates": [
         "Promote applied research and engineering prototyping among trainees and faculty.",
         "Organize the annual Loima TVC Trainee Innovation and Science Competition.",

@@ -88,7 +88,7 @@ export default function DownloadsPage({ onDownloadDoc }) {
   };
 
   const handleOpenRegistryWhatsApp = () => {
-    const rawNumber = (whatsappNumber || '+254759437978').replace(/[^0-9]/g, '');
+    const rawNumber = (whatsappNumber || '+254746525252').replace(/[^0-9]/g, '');
     Linking.openURL(`https://wa.me/${rawNumber}?text=Hello%20Registry,%20I%20need%20assistance%20with%20an%20official%20download%20or%20joining%20form.`);
   };
 

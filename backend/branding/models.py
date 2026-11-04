@@ -52,9 +52,9 @@ class SiteBranding(models.Model):
     favicon = models.ImageField(upload_to="branding/", blank=True, null=True)
 
     # Contact & Helpline
-    helpline_phone = models.CharField(max_length=50, default="+254 716 189 084")
-    helpline_phone_alt = models.CharField(max_length=50, blank=True, default="+254 759 437 978")
-    whatsapp_number = models.CharField(max_length=50, default="+254 759 437 978")
+    helpline_phone = models.CharField(max_length=50, default="+254 746 525 252")
+    helpline_phone_alt = models.CharField(max_length=50, blank=True, default="")
+    whatsapp_number = models.CharField(max_length=50, default="+254 746 525 252")
     email_info = models.EmailField(default="info@loimatvc.ac.ke")
     email_principal = models.EmailField(default="principal@loimatvc.ac.ke")
     physical_location = models.CharField(

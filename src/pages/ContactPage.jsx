@@ -77,7 +77,7 @@ export default function ContactPage({ onNavigate }) {
 
   const handleOpenWhatsApp = (customMsg) => {
     const text = encodeURIComponent(customMsg || 'Hello Loima TVC, I have an inquiry regarding admissions and programmes');
-    Linking.openURL(`https://wa.me/254759437978?text=${text}`);
+    Linking.openURL(`https://wa.me/254746525252?text=${text}`);
   };
 
   const handleCall = (phoneNum) => {
@@ -203,7 +203,7 @@ export default function ContactPage({ onNavigate }) {
                       <Text style={styles.fieldLabel}>Mobile / WhatsApp Number *</Text>
                       <TextInput
                         style={styles.textInput}
-                        placeholder="e.g. +254 716 189 084 / +254 759 437 978"
+                        placeholder="e.g. +254 746 525 252"
                         placeholderTextColor="#94A3B8"
                         value={formData.phone}
                         onChangeText={(t) => handleInputChange('phone', t)}
@@ -391,9 +391,9 @@ export default function ContactPage({ onNavigate }) {
               <Text style={styles.securityDesc}>
                 For on-campus safety, late arrival guidance, or lost-and-found queries:
               </Text>
-              <TouchableOpacity style={styles.securityPhoneTouch} onPress={() => handleCall('+254759437978')}>
+              <TouchableOpacity style={styles.securityPhoneTouch} onPress={() => handleCall('+254746525252')}>
                 <Phone size={14} color="#D97706" />
-                <Text style={styles.securityPhoneText}>Campus Security Gate: +254 716 189 084 / +254 759 437 978</Text>
+                <Text style={styles.securityPhoneText}>Campus Security Gate: +254 746 525 252</Text>
               </TouchableOpacity>
             </View>
 
