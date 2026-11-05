@@ -39,7 +39,7 @@ export default function NoticeModal({ visible, notice, onClose }) {
               </Text>
             </View>
 
-            <TouchableOpacity style={styles.closeBtn} onPress={onClose}>
+            <TouchableOpacity style={styles.closeBtn} onPress={onClose} className="tvet-clickable">
               <X size={20} color="#64748B" />
             </TouchableOpacity>
           </View>
@@ -84,12 +84,19 @@ export default function NoticeModal({ visible, notice, onClose }) {
             <TouchableOpacity 
               style={styles.printBtn} 
               onPress={() => window.print ? window.print() : alert('Printing circular...')}
+              className="tvet-btn-outline"
+              dataSet={{ class: 'tvet-btn-outline' }}
             >
               <Printer size={15} color="#0F172A" />
               <Text style={styles.printBtnText}>Print Official Notice</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.closeModalBtn} onPress={onClose}>
+            <TouchableOpacity 
+              style={styles.closeModalBtn} 
+              onPress={onClose}
+              className="tvet-btn-secondary"
+              dataSet={{ class: 'tvet-btn-secondary' }}
+            >
               <Text style={styles.closeModalText}>Close Circular</Text>
             </TouchableOpacity>
           </View>

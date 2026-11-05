@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { 
   Zap, 
@@ -211,6 +211,10 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                   onPress={() => setActiveCategory(cat.id)}
                   style={[styles.filterPill, isActive && styles.filterPillActive]}
                   activeOpacity={0.8}
+                  className="tvet-filter-pill"
+                  // @ts-ignore
+                  data-active={isActive ? "true" : "false"}
+                  dataSet={{ class: 'tvet-filter-pill', active: isActive ? 'true' : 'false' }}
                 >
                   <Text style={[styles.filterPillText, isActive && styles.filterPillTextActive]}>
                     {cat.label}
@@ -305,6 +309,8 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                   style={styles.exploreAllBtn}
                   onPress={onViewAllCourses}
                   activeOpacity={0.85}
+                  className="tvet-btn-primary"
+                  dataSet={{ class: 'tvet-btn-primary' }}
                 >
                   <Text style={styles.exploreAllBtnText}>
                     Explore Full 15+ Programme Catalog
@@ -342,6 +348,8 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                       styles.programmeCard,
                       isMobile && styles.programmeCardMobile
                     ]}
+                    className="tvet-card-interactive"
+                    dataSet={{ class: 'tvet-card-interactive' }}
                   >
                     {/* Top Row: Icon + Department + Qualification Badge */}
                     <View style={styles.cardHeaderRow}>
@@ -366,7 +374,13 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                       onPress={() => onSelectCourse && onSelectCourse(course)}
                       activeOpacity={0.7}
                     >
-                      <Text style={styles.courseHeadline} numberOfLines={2}>
+                      <Text 
+                        style={styles.courseHeadline} 
+                        numberOfLines={2}
+                        // @ts-ignore
+                        data-card-title="true"
+                        dataSet={{ cardTitle: 'true' }}
+                      >
                         {course.title}
                       </Text>
                     </TouchableOpacity>
@@ -409,6 +423,8 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                           style={styles.detailsBtn}
                           onPress={() => onSelectCourse && onSelectCourse(course)}
                           activeOpacity={0.7}
+                          className="tvet-btn-outline"
+                          dataSet={{ class: 'tvet-btn-outline' }}
                         >
                           <BookOpen size={12} color={colors.textSecondary} />
                           <Text style={styles.detailsBtnText}>Curriculum</Text>
@@ -418,6 +434,8 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                           style={styles.applyActionBtn}
                           onPress={() => onApplyCourse && onApplyCourse(course)}
                           activeOpacity={0.8}
+                          className="tvet-btn-secondary"
+                          dataSet={{ class: 'tvet-btn-secondary' }}
                         >
                           <Text style={styles.applyActionText}>Apply</Text>
                           <ArrowRight size={12} color="#FFFFFF" />
@@ -444,6 +462,8 @@ export default function CoursesSection({ onSelectCourse, onApplyCourse, onViewAl
                 style={styles.promptBtn}
                 onPress={onViewAllCourses}
                 activeOpacity={0.8}
+                className="tvet-btn-outline"
+                dataSet={{ class: 'tvet-btn-outline' }}
               >
                 <Text style={styles.promptBtnText}>View All 15+ Courses</Text>
                 <ArrowRight size={13} color={colors.greenDeep} />

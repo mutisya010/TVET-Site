@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   View, 
   Text, 
@@ -169,6 +169,8 @@ export default function ContactPage({ onNavigate }) {
                       style={styles.successWhatsAppBtn}
                       onPress={() => handleOpenWhatsApp(`Hello, I have submitted an official inquiry with reference code: ${refCode}`)}
                       activeOpacity={0.85}
+                      className="tvet-btn-primary"
+                      dataSet={{ class: 'tvet-btn-primary' }}
                     >
                       <MessageSquare size={14} color="#FFFFFF" />
                       <Text style={styles.successWhatsAppText}>Follow Up on WhatsApp</Text>
@@ -178,6 +180,8 @@ export default function ContactPage({ onNavigate }) {
                       style={styles.newInquiryBtn}
                       onPress={handleResetForm}
                       activeOpacity={0.8}
+                      className="tvet-btn-outline"
+                      dataSet={{ class: 'tvet-btn-outline' }}
                     >
                       <Text style={styles.newInquiryText}>Submit Another Inquiry</Text>
                     </TouchableOpacity>
@@ -243,6 +247,9 @@ export default function ContactPage({ onNavigate }) {
                             ]}
                             onPress={() => handleInputChange('category', cat.id)}
                             activeOpacity={0.7}
+                            className="tvet-filter-pill"
+                            // @ts-ignore
+                            data-active={formData.category === cat.id ? "true" : "false"}
                           >
                             <Text style={[
                               styles.miniPillText,
@@ -295,6 +302,8 @@ export default function ContactPage({ onNavigate }) {
                       style={styles.submitBtn}
                       onPress={handleSubmit}
                       activeOpacity={0.85}
+                      className="tvet-btn-primary"
+                      dataSet={{ class: 'tvet-btn-primary' }}
                     >
                       <Text style={styles.submitBtnText}>Transmit Inquiry</Text>
                       <Send size={15} color="#FFFFFF" />
@@ -311,7 +320,7 @@ export default function ContactPage({ onNavigate }) {
           <View style={[styles.locationColumn, (isTablet || isMobile) && styles.locationColumnFull]}>
             
             {/* Campus Photo & Interactive Location Card */}
-            <View style={styles.locationCard}>
+            <View style={styles.locationCard} className="tvet-card-interactive">
               <View style={styles.campusImageWrapper}>
                 <Image 
                   source={typeof campusFacadeImg === 'string' ? { uri: campusFacadeImg } : campusFacadeImg} 
@@ -364,6 +373,8 @@ export default function ContactPage({ onNavigate }) {
                     style={styles.mapBtn}
                     onPress={handleOpenGoogleMaps}
                     activeOpacity={0.8}
+                    className="tvet-btn-outline"
+                    dataSet={{ class: 'tvet-btn-outline' }}
                   >
                     <ExternalLink size={14} color={colors.greenDeep} />
                     <Text style={styles.mapBtnText}>Open in Google Maps</Text>
@@ -373,6 +384,8 @@ export default function ContactPage({ onNavigate }) {
                     style={styles.tourBtn}
                     onPress={() => handleOpenWhatsApp('Hello Loima TVC Admissions, I would like to schedule an in-person guided tour of your technical workshops')}
                     activeOpacity={0.85}
+                    className="tvet-btn-primary"
+                    dataSet={{ class: 'tvet-btn-primary' }}
                   >
                     <Calendar size={14} color="#FFFFFF" />
                     <Text style={styles.tourBtnText}>Book Workshop Tour</Text>

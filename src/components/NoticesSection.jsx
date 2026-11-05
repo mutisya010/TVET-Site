@@ -61,6 +61,7 @@ export default function NoticesSection({ onOpenNotice }) {
                   styles.noticeCard, 
                   isMobile && styles.noticeCardMobile
                 ]}
+                className="tvet-card-interactive"
               >
                 {/* Card Header: Tag & Date */}
                 <View style={styles.cardHeader}>
@@ -80,7 +81,13 @@ export default function NoticesSection({ onOpenNotice }) {
                   onPress={() => onOpenNotice && onOpenNotice(item)}
                   activeOpacity={0.7}
                 >
-                  <Text style={styles.noticeTitle}>{item.title}</Text>
+                  <Text 
+                    style={styles.noticeTitle}
+                    // @ts-ignore
+                    data-card-title="true"
+                  >
+                    {item.title}
+                  </Text>
                 </TouchableOpacity>
 
                 {/* Excerpt */}
@@ -95,8 +102,17 @@ export default function NoticesSection({ onOpenNotice }) {
                     style={styles.actionBtn}
                     onPress={() => onOpenNotice && onOpenNotice(item)}
                     activeOpacity={0.7}
+                    className="tvet-footer-link"
+                    dataSet={{ class: 'tvet-footer-link' }}
                   >
-                    <Text style={styles.actionBtnText}>{item.actionLabel || 'Read Circular'}</Text>
+                    <Text 
+                      style={styles.actionBtnText}
+                      // @ts-ignore
+                      data-footer-text="true"
+                      dataSet={{ footerText: 'true' }}
+                    >
+                      {item.actionLabel || 'Read Circular'}
+                    </Text>
                     <ArrowRight size={13} color="#D97706" />
                   </TouchableOpacity>
                 </View>

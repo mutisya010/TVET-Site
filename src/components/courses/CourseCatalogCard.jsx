@@ -37,6 +37,8 @@ export default function CourseCatalogCard({ course, onViewDetails, onApplyNow })
         isMobile && styles.cardMobile,
         isTablet && styles.cardTablet
       ]}
+      className="tvet-card-interactive"
+      dataSet={{ class: 'tvet-card-interactive' }}
     >
       {/* Top Header Row: Category Badge & KNQF Level */}
       <View style={styles.topRow}>
@@ -54,7 +56,13 @@ export default function CourseCatalogCard({ course, onViewDetails, onApplyNow })
       {/* Course Title & Code Header */}
       <View style={styles.titleArea}>
         <TouchableOpacity onPress={() => onViewDetails && onViewDetails(course)} activeOpacity={0.8}>
-          <Text style={styles.title} numberOfLines={2}>
+          <Text 
+            style={styles.title} 
+            numberOfLines={2}
+            // @ts-ignore
+            data-card-title="true"
+            dataSet={{ cardTitle: 'true' }}
+          >
             {course.title}
           </Text>
         </TouchableOpacity>
@@ -122,6 +130,8 @@ export default function CourseCatalogCard({ course, onViewDetails, onApplyNow })
           style={styles.detailsBtn}
           onPress={() => onViewDetails && onViewDetails(course)}
           activeOpacity={0.8}
+          className="tvet-btn-outline"
+          dataSet={{ class: 'tvet-btn-outline' }}
         >
           <BookOpen size={13} color={colors.greenDeep} />
           <Text style={styles.detailsBtnText}>Details</Text>
@@ -131,6 +141,8 @@ export default function CourseCatalogCard({ course, onViewDetails, onApplyNow })
           style={styles.applyBtn}
           onPress={() => onApplyNow && onApplyNow(course)}
           activeOpacity={0.85}
+          className="tvet-btn-secondary"
+          dataSet={{ class: 'tvet-btn-secondary' }}
         >
           <Text style={styles.applyBtnText}>Apply Now</Text>
           <ArrowRight size={13} color={colors.white} />

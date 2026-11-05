@@ -127,11 +127,11 @@ export default function App() {
   };
 
   const handleBookVisit = () => {
-    Linking.openURL('https://wa.me/254759437978?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20book%20a%20guided%20campus%20visit');
+    Linking.openURL('https://wa.me/254746525252?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20book%20a%20guided%20campus%20visit');
   };
 
   const handleFloatingWhatsApp = () => {
-    Linking.openURL('https://wa.me/254759437978?text=Hello%20Loima%20TVC%20Admissions,%20I%20have%20an%20enquiry');
+    Linking.openURL('https://wa.me/254746525252?text=Hello%20Loima%20TVC%20Admissions,%20I%20have%20an%20enquiry');
   };
 
   return (

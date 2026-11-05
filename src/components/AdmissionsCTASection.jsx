@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   View, 
   Text, 
@@ -105,6 +105,8 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
                 style={styles.whatsAppBtn}
                 onPress={handleWhatsApp}
                 activeOpacity={0.85}
+                className="tvet-btn-primary"
+                dataSet={{ class: 'tvet-btn-primary' }}
               >
                 <MessageCircle size={16} color="#FFFFFF" />
                 <Text style={styles.whatsAppBtnText}>WhatsApp Admissions</Text>
@@ -114,6 +116,8 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
                 style={styles.callBtn}
                 onPress={handleCall}
                 activeOpacity={0.85}
+                className="tvet-btn-secondary"
+                dataSet={{ class: 'tvet-btn-secondary' }}
               >
                 <Phone size={16} color="#FFFFFF" />
                 <Text style={styles.callBtnText}>+254 746 525 252</Text>
@@ -246,6 +250,8 @@ export default function AdmissionsCTASection({ initialCourse = null }) {
                     onPress={handleSubmit}
                     disabled={isSubmitting}
                     activeOpacity={0.85}
+                    className="tvet-btn-primary"
+                    dataSet={{ class: 'tvet-btn-primary' }}
                   >
                     {isSubmitting ? (
                       <ActivityIndicator color="#FFFFFF" size="small" />

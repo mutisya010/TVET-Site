@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -281,6 +281,10 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                     style={[styles.segmentBtn, isActive && styles.segmentBtnActive]}
                     onPress={() => setSelectedLevel(level.id)}
                     activeOpacity={0.8}
+                    className="tvet-filter-pill"
+                    // @ts-ignore
+                    data-active={isActive ? "true" : "false"}
+                    dataSet={{ class: 'tvet-filter-pill', active: isActive ? 'true' : 'false' }}
                   >
                     <Text style={[styles.segmentBtnText, isActive && styles.segmentBtnTextActive]}>
                       {level.label}
@@ -300,6 +304,10 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                     style={[styles.intakeBtn, isActive && styles.intakeBtnActive]}
                     onPress={() => setSelectedIntake(intake.id)}
                     activeOpacity={0.8}
+                    className="tvet-filter-pill"
+                    // @ts-ignore
+                    data-active={isActive ? "true" : "false"}
+                    dataSet={{ class: 'tvet-filter-pill', active: isActive ? 'true' : 'false' }}
                   >
                     <Text style={[styles.intakeBtnText, isActive && styles.intakeBtnTextActive]}>
                       {intake.label}
@@ -323,6 +331,10 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                     style={[styles.deptPill, isActive && styles.deptPillActive]}
                     onPress={() => setSelectedDept(dept.id)}
                     activeOpacity={0.8}
+                    className="tvet-filter-pill"
+                    // @ts-ignore
+                    data-active={isActive ? "true" : "false"}
+                    dataSet={{ class: 'tvet-filter-pill', active: isActive ? 'true' : 'false' }}
                   >
                     <Text style={[styles.deptPillText, isActive && styles.deptPillTextActive]}>
                       {dept.label}
@@ -391,6 +403,8 @@ export default function CoursesPage({ onViewCourseDetails, onApplyCourse, onStar
                   style={styles.resetBtn} 
                   onPress={handleResetFilters}
                   activeOpacity={0.8}
+                  className="tvet-btn-outline"
+                  dataSet={{ class: 'tvet-btn-outline' }}
                 >
                   <RotateCcw size={12} color={colors.orangeDark} />
                   <Text style={styles.resetBtnText}>Clear All</Text>

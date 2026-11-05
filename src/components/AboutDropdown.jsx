@@ -25,6 +25,8 @@ export default function AboutDropdown({ onSelectOption, onClose }) {
         style={styles.menuItem}
         onPress={() => handleItemClick('our-history')}
         activeOpacity={0.8}
+        className="tvet-dropdown-item"
+        dataSet={{ class: 'tvet-dropdown-item' }}
       >
         <Text style={styles.menuText}>Our History & Heritage</Text>
       </TouchableOpacity>
@@ -34,6 +36,8 @@ export default function AboutDropdown({ onSelectOption, onClose }) {
         style={styles.menuItem}
         onPress={() => handleItemClick('gallery')}
         activeOpacity={0.8}
+        className="tvet-dropdown-item"
+        dataSet={{ class: 'tvet-dropdown-item' }}
       >
         <Text style={styles.menuText}>Campus Life & Gallery</Text>
       </TouchableOpacity>
@@ -48,6 +52,8 @@ export default function AboutDropdown({ onSelectOption, onClose }) {
         style={styles.menuItem}
         onPress={() => handleItemClick('office-of-principal')}
         activeOpacity={0.8}
+        className="tvet-dropdown-item"
+        dataSet={{ class: 'tvet-dropdown-item' }}
       >
         <Text style={styles.menuText}>Principal</Text>
       </TouchableOpacity>
@@ -64,6 +70,8 @@ export default function AboutDropdown({ onSelectOption, onClose }) {
           style={[styles.menuItem, styles.menuItemLast, deputySubmenuOpen && styles.menuItemHovered]}
           onPress={() => setDeputySubmenuOpen(!deputySubmenuOpen)}
           activeOpacity={0.8}
+          className="tvet-dropdown-item"
+          dataSet={{ class: 'tvet-dropdown-item' }}
         >
           <Text style={[styles.menuText, deputySubmenuOpen && styles.menuTextHighlight]}>
             Deputy Principals
@@ -82,6 +90,8 @@ export default function AboutDropdown({ onSelectOption, onClose }) {
               style={styles.submenuItem}
               onPress={() => handleItemClick('deputy-principal-admin')}
               activeOpacity={0.8}
+              className="tvet-dropdown-item"
+              dataSet={{ class: 'tvet-dropdown-item' }}
             >
               <Text style={styles.submenuText}>Deputy Principal (Administration)</Text>
             </TouchableOpacity>
@@ -90,6 +100,8 @@ export default function AboutDropdown({ onSelectOption, onClose }) {
               style={[styles.submenuItem, styles.submenuItemLast]}
               onPress={() => handleItemClick('deputy-principal-academics')}
               activeOpacity={0.8}
+              className="tvet-dropdown-item"
+              dataSet={{ class: 'tvet-dropdown-item' }}
             >
               <Text style={styles.submenuText}>Deputy Principal (Academics)</Text>
             </TouchableOpacity>

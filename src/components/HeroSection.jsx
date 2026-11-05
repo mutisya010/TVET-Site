@@ -109,6 +109,8 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
                   style={styles.primaryBtn}
                   onPress={onExploreCourses}
                   activeOpacity={0.85}
+                  className="tvet-btn-primary"
+                  dataSet={{ class: 'tvet-btn-primary' }}
                 >
                   <Compass size={17} color={colors.white} />
                   <Text style={styles.primaryBtnText}>Explore Courses (15)</Text>
@@ -118,6 +120,8 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
                   style={styles.secondaryBtn}
                   onPress={onApplyNow}
                   activeOpacity={0.85}
+                  className="tvet-btn-secondary"
+                  dataSet={{ class: 'tvet-btn-secondary' }}
                 >
                   <Text style={styles.secondaryBtnText}>Apply for Admission</Text>
                   <ArrowRight size={16} color={colors.white} />
@@ -130,7 +134,7 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
               <View style={styles.trustRow}>
                 <ShieldCheck size={16} color={colors.green} />
                 <Text style={styles.trustText}>
-                  KUCCPS Placement & Self-Sponsored • TVETA Reg: <Text style={styles.trustBold}>TVETA/PUBLIC/TVC/0005/2023</Text> • Lorugum, Turkana
+                  KUCCPS Placement & Self-Sponsored • <Text style={styles.trustBold}>TVETA & CDACC CERTIFIED</Text> • Lorugum, Turkana
                 </Text>
               </View>
             </ScrollReveal>
@@ -177,6 +181,10 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
                     ]}
                     activeOpacity={0.7}
                     aria-label={`Go to slide ${idx + 1}`}
+                    className="tvet-indicator-dot"
+                    // @ts-ignore
+                    data-active={currentSlideIndex === idx ? "true" : "false"}
+                    dataSet={{ class: 'tvet-indicator-dot', active: currentSlideIndex === idx ? 'true' : 'false' }}
                   />
                 ))}
               </View>
@@ -187,6 +195,8 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
                 onPress={handlePrevSlide}
                 activeOpacity={0.8}
                 aria-label="Previous Slide"
+                className="tvet-clickable"
+                dataSet={{ class: 'tvet-clickable' }}
               >
                 <ChevronLeft size={16} color="#FFFFFF" />
               </TouchableOpacity>
@@ -196,6 +206,8 @@ export default function HeroSection({ onExploreCourses, onApplyNow }) {
                 onPress={handleNextSlide}
                 activeOpacity={0.8}
                 aria-label="Next Slide"
+                className="tvet-clickable"
+                dataSet={{ class: 'tvet-clickable' }}
               >
                 <ChevronRight size={16} color="#FFFFFF" />
               </TouchableOpacity>

@@ -71,6 +71,8 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
             onPress={() => handleNavClick('home')} 
             activeOpacity={0.8}
             style={styles.logoTouch}
+            className="tvet-clickable"
+            dataSet={{ class: 'tvet-clickable' }}
           >
             <CollegeLogo />
           </TouchableOpacity>
@@ -124,12 +126,21 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                         (isCourses && coursesDropdownOpen) && styles.navLinkManagementOpen
                       ]}
                       activeOpacity={0.7}
+                      className="tvet-nav-link"
+                      // @ts-ignore
+                      data-active={isActive ? "true" : "false"}
+                      dataSet={{ class: 'tvet-nav-link', active: isActive ? 'true' : 'false' }}
                     >
-                      <Text style={[
-                        styles.navText, 
-                        (isActive || isDropdownOpen) && styles.navTextActive,
-                        (isCourses && coursesDropdownOpen) && styles.navTextHighlight
-                      ]}>
+                      <Text 
+                        style={[
+                          styles.navText, 
+                          (isActive || isDropdownOpen) && styles.navTextActive,
+                          (isCourses && coursesDropdownOpen) && styles.navTextHighlight
+                        ]}
+                        // @ts-ignore
+                        data-nav-text="true"
+                        dataSet={{ navText: 'true' }}
+                      >
                         {item.label}
                       </Text>
                       {item.hasDropdown && (
@@ -177,6 +188,8 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                   style={styles.ctaButton}
                   onPress={onOpenInquiry}
                   activeOpacity={0.85}
+                  className="tvet-btn-primary"
+                  dataSet={{ class: 'tvet-btn-primary' }}
                 >
                   <Text style={styles.ctaText}>Apply / Enquire Now</Text>
                   <ArrowRight size={15} color={colors.white} />
@@ -187,6 +200,8 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenInquiry
                   style={styles.userAvatarBtn}
                   onPress={() => alert('Loima TVC Trainee & Staff Portal')}
                   activeOpacity={0.8}
+                  className="tvet-avatar-btn"
+                  dataSet={{ class: 'tvet-avatar-btn' }}
                 >
                   <User size={16} color={colors.textPrimary} />
                 </TouchableOpacity>

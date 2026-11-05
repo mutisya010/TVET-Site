@@ -1,0 +1,483 @@
+/* ==============================================================================
+   TVET-Site Master Interactions & Motion System
+   Hybrid CSS + React Native Web (dataSet & class) micro-interactions
+   ============================================================================== */
+
+:root {
+  /* Motion Tokens */
+  --tvet-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --tvet-ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --tvet-duration-fast: 160ms;
+  --tvet-duration-normal: 220ms;
+  --tvet-duration-smooth: 320ms;
+
+  /* Shadows */
+  --tvet-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --tvet-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --tvet-shadow-hover-card: 0 16px 32px rgba(15, 23, 42, 0.09), 0 4px 10px rgba(15, 23, 42, 0.04);
+  --tvet-shadow-hover-orange: 0 8px 20px rgba(245, 158, 11, 0.38);
+  --tvet-shadow-hover-green: 0 8px 20px rgba(20, 70, 46, 0.28);
+}
+
+/* ==============================================================================
+   1. GLOBAL ACCESSIBILITY & FOCUS MANAGEMENT
+   ============================================================================== */
+
+/* Ensure smooth pointer cursor on all touchables and buttons */
+[role="button"],
+button,
+.tvet-clickable,
+[data-class~="tvet-clickable"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Keyboard accessibility focus ring */
+[role="button"]:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #2E8B57 !important;
+  outline-offset: 2px !important;
+}
+
+/* ==============================================================================
+   2. DESKTOP HOVER INTERACTIONS (@media hover: hover)
+   Prevents sticky hover bug on touchscreens (iOS Safari & Android)
+   Dual-targeting: supports both standard .class and React Native Web's [data-class]
+   ============================================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+  /* --------------------------------------------------------------------------
+     Navigation Links & TopBar Items
+     -------------------------------------------------------------------------- */
+  .tvet-nav-link,
+  [data-class~="tvet-nav-link"] {
+    position: relative;
+    opacity: 0.95;
+    transition: background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-nav-link:hover:not([data-active="true"]),
+  [data-class~="tvet-nav-link"]:hover:not([data-active="true"]) {
+    background-color: #F0FDF4 !important;
+    transform: translateY(-1px);
+    opacity: 1 !important;
+  }
+  .tvet-nav-link:active,
+  [data-class~="tvet-nav-link"]:active {
+    transform: scale(0.97);
+    opacity: 0.82 !important;
+  }
+  .tvet-nav-link:hover:not([data-active="true"]) [data-nav-text="true"],
+  [data-class~="tvet-nav-link"]:hover:not([data-active="true"]) [data-nav-text="true"] {
+    color: #14462E !important;
+  }
+  .tvet-nav-link:hover svg,
+  [data-class~="tvet-nav-link"]:hover svg {
+    transform: translateY(1.5px) scale(1.1);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  /* TopBar Contact Links */
+  .tvet-topbar-link,
+  [data-class~="tvet-topbar-link"] {
+    opacity: 0.88;
+    transition: opacity var(--tvet-duration-fast) var(--tvet-ease-standard),
+                transform var(--tvet-duration-fast) var(--tvet-ease-spring) !important;
+  }
+  .tvet-topbar-link:hover,
+  [data-class~="tvet-topbar-link"]:hover {
+    opacity: 1 !important;
+    transform: translateY(-1.5px) scale(1.02);
+  }
+  .tvet-topbar-link:active,
+  [data-class~="tvet-topbar-link"]:active {
+    opacity: 0.75 !important;
+    transform: translateY(0) scale(0.98);
+  }
+  .tvet-topbar-link:hover,
+  .tvet-topbar-link:hover *,
+  [data-class~="tvet-topbar-link"]:hover,
+  [data-class~="tvet-topbar-link"]:hover * {
+    color: #14462E !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+    text-decoration-color: #2E8B57 !important;
+    text-decoration-thickness: 1.5px !important;
+  }
+  .tvet-topbar-link:hover svg,
+  [data-class~="tvet-topbar-link"]:hover svg {
+    transform: scale(1.18);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  /* Portal User Avatar Button */
+  .tvet-avatar-btn,
+  [data-class~="tvet-avatar-btn"] {
+    opacity: 0.95;
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                border-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                box-shadow var(--tvet-duration-fast) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-avatar-btn:hover,
+  [data-class~="tvet-avatar-btn"]:hover {
+    transform: scale(1.08);
+    opacity: 0.92 !important;
+    border-color: #2E8B57 !important;
+    background-color: #F0FDF4 !important;
+    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.25);
+  }
+  .tvet-avatar-btn:active,
+  [data-class~="tvet-avatar-btn"]:active {
+    transform: scale(0.96);
+    opacity: 0.78 !important;
+  }
+
+  /* Dropdown Menu Items (About & Courses) */
+  .tvet-dropdown-item,
+  [data-class~="tvet-dropdown-item"] {
+    opacity: 0.92;
+    transition: background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-dropdown-item:hover,
+  [data-class~="tvet-dropdown-item"]:hover {
+    opacity: 1 !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    transform: translateX(4px);
+  }
+  .tvet-dropdown-item:active,
+  [data-class~="tvet-dropdown-item"]:active {
+    opacity: 0.8 !important;
+    transform: translateX(2px);
+  }
+  .tvet-dropdown-item:hover svg,
+  [data-class~="tvet-dropdown-item"]:hover svg {
+    transform: translateX(3px) scale(1.1);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  /* --------------------------------------------------------------------------
+     Buttons: Primary (Amber Orange), Secondary (Deep Green), Outline
+     Features: Opacity change, elevated scale lift, luminous sheen, tactile press
+     -------------------------------------------------------------------------- */
+  .tvet-btn-primary,
+  [data-class~="tvet-btn-primary"] {
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                box-shadow var(--tvet-duration-normal) var(--tvet-ease-standard),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard),
+                filter var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-btn-primary:hover,
+  [data-class~="tvet-btn-primary"]:hover {
+    transform: translateY(-2.5px) scale(1.02);
+    opacity: 0.93 !important;
+    filter: brightness(1.05);
+    background-color: #D97706 !important;
+    box-shadow: 0 10px 24px rgba(245, 158, 11, 0.42), 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+  }
+  .tvet-btn-primary:active,
+  [data-class~="tvet-btn-primary"]:active {
+    transform: translateY(0.5px) scale(0.97);
+    opacity: 0.82 !important;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.25) !important;
+  }
+  /* Icon micro-slide forward on hover */
+  .tvet-btn-primary:hover svg,
+  [data-class~="tvet-btn-primary"]:hover svg {
+    transform: translateX(4px) scale(1.08);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  .tvet-btn-secondary,
+  [data-class~="tvet-btn-secondary"] {
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                box-shadow var(--tvet-duration-normal) var(--tvet-ease-standard),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                border-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard),
+                filter var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-btn-secondary:hover,
+  [data-class~="tvet-btn-secondary"]:hover {
+    transform: translateY(-2.5px) scale(1.02);
+    opacity: 0.93 !important;
+    filter: brightness(1.06);
+    background-color: #1A5638 !important;
+    border-color: #2E8B57 !important;
+    box-shadow: 0 10px 24px rgba(20, 70, 46, 0.35), 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+  }
+  .tvet-btn-secondary:active,
+  [data-class~="tvet-btn-secondary"]:active {
+    transform: translateY(0.5px) scale(0.97);
+    opacity: 0.82 !important;
+    box-shadow: 0 2px 6px rgba(20, 70, 46, 0.2) !important;
+  }
+  .tvet-btn-secondary:hover svg,
+  [data-class~="tvet-btn-secondary"]:hover svg {
+    transform: translateX(4px) scale(1.08);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  .tvet-btn-outline,
+  [data-class~="tvet-btn-outline"] {
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                border-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                box-shadow var(--tvet-duration-normal) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-btn-outline:hover,
+  [data-class~="tvet-btn-outline"]:hover {
+    transform: translateY(-2px) scale(1.015);
+    opacity: 0.92 !important;
+    background-color: #F0FDF4 !important;
+    border-color: #2E8B57 !important;
+    box-shadow: 0 6px 14px rgba(46, 139, 87, 0.18) !important;
+  }
+  .tvet-btn-outline:active,
+  [data-class~="tvet-btn-outline"]:active {
+    transform: translateY(0.5px) scale(0.97);
+    opacity: 0.8 !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     Hero Carousel Dots
+     -------------------------------------------------------------------------- */
+  .tvet-indicator-dot,
+  [data-class~="tvet-indicator-dot"] {
+    opacity: 0.75;
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                width var(--tvet-duration-fast) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-indicator-dot:hover:not([data-active="true"]),
+  [data-class~="tvet-indicator-dot"]:hover:not([data-active="true"]) {
+    transform: scale(1.35);
+    opacity: 1 !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     Cards (Course Catalog & Discipline Cards)
+     -------------------------------------------------------------------------- */
+  .tvet-card-interactive,
+  [data-class~="tvet-card-interactive"] {
+    transition: transform var(--tvet-duration-normal) var(--tvet-ease-spring),
+                box-shadow var(--tvet-duration-normal) var(--tvet-ease-standard),
+                border-color var(--tvet-duration-normal) var(--tvet-ease-standard),
+                filter var(--tvet-duration-normal) var(--tvet-ease-standard) !important;
+  }
+  .tvet-card-interactive:hover,
+  [data-class~="tvet-card-interactive"]:hover {
+    transform: translateY(-6px) scale(1.008);
+    box-shadow: var(--tvet-shadow-hover-card) !important;
+    border-color: #2E8B57 !important;
+    filter: brightness(1.01);
+  }
+  /* Card title highlight on card hover */
+  .tvet-card-interactive:hover [data-card-title="true"],
+  [data-class~="tvet-card-interactive"]:hover [data-card-title="true"] {
+    color: #14462E !important;
+    transition: color var(--tvet-duration-fast) var(--tvet-ease-standard);
+  }
+
+  /* Filter Pills */
+  .tvet-filter-pill,
+  [data-class~="tvet-filter-pill"] {
+    opacity: 0.92;
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                border-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                box-shadow var(--tvet-duration-fast) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-filter-pill:hover:not([data-active="true"]),
+  [data-class~="tvet-filter-pill"]:hover:not([data-active="true"]) {
+    transform: translateY(-1.5px) scale(1.03);
+    opacity: 1 !important;
+    background-color: #DCFCE7 !important;
+    border-color: #2E8B57 !important;
+    box-shadow: 0 4px 10px rgba(46, 139, 87, 0.16);
+  }
+  .tvet-filter-pill:active,
+  [data-class~="tvet-filter-pill"]:active {
+    transform: scale(0.97);
+    opacity: 0.82 !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     Downloads Page Document Rows
+     -------------------------------------------------------------------------- */
+  .tvet-doc-row,
+  [data-class~="tvet-doc-row"] {
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                border-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                box-shadow var(--tvet-duration-normal) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-doc-row:hover,
+  [data-class~="tvet-doc-row"]:hover {
+    transform: translateY(-2.5px) scale(1.005);
+    background-color: #FAFCF9 !important;
+    border-color: #2E8B57 !important;
+    box-shadow: 0 8px 22px rgba(20, 70, 46, 0.1) !important;
+  }
+  .tvet-doc-row:hover [data-doc-title="true"],
+  [data-class~="tvet-doc-row"]:hover [data-doc-title="true"] {
+    color: #14462E !important;
+    transition: color var(--tvet-duration-fast) var(--tvet-ease-standard);
+  }
+  .tvet-doc-row:hover .tvet-doc-icon,
+  [data-class~="tvet-doc-row"]:hover .tvet-doc-icon,
+  .tvet-doc-row:hover [data-class~="tvet-doc-icon"],
+  [data-class~="tvet-doc-row"]:hover [data-class~="tvet-doc-icon"] {
+    transform: scale(1.12);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  /* Download Button inside row */
+  .tvet-download-btn,
+  [data-class~="tvet-download-btn"] {
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                box-shadow var(--tvet-duration-fast) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard),
+                filter var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-download-btn:hover,
+  [data-class~="tvet-download-btn"]:hover {
+    transform: translateY(-1.5px) scale(1.03);
+    opacity: 0.93 !important;
+    filter: brightness(1.05);
+    background-color: #F59E0B !important;
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4) !important;
+  }
+  .tvet-download-btn:active,
+  [data-class~="tvet-download-btn"]:active {
+    transform: translateY(0.5px) scale(0.97);
+    opacity: 0.8 !important;
+  }
+  .tvet-download-btn:hover svg,
+  [data-class~="tvet-download-btn"]:hover svg {
+    transform: translateY(2px) scale(1.12);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  /* --------------------------------------------------------------------------
+     Footer Quick Links & Resource Links
+     Hover transformation: color shift to warm amber + animated expanding underline + opacity change
+     -------------------------------------------------------------------------- */
+  .tvet-footer-link,
+  [data-class~="tvet-footer-link"] {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none !important;
+    opacity: 0.88;
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+
+  .tvet-footer-link [data-footer-text="true"],
+  [data-class~="tvet-footer-link"] [data-footer-text="true"],
+  .tvet-footer-link span,
+  [data-class~="tvet-footer-link"] span,
+  .tvet-footer-link div,
+  [data-class~="tvet-footer-link"] div {
+    position: relative;
+    display: inline-block;
+    transition: color var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+
+  /* Animated underline effect: expands smoothly from left to right */
+  .tvet-footer-link [data-footer-text="true"]::after,
+  [data-class~="tvet-footer-link"] [data-footer-text="true"]::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 1.5px;
+    background-color: #FFA500;
+    border-radius: 1px;
+    transition: width var(--tvet-duration-normal) var(--tvet-ease-standard);
+    pointer-events: none;
+  }
+
+  .tvet-footer-link:hover,
+  [data-class~="tvet-footer-link"]:hover {
+    transform: translateX(6px);
+    opacity: 1 !important;
+  }
+
+  .tvet-footer-link:active,
+  [data-class~="tvet-footer-link"]:active {
+    transform: translateX(3px) scale(0.98);
+    opacity: 0.75 !important;
+  }
+
+  .tvet-footer-link:hover,
+  .tvet-footer-link:hover *,
+  [data-class~="tvet-footer-link"]:hover,
+  [data-class~="tvet-footer-link"]:hover * {
+    color: #FFA500 !important;
+  }
+
+  .tvet-footer-link:hover [data-footer-text="true"]::after,
+  [data-class~="tvet-footer-link"]:hover [data-footer-text="true"]::after {
+    width: 100%;
+  }
+
+  /* Text-decoration underline with offset as robust visual guarantee */
+  .tvet-footer-link:hover [data-footer-text="true"],
+  [data-class~="tvet-footer-link"]:hover [data-footer-text="true"] {
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+    text-decoration-thickness: 1.5px !important;
+    text-decoration-color: #FFA500 !important;
+  }
+
+  .tvet-footer-link:hover svg,
+  [data-class~="tvet-footer-link"]:hover svg {
+    transform: scale(1.2) translateX(2px);
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring);
+  }
+
+  /* Sidebar Navigation Tab (About page & Office directory) */
+  .tvet-sidebar-item,
+  [data-class~="tvet-sidebar-item"] {
+    transition: background-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                border-color var(--tvet-duration-fast) var(--tvet-ease-standard),
+                transform var(--tvet-duration-fast) var(--tvet-ease-spring) !important;
+  }
+  .tvet-sidebar-item:hover:not([data-active="true"]),
+  [data-class~="tvet-sidebar-item"]:hover:not([data-active="true"]) {
+    background-color: #F1F5F9 !important;
+    transform: translateX(3px);
+  }
+}
+
+/* ==============================================================================
+   3. ACCESSIBILITY: REDUCED MOTION PREFERENCE
+   ============================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+}

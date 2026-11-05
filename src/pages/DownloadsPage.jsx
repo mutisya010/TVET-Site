@@ -151,6 +151,10 @@ export default function DownloadsPage({ onDownloadDoc }) {
                   style={[styles.catPill, isActive && styles.catPillActive]}
                   onPress={() => setActiveCategory(cat.id)}
                   activeOpacity={0.8}
+                  className="tvet-filter-pill"
+                  // @ts-ignore
+                  data-active={isActive ? "true" : "false"}
+                  dataSet={{ class: 'tvet-filter-pill', active: isActive ? 'true' : 'false' }}
                 >
                   <Text style={[styles.catPillText, isActive && styles.catPillTextActive]}>
                     {cat.label} ({count})
@@ -204,6 +208,8 @@ export default function DownloadsPage({ onDownloadDoc }) {
                 setActiveCategory('all');
               }}
               activeOpacity={0.8}
+              className="tvet-btn-primary"
+              dataSet={{ class: 'tvet-btn-primary' }}
             >
               <Text style={styles.emptyResetBtnText}>View All Documents</Text>
             </TouchableOpacity>
@@ -228,6 +234,8 @@ export default function DownloadsPage({ onDownloadDoc }) {
             style={styles.supportRightBtn}
             onPress={handleOpenRegistryWhatsApp}
             activeOpacity={0.8}
+            className="tvet-btn-outline"
+            dataSet={{ class: 'tvet-btn-outline' }}
           >
             <MessageSquare size={14} color={colors.greenDeep} />
             <Text style={styles.supportRightBtnText}>Admissions Registry Help</Text>

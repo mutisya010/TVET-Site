@@ -25,6 +25,8 @@ export default function TopBar({ onOpenInquiry }) {
           style={styles.noticeLeft} 
           onPress={onOpenInquiry}
           activeOpacity={0.8}
+          className="tvet-clickable"
+          dataSet={{ class: 'tvet-clickable' }}
         >
           <View style={styles.badge}>
             <Megaphone size={14} color={colors.orange} />
@@ -37,7 +39,13 @@ export default function TopBar({ onOpenInquiry }) {
 
         {/* Right Contact Quick Links */}
         <View style={styles.contactRight}>
-          <TouchableOpacity style={styles.contactItem} onPress={handleCall} activeOpacity={0.7}>
+          <TouchableOpacity 
+            style={styles.contactItem} 
+            onPress={handleCall} 
+            activeOpacity={0.7}
+            className="tvet-topbar-link"
+            dataSet={{ class: 'tvet-topbar-link' }}
+          >
             <Phone size={13} color={colors.green} />
             <Text style={styles.contactLabel}>Helpline: </Text>
             <Text style={styles.contactValue}>{helplinePhone || '+254 746 525 252'}</Text>
@@ -45,7 +53,13 @@ export default function TopBar({ onOpenInquiry }) {
 
           <View style={styles.divider} />
 
-          <TouchableOpacity style={styles.contactItem} onPress={handleWhatsApp} activeOpacity={0.7}>
+          <TouchableOpacity 
+            style={styles.contactItem} 
+            onPress={handleWhatsApp} 
+            activeOpacity={0.7}
+            className="tvet-topbar-link"
+            dataSet={{ class: 'tvet-topbar-link' }}
+          >
             <MessageCircle size={13} color={colors.green} />
             <Text style={styles.contactLabel}>WhatsApp: </Text>
             <Text style={[styles.contactValue, styles.whatsAppColor]}>{whatsappNumber || '+254 746 525 252'}</Text>

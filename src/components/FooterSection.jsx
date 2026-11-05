@@ -90,7 +90,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
             </Text>
             <View style={styles.tvetaBadge}>
               <ShieldCheck size={14} color="#FFA500" />
-              <Text style={styles.tvetaBadgeText}>Registered: {tvetaLicense || 'TVETA/PUBLIC/TVC/0005/2023'} • CDACC: 02300008</Text>
+              <Text style={styles.tvetaBadgeText}>TVETA & CDACC ACCREDITED</Text>
             </View>
           </View>
 
@@ -99,8 +99,22 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
             <Text style={styles.colTitle}>Quick Links</Text>
             <View style={styles.linksList}>
               {quickLinks.map((item, i) => (
-                <TouchableOpacity key={i} onPress={item.action} style={styles.linkItem} activeOpacity={0.7}>
-                  <Text style={styles.linkText}>{item.label}</Text>
+                <TouchableOpacity 
+                  key={i} 
+                  onPress={item.action} 
+                  style={styles.linkItem} 
+                  activeOpacity={0.7}
+                  className="tvet-footer-link"
+                  dataSet={{ class: 'tvet-footer-link' }}
+                >
+                  <Text 
+                    style={styles.linkText}
+                    // @ts-ignore
+                    data-footer-text="true"
+                    dataSet={{ footerText: 'true' }}
+                  >
+                    {item.label}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -111,9 +125,23 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
             <Text style={styles.colTitle}>Downloads & Resources</Text>
             <View style={styles.linksList}>
               {downloads.map((item, i) => (
-                <TouchableOpacity key={i} onPress={item.action} style={styles.linkItem} activeOpacity={0.7}>
+                <TouchableOpacity 
+                  key={i} 
+                  onPress={item.action} 
+                  style={styles.linkItem} 
+                  activeOpacity={0.7}
+                  className="tvet-footer-link"
+                  dataSet={{ class: 'tvet-footer-link' }}
+                >
                   <Download size={13} color="#FFA500" />
-                  <Text style={styles.linkText}>{item.label}</Text>
+                  <Text 
+                    style={styles.linkText}
+                    // @ts-ignore
+                    data-footer-text="true"
+                    dataSet={{ footerText: 'true' }}
+                  >
+                    {item.label}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -134,6 +162,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
                 style={styles.contactEntry} 
                 onPress={() => Linking.openURL(`tel:${rawPhone}`)}
                 activeOpacity={0.7}
+                className="tvet-topbar-link"
               >
                 <Phone size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
@@ -145,6 +174,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
                 style={styles.contactEntry} 
                 onPress={() => Linking.openURL(`mailto:${primaryEmail}`)}
                 activeOpacity={0.7}
+                className="tvet-topbar-link"
               >
                 <Mail size={15} color="#FFA500" />
                 <Text style={styles.contactEntryText}>
@@ -178,18 +208,54 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
                 accessibilityRole="link"
                 href="https://royalsoftwares.co.ke/"
                 target="_blank"
+                className="tvet-footer-link"
+                dataSet={{ class: 'tvet-footer-link' }}
               >
-                <Text style={styles.creditsLink}>Royal Software Solutions</Text>
+                <Text 
+                  style={styles.creditsLink}
+                  // @ts-ignore
+                  data-footer-text="true"
+                  dataSet={{ footerText: 'true' }}
+                >
+                  Royal Software Solutions
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.legalLinks}>
-            <TouchableOpacity><Text style={styles.legalText}>Privacy Policy</Text></TouchableOpacity>
+            <TouchableOpacity className="tvet-footer-link" dataSet={{ class: 'tvet-footer-link' }}>
+              <Text 
+                style={styles.legalText}
+                // @ts-ignore
+                data-footer-text="true"
+                dataSet={{ footerText: 'true' }}
+              >
+                Privacy Policy
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.legalDivider}>•</Text>
-            <TouchableOpacity><Text style={styles.legalText}>Terms of Use</Text></TouchableOpacity>
+            <TouchableOpacity className="tvet-footer-link" dataSet={{ class: 'tvet-footer-link' }}>
+              <Text 
+                style={styles.legalText}
+                // @ts-ignore
+                data-footer-text="true"
+                dataSet={{ footerText: 'true' }}
+              >
+                Terms of Use
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.legalDivider}>•</Text>
-            <TouchableOpacity><Text style={styles.legalText}>Staff Portal</Text></TouchableOpacity>
+            <TouchableOpacity className="tvet-footer-link" dataSet={{ class: 'tvet-footer-link' }}>
+              <Text 
+                style={styles.legalText}
+                // @ts-ignore
+                data-footer-text="true"
+                dataSet={{ footerText: 'true' }}
+              >
+                Staff Portal
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
 

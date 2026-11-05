@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -117,7 +117,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                   </View>
                   <View style={styles.bannerBadgeItem}>
                     <Building2 size={14} color={colors.orange} />
-                    <Text style={styles.bannerBadgeText}>35+ Acre Campus Complex</Text>
+                    <Text style={styles.bannerBadgeText}>Spacious Campus Complex</Text>
                   </View>
                 </View>
               </View>
@@ -182,6 +182,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
                       activeItem.images.length === 1 && styles.galleryCardFull,
                       idx === 0 && activeItem.images.length === 3 && styles.galleryCardLarge
                     ]}
+                    className="tvet-card-interactive"
                   >
                     <Image
                       source={typeof img.url === "string" ? { uri: img.url } : img.url}
@@ -210,7 +211,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
             <Text style={styles.sectionHeading}>Core Responsibilities & Objectives</Text>
             <View style={styles.mandatesList}>
               {activeItem.mandates.map((m, idx) => (
-                <View key={idx} style={styles.mandateCard}>
+                <View key={idx} style={styles.mandateCard} className="tvet-card-interactive">
                   <CheckCircle2 size={16} color={colors.green} style={styles.mandateIcon} />
                   <Text style={styles.mandateText}>{m}</Text>
                 </View>
@@ -223,7 +224,7 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
             <Text style={styles.sectionHeading}>Key Facts & Standards</Text>
             <View style={styles.highlightsGrid}>
               {activeItem.highlights.map((h, idx) => (
-                <View key={idx} style={styles.highlightCard}>
+                <View key={idx} style={styles.highlightCard} className="tvet-card-interactive">
                   <Text style={styles.highlightLabel}>{h.label}</Text>
                   <Text style={styles.highlightVal}>{h.value}</Text>
                 </View>
@@ -247,6 +248,8 @@ export default function AboutPage({ initialOptionId = 'our-history', onNavigate,
               style={styles.actionBtn}
               onPress={handleActionClick}
               activeOpacity={0.85}
+              className="tvet-btn-primary"
+              dataSet={{ class: 'tvet-btn-primary' }}
             >
               <Text style={styles.actionBtnText}>{activeItem.actionText}</Text>
               <ArrowRight size={15} color={colors.white} />

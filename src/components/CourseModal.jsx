@@ -30,7 +30,7 @@ export default function CourseModal({ visible, course, onClose, onApplyCourse })
               <Text style={styles.modalTitle}>{course.title}</Text>
             </View>
 
-            <TouchableOpacity style={styles.closeBtn} onPress={onClose}>
+            <TouchableOpacity style={styles.closeBtn} onPress={onClose} className="tvet-clickable">
               <X size={20} color="#64748B" />
             </TouchableOpacity>
           </View>
@@ -104,7 +104,12 @@ export default function CourseModal({ visible, course, onClose, onApplyCourse })
 
           {/* Modal Footer Actions */}
           <View style={styles.modalFooter}>
-            <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
+            <TouchableOpacity 
+              style={styles.cancelBtn} 
+              onPress={onClose} 
+              className="tvet-btn-outline"
+              dataSet={{ class: 'tvet-btn-outline' }}
+            >
               <Text style={styles.cancelBtnText}>Close</Text>
             </TouchableOpacity>
 
@@ -114,6 +119,8 @@ export default function CourseModal({ visible, course, onClose, onApplyCourse })
                 onClose();
                 onApplyCourse(course);
               }}
+              className="tvet-btn-secondary"
+              dataSet={{ class: 'tvet-btn-secondary' }}
             >
               <Text style={styles.applyActionText}>Apply for this Programme</Text>
               <ArrowRight size={16} color="#FFFFFF" />

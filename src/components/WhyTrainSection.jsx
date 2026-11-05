@@ -130,6 +130,7 @@ export default function WhyTrainSection({ onOpenNotice, onOpenInquiry }) {
                     delay={cIdx * 90}
                     duration={600}
                     style={styles.featureCard}
+                    className="tvet-card-interactive"
                   >
                     <View style={[styles.cardIconBox, { backgroundColor: card.iconBg }]}>
                       <CardIcon size={20} color={card.iconColor} />
@@ -140,8 +141,17 @@ export default function WhyTrainSection({ onOpenNotice, onOpenInquiry }) {
                       style={styles.cardLink}
                       onPress={card.action}
                       activeOpacity={0.7}
+                      className="tvet-footer-link"
+                      dataSet={{ class: 'tvet-footer-link' }}
                     >
-                      <Text style={styles.cardLinkText}>{card.linkText}</Text>
+                      <Text 
+                        style={styles.cardLinkText}
+                        // @ts-ignore
+                        data-footer-text="true"
+                        dataSet={{ footerText: 'true' }}
+                      >
+                        {card.linkText}
+                      </Text>
                       <ArrowRight size={13} color="#FFA500" />
                     </TouchableOpacity>
                   </ScrollReveal>

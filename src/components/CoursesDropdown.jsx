@@ -71,6 +71,8 @@ export default function CoursesDropdown({ onSelectCourse, onClose, onViewAllCour
               style={[styles.menuItem, isHovered && styles.menuItemHovered]}
               onPress={() => setActiveDeptId(isHovered ? null : dept.id)}
               activeOpacity={0.8}
+              className="tvet-dropdown-item"
+              dataSet={{ class: 'tvet-dropdown-item' }}
             >
               <Text 
                 style={[styles.menuText, isHovered && styles.menuTextHighlight]}
@@ -116,6 +118,8 @@ export default function CoursesDropdown({ onSelectCourse, onClose, onViewAllCour
                         style={[styles.courseRow, isLast && styles.courseRowLast]}
                         onPress={() => handleCourseClick(course)}
                         activeOpacity={0.8}
+                        className="tvet-dropdown-item"
+                        dataSet={{ class: 'tvet-dropdown-item' }}
                       >
                         <View style={styles.courseRowTop}>
                           <View style={[styles.badge, { backgroundColor: badge.bg, borderColor: badge.border }]}>
@@ -153,6 +157,8 @@ export default function CoursesDropdown({ onSelectCourse, onClose, onViewAllCour
         style={styles.viewAllRow}
         onPress={handleViewAll}
         activeOpacity={0.8}
+        className="tvet-dropdown-item"
+        dataSet={{ class: 'tvet-dropdown-item' }}
       >
         <View style={styles.viewAllLeft}>
           <BookOpen size={14} color={colors.orange} />

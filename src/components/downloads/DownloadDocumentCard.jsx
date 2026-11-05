@@ -8,9 +8,17 @@ export default function DownloadDocumentCard({ doc, onDownload }) {
   const isMobile = width < 768;
 
   return (
-    <View style={[styles.itemRow, isMobile && styles.itemRowMobile]}>
+    <View 
+      style={[styles.itemRow, isMobile && styles.itemRowMobile]}
+      className="tvet-doc-row"
+      dataSet={{ class: 'tvet-doc-row' }}
+    >
       {/* File Type Icon Badge */}
-      <View style={styles.iconContainer}>
+      <View 
+        style={styles.iconContainer} 
+        className="tvet-doc-icon"
+        dataSet={{ class: 'tvet-doc-icon' }}
+      >
         <FileText size={20} color={colors.greenDeep} />
       </View>
 
@@ -29,7 +37,14 @@ export default function DownloadDocumentCard({ doc, onDownload }) {
 
         {/* Document Title */}
         <TouchableOpacity onPress={() => onDownload(doc)} activeOpacity={0.7}>
-          <Text style={styles.title}>{doc.title}</Text>
+          <Text 
+            style={styles.title}
+            // @ts-ignore
+            data-doc-title="true"
+            dataSet={{ docTitle: 'true' }}
+          >
+            {doc.title}
+          </Text>
         </TouchableOpacity>
 
         {/* Document Description */}
@@ -41,6 +56,8 @@ export default function DownloadDocumentCard({ doc, onDownload }) {
         style={[styles.downloadBtn, isMobile && styles.downloadBtnMobile]}
         onPress={() => onDownload(doc)}
         activeOpacity={0.85}
+        className="tvet-download-btn"
+        dataSet={{ class: 'tvet-download-btn' }}
       >
         <Download size={14} color="#FFFFFF" />
         <Text style={styles.downloadBtnText}>Download</Text>
