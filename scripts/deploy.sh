@@ -3,7 +3,7 @@
 # Loima TVC (TVET Site) - Enterprise Deployment & Management Automation Script
 # ==============================================================================
 # Target Domain: loima-tvc.ac.ke (or loima.royalsoftwares.co.ke / custom domain)
-# Target OS:     Ubuntu 20.04 / 22.04 / 24.04 LTS / Debian 11 / 12
+# Target OS:     Ubuntu 24.04 LTS (or any OS with Python 3.12+ available)
 # Target Stack:  Django 6.x (WSGI), Gunicorn, Nginx, PostgreSQL/SQLite, Certbot
 # Architecture:  Vite + React Frontend (SPA) + Django REST Framework Backend
 # ==============================================================================
@@ -303,17 +303,64 @@ parse_args() {
 # 6. Environment & Configuration Loading
 # ------------------------------------------------------------------------------
 resolve_python_bin() {
-    if command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+    local requested_python=""
+    local candidate=""
+    local candidate_version=""
+    local candidate_major=0
+    local candidate_minor=0
+    local selected_major=0
+    local selected_minor=0
+    local selected_python=""
+    local -a candidates=()
+
+    if [ -n "$CLI_PYTHON" ]; then
+        requested_python="$CLI_PYTHON"
+    elif [ "$PYTHON_BIN" != "python3" ]; then
+        requested_python="$PYTHON_BIN"
+    fi
+
+    if [ -n "$requested_python" ]; then
+        if ! command -v "$requested_python" >/dev/null 2>&1; then
+            log_error "Requested Python interpreter '$requested_python' was not found."
+            exit 1
+        fi
+        candidate_version=$("$requested_python" -c 'import sys; print("%d.%d" % sys.version_info[:2])') || {
+            log_error "Could not determine the version of '$requested_python'."
+            exit 1
+        }
+        IFS=. read -r candidate_major candidate_minor <<< "$candidate_version"
+        if [ "$candidate_major" -lt 3 ] || { [ "$candidate_major" -eq 3 ] && [ "$candidate_minor" -lt 12 ]; }; then
+            log_error "Python 3.12 or newer is required by Django 6; '$requested_python' is $candidate_version."
+            exit 1
+        fi
+        PYTHON_BIN="$requested_python"
         return 0
     fi
-    for candidate in python3.14 python3.13 python3.12 python3.11 python3.10 python3; do
-        if command -v "$candidate" >/dev/null 2>&1; then
-            PYTHON_BIN="$candidate"
-            return 0
+
+    mapfile -t candidates < <(compgen -c | grep -E '^python3(\.[0-9]+)?$' | sort -u)
+    for candidate in "${candidates[@]}"; do
+        command -v "$candidate" >/dev/null 2>&1 || continue
+        candidate_version=$("$candidate" -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null) || continue
+        IFS=. read -r candidate_major candidate_minor <<< "$candidate_version"
+        if [ "$candidate_major" -lt 3 ] || { [ "$candidate_major" -eq 3 ] && [ "$candidate_minor" -lt 12 ]; }; then
+            continue
+        fi
+        if [ "$candidate_major" -gt "$selected_major" ] || \
+           { [ "$candidate_major" -eq "$selected_major" ] && [ "$candidate_minor" -gt "$selected_minor" ]; }; then
+            selected_python="$candidate"
+            selected_major="$candidate_major"
+            selected_minor="$candidate_minor"
         fi
     done
-    log_error "No suitable Python 3 interpreter found. Please install Python 3.10+."
-    exit 1
+
+    if [ -z "$selected_python" ]; then
+        log_error "Django 6 requires Python 3.12 or newer, but no compatible installed interpreter was found."
+        log_error "Install Python 3.12+ with its venv support, or specify it with --python=/path/to/python3.12."
+        exit 1
+    fi
+
+    PYTHON_BIN="$selected_python"
+    log_info "Selected highest compatible installed Python: $PYTHON_BIN ($selected_major.$selected_minor)"
 }
 
 load_environment() {
@@ -894,6 +941,9 @@ install_full_stack() {
         libpq-dev libjpeg-dev zlib1g-dev \
         nginx postgresql postgresql-contrib \
         certbot python3-certbot-nginx
+
+    resolve_python_bin
+    log_info "Provisioning will use Python $("$PYTHON_BIN" --version 2>&1 | awk '{print $2}') from $PYTHON_BIN."
 
     if ! command -v node >/dev/null 2>&1; then
         log_info "Installing Node.js LTS (v20)..."

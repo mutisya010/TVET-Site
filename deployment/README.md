@@ -1,12 +1,14 @@
 # Loima TVC - Linux VPS Deployment Guide
 
-This directory contains the production infrastructure and automation files for deploying **Loima Technical & Vocational College (TVET Site)** to an Ubuntu or Debian Linux VPS.
+This directory contains the production infrastructure and automation files for deploying **Loima Technical & Vocational College (TVET Site)** to a Linux VPS.
+
+The Django 6 backend requires **Python 3.12 or newer**. The deployment script checks installed Python 3 interpreters and selects the highest compatible version. Ubuntu 24.04 includes a suitable system Python; Ubuntu 20.04/22.04 and older Debian releases may need Python 3.12 installed separately before provisioning. You can explicitly select an interpreter with `--python=/path/to/python3.12`.
 
 ---
 
 ## 1. Quick Start (First-Time Provisioning)
 
-On a freshly created Linux VPS (Ubuntu 20.04 / 22.04 / 24.04 LTS):
+On a freshly created Linux VPS with Python 3.12 or newer (for example, Ubuntu 24.04 LTS):
 
 1. **Clone the repository to your VPS**:
    ```bash
