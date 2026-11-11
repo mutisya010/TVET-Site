@@ -47,7 +47,7 @@ export default function FooterSection({ onNavigate, onOpenInquiry, onOpenNotice 
   const rawPhone = primaryPhone.replace(/[^0-9+]/g, '');
 
   const primaryEmail = emailInfo || 'info@loimatvc.ac.ke';
-  const altEmail = emailPrincipal || 'principal@loimatvc.ac.ke';
+  const altEmail = emailPrincipal || 'principal@loima-tvc.ac.ke';
   const emailDisplay = `${primaryEmail} / ${altEmail}`;
 
   return (

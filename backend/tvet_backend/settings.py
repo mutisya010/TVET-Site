@@ -28,11 +28,23 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 
 # Allowed hosts configuration
-hosts_env = os.environ.get('ALLOWED_HOSTS', '*')
-if hosts_env == '*':
-    ALLOWED_HOSTS = ['*']
+hosts_env = os.environ.get('ALLOWED_HOSTS')
+if hosts_env:
+    if hosts_env == '*':
+        ALLOWED_HOSTS = ['*']
+    else:
+        ALLOWED_HOSTS = [h.strip() for h in hosts_env.split(',') if h.strip()]
 else:
-    ALLOWED_HOSTS = [h.strip() for h in hosts_env.split(',') if h.strip()]
+    ALLOWED_HOSTS = [
+        'loima-tvc.ac.ke',
+        'www.loima-tvc.ac.ke',
+        'loima.royalsoftwares.co.ke',
+        'www.loima.royalsoftwares.co.ke',
+        'loimatvc.ac.ke',
+        'www.loimatvc.ac.ke',
+        '127.0.0.1',
+        'localhost',
+    ]
 
 # Application definition
 INSTALLED_APPS = [
@@ -144,9 +156,35 @@ if CORS_ORIGIN_ENV:
     CORS_ALLOW_ALL_ORIGINS = False
     CORS_ALLOWED_ORIGINS = [o.strip() for o in CORS_ORIGIN_ENV.split(',') if o.strip()]
 else:
-    CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOWED_ORIGINS = [
+        'https://loima-tvc.ac.ke',
+        'https://www.loima-tvc.ac.ke',
+        'https://loima.royalsoftwares.co.ke',
+        'https://www.loima.royalsoftwares.co.ke',
+        'http://127.0.0.1:5173',
+        'http://localhost:5173',
+        'http://127.0.0.1:3000',
+        'http://localhost:3000',
+    ]
+    CORS_ALLOW_ALL_ORIGINS = DEBUG
 
 CORS_ALLOW_CREDENTIALS = True
+
+# CSRF Trusted Origins (required by Django 4+ for HTTPS POST/PUT requests)
+csrf_trusted_env = os.environ.get('CSRF_TRUSTED_ORIGINS')
+if csrf_trusted_env:
+    CSRF_TRUSTED_ORIGINS = [o.strip() for o in csrf_trusted_env.split(',') if o.strip()]
+else:
+    CSRF_TRUSTED_ORIGINS = [
+        'https://loima-tvc.ac.ke',
+        'https://www.loima-tvc.ac.ke',
+        'https://loima.royalsoftwares.co.ke',
+        'https://www.loima.royalsoftwares.co.ke',
+        'http://127.0.0.1:8000',
+        'http://localhost:8000',
+        'http://127.0.0.1:5173',
+        'http://localhost:5173',
+    ]
 
 # REST Framework settings
 REST_FRAMEWORK = {

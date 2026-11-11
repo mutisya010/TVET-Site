@@ -55,8 +55,8 @@ class SiteBranding(models.Model):
     helpline_phone = models.CharField(max_length=50, default="+254 746 525 252")
     helpline_phone_alt = models.CharField(max_length=50, blank=True, default="")
     whatsapp_number = models.CharField(max_length=50, default="+254 746 525 252")
-    email_info = models.EmailField(default="info@loimatvc.ac.ke")
-    email_principal = models.EmailField(default="principal@loimatvc.ac.ke")
+    email_info = models.EmailField(default="info@loima-tvc.ac.ke")
+    email_principal = models.EmailField(default="principal@loima-tvc.ac.ke")
     physical_location = models.CharField(
         max_length=255, 
         default="Lorugum Campus (~1.5 km off Lodwar–Uganda Road), Loima Sub-County, Turkana County"

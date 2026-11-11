@@ -2,7 +2,7 @@
 # ==============================================================================
 # Loima TVC (TVET Site) - Enterprise Deployment & Management Automation Script
 # ==============================================================================
-# Target Domain: loima.royalsoftwares.co.ke (or loimatvc.ac.ke / custom domain)
+# Target Domain: loima-tvc.ac.ke (or loima.royalsoftwares.co.ke / custom domain)
 # Target OS:     Ubuntu 20.04 / 22.04 / 24.04 LTS / Debian 11 / 12
 # Target Stack:  Django 6.x (WSGI), Gunicorn, Nginx, PostgreSQL/SQLite, Certbot
 # Architecture:  Vite + React Frontend (SPA) + Django REST Framework Backend
@@ -97,7 +97,7 @@ ENV_FILE="${ENV_FILE:-$ENV_DIR/tvet.env}"
 DEPLOY_CONFIG_FILE="${DEPLOY_CONFIG_FILE:-$PROJECT_ROOT/deployment/tvet.env.example}"
 
 # Default domain (user configured)
-DOMAIN="loima.royalsoftwares.co.ke"
+DOMAIN="loima-tvc.ac.ke"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 GIT_REMOTE="${GIT_REMOTE:-origin}"
 CURRENT_ACTIVE_BRANCH=$(git -C "$PROJECT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
@@ -160,7 +160,7 @@ ${BOLD}OPTIONS:${NC}
   -m, --mode=<mode>        Specify execution mode (default: deploy)
   -b, --branch=<branch>    Git branch to deploy (default: main)
   -c, --commit=<hash>      Deploy a specific Git commit hash instead of branch HEAD
-      --domain=<domain>    Target domain (e.g. loima.royalsoftwares.co.ke or loimatvc.ac.ke)
+      --domain=<domain>    Target domain (e.g. loima-tvc.ac.ke or loima.royalsoftwares.co.ke)
       --maintenance=<cmd>  Maintenance action: on (enable), off (disable), or status
       --bypass-key=<key>   Custom preview key for maintenance bypass
       --python=<path>      Specify path to Python interpreter (default: python3)
@@ -176,7 +176,7 @@ ${BOLD}EXAMPLES:${NC}
   sudo bash scripts/deploy.sh --mode=check
   sudo bash scripts/deploy.sh --mode=deploy
   sudo bash scripts/deploy.sh --mode=install
-  sudo bash scripts/deploy.sh --mode=https --domain=loima.royalsoftwares.co.ke
+  sudo bash scripts/deploy.sh --mode=https --domain=loima-tvc.ac.ke
   sudo bash scripts/deploy.sh --maintenance=on
   sudo bash scripts/deploy.sh --maintenance=off
   sudo bash scripts/deploy.sh --mode=backup
@@ -366,7 +366,7 @@ load_environment() {
         MAINTENANCE_ACTION="$CLI_MAINTENANCE"
     fi
 
-    export DOMAIN="${DOMAIN:-loima.royalsoftwares.co.ke}"
+    export DOMAIN="${DOMAIN:-loima-tvc.ac.ke}"
     export DB_PORT="${DB_PORT:-5432}"
     export DB_ENGINE="${DB_ENGINE:-django.db.backends.sqlite3}"
     export MAINTENANCE_BYPASS_KEY="${MAINTENANCE_BYPASS_KEY:-tvet-preview-2026}"
@@ -725,11 +725,16 @@ manage_nginx() {
     local server_names="$DOMAIN"
     local dot_count
     dot_count=$(echo "$DOMAIN" | tr -cd '.' | wc -c)
+    local is_apex=false
     if [ "$dot_count" -le 1 ]; then
-        # Apex domain like loimatvc.ac.ke or site.ke
+        is_apex=true
+    elif [[ "$DOMAIN" =~ \.(ac|co|go|or|ne|sc|me)\.ke$ ]] && [ "$dot_count" -eq 2 ]; then
+        is_apex=true
+    fi
+
+    if [ "$is_apex" = true ]; then
         server_names="$DOMAIN www.$DOMAIN"
     elif command -v host >/dev/null 2>&1 && host "www.$DOMAIN" >/dev/null 2>&1; then
-        # Subdomain whose www variant also resolves in DNS
         server_names="$DOMAIN www.$DOMAIN"
     fi
 
@@ -784,14 +789,22 @@ manage_ssl() {
     local certbot_domains=("-d" "$DOMAIN")
     local dot_count
     dot_count=$(echo "$DOMAIN" | tr -cd '.' | wc -c)
-
-    # Only include www if it's an apex domain or if www actually resolves
+    local is_apex=false
     if [ "$dot_count" -le 1 ]; then
+        is_apex=true
+    elif [[ "$DOMAIN" =~ \.(ac|co|go|or|ne|sc|me)\.ke$ ]] && [ "$dot_count" -eq 2 ]; then
+        is_apex=true
+    fi
+
+    # Only include www if it resolves in DNS, or if apex without host utility
+    if command -v host >/dev/null 2>&1; then
+        if host "www.$DOMAIN" >/dev/null 2>&1; then
+            certbot_domains+=("-d" "www.$DOMAIN")
+        else
+            log_info "Subdomain www.$DOMAIN is not pointed in DNS yet. Certbot will provision certificate for $DOMAIN only."
+        fi
+    elif [ "$is_apex" = true ]; then
         certbot_domains+=("-d" "www.$DOMAIN")
-    elif command -v host >/dev/null 2>&1 && host "www.$DOMAIN" >/dev/null 2>&1; then
-        certbot_domains+=("-d" "www.$DOMAIN")
-    else
-        log_info "Subdomain detected: skipping www.$DOMAIN (only requesting certificate for $DOMAIN)."
     fi
 
     log_info "Requesting/Renewing SSL certificate for ${certbot_domains[*]} via Certbot..."

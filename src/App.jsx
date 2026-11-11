@@ -29,9 +29,12 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
 import { noticesData } from './data/noticesData';
+import { useBranding } from './context/BrandingContext';
 
 export default function App() {
   const { width } = useWindowDimensions();
+  const { helplinePhone, whatsappNumber } = useBranding();
+  const rawWhatsApp = (whatsappNumber || helplinePhone || '+254746525252').replace(/[^0-9]/g, '');
 
   // Active page route: 'home' | 'about' | 'courses' | 'downloads' | 'contact'
   const [currentPage, setCurrentPage] = useState('home');
@@ -127,11 +130,11 @@ export default function App() {
   };
 
   const handleBookVisit = () => {
-    Linking.openURL('https://wa.me/254746525252?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20book%20a%20guided%20campus%20visit');
+    Linking.openURL(`https://wa.me/${rawWhatsApp}?text=Hello%20Loima%20TVC,%20I%20would%20like%20to%20book%20a%20guided%20campus%20visit`);
   };
 
   const handleFloatingWhatsApp = () => {
-    Linking.openURL('https://wa.me/254746525252?text=Hello%20Loima%20TVC%20Admissions,%20I%20have%20an%20enquiry');
+    Linking.openURL(`https://wa.me/${rawWhatsApp}?text=Hello%20Loima%20TVC%20Admissions,%20I%20have%20an%20enquiry`);
   };
 
   return (
@@ -246,6 +249,10 @@ export default function App() {
         style={styles.floatingWhatsApp}
         onPress={handleFloatingWhatsApp}
         activeOpacity={0.85}
+        className="tvet-fab-whatsapp"
+        dataSet={{ class: 'tvet-fab-whatsapp' }}
+        accessibilityLabel="Chat with Loima TVC Admissions on WhatsApp"
+        accessibilityRole="button"
       >
         <MessageCircle size={22} color="#ffffff" />
       </TouchableOpacity>

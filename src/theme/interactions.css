@@ -466,6 +466,27 @@ a:focus-visible {
     background-color: #F1F5F9 !important;
     transform: translateX(3px);
   }
+
+  /* Floating WhatsApp Action Button */
+  .tvet-fab-whatsapp,
+  [data-class~="tvet-fab-whatsapp"] {
+    transition: transform var(--tvet-duration-fast) var(--tvet-ease-spring),
+                box-shadow var(--tvet-duration-fast) var(--tvet-ease-standard),
+                opacity var(--tvet-duration-fast) var(--tvet-ease-standard),
+                filter var(--tvet-duration-fast) var(--tvet-ease-standard) !important;
+  }
+  .tvet-fab-whatsapp:hover,
+  [data-class~="tvet-fab-whatsapp"]:hover {
+    transform: translateY(-3px) scale(1.08) !important;
+    box-shadow: 0 10px 24px rgba(46, 139, 87, 0.45) !important;
+    opacity: 0.98 !important;
+    filter: brightness(1.06) !important;
+  }
+  .tvet-fab-whatsapp:active,
+  [data-class~="tvet-fab-whatsapp"]:active {
+    transform: translateY(0) scale(0.96) !important;
+    opacity: 0.9 !important;
+  }
 }
 
 /* ==============================================================================
